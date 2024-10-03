@@ -1,0 +1,146 @@
+unit BI_PedidoVendaEstruturaBuscarProduto_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TBI_PedidoVendaEstrutura_BuscarProduto = class(TPadraoBuscador)
+    QueryGrupo: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryArte_ID: TStringField;
+    QueryArte: TStringField;
+    QueryPersonalizacao: TStringField;
+    QueryStatusArte: TStringField;
+    QueryBloqueado: TStringField;
+    CDSGrupo: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSArte_ID: TStringField;
+    CDSArte: TStringField;
+    CDSPersonalizacao: TStringField;
+    CDSStatusArte: TStringField;
+    CDSBloqueado: TStringField;
+    DBGrid1: TDBGrid; // Adicione aqui seu componente DBGrid, caso não esteja presente
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer); // Evento do Mouse
+  private
+    { Private declarations }
+    procedure ShowHintForCell(ACol, ARow: Integer; X, Y: Integer);
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaEstrutura_BuscarProduto: TBI_PedidoVendaEstrutura_BuscarProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVendaEstrutura_Unit, FuncaoSistema_Unit, ConexaoDados_Unit;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BNT_ConfirmarClick(
+  Sender: TObject);
+begin
+  inherited;
+  BI_PedidoVendaEstrutura.TXT_ProdutoID.Text := CDSProduto_ID.AsString;
+  BI_PedidoVendaEstrutura.BTN_BuscarClick(nil);
+  Close;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BTN_BuscarClick(
+  Sender: TObject);
+Var
+  VLC_Select : String;
+
+begin
+
+  VLC_Select := '  Select Distinct Grupo, Produto_ID, Produto, Arte_ID, Arte, Personalizacao, StatusArte, Bloqueado ' + #13;
+  VLC_Select := VLC_Select + '  from BomixBI.dbo.Pcp_TB_Produto (nolock) Produto ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + '  AND EstaNaEstrutura = ' + '''' + 'Sim' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND (Grupo + Produto_ID + Produto + Arte_ID + Arte + Personalizacao + StatusArte) Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Grupo' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+// Função para mostrar o hint se o texto estiver truncado
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.ShowHintForCell(ACol, ARow: Integer; X, Y: Integer);
+var
+  CelulaRect: TRect;
+  TextoCelula: String;
+  DisplayTextWidth: Integer;
+begin
+  // Verifica se a linha é válida
+  if ARow >= 0 then
+  begin
+    // Obtém o retângulo da célula
+    CelulaRect := DBGrid1.CellRect(ACol, ARow);
+    // Obtém o texto da célula
+    TextoCelula := DBGrid1.Columns[ACol].Field.AsString;
+
+    // Calcula o tamanho do texto que cabe na célula
+    DisplayTextWidth := DBGrid1.Canvas.TextWidth(TextoCelula);
+
+    // Verifica se o texto está truncado
+    if DisplayTextWidth > (CelulaRect.Right - CelulaRect.Left) then
+    begin
+      // Define o Hint com o texto completo da célula
+      DBGrid1.Hint := TextoCelula;
+      // Ativa o Hint
+      Application.ActivateHint(DBGrid1.ClientToScreen(Point(X, Y)));
+    end
+    else
+    begin
+      // Desativa o Hint se o texto couber na célula
+      Application.CancelHint;
+    end;
+  end;
+end;
+
+// Evento OnMouseMove para exibir o texto completo da célula
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  Coluna, Linha: Integer;
+begin
+  // Obtém a célula (coluna e linha) sob o mouse
+  DBGrid1.MouseCoord(X, Y); // Obtém a coordenada do mouse
+  Coluna := DBGrid1.MouseCoord(X, Y).X;
+  Linha := DBGrid1.MouseCoord(X, Y).Y - 1; // Ajusta para ignorar o título da coluna
+
+  // Verifica se a célula é válida
+  if (Coluna >= 0) and (Linha >= 0) then
+  begin
+    ShowHintForCell(Coluna, Linha, X, Y);
+  end
+  else
+  begin
+    // Desativa o Hint se a célula não for válida
+    Application.CancelHint;
+  end;
+end;
+
+end.

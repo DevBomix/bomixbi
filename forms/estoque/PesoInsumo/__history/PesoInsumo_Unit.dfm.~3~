@@ -1,0 +1,5 @@
+inherited PesoInsumo: TPesoInsumo
+  Caption = 'PesoInsumo'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,52 @@
+unit sys_usuariobuscadorfornecedor_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TSys_UsuarioBuscadorFornecedor = class(TPadraoBuscador)
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_UsuarioBuscadorFornecedor: TSys_UsuarioBuscadorFornecedor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSys_UsuarioBuscadorFornecedor.BTN_BuscarClick(Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	R_E_C_N_O_ as Recno, A2_FILIAL as Empresa, Rtrim(A2_COD) as Fornecedor_FK, Rtrim(A2_LOJA) as Loja, Rtrim(A2_NOME) as RazaoSocial, ' + #13;
+  VLC_Select := VLC_Select + ' 	Rtrim(A2_NREDUZ) as NomeFantasia, Rtrim(A2_MUN) as Cidade, Rtrim(A2_EST) as UF, ' + #13;
+  VLC_Select := VLC_Select + ' 	Case when A2_MSBLQL = 1 then ' + '''' + 'Sim' + '''' + ' else ' + '''' + 'Não' + '''' + ' end as Bloqueado ' + #13;
+  VLC_Select := VLC_Select + ' from P12OFICIAL.dbo.SA2010 A2 (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where 1=1  ' + #13;
+  VLC_Select := VLC_Select + ' AND (Rtrim(A2_COD) + Rtrim(A2_NOME) + Rtrim(A2_NREDUZ) + Rtrim(A2_MUN)) like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + ' Order by A2.R_E_C_N_O_ desc ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

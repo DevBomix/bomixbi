@@ -1,0 +1,154 @@
+unit OrdemProducaoImprimirEtiquetaApontamentoConsultarSolictarPerdaWMS_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS = class(TPadraoBuscador)
+    QueryRecno: TIntegerField;
+    QueryEmpresa: TStringField;
+    QuerySetor: TStringField;
+    QueryArea: TStringField;
+    QueryOrdemProducao: TStringField;
+    QueryStatus: TStringField;
+    QueryCliente: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryRecurso: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryQuantidade: TIntegerField;
+    QueryProduzida: TIntegerField;
+    QuerySaldo: TIntegerField;
+    CDSRecno: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSSetor: TStringField;
+    CDSArea: TStringField;
+    CDSOrdemProducao: TStringField;
+    CDSStatus: TStringField;
+    CDSCliente: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSRecurso: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSQuantidade: TIntegerField;
+    CDSProduzida: TIntegerField;
+    CDSSaldo: TIntegerField;
+    Panel1: TPanel;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    PNL_Prioridade: TPanel;
+    Panel11: TPanel;
+    Panel2: TPanel;
+    TXT_Quantidade: TMaskEdit;
+    QueryPerda_ID: TStringField;
+    QueryPerda: TStringField;
+    CDSPerda_ID: TStringField;
+    CDSPerda: TStringField;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS: TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS;
+
+implementation
+
+{$R *.dfm}
+
+uses conexaodados_unit;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS.BNT_ConfirmarClick(
+  Sender: TObject);
+  Var VLC_Insert : String;
+
+begin
+  inherited;
+
+  VLC_Insert := VLC_Insert + 'Insert Into BomixBI.dbo.Wms_TB_OrdensDeServico (Recno, QtdSolicitada, TipoOS, Emissao, Status) Values (';
+  VLC_Insert := VLC_Insert + CDSRecno.AsString + ',' + TXT_Quantidade.Text + ',' + '''' + 'Separação-PE-Perda' + '''' + ',' + 'GetDate()' + ',' + '0' + ')';
+
+  Memo1.Lines.Text := VLC_Insert;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Insert;
+       Execute;
+   end;
+
+   VLC_Insert := 'Exec BomixBI.dbo.WMS_SP_AtualizarBase_WMS_21_Programacao_SeparacaoPersonalizadoPerda' + #13;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Insert;
+       Execute;
+   end;
+
+   VLC_Insert := 'Exec BomixBI.dbo.WMS_SP_AtualizarBase_WMS_22_Programacao_SeparacaoPersonalizadoPerda_RelacionarSKU' + #13;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Insert;
+       Execute;
+   end;
+
+  Application.MessageBox('OS Aberta com Sucesso' + #13 + '','Atenção',MB_ICONWARNING + mb_ok);
+  TXT_Quantidade.Text := '';
+
+end;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS.BTN_BuscarClick(
+  Sender: TObject);
+  Var
+      VLC_Select : String;
+begin
+
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	OP.Recno, OP.Empresa, Setor, Area, OrdemProducao, Status, ' + #13;
+  VLC_Select := VLC_Select + ' 	OP.Cliente, ' + #13;
+  VLC_Select := VLC_Select + ' 	Emissao, Injetora as Recurso, ' + #13;
+  VLC_Select := VLC_Select + ' 	OP.Produto_ID, OP.Produto, ' + #13;
+  VLC_Select := VLC_Select + ' 	Quantidade, Produzida, Saldo, Produto.Liso_ID as Perda_ID, Liso.Produto as Perda ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_OrdemProducao OP (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Produto.Empresa = ' + '''' + '0101' + '''' + #13;
+  VLC_Select := VLC_Select + ' 													  AND Produto.Produto_ID = OP.Produto_ID ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join BomixBI.dbo.Pcp_TB_Produto Liso (nolock) ON Liso.Empresa = ' + '''' + '0101' + '''' + #13;
+  VLC_Select := VLC_Select + ' 											       AND Produto.Liso_ID = Liso.Produto_ID ' + #13;
+  VLC_Select := VLC_Select + ' Where Area = ' + '''' + 'PERSONALIZACAO' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND OP.Empresa = ' + '''' + '0101' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Prioridade < 500 ' + #13;
+  VLC_Select := VLC_Select + ' AND Status not in (' + '''' + 'FINALIZADA' + '''' + ',' + '''' + 'SUSPENSA' + '''' + ')' + #13;
+  VLC_Select := VLC_Select + ' AND Produzida > 0 ' + #13;
+  VLC_Select := VLC_Select + ' AND (OP.Produto_ID + OrdemProducao + OP.Produto + OP.Cliente + Produto.Liso_ID + Liso.Produto) like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + ' Order by OP.Recno desc  ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

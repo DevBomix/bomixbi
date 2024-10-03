@@ -1,0 +1,356 @@
+unit CIT_EnviarEmail_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, ExtCtrls, ComCtrls, DB, ADODB,
+  Provider, DBClient, Grids, DBGrids, IdComponent, IdTCPConnection,
+  IdTCPClient, IdMessageClient, IdSMTP, IdBaseComponent, IdMessage,
+  IdExplicitTLSClientServerBase, IdSMTPBase, Vcl.Buttons;
+
+type
+  TCIT_EnviarEmail = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label6: TLabel;
+    DBEdit1: TDBEdit;
+    TXT_DataCIT: TDBEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    Panel4: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    TXT_EmailGerente: TEdit;
+    Label1: TLabel;
+    MensagemGerente: TMemo;
+    DSP_CITItens: TDataSetProvider;
+    DS_CITItens: TDataSource;
+    Query_CITItens: TADOQuery;
+    CDS_CITItens: TClientDataSet;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Label2: TLabel;
+    Panel13: TPanel;
+    TXT_EmailCliente: TEdit;
+    MensagemCliente: TMemo;
+    IdMessage: TIdMessage;
+    IdSMTP: TIdSMTP;
+    Image4: TImage;
+    LBL_Titulo: TLabel;
+    Panel5: TPanel;
+    IMG_Desistir: TImage;
+    IMG_Confirmar: TImage;
+    BNT_Desistir: TSpeedButton;
+    BNT_Confirmar: TSpeedButton;
+    Label3: TLabel;
+    Query_CITItensOrdemEntrega: TStringField;
+    Query_CITItensCliente_ID: TStringField;
+    Query_CITItensCliente: TStringField;
+    Query_CITItensEmailCliente: TStringField;
+    Query_CITItensGerente_ID: TStringField;
+    Query_CITItensGerente: TStringField;
+    Query_CITItensEmailGerente: TStringField;
+    Query_CITItensCidadeUF: TStringField;
+    Query_CITItensNF: TStringField;
+    Query_CITItensDataPrevChegada: TDateTimeField;
+    Query_CITItensEmailVendedor: TStringField;
+    Query_CITItensEmissao: TDateTimeField;
+    Query_CITItensQuantidade: TFloatField;
+    CDS_CITItensOrdemEntrega: TStringField;
+    CDS_CITItensCliente_ID: TStringField;
+    CDS_CITItensCliente: TStringField;
+    CDS_CITItensEmailCliente: TStringField;
+    CDS_CITItensGerente_ID: TStringField;
+    CDS_CITItensGerente: TStringField;
+    CDS_CITItensEmailGerente: TStringField;
+    CDS_CITItensCidadeUF: TStringField;
+    CDS_CITItensNF: TStringField;
+    CDS_CITItensDataPrevChegada: TDateTimeField;
+    CDS_CITItensEmailVendedor: TStringField;
+    CDS_CITItensEmissao: TDateTimeField;
+    CDS_CITItensQuantidade: TFloatField;
+
+    // Minhas Procedures e Functions
+    procedure GetItensDaCit(PLC_CITID : String);
+    function ListarProdutos(PLC_Nota : String) : String;
+    procedure DS_CITItensDataChange(Sender: TObject; Field: TField);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_DesistirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CIT_EnviarEmail: TCIT_EnviarEmail;
+
+implementation
+
+uses CIT_Unit, FuncaoSistema_Unit, ConexaoDados_Unit;
+
+{$R *.dfm}
+
+procedure TCIT_EnviarEmail.GetItensDaCit(PLC_CITID: String);
+Var
+    VLC_Select : String;
+
+begin
+
+    VLC_Select := VLC_Select + '	Select ' + #13;
+    VLC_Select := VLC_Select + '     	CASE WHEN Len(Itens_CIT.Sequencia) = 1 THEN ' + '''' + '0' + '''' + ' + CAST(Itens_CIT.Sequencia AS varchar(1)) ELSE CAST(Itens_CIT.Sequencia AS varchar(2)) END AS OrdemEntrega, ' + #13;
+    VLC_Select := VLC_Select + '     	Rtrim(F2_CLIENTE) as Cliente_ID, A1_NOME as Cliente, Cliente.A1_EMAIL as EmailCliente, ' + #13;
+    VLC_Select := VLC_Select + '     	Vendedor.Gerencia_FK as Gerente_ID, Vendedor.Gerente, ' + #13;
+    VLC_Select := VLC_Select + '     	Rtrim(Vendedor.EmailVendedor) as EmailVendedor,  ' + #13;
+    VLC_Select := VLC_Select + '     	Rtrim(Vendedor.EmailGerente) as EmailGerente,   ' + #13;
+    VLC_Select := VLC_Select + '     	RTRIM(A1_MUN) + ' + '''' + ' - ' + '''' + ' + RTRIM(A1_EST) AS CidadeUF,  ' + #13;
+    VLC_Select := VLC_Select + '     	Nota.F2_DOC AS NF,' + #13;
+    VLC_Select := VLC_Select + '     	Convert(Datetime,F2_EMISSAO,112) AS Emissao, ' + #13;
+    VLC_Select := VLC_Select + '  ' + #13;
+    VLC_Select := VLC_Select + '     	(  ' + #13;
+    VLC_Select := VLC_Select + '     				SELECT  ' + #13;
+    VLC_Select := VLC_Select + ' 		     			SUM(D2_QUANT) AS Quantidade ' + #13;
+    VLC_Select := VLC_Select + ' 	     			FROM  P11OFICIAL.dbo.SD2010 (nolock) Item  ' + #13;
+    VLC_Select := VLC_Select + ' 	      			Where Item.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' 	      			AND Item.D2_FILIAL = F2_FILIAL ' + #13;
+    VLC_Select := VLC_Select + '       			AND Item.D2_DOC = F2_DOC ' + #13;
+    VLC_Select := VLC_Select + '       			AND (D2_COD like ' + '''' + 'B%' + '''' + ' OR D2_COD like ' + '''' + 'T%' + '''' + ') ' + #13;
+    VLC_Select := VLC_Select + '	    ) AS Quantidade, ' + #13;
+    VLC_Select := VLC_Select + '     	Itens_CIT.DataPrevista as DataPrevChegada  ' + #13;
+    VLC_Select := VLC_Select + '  ' + #13;
+    VLC_Select := VLC_Select + ' from P11OFICIAL.dbo.SF2010 Nota (nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Inner Join P11OFICIAL.dbo.SA1010 Cliente (nolock) ON Cliente.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' 												 AND A1_FILIAL = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + ' 												 AND F2_CLIENTE = A1_COD ' + #13;
+    VLC_Select := VLC_Select + ' INNER JOIN BomixBI.dbo.Fat_TB_VendedorGerente AS Vendedor WITH (nolock) ON Vendedor.Vendedor_ID = Nota.F2_VEND1 ' + #13;
+    VLC_Select := VLC_Select + ' 																	  AND Vendedor.Empresa = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + ' 																	  AND Vendedor.Vendedor_ID <> ' + '''' + '000040' + '''' + #13;
+    VLC_Select := VLC_Select + ' LEFT Join P11OFICIAL.dbo.SA4010 (nolock) AS Transportadora ON Transportadora.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' 														  AND Transportadora.A4_FILIAL = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + ' 														  AND Transportadora.A4_COD = Nota.F2_TRANSP ' + #13;
+    VLC_Select := VLC_Select + ' LEFT Join P11OFICIAL.dbo.DA3010 (nolock) Veiculo ON Veiculo.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' 												AND DA3_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + ' 												AND Veiculo.DA3_COD = Nota.F2_VEICUL1 ' + #13;
+    VLC_Select := VLC_Select + ' LEFT OUTER JOIN P11OFICIAL.dbo.DA4010 (nolock) Motorista ON Motorista.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' 														AND DA4_FILIAL = DA3_FILIAL ' + #13;
+    VLC_Select := VLC_Select + ' 														AND Motorista.DA4_COD = Veiculo.DA3_MOTORI ' + #13;
+    VLC_Select := VLC_Select + ' Inner JOIN BomixBI.dbo.[Fat_TB_NotaFiscalVendaCIT_Itens] (nolock) Itens_CIT ON Itens_CIT.Empresa = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + ' 																		  AND Itens_CIT.Nota_FK = F2_DOC ' + #13;
+    VLC_Select := VLC_Select + ' Inner Join BomixBI.dbo.Fat_TB_NotaFiscalVendaCIT_Capa CIT (nolock) ON CIT.Empresa = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + '																   AND CIT.Cit_ID = Itens_CIT.Cit_FK  ' + #13;
+    VLC_Select := VLC_Select + '  ' + #13;
+    VLC_Select := VLC_Select + ' Where Nota.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Nota.F2_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Itens_CIT.Cit_FK = ' + '''' + PLC_CITID + '''' + #13;
+    VLC_Select := VLC_Select + ' Order by Cit_FK, Sequencia ' + #13;
+
+    CDS_CITItens.Close;
+    Query_CITItens.Close;
+    Query_CITItens.SQL.Clear;
+    Query_CITItens.SQL.Text := VLC_Select;
+    CDS_CITItens.Open;
+
+end;
+
+function TCIT_EnviarEmail.ListarProdutos(PLC_Nota: String): String;
+Var
+   VLC_Select : String;
+   Query : TADOQuery;
+   VLC_EmailProduto : String;
+   VLN_Contador : Integer;
+
+begin
+
+    VLC_Select := '  Select ' + #13;
+    VLC_Select := VLC_Select + ' D2_DOC as Nota_FK, D2_ITEM as Sequencia, Rtrim(B1_DESC) as Produto, D2_QUANT as Quantidade  ' + #13;
+    VLC_Select := VLC_Select + ' from P11OFICIAL.dbo.SD2010 D2 (Nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Inner Join P11OFICIAL.dbo.SB1010 B1 (nolock) ON B1.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + '                                             AND B1.B1_COD = D2_COD ' + #13;
+    VLC_Select := VLC_Select + ' Where D2_DOC = ' + '''' + PLC_Nota + '''' + #13;
+    VLC_Select := VLC_Select + ' AND D2_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + ' Order by D2_ITEM' + #13;
+
+    Query := TADOQuery.Create(self);
+    With Query do
+    begin
+        Close;
+        Connection := Sys_ModuloConexaoDados.ADOConnection1;
+        SQL.Clear;
+        SQL.Text := VLC_Select;
+        Open;
+    end;
+
+    VLC_EmailProduto := '' + #13;
+    //VLC_EmailProduto := VLC_EmailProduto + '' + #13;
+    VLC_EmailProduto := VLC_EmailProduto + 'PRODUTOS :' + #13;
+
+    Query.First;
+    For VLN_Contador := 1 to Query.RecordCount do
+    begin
+          VLC_EmailProduto := VLC_EmailProduto + '' + #13;
+          VLC_EmailProduto := VLC_EmailProduto + '    ' + Query.FieldByName('Sequencia').AsString + ' - ' +  Query.FieldByName('Produto').AsString + #13;
+          VLC_EmailProduto := VLC_EmailProduto + '      -> QUANTIDADE: ' + IntToStr(Query.FieldByName('Quantidade').AsInteger) + #13;
+          Query.Next;
+    end;
+
+    Result := VLC_EmailProduto;
+    Query.Free;
+
+end;
+
+procedure TCIT_EnviarEmail.BNT_ConfirmarClick(Sender: TObject);
+Var
+   VLN_Contador : Integer;
+
+begin
+
+    CDS_CITItens.First;
+    For VLN_Contador := 1 to CDS_CITItens.RecordCount do
+    begin
+
+          IdMessage.Recipients.EMailAddresses := TXT_EmailGerente.Text;
+          IdMessage.BccList.EMailAddresses := 'desenvolvimento.ti@bomix.com.br; alexandrerosario@bomix.com.br';
+          IdMessage.Subject := 'Transferência Arquivo Automática - Embarque de Mercadoria';
+          IdMessage.Body := MensagemGerente.Lines;
+
+          IdSMTP.Connect;
+          try
+              IdSMTP.Send(IdMessage);
+          finally
+              IdSMTP.Disconnect;
+              Application.ProcessMessages;
+          end;
+
+          if CDS_CITItensEmailCliente.Value <> '' then
+          begin
+                IdMessage.Recipients.EMailAddresses := TXT_EmailCliente.Text;
+                IdMessage.BccList.EMailAddresses := 'desenvolvimento.ti@bomix.com.br';
+                IdMessage.Subject := 'Transferência Arquivo Automática - Embarque de Mercadoria';
+                IdMessage.Body := MensagemCliente.Lines;
+
+                IdSMTP.Connect;
+                try
+                    IdSMTP.Send(IdMessage);
+                finally
+                    IdSMTP.Disconnect;
+                    Application.ProcessMessages;
+                end;
+          end;
+
+          CDS_CITItens.Next;
+    end;
+
+    Application.MessageBox('Email Enviado com Sucesso','Atenção',mb_iconwarning + mb_ok);
+
+end;
+
+procedure TCIT_EnviarEmail.BNT_DesistirClick(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TCIT_EnviarEmail.DS_CITItensDataChange(Sender: TObject;
+  Field: TField);
+var
+  VLC_AlertarEmailCliente : String;
+  VLC_EmailCabecario : String;
+  VLC_EmailProdutos : String;
+  VLC_EmailRodape : String;
+  VLC_Motorista : String;
+  VLC_Roteiro : String;
+
+begin
+
+   if (DS_CITItens.DataSet.FieldByName('Gerente').AsString = 'INTERIOR SP')       OR
+      (DS_CITItens.DataSet.FieldByName('Gerente').AsString = 'GRANDE SP')         OR
+      (DS_CITItens.DataSet.FieldByName('Gerente').AsString = 'SP GRANDES CONTAS') then
+   begin
+         TXT_EmailGerente.Text := 'andrerosario@bomix.com.br; ' + 'faturamento@bomix.com.br; ' + CDS_CITItensEmailGerente.Value + '; ' + CDS_CITItensEmailVendedor.Value;
+   end
+   else
+   begin
+         TXT_EmailGerente.Text := 'faturamento@bomix.com.br; ' +  CDS_CITItensEmailGerente.Value + '; ' + CDS_CITItensEmailVendedor.Value;
+   end;
+
+   TXT_EmailCliente.Text := CDS_CITItensEmailCliente.Value;
+
+    VLC_EmailCabecario := '';
+    VLC_AlertarEmailCliente := '';
+    if CDS_CITItensEmailCliente.Value = '' then
+    begin
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + 'ALERTA' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + '_____________________________________________________________________' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + ' CLIENTE NÃO RECEBEU A CIT PORQUE SEU CADASTRO NÃO POSSUE EMAIL ' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + ' FAVOR VERIFICAR COM URGÊNCIA ' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + '_____________________________________________________________________' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + '' + #13;
+       VLC_AlertarEmailCliente := VLC_AlertarEmailCliente + '' + #13;
+    end
+    else
+    begin
+       VLC_EmailCabecario := '_____________________________________________________________________' + #13;
+       VLC_EmailCabecario := VLC_EmailCabecario + '_____________________________________________________________________' + #13;
+    end;
+
+    VLC_EmailCabecario := VLC_EmailCabecario + ' ' + #13;
+    VLC_EmailCabecario := VLC_EmailCabecario + 'Empresa: ' + CDS_CITItensCliente.Value + #13;
+    VLC_EmailCabecario := VLC_EmailCabecario + 'Número Nota Fiscal: ' + CDS_CITItensNF.Value + #13;
+    VLC_EmailCabecario := VLC_EmailCabecario + 'Número da CIT: ' + CIT.CDSCit_ID.Value + #13;
+    VLC_EmailCabecario := VLC_EmailCabecario + 'Data Embarque: ' + TXT_DataCIT.Text + #13;
+    VLC_EmailCabecario := VLC_EmailCabecario + 'Data Prevista de Chegada: ' + DateToStr((CDS_CITItensDataPrevChegada.Value)) + #13;
+
+    VLC_EmailProdutos := ListarProdutos(CDS_CITItensNF.Value);
+
+    VLC_Motorista := ' ' + #13;
+    VLC_Motorista := VLC_Motorista + '_____________________________________________________________________' + #13;
+    VLC_Motorista := VLC_Motorista + 'MOTORISTA: ' + CIT.CDSMotorista.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'END: ' + CIT.CDSEndereco.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'BAIRRO: ' + CIT.CDSMotoristaBairro.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'CIDADE: ' + CIT.CDSCidade.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'TELEFONE: ' + CIT.CDSMotoristaTelefone.Value;
+    VLC_Motorista := VLC_Motorista + ' / CELULAR: ' + CIT.CDSMotoristaCelular.Value;
+    VLC_Motorista := VLC_Motorista + ' / NEXTEL: ' + CIT.CDSMotoristaNextel.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'TRANPORTADORA: ' + CIT.CDSTransportadora.Value + #13;
+    VLC_Motorista := VLC_Motorista + 'PLACA DO VEICULO: ' + CIT.CDSPlaca.Value + #13;
+
+    VLC_Roteiro := '_____________________________________________________________________' + #13;
+    VLC_Roteiro := VLC_Roteiro + 'ORDEM DE ENTREGA: ' + CDS_CITItensOrdemEntrega.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'CLIENTE: ' + CDS_CITItensCliente.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'CIDADE: ' + CDS_CITItensCidadeUF.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'NOTA FISCAL: ' + CDS_CITItensNF.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'DATA PREVISTA DE CHEGADA: ' + DateToStr((CDS_CITItensDataPrevChegada.Value)) + #13;
+    VLC_Roteiro := VLC_Roteiro + '' + #13;
+    VLC_Roteiro := VLC_Roteiro + '' + #13;
+    VLC_Roteiro := VLC_Roteiro + 'DATA: ' + TXT_DataCIT.Text + #13;
+    VLC_Roteiro := VLC_Roteiro + 'NUM. LACRE 01: ' + CIT.CDSNumLacre1.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'NUM. LACRE 02: ' + CIT.CDSNumLacre2.Value + #13;
+    VLC_Roteiro := VLC_Roteiro + 'NUM. LACRE 03: ' + CIT.CDSNumLacre3.Value + #13;
+
+    VLC_EmailRodape := '_____________________________________________________________________' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + ' ' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + ' E-MAIL ENVIADO PELO SISTEMA DA' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + ' BOMIX INDUSTRIA DE EMBALAGENS PLASTICAS ' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + ' FAVOR CONFIRMAR RECEBIMENTO **********************************' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + '_____________________________________________________________________' + #13;
+    VLC_EmailRodape := VLC_EmailRodape + '_____________________________________________________________________' + #13;
+
+    MensagemGerente.Lines.Text := VLC_AlertarEmailCliente + VLC_EmailCabecario + VLC_EmailProdutos + VLC_Motorista + VLC_Roteiro + VLC_EmailRodape;
+    MensagemCliente.Lines.Text := VLC_EmailCabecario + VLC_EmailProdutos + VLC_EmailRodape;
+
+end;
+
+end.
+

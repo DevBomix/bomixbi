@@ -1,0 +1,64 @@
+unit ProcessoInspecaoIncluirBuscarProducao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TProcessoInspecao_IncluirBuscarProducao = class(TPadraoBuscador)
+    QueryArea: TStringField;
+    QuerySetor: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryArte_ID: TStringField;
+    QueryArte: TStringField;
+    QueryDataTurno: TDateTimeField;
+    QueryOrdemProducao: TStringField;
+    QueryRecurso: TStringField;
+    QueryTurno: TStringField;
+    CDSArea: TStringField;
+    CDSSetor: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSArte_ID: TStringField;
+    CDSArte: TStringField;
+    CDSDataTurno: TDateTimeField;
+    CDSOrdemProducao: TStringField;
+    CDSRecurso: TStringField;
+    CDSTurno: TStringField;
+    TXT_Buscador2: TEdit;
+    Label7: TLabel;
+    QueryRecno: TIntegerField;
+    CDSRecno: TIntegerField;
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_IncluirBuscarProducao: TProcessoInspecao_IncluirBuscarProducao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProcessoInspecao_IncluirBuscarProducao.BTN_BuscarClick(
+  Sender: TObject);
+begin
+  inherited;
+  CDS.Close;
+  Query.Close;
+  Query.Parameters.ParamByName('Buscador1').Value := '%' + TXT_Buscador.Text + '%';
+  Query.Parameters.ParamByName('Buscador2').Value := '%' + TXT_Buscador2.Text + '%';
+  CDS.Open;
+end;
+
+end.

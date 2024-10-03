@@ -1,0 +1,789 @@
+unit BI_FuncionarioEntregaMaterias_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobi_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  ppParameter, ppDesignLayer, ppStrtch, ppRichTx, ppBands, ppCtrls, ppClass,
+  ppPrnabl, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDB, ppDBPipe,
+  System.ImageList, Vcl.ImgList, Vcl.Menus;
+
+type
+  TBI_FuncionarioEntregaMaterias = class(TPadraoBI)
+    Panel2: TPanel;
+    Image2: TImage;
+    Image3: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Panel7: TPanel;
+    DBGrid2: TDBGrid;
+    CBX_TipoData: TComboBox;
+    Memo1: TMemo;
+    CDS_Itens: TClientDataSet;
+    DS_Itens: TDataSource;
+    DSP_Itens: TDataSetProvider;
+    Query_Itens: TADOQuery;
+    PNL_Consultar_Bomix: TPanel;
+    SHP_Bomix: TShape;
+    BTN_Bomix: TBitBtn;
+    PNL_Consultar_BomixLOG: TPanel;
+    SHP_BomixLog: TShape;
+    BTN_BomixLOG: TBitBtn;
+    CategoryPanel6: TCategoryPanel;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    PNL_StatusUsando: TShape;
+    PNL_StatusDevolvido: TShape;
+    PNL_StatusVencido: TShape;
+    BTN_StatusUsando: TBitBtn;
+    BTN_StatusDevolvido: TBitBtn;
+    BTN_StatusVencido: TBitBtn;
+    BitBtn1: TBitBtn;
+    BTN_StatusSemMaterial: TBitBtn;
+    PNL_StatusSemMaterial: TShape;
+    CategoryPanel1: TCategoryPanel;
+    Panel5: TPanel;
+    Panel8: TPanel;
+    PNL_Ativo: TShape;
+    PNL_Demitido: TShape;
+    BTN_Ativo: TBitBtn;
+    BTN_Demitido: TBitBtn;
+    BitBtn2: TBitBtn;
+    QueryRecno: TIntegerField;
+    QueryIDTotvs: TStringField;
+    QueryEmpresa: TStringField;
+    QueryMatricula: TStringField;
+    QueryFuncionario: TStringField;
+    QueryFuncao: TStringField;
+    QueryTipoFuncao: TStringField;
+    QueryDepartamento: TStringField;
+    QueryAdmissao: TDateTimeField;
+    QueryHorario: TStringField;
+    QueryDemissao: TDateTimeField;
+    QuerySituacaoFolha: TStringField;
+    CDSRecno: TIntegerField;
+    CDSIDTotvs: TStringField;
+    CDSEmpresa: TStringField;
+    CDSMatricula: TStringField;
+    CDSFuncionario: TStringField;
+    CDSFuncao: TStringField;
+    CDSTipoFuncao: TStringField;
+    CDSDepartamento: TStringField;
+    CDSAdmissao: TDateTimeField;
+    CDSHorario: TStringField;
+    CDSDemissao: TDateTimeField;
+    CDSSituacaoFolha: TStringField;
+    TXT_Observacao: TEdit;
+    Label4: TLabel;
+    Shape3: TShape;
+    Button1: TButton;
+    IMG_EntregaRetirar: TImage;
+    BTN_Entregar: TSpeedButton;
+    IMG_EntregaColocar: TImage;
+    Label6: TLabel;
+    DSP_EntregaMaterial: TDataSetProvider;
+    CDS_EntregaMaterial: TClientDataSet;
+    CDS_EntregaMaterialRecno: TIntegerField;
+    CDS_EntregaMaterialEmpresa: TStringField;
+    CDS_EntregaMaterialIDTotvs: TStringField;
+    CDS_EntregaMaterialMatricula: TStringField;
+    CDS_EntregaMaterialFuncionario: TStringField;
+    CDS_EntregaMaterialFuncao: TStringField;
+    CDS_EntregaMaterialTipoFuncao: TStringField;
+    CDS_EntregaMaterialDepartamento: TStringField;
+    CDS_EntregaMaterialAdmissao: TDateTimeField;
+    CDS_EntregaMaterialDemissao: TDateTimeField;
+    CDS_EntregaMaterialHorario: TStringField;
+    CDS_EntregaMaterialSituacaoFolha: TStringField;
+    CDS_EntregaMaterialAcessorio_FK: TIntegerField;
+    CDS_EntregaMaterialAcessorio: TStringField;
+    CDS_EntregaMaterialDataEntrega: TDateTimeField;
+    CDS_EntregaMaterialDataVencimento: TDateTimeField;
+    CDS_EntregaMaterialDataDevolucao: TDateTimeField;
+    CDS_EntregaMaterialQuantidade: TIntegerField;
+    CDS_EntregaMaterialObservacao: TStringField;
+    CDS_EntregaMaterialStatus: TStringField;
+    CDS_EntregaMaterialOrdem: TAutoIncField;
+    DS_EntregaMaterial: TDataSource;
+    Query_EntregaMaterial: TADOQuery;
+    Query_EntregaMaterialRecno: TIntegerField;
+    Query_EntregaMaterialEmpresa: TStringField;
+    Query_EntregaMaterialIDTotvs: TStringField;
+    Query_EntregaMaterialMatricula: TStringField;
+    Query_EntregaMaterialFuncionario: TStringField;
+    Query_EntregaMaterialFuncao: TStringField;
+    Query_EntregaMaterialTipoFuncao: TStringField;
+    Query_EntregaMaterialDepartamento: TStringField;
+    Query_EntregaMaterialAdmissao: TDateTimeField;
+    Query_EntregaMaterialDemissao: TDateTimeField;
+    Query_EntregaMaterialHorario: TStringField;
+    Query_EntregaMaterialSituacaoFolha: TStringField;
+    Query_EntregaMaterialAcessorio_FK: TIntegerField;
+    Query_EntregaMaterialAcessorio: TStringField;
+    Query_EntregaMaterialDataEntrega: TDateTimeField;
+    Query_EntregaMaterialDataVencimento: TDateTimeField;
+    Query_EntregaMaterialDataDevolucao: TDateTimeField;
+    Query_EntregaMaterialQuantidade: TIntegerField;
+    Query_EntregaMaterialObservacao: TStringField;
+    Query_EntregaMaterialStatus: TStringField;
+    Query_EntregaMaterialOrdem: TAutoIncField;
+    ppEntregaMaterial: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppIMG_Logo: TppImage;
+    ppLBL_TituloRelatorio: TppLabel;
+    ppShape4: TppShape;
+    ppLabel20: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLine3: TppLine;
+    ppDBText2: TppDBText;
+    ppLabel11: TppLabel;
+    ppDBText7: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppLabel12: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppLine125: TppLine;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText20: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppLine9: TppLine;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
+    ppLabel29: TppLabel;
+    ppLabel10: TppLabel;
+    ppLine2: TppLine;
+    ppLine1: TppLine;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle1: TppPageStyle;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    ppDBPipeline_EntregaMaterial: TppDBPipeline;
+    Query_ItensOrdem: TAutoIncField;
+    Query_ItensMatricula_FK: TStringField;
+    Query_ItensAcessorio_FK: TIntegerField;
+    Query_ItensAcessorio: TStringField;
+    Query_ItensDataEntrega: TDateTimeField;
+    Query_ItensDataVencimento: TDateTimeField;
+    Query_ItensDataDevolucao: TDateTimeField;
+    Query_ItensQuantidade: TIntegerField;
+    Query_ItensObservacao: TStringField;
+    Query_ItensStatus: TStringField;
+    Query_ItensEmpresa: TStringField;
+    CDS_ItensOrdem: TAutoIncField;
+    CDS_ItensMatricula_FK: TStringField;
+    CDS_ItensAcessorio_FK: TIntegerField;
+    CDS_ItensAcessorio: TStringField;
+    CDS_ItensDataEntrega: TDateTimeField;
+    CDS_ItensDataVencimento: TDateTimeField;
+    CDS_ItensDataDevolucao: TDateTimeField;
+    CDS_ItensQuantidade: TIntegerField;
+    CDS_ItensObservacao: TStringField;
+    CDS_ItensStatus: TStringField;
+    CDS_ItensEmpresa: TStringField;
+    PopupMenu1: TPopupMenu;
+    ImageList1: TImageList;
+    FuncionrioxMateriais1: TMenuItem;
+    FichadeEntregadeMaterias1: TMenuItem;
+    Query_EntregaMaterialChapa: TStringField;
+    CDS_EntregaMaterialChapa: TStringField;
+
+    // MInhas Functions e Procedere
+    Function Get_ConsultaPrincipal : String;
+
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure Memo1DblClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure BTN_BomixClick(Sender: TObject);
+    procedure BTN_BomixLOGClick(Sender: TObject);
+    procedure BTN_StatusUsandoClick(Sender: TObject);
+    procedure BTN_StatusVencidoClick(Sender: TObject);
+    procedure BTN_StatusDevolvidoClick(Sender: TObject);
+    procedure BTN_StatusSemMaterialClick(Sender: TObject);
+    procedure BTN_AtivoClick(Sender: TObject);
+    procedure BTN_DemitidoClick(Sender: TObject);
+    procedure BTN_IncluirRestricaoClick(Sender: TObject);
+    procedure BTN_ExcluirRestricaoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BTN_EntregarClick(Sender: TObject);
+    procedure DS_ItensDataChange(Sender: TObject; Field: TField);
+    procedure FichadeEntregadeMaterias1Click(Sender: TObject);
+    procedure BTN_ImprimirClick(Sender: TObject);
+    procedure FuncionrioxMateriais1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_FuncionarioEntregaMaterias: TBI_FuncionarioEntregaMaterias;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_FuncionarioEntregaMaterias_InserirMaterial_Unit, conexaodados_unit,
+  funcaosistema_unit, BI_FuncionarioEntregaMaterias_DataEntrega_Unit,
+  BI_FuncionarioEntregaMaterias_FuncXMat_Unit;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_AtivoClick(Sender: TObject);
+begin
+  inherited;
+  if PNL_Ativo.Brush.Color = $00FF8000 then
+  begin
+     if (PNL_Demitido.Brush.Color = clGray) then
+          PNL_Ativo.Brush.Color := $00FF8000
+        else
+          PNL_Ativo.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if PNL_Ativo.Brush.Color = clGray then
+  begin
+     PNL_Ativo.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_BomixClick(Sender: TObject);
+begin
+  inherited;
+
+  if SHP_Bomix.Brush.Color = $00FF8000 then
+  begin
+     if (SHP_BomixLOG.Brush.Color = clGray) then
+          SHP_Bomix.Brush.Color := $00FF8000
+        else
+          SHP_Bomix.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if SHP_Bomix.Brush.Color = clGray then
+  begin
+     SHP_Bomix.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_BomixLOGClick(Sender: TObject);
+begin
+  inherited;
+
+  if SHP_BomixLOG.Brush.Color = $00FF8000 then
+  begin
+     if (SHP_Bomix.Brush.Color = clGray) then
+          SHP_BomixLOG.Brush.Color := $00FF8000
+        else
+          SHP_BomixLOG.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if SHP_BomixLOG.Brush.Color = clGray then
+  begin
+     SHP_BomixLOG.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+function TBI_FuncionarioEntregaMaterias.Get_ConsultaPrincipal: String;
+Var
+  VCL_Select, VLC_Buscador : String;
+
+begin
+
+   VCL_Select := VCL_Select + ' 		Select ' + #13;
+    VCL_Select := VCL_Select + ' 			Recno, Funcionario.IDTotvs, Funcionario.Empresa, Matricula, Funcionario.Chapa, NomeCompleto as Funcionario, Funcao, TipoFuncao, Departamento, Admissao, Demissao, ' + #13;
+    VCL_Select := VCL_Select + ' 			Horario, Funcionario.Status as SituacaoFolha, Acessorio_FK, Acessorio, DataEntrega, DataVencimento, ' + #13;
+    VCL_Select := VCL_Select + ' 			DataDevolucao, Quantidade, Observacao, Acessorio.Status ' + #13;
+    VCL_Select := VCL_Select + ' 		from BomixBI.[dbo].[Pes_TB_Funcionario] Funcionario (nolock) ' + #13;
+    VCL_Select := VCL_Select + ' 		Left Join BomixBI.dbo.Pes_TB_FuncionarioAcessorio Acessorio (nolock) ON Acessorio.Empresa = Funcionario.IDTotvs ' + #13;
+    VCL_Select := VCL_Select + ' 																			  AND Acessorio.Matricula_FK = Funcionario.Matricula ' + #13;    VCL_Select := VCL_Select + ' ' + #13;
+    VCL_Select := VCL_Select + '    Where 1 = 1 ' + #13;
+
+    // Filtro de Datas ************************************************************************************************************************************************
+    if CBX_TipoData.Text = 'ADMISSÃO' then
+    begin
+        VCL_Select := VCL_Select + '    AND Admissao Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+        VCL_Select := VCL_Select + '    AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    end;
+
+    if CBX_TipoData.Text = 'DEMISSÃO' then
+    begin
+        VCL_Select := VCL_Select + '    AND Demissao Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+        VCL_Select := VCL_Select + '    AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    end;
+
+    if CBX_TipoData.Text = 'DATA DE ENTREGA' then
+    begin
+        VCL_Select := VCL_Select + '    AND DataEntrega Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+        VCL_Select := VCL_Select + '    AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    end;
+
+    if CBX_TipoData.Text = 'DATA DE VENCIMENTO' then
+    begin
+        VCL_Select := VCL_Select + '    AND DataVencimento Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+        VCL_Select := VCL_Select + '    AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    end;
+
+    // Filtro de Empresa ************************************************************************************************************************************************
+
+        VCL_Select := VCL_Select + '  AND Funcionario.Empresa in (' + '''' + '' + '''';
+
+      if SHP_Bomix.Brush.Color = $00FF8000 then
+      begin
+        VCL_Select := VCL_Select + ',' + '''' + 'BOMIX MATRIZ' + '''';
+      end;
+
+      if SHP_BomixLog.Brush.Color = $00FF8000 then
+      begin
+        VCL_Select := VCL_Select +  ',' + '''' + 'BOMIX LOG' + '''';
+      end;
+
+        VCL_Select := VCL_Select +')';
+
+    // Filtro de Status ************************************************************************************************************************************************
+
+      if PNL_StatusSemMaterial.Brush.Color = clGray then
+      begin
+
+              VCL_Select := VCL_Select + '  AND Acessorio.Status in (' + '''' + '' + '''';
+
+              if PNL_StatusUsando.Brush.Color = $00FF8000 then
+              begin
+                VCL_Select := VCL_Select + ',' + '''' + 'USANDO' + '''';
+              end;
+
+              if PNL_StatusVencido.Brush.Color = $00FF8000 then
+              begin
+                VCL_Select := VCL_Select +  ',' + '''' + 'VENCIDO' + '''';
+              end;
+
+              if PNL_StatusDevolvido.Brush.Color = $00FF8000 then
+              begin
+                VCL_Select := VCL_Select +  ',' + '''' + 'DEVOLVIDO' + '''';
+              end;
+
+                VCL_Select := VCL_Select +')';
+      end;
+
+    // Filtro de Status ************************************************************************************************************************************************
+
+      if (PNL_Ativo.Brush.Color = $00FF8000) AND (PNL_Demitido.Brush.Color = $00FF8000)  then
+      begin
+        VCL_Select := VCL_Select + '  AND Funcionario.Status in (' + '''' + '' + '''' + ',' + '''' + 'ATIVO' + '''' +  ',' + '''' + 'DEMITIDO' + '''' + ')';
+      end;
+
+      if (PNL_Ativo.Brush.Color = $00FF8000) AND (PNL_Demitido.Brush.Color <> $00FF8000)  then
+      begin
+        VCL_Select := VCL_Select + '  AND Funcionario.Status in (' + '''' + '' + '''' + ',' + '''' + 'ATIVO' + '''' + ')';
+      end;
+
+      if (PNL_Ativo.Brush.Color <> $00FF8000) AND (PNL_Demitido.Brush.Color = $00FF8000)  then
+      begin
+        VCL_Select := VCL_Select + '  AND Funcionario.Status in (' + '''' + 'DEMITIDO' + '''' + ')';
+      end;
+
+    // Filtro de Buscador ************************************************************************************************************************************************
+    VLC_Buscador := '(Rtrim(Matricula) + Rtrim(NomeCompleto) + Rtrim(Funcao) + Rtrim(TipoFuncao) + Rtrim(Departamento) + Isnull(Rtrim(Horario),' + '''' + '' + '''' + ') + Isnull(Rtrim(SituacaoFolha),' + '''' + '' + '''' + ') + Isnull(Rtrim(Acessorio),' + '''' + '' + '''' + '))' + #13;
+
+    VCL_Select := VCL_Select + '    AND ' + VLC_Buscador + ' Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+      If TXT_Buscador2.Text <> '' then
+          VCL_Select := VCL_Select + '    AND ' + VLC_Buscador + ' Like ' + '''' + '%' + TXT_Buscador2.Text + '%' + '''' + #13;
+
+
+      Result :=  VCL_Select;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_BuscarClick(Sender: TObject);
+Var
+  VCL_Select : String;
+
+begin
+  inherited;
+
+    VCL_Select := VCL_Select + ' Select ' + #13;
+    VCL_Select := VCL_Select + ' 	Distinct Recno, IDTotvs, Empresa, Matricula, Funcionario, Funcao, TipoFuncao, Departamento, Admissao, Horario, Demissao, SituacaoFolha ' + #13;
+    VCL_Select := VCL_Select + ' from ( ' + #13;
+    VCL_Select := VCL_Select + '  ' + #13;
+
+    VCL_Select := VCL_Select + Get_ConsultaPrincipal;
+
+    VCL_Select := VCL_Select + '  ' + #13;
+    VCL_Select := VCL_Select + ' ) TB ' + #13;
+
+    VCL_Select := VCL_Select + ' Order by Recno desc ' + #13;
+
+    Memo1.Lines.Text := VCL_Select;
+
+    CDS.Close;
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Text := VCL_Select;
+    CDS.Open;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_DemitidoClick(Sender: TObject);
+begin
+  inherited;
+  if PNL_Demitido.Brush.Color = $00FF8000 then
+  begin
+     if (PNL_Ativo.Brush.Color = clGray) then
+          PNL_Demitido.Brush.Color := $00FF8000
+        else
+          PNL_Demitido.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if PNL_Demitido.Brush.Color = clGray then
+  begin
+     PNL_Demitido.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_EntregarClick(Sender: TObject);
+  Var
+     VLC_Update : String;
+begin
+
+  if IMG_EntregaColocar.Visible = True then
+  begin
+
+     Application.CreateForm(TBI_FuncionarioEntregaMaterias_DataEntrega, BI_FuncionarioEntregaMaterias_DataEntrega);
+     try
+         BI_FuncionarioEntregaMaterias_DataEntrega.DTP_DataEntrega.Date := now;
+         BI_FuncionarioEntregaMaterias_DataEntrega.ShowModal;
+     finally
+         BI_FuncionarioEntregaMaterias_DataEntrega.Release;
+         BI_FuncionarioEntregaMaterias_DataEntrega := Nil;
+     end;
+
+  end;
+
+  if IMG_EntregaColocar.Visible = False then
+  begin
+
+      VLC_Update := 'Update BomixBI.[dbo].[Pes_TB_FuncionarioAcessorio]' + #13;
+      VLC_Update := VLC_Update + 'Set DataDevolucao = NULL' + #13;
+      VLC_Update := VLC_Update + 'Where Ordem = ' + IntToStr(CDS_ItensOrdem.AsInteger);
+
+       With Sys_ModuloConexaoDados.ADOCommand1 do
+       begin
+           CommandText := VLC_Update;
+           Execute;
+       end;
+
+       VLC_Update := 'Exec BomixBI.[dbo].[Pes_SP_AtualizarBase_Funcionario_BasePontoAntigo]' + #13;
+       With Sys_ModuloConexaoDados.ADOCommand1 do
+       begin
+           CommandText := VLC_Update;
+           Execute;
+       end;
+
+  end;
+
+  CDS_Itens.Close;
+  CDS_Itens.Open;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_ExcluirRestricaoClick(
+  Sender: TObject);
+  Var
+     VLC_Delete : String;
+begin
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(139,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+       Application.MessageBox('Acesso negado para exclusão.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+   end
+   else
+   begin
+         VLC_Delete := 'Delete from BomixBI.[dbo].[Pes_TB_FuncionarioAcessorio] where Ordem = ' + IntToStr(CDS_ItensOrdem.AsInteger);
+
+         With Sys_ModuloConexaoDados.ADOCommand1 do
+         begin
+             CommandText := VLC_Delete;
+             Execute;
+         end;
+
+        CDS_Itens.Close;
+        CDS_Itens.Open;
+   end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_ImprimirClick(Sender: TObject);
+begin
+  PopupMenu1.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_IncluirRestricaoClick(
+  Sender: TObject);
+begin
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(138,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+       Application.MessageBox('Acesso negado para inclusão.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+   end
+   else
+   begin
+
+          Application.CreateForm(TBI_FuncionarioEntregaMaterias_InserirMaterial, BI_FuncionarioEntregaMaterias_InserirMaterial);
+          try
+            BI_FuncionarioEntregaMaterias_InserirMaterial.BTN_BuscarClick(nil);
+            BI_FuncionarioEntregaMaterias_InserirMaterial.ShowModal;
+          finally
+            BI_FuncionarioEntregaMaterias_InserirMaterial.Release;
+            BI_FuncionarioEntregaMaterias_InserirMaterial := nil;
+          end;
+
+   end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_StatusDevolvidoClick(
+  Sender: TObject);
+begin
+  PNL_StatusSemMaterial.Brush.Color := clGray;
+
+  if PNL_StatusDevolvido.Brush.Color = $00FF8000 then
+  begin
+     if (PNL_StatusVencido.Brush.Color = clGray) AND (PNL_StatusUsando.Brush.Color = clGray) AND (PNL_StatusSemMaterial.Brush.Color = clGray) then
+          PNL_StatusDevolvido.Brush.Color := $00FF8000
+        else
+          PNL_StatusDevolvido.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if PNL_StatusDevolvido.Brush.Color = clGray then
+  begin
+     PNL_StatusDevolvido.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_StatusSemMaterialClick(
+  Sender: TObject);
+begin
+
+  PNL_StatusVencido.Brush.Color := clGray;
+  PNL_StatusUsando.Brush.Color := clGray;
+  PNL_StatusDevolvido.Brush.Color := clGray;
+  PNL_StatusSemMaterial.Brush.Color := $00FF8000;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_StatusUsandoClick(Sender: TObject);
+begin
+  PNL_StatusSemMaterial.Brush.Color := clGray;
+
+  if PNL_StatusUsando.Brush.Color = $00FF8000 then
+  begin
+     if (PNL_StatusVencido.Brush.Color = clGray) AND (PNL_StatusDevolvido.Brush.Color = clGray) AND (PNL_StatusSemMaterial.Brush.Color = clGray) then
+          PNL_StatusUsando.Brush.Color := $00FF8000
+        else
+          PNL_StatusUsando.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if PNL_StatusUsando.Brush.Color = clGray then
+  begin
+     PNL_StatusUsando.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.BTN_StatusVencidoClick(
+  Sender: TObject);
+begin
+  inherited;
+  PNL_StatusSemMaterial.Brush.Color := clGray;
+
+  if PNL_StatusVencido.Brush.Color = $00FF8000 then
+  begin
+     if (PNL_StatusDevolvido.Brush.Color = clGray) AND (PNL_StatusUsando.Brush.Color = clGray) AND (PNL_StatusSemMaterial.Brush.Color = clGray) then
+          PNL_StatusVencido.Brush.Color := $00FF8000
+        else
+          PNL_StatusVencido.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if PNL_StatusVencido.Brush.Color = clGray then
+  begin
+     PNL_StatusVencido.Brush.Color := $00FF8000;
+     Exit;
+  end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.Button1Click(Sender: TObject);
+  Var
+     VLC_Update : String;
+begin
+
+  VLC_Update := 'Update BomixBI.[dbo].[Pes_TB_FuncionarioAcessorio]' + #13;
+  VLC_Update := VLC_Update + 'Set Observacao = ' + '''' + TXT_Observacao.Text + '''' + #13;
+  VLC_Update := VLC_Update + ' Where Ordem = ' + IntToStr(CDS_ItensOrdem.AsInteger);
+
+   With Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Update;
+       Execute;
+   end;
+
+   CDS_Itens.Close;
+   CDS_Itens.Open;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.DesenvolvimentoExecute(
+  Sender: TObject);
+begin
+  inherited;
+  Memo1.Visible := True;
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.DSDataChange(Sender: TObject;
+  Field: TField);
+Var
+  VCL_Select : String;
+begin
+
+    VCL_Select := VCL_Select + ' Select * from BomixBI.dbo.Pes_TB_FuncionarioAcessorio (nolock) ' + #13;
+    VCL_Select := VCL_Select + ' where Matricula_FK = ' + '''' + CDSMatricula.AsString + '''' + #13;
+    VCL_Select := VCL_Select + ' AND Empresa = ' + '''' + CDSIDTotvs.AsString + '''' + #13;
+    VCL_Select := VCL_Select + ' Order by DataEntrega desc ' + #13;
+
+    CDS_Itens.Close;
+    Query_Itens.Close;
+    Query_Itens.SQL.Clear;
+    Query_Itens.SQL.Text := VCL_Select;
+    CDS_Itens.Open;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.DS_ItensDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  if CDS_ItensDataDevolucao.AsString = '' then
+  begin
+     IMG_EntregaColocar.Visible := True;
+     IMG_EntregaRetirar.Visible := False;
+  end
+  else
+  begin
+     IMG_EntregaColocar.Visible := False;
+     IMG_EntregaRetirar.Visible := True;
+  end;
+
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.FichadeEntregadeMaterias1Click(
+  Sender: TObject);
+Var
+  VLC_Select : String;
+begin
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(140,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+       Application.MessageBox('Acesso negado para imprimir este relatório.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+   end
+   else
+   begin
+         VLC_Select :=  VLC_Select + ' Select ' + #13;
+         VLC_Select :=  VLC_Select + ' 			Ordem, Recno, Funcionario.Empresa, Funcionario.IDTotvs, Matricula, NomeCompleto as Funcionario, ' + #13;
+         VLC_Select :=  VLC_Select + ' 			Funcao, TipoFuncao, Departamento, Admissao, Demissao, ' + #13;
+         VLC_Select :=  VLC_Select + ' 			Horario, Funcionario.Status as SituacaoFolha, Acessorio_FK, Acessorio, DataEntrega, DataVencimento, ' + #13;
+         VLC_Select :=  VLC_Select + ' 			DataDevolucao, Quantidade, Observacao, Acessorio.Status ' + #13;
+         VLC_Select :=  VLC_Select + ' 		from BomixBI.[dbo].[Pes_TB_Funcionario] Funcionario (nolock) ' + #13;
+         VLC_Select :=  VLC_Select + ' 		Inner Join BomixBI.dbo.Pes_TB_FuncionarioAcessorio Acessorio (nolock) ON Acessorio.Empresa = Funcionario.IDTotvs ' + #13;
+         VLC_Select :=  VLC_Select + ' 																			 AND Acessorio.Matricula_FK = Funcionario.Matricula ' + #13;
+         VLC_Select :=  VLC_Select + ' 		Where Matricula = ' + '''' + CDSMatricula.AsString + '''' + #13;
+         VLC_Select :=  VLC_Select + ' 		AND  Funcionario.IDTotvs = ' + '''' + CDSIDTotvs.AsString + '''' + #13;
+         VLC_Select :=  VLC_Select + ' 		Order by DataEntrega desc  ' + #13;
+
+         Query_EntregaMaterial.Close;
+         CDS_EntregaMaterial.Close;
+         Query_EntregaMaterial.SQL.Clear;
+         Query_EntregaMaterial.SQL.Text := VLC_Select;
+         CDS_EntregaMaterial.Open;
+
+         ppEntregaMaterial.Print;
+   end;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.FormShow(Sender: TObject);
+begin
+  inherited;
+  DTP_DataInicial.Date := Date - 365;
+  DTP_DataFinal.Date:= Date;
+  MonthCalendar1.Date := Date - 365;
+  MonthCalendar1.EndDate := Date;
+  BTN_BuscarClick(nil);
+  BNT_EncolherFiltroClick(nil);
+
+end;
+
+
+
+procedure TBI_FuncionarioEntregaMaterias.FuncionrioxMateriais1Click(
+  Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+
+  VLC_Select := Get_ConsultaPrincipal + ' Order by Empresa, NomeCompleto, Acessorio_FK ';
+
+  Application.CreateForm(TBI_FuncionarioEntregaMaterias_FuncXMat, BI_FuncionarioEntregaMaterias_FuncXMat);
+
+  BI_FuncionarioEntregaMaterias_FuncXMat.Query_EntregaMaterial.Close;
+  BI_FuncionarioEntregaMaterias_FuncXMat.CDS_EntregaMaterial.Close;
+  BI_FuncionarioEntregaMaterias_FuncXMat.Query_EntregaMaterial.SQL.Clear;
+  BI_FuncionarioEntregaMaterias_FuncXMat.Query_EntregaMaterial.SQL.Text := VLC_Select;
+  BI_FuncionarioEntregaMaterias_FuncXMat.CDS_EntregaMaterial.Open;
+
+  Memo1.Lines.Text :=  VLC_Select;
+
+  BI_FuncionarioEntregaMaterias_FuncXMat.ppEntregaMaterial.Print;
+
+end;
+
+procedure TBI_FuncionarioEntregaMaterias.Memo1DblClick(Sender: TObject);
+begin
+  Memo1.Visible := False;
+end;
+
+end.

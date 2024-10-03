@@ -1,0 +1,102 @@
+unit CertificadoDeQualidadeCadastro_DefinicaoMetricas_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, cxTextEdit, cxDBEdit,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TCertificadoDeQualidadeCadastro_DefinicaoMetricas = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    Image1: TImage;
+    SpeedButton1: TSpeedButton;
+    TXT_Especificacao: TcxDBTextEdit;
+    TXT_Variacao: TcxDBTextEdit;
+    TXT_Maximo: TcxDBTextEdit;
+    TXT_Minimo: TcxDBTextEdit;
+    DBGrid: TDBGrid;
+    Memo1: TMemo;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    QueryEP_Empresa: TStringField;
+    QueryProduto_FK: TStringField;
+    QueryLote: TStringField;
+    QueryTipoEspecificacao: TStringField;
+    QueryID: TStringField;
+    QueryItem: TStringField;
+    QueryGrupo: TStringField;
+    QueryTipo: TStringField;
+    QueryTamanho: TStringField;
+    QueryFormato: TStringField;
+    QueryOrdem: TStringField;
+    QueryMedida: TStringField;
+    QueryEspecificacao: TStringField;
+    QueryVariacao: TStringField;
+    QueryMinino: TStringField;
+    QueryMaximo: TStringField;
+    QueryMatricula: TStringField;
+    QueryData: TDateTimeField;
+    CDSEP_Empresa: TStringField;
+    CDSProduto_FK: TStringField;
+    CDSLote: TStringField;
+    CDSTipoEspecificacao: TStringField;
+    CDSID: TStringField;
+    CDSItem: TStringField;
+    CDSGrupo: TStringField;
+    CDSTipo: TStringField;
+    CDSTamanho: TStringField;
+    CDSFormato: TStringField;
+    CDSOrdem: TStringField;
+    CDSMedida: TStringField;
+    CDSEspecificacao: TStringField;
+    CDSVariacao: TStringField;
+    CDSMinino: TStringField;
+    CDSMaximo: TStringField;
+    CDSMatricula: TStringField;
+    CDSData: TDateTimeField;
+    QueryRecno: TAutoIncField;
+    CDSRecno: TAutoIncField;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CertificadoDeQualidadeCadastro_DefinicaoMetricas: TCertificadoDeQualidadeCadastro_DefinicaoMetricas;
+
+implementation
+
+{$R *.dfm}
+
+procedure TCertificadoDeQualidadeCadastro_DefinicaoMetricas.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

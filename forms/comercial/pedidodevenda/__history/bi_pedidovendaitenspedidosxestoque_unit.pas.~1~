@@ -1,0 +1,133 @@
+unit BI_PedidoVendaItensPedidosxEstoque_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppDB, ppDBPipe, ppParameter,
+  ppDesignLayer, ppBands, ppCtrls, ppClass, ppStrtch, ppMemo, ppPrnabl, ppCache,
+  ppComm, ppRelatv, ppProd, ppReport, Datasnap.DBClient, Data.DB,
+  Data.Win.ADODB, Datasnap.Provider;
+
+type
+  TBI_PedidoVenda_ItensPedidosxEstoque = class(TForm)
+    DSP_RelItensXEstoque: TDataSetProvider;
+    DS_RelItensXEstoque: TDataSource;
+    Query_RelItensXEstoque: TADOQuery;
+    Query_RelItensXEstoqueTipoProduto: TStringField;
+    Query_RelItensXEstoqueGrupo: TStringField;
+    Query_RelItensXEstoqueProduto_ID: TStringField;
+    Query_RelItensXEstoqueProduto: TStringField;
+    Query_RelItensXEstoqueArte_ID: TStringField;
+    Query_RelItensXEstoqueArte: TStringField;
+    Query_RelItensXEstoqueStatusArte: TStringField;
+    Query_RelItensXEstoqueQuantidade: TIntegerField;
+    Query_RelItensXEstoqueEstoque: TFloatField;
+    Query_RelItensXEstoqueEstoqueE2: TFloatField;
+    CDS_RelItensXEstoque: TClientDataSet;
+    CDS_RelItensXEstoqueTipoProduto: TStringField;
+    CDS_RelItensXEstoqueGrupo: TStringField;
+    CDS_RelItensXEstoqueProduto_ID: TStringField;
+    CDS_RelItensXEstoqueProduto: TStringField;
+    CDS_RelItensXEstoqueArte_ID: TStringField;
+    CDS_RelItensXEstoqueArte: TStringField;
+    CDS_RelItensXEstoqueStatusArte: TStringField;
+    CDS_RelItensXEstoqueQuantidade: TIntegerField;
+    CDS_RelItensXEstoqueEstoque: TFloatField;
+    CDS_RelItensXEstoqueEstoqueE2: TFloatField;
+    ppReportRelItensXEstoque: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppLabel61: TppLabel;
+    ppLabel60: TppLabel;
+    ppImage5: TppImage;
+    ppLine48: TppLine;
+    ppDetailBand5: TppDetailBand;
+    ppLine56: TppLine;
+    ppDBMemo5: TppDBMemo;
+    ppDBText49: TppDBText;
+    ppDBText50: TppDBText;
+    ppDBText51: TppDBText;
+    ppDBText53: TppDBText;
+    ppDBText52: TppDBText;
+    ppFooterBand5: TppFooterBand;
+    ppLine57: TppLine;
+    ppLabel71: TppLabel;
+    ppSummaryBand2: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppShape10: TppShape;
+    ppDBText57: TppDBText;
+    ppLabel63: TppLabel;
+    ppLabel69: TppLabel;
+    ppLabel70: TppLabel;
+    ppLabel73: TppLabel;
+    ppLabel75: TppLabel;
+    ppLine58: TppLine;
+    ppLine61: TppLine;
+    ppLine60: TppLine;
+    ppLabel62: TppLabel;
+    ppLine49: TppLine;
+    ppLine50: TppLine;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    ppDBPipeline3: TppDBPipeline;
+
+    //Minhas Procedures e Functions
+    procedure ImprimirRelItensXEstoque(PLC_Order : String);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVenda_ItensPedidosxEstoque: TBI_PedidoVenda_ItensPedidosxEstoque;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVenda_Unit, FuncaoSistema_Unit;
+
+
+
+procedure TBI_PedidoVenda_ItensPedidosxEstoque.ImprimirRelItensXEstoque(PLC_Order: String);
+Var
+    VLC_Select : String;
+
+begin
+  inherited;
+  BI_PedidoVenda.BTN_ConsultarPorItensPedidoVendaClick(nil);
+
+  VLC_Select := VLC_Select + '  Select ' + #13;
+  VLC_Select := VLC_Select + '       TipoProduto, Grupo, Produto_ID, Produto, Arte_ID, Arte, StatusArte, Sum(Saldo) as Quantidade, Estoque, EstoqueE2 ' + #13;
+  VLC_Select := VLC_Select + '  from ( ' + #13;
+  VLC_Select := VLC_Select + ' ' + #13;
+
+  VLC_Select := VLC_Select + BI_PedidoVenda.Memo1.Lines.Text;
+
+  VLC_Select := VLC_Select + ' ' + #13;
+  VLC_Select := VLC_Select + '  ) TB  ' + #13;
+  VLC_Select := VLC_Select + '  Group by TipoProduto, Grupo, Produto_ID, Produto, Arte_ID, Arte, StatusArte, Estoque, EstoqueE2  ' + #13;
+
+  CDS_RelItensXEstoque.Close;
+  Query_RelItensXEstoque.Close;
+  Query_RelItensXEstoque.SQL.Clear;
+  Query_RelItensXEstoque.SQL.Text := VLC_Select + ' ' + PLC_Order;
+  CDS_RelItensXEstoque.Open;
+
+  // Periodo
+  ppLabel61.Caption :=  BI_PedidoVenda.CBX_TipoData.Text + ' Entre ' + ' ' + DateToStr(BI_PedidoVenda.DTP_DataInicial.Date) + ' a ' + DateToStr(BI_PedidoVenda.DTP_DataFinal.Date);
+
+  // Usuario
+  ppLabel71.Caption :=  'Usuário: ' + FuncaoSistema.PNL_UsuarioAtivo.Caption + ' - ' + ' Data Impressão: ' + DateTimeToStr(Date());
+
+  ppReportRelItensXEstoque.Print;
+
+end;
+
+end.

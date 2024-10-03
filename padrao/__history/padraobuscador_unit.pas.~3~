@@ -1,0 +1,49 @@
+unit PadraoBuscador_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DBClient, DB,
+  ADODB, Provider, ActnList, System.Actions;
+
+type
+  TPadraoBuscador = class(TForm)
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    PNL_Auxiliar: TPanel;
+    Panel4: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    DSP: TDataSetProvider;
+    Query: TADOQuery;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    Memo1: TMemo;
+    DBGrid: TDBGrid;
+    SpeedButton2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PadraoBuscador: TPadraoBuscador;
+
+implementation
+
+{$R *.dfm}
+
+end.

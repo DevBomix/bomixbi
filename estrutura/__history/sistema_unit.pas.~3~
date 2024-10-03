@@ -1,0 +1,27 @@
+unit Sistema_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, LayoutPadraoCadastro_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls,
+  LayoutPadraoCadastro_Unit;
+
+type
+  TSys_Sistema = class(TSys_LayoutPadraoCadastro_Form)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_Sistema: TSys_Sistema;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,186 @@
+inherited OrdemSolicitacao_MateriaPrimaBuscador: TOrdemSolicitacao_MateriaPrimaBuscador
+  Caption = 'Consultar Ordem de Solicita'#231#227'o de Mat'#233'ria Prima'
+  ClientHeight = 168
+  OnShow = FormShow
+  ExplicitHeight = 197
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 455
+      Caption = 'Consultar Ordem de Solicita'#231#227'o de Mat'#233'ria Prima'
+      ExplicitWidth = 455
+    end
+  end
+  inherited Panel_Padrao: TPanel
+    inherited CBX_Operador: TComboBox
+      Text = 'Igual'
+    end
+    inherited Panel_Caption: TPanel
+      Caption = '  Ordem'
+    end
+  end
+  object Panel7: TPanel [3]
+    Left = 7
+    Top = 89
+    Width = 672
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 3
+    object CBX_OperadorDataEmissao: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Entre'
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object Panel8: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Data de Emiss'#227'o'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 1
+      object PNL_SinalDataEmissao: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+      end
+    end
+    object CBX_Igual_DataEmissao: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      TabStop = False
+      Visible = False
+    end
+    object TXT_Valor1_DataEmissao: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Text = ''
+    end
+    object TXT_Valor2_DataEmissao: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      Text = ''
+    end
+    object DT_DataEmissao1: TDateTimePicker
+      Left = 335
+      Top = 4
+      Width = 159
+      Height = 24
+      Date = 41275.000000000000000000
+      Time = 0.424179409732460000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16744448
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+    end
+    object DT_DataEmissao2: TDateTimePicker
+      Left = 496
+      Top = 4
+      Width = 160
+      Height = 24
+      Date = 41335.000000000000000000
+      Time = 0.424179409732460000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16744448
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 129
+    TabOrder = 4
+    ExplicitTop = 129
+    inherited Panel_Navegador: TPanel
+      inherited BNT_Confirmar: TSpeedButton
+        Left = 129
+        Top = -2
+        ExplicitLeft = 129
+        ExplicitTop = -2
+      end
+    end
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 395
+    Top = 124
+  end
+end

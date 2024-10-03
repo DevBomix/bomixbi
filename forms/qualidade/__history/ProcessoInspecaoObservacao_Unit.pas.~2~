@@ -1,0 +1,24 @@
+unit ProcessoInspecaoObservacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TProcessoInspecao_Observacao = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_Observacao: TProcessoInspecao_Observacao;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,860 @@
+unit Inicializacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, Vcl.StdCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, System.Actions, Vcl.ActnList;
+
+type
+  TSys_Inicializacao = class(TForm)
+    Panel2: TPanel;
+    IMG_Login: TImage;
+    LBL_SenhaTitulo: TLabel;
+    Bevel4: TBevel;
+    LBL_Login: TLabel;
+    LBL_Senha: TLabel;
+    TXT_Login: TEdit;
+    TXT_Senha: TEdit;
+    Panel1: TPanel;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Novo: TAction;
+    Editar: TAction;
+    Excluir: TAction;
+    Confirmar: TAction;
+    Desistir: TAction;
+    Pesquisar: TAction;
+    Imprimir: TAction;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+
+    //Minhas Procedures e Functions;
+    function GetUsuarioValido(PLC_Login: String; PLC_Senha: String) : Boolean;
+    procedure ProcessosDeConfiguracoesIniciaisDoSistema;
+    procedure AjustarMenuConformePermissaoDoUsuario;
+    procedure AcessoMenuComercial;
+    procedure AcessoMenuQualidade;
+    procedure AcessoMenuPainelControle;
+    procedure AcessoMenuPCPProducao;
+    procedure AcessoMenuGestaoPessoal;
+    procedure AjustarModulosConformePermissaoDoUsuario;
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_Inicializacao: TSys_Inicializacao;
+
+implementation
+
+{$R *.dfm}
+
+uses Principal_Unit, FuncaoSistema_Unit, ConexaoDados_Unit,
+  FuncaoRestricoesInformacoes_Unit, FuncaoGrafica_Unit;
+
+
+procedure TSys_Inicializacao.AcessoMenuComercial;
+begin
+
+  // Comercial - Pedido de Venda
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(46,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+    Sys_Principal.Comercial_PedidoDeVenda.Visible := False;
+    Sys_Principal.BTN_Comercial_PedidoVenda.Visible := False;
+  end
+  else
+  begin
+     Sys_Principal.Comercial_PedidoDeVenda.Visible := True;
+     Sys_Principal.BTN_Comercial_PedidoVenda.Visible := True;
+  end;
+
+  // Comercial - Cliente CRM
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(115,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+    Sys_Principal.Comercial_ClienteCRM.Visible := False;
+  end
+  else
+  begin
+     Sys_Principal.Comercial_ClienteCRM.Visible := True;
+  end;
+
+  // Comercial - CIT - Conhecimento Int. de Transporte
+  If (Sys_FuncaoSistema.GetVerificaSeExistePermissao(74,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False)
+  AND (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption <> '010101') then
+  begin
+      Sys_Principal.Comercial_CIT.Visible := False;
+      Sys_Principal.BTN_Comercial_CIT.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_CIT.Visible := True;
+      Sys_Principal.BTN_Comercial_CIT.Visible := True;
+  end;
+
+  // Comercial - Diário de Nota Fiscal por Transportadora
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(67,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_DiarioNotaFiscalTransportadora.Visible := False else Sys_Principal.Comercial_DiarioNotaFiscalTransportadora.Visible := True;
+
+  // Comercial - Pós venda
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(39,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_PosVenda.Visible := False;
+      Sys_Principal.BTN_Comercial_PosVenda.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_PosVenda.Visible := True;
+      Sys_Principal.BTN_Comercial_PosVenda.Visible := True;
+  end;
+
+  // Comercial - Relatório  CIT - Conhecimento Int. de Transporte
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(43,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_RelatorioCIT.Visible := False else Sys_Principal.Comercial_RelatorioCIT.Visible := True;
+
+  // Comercial - Relatório de Pós Venda
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(44,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_RelatorioPosVenda.Visible := False else Sys_Principal.Comercial_RelatorioPosVenda.Visible := True;
+
+  //Comercial Relatório Faturamento Periódico
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(20,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_FaturamentoPeriodico.Visible := False;
+      Sys_Principal.BTN_Comercial_FaturamentoPeriodico.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_FaturamentoPeriodico.Visible := True;
+      Sys_Principal.BTN_Comercial_FaturamentoPeriodico.Visible := True;
+  end;
+
+  //Comercial Relatório - Etiqueta\Envelope para Feiras
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(55,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_EtiquetaEnvelopeFeiras.Visible := False else Sys_Principal.Comercial_EtiquetaEnvelopeFeiras.Visible := True;
+
+  // Comercial Relatório - Pedidos com Data PCP em Atraso
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(59,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_PedidosDataPCPAtraso.Visible := False else Sys_Principal.Comercial_PedidosDataPCPAtraso.Visible := True;
+
+  // Comercial Relatório - Periódico de Faturamento x Produção
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(81,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_PeriodicoFaturamentoProducao.Visible := False else Sys_Principal.Comercial_PeriodicoFaturamentoProducao.Visible := True;
+
+  // Comercial Relatório - Último Faturamento (Cliente)
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(121,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_UltimoFaturamentoCliente.Visible := False else Sys_Principal.Comercial_UltimoFaturamentoCliente.Visible := True;
+
+  // Comercial Relatório - Último Faturamento (Produto)
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(122,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_UltimoFaturamentoProduto.Visible := False else Sys_Principal.Comercial_UltimoFaturamentoProduto.Visible := True;
+
+
+  // Comercial Relatório - Ranking de Clientes
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(21,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_RankingClientes.Visible := False;
+      Sys_Principal.BTN_RankingClientes.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_RankingClientes.Visible := True;
+      Sys_Principal.BTN_RankingClientes.Visible := True;
+  end;
+
+  // Comercial - Relatório - Controle de Rótulos
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(120,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_ControleRotulo.Visible := False else Sys_Principal.Comercial_ControleRotulo.Visible := True;
+
+  // Comercial Relatório - Relação de Notas Fiscais
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(76,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_RelacaoNotasFiscais.Visible := False;
+      Sys_Principal.BTN_Comercial_RelacaoNotaFiscal.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_RelacaoNotasFiscais.Visible := True;
+      Sys_Principal.BTN_Comercial_RelacaoNotaFiscal.Visible := True;
+  end;
+
+  // Comercial Relatório - Vendas Por Mix de Produtos
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(47,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_VendasMixProdutos.Visible := False;
+      Sys_Principal.BTN_Comercial_VendasMixProdutos.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_VendasMixProdutos.Visible := True;
+      Sys_Principal.BTN_Comercial_VendasMixProdutos.Visible := True;
+  end;
+
+    // Comercial Relatório - Parametrizado de Vendas (NOVO)
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(113,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_ParametrizadoVendasNOVO.Visible := False;
+      Sys_Principal.BTN_Comercial_ParametrizadoVendasNOVO.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_ParametrizadoVendasNOVO.Visible := True;
+      Sys_Principal.BTN_Comercial_ParametrizadoVendasNOVO.Visible := True;
+  end;
+
+  // Comercial Relatório - Parametrizado de Vendas (Antigo)
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(20,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_ParametrizadoVendas.Visible := False;
+      Sys_Principal.BTN_Comercial_ParametrizadoVendas.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_ParametrizadoVendas.Visible := True;
+      Sys_Principal.BTN_Comercial_ParametrizadoVendas.Visible := True;
+  end;
+
+  // Comercial Relatório - Mapas Anual de Vendas
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(20,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.Comercial_MapaAnualVendas.Visible := False;
+      Sys_Principal.BTN_Comercial_MapaAnualVendas.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.Comercial_MapaAnualVendas.Visible := True;
+      Sys_Principal.BTN_Comercial_MapaAnualVendas.Visible := True;
+  end;
+
+  // Comercial Relatório - Média de Prazos de Pagamento
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(71,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_MediaPrazoPagamento.Visible := False else Sys_Principal.Comercial_MediaPrazoPagamento.Visible := True;
+
+  // Comercial Relatório - Tonelagem Diária
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(128,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Comercial_TonelagemDiaria.Visible := False else Sys_Principal.Comercial_TonelagemDiaria.Visible := True;
+
+  // Comercial Relatório - Posição de Estoque x Faturamento
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(68,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Producao_PosicaoEstoqueFaturamento.Visible := False else Sys_Principal.Producao_PosicaoEstoqueFaturamento.Visible := True;
+
+
+end;
+
+procedure TSys_Inicializacao.AcessoMenuPainelControle;
+begin
+
+  // Painel de Controle - Setor
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(19,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_Setor.Visible := False else   Sys_Principal.PainelControle_Setor.Visible := True;
+
+  // Painel de Controle - Sistema
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(15,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_Sistema.Visible := False else Sys_Principal.PainelControle_Sistema.Visible := True;
+
+  // Painel de Controle - Formulario
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(12,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_Formulario.Visible := False else Sys_Principal.PainelControle_Formulario.Visible := True;
+
+  // Painel de Controle - Grupo de Usuario
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(8,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_GrupoUsuario.Visible := False else Sys_Principal.PainelControle_GrupoUsuario.Visible := True;
+
+  // Painel de Controle - Usuario
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(25,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_Usuario.Visible := False else Sys_Principal.PainelControle_Usuario.Visible := True;
+
+  // Painel de Controle - Acesso do Usuário ao Sistema
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(29,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.PainelControle_AcessoAoSistema.Visible := False else Sys_Principal.PainelControle_AcessoAoSistema.Visible := True;
+end;
+
+procedure TSys_Inicializacao.AcessoMenuPCPProducao;
+begin
+
+    // Produção - Administração de Ciclo
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(155,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_AdministracaoCiclo.Visible := False else Sys_Principal.Producao_AdministracaoCiclo.Visible := True;
+
+    // Produção - Administração de Resina e Master
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(149,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_AdministracaoMasterResina.Visible := False else Sys_Principal.Producao_AdministracaoMasterResina.Visible := True;
+
+    // Produção - Etiqueta de Apontamento
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(88,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_EtiquetaApontamento.Visible := False;
+          Sys_Principal.BTN_Producao_EtiquetaApontamento.Visible := False;
+          Sys_Principal.Producao_ApontamentoParada.Visible := False;
+    end
+    else
+    begin
+         Sys_Principal.Producao_EtiquetaApontamento.Visible := True;
+         Sys_Principal.BTN_Producao_EtiquetaApontamento.Visible := True;
+         Sys_Principal.Producao_ApontamentoParada.Visible := True;
+    end;
+
+    // Produção - Etiqueta Pequena
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(52,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_EtiquetaPequena.Visible := False;
+          Sys_Principal.BTN_Producao_EtiquetaPequena.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_EtiquetaPequena.Visible := True;
+          Sys_Principal.BTN_Producao_EtiquetaPequena.Visible := True;
+    end;
+
+    // Produção - Ordem de Produção
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(62,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_OrdemProducao.Visible := False;
+          Sys_Principal.BTN_Producao_OrdemProducao.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_OrdemProducao.Visible := True;
+          Sys_Principal.BTN_Producao_OrdemProducao.Visible := True;
+    end;
+
+    // Produção - Ordem de Produção PCP
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(72,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_OrdemProducaoPCP.Visible := False;
+          Sys_Principal.BTN_Producao_OrdemProducaoPCP.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_OrdemProducaoPCP.Visible := True;
+          Sys_Principal.BTN_Producao_OrdemProducaoPCP.Visible := True;
+    end;
+
+    // Produção - Transferência Produção (P1 ou P4) -> Transbordo (TE)
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(119,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_TransferenciaProducaoTE.Visible := False else Sys_Principal.Producao_TransferenciaProducaoTE.Visible := True;
+
+    // Produção - Ordem de Solicitação de Matéria Prima
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(64,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_OrdemSolicitacaoMateriaPrima.Visible := False else Sys_Principal.Producao_OrdemSolicitacaoMateriaPrima.Visible := True;
+
+    // Produção - Relatório de Apontamento de Produção
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(53,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_ApontamentoProducao.Visible := False;
+          Sys_Principal.BTN_Producao_ApontamentoProducao.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_ApontamentoProducao.Visible := True;
+          Sys_Principal.BTN_Producao_ApontamentoProducao.Visible := True;
+    end;
+
+   // Produção - Relatório de Apontamento Personalização
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(56,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_ApontamentoPersonalizacao.Visible := False;
+          Sys_Principal.BTN_Producao_ApontamentoPersonalizacao.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_ApontamentoPersonalizacao.Visible := True;
+          Sys_Principal.BTN_Producao_ApontamentoPersonalizacao.Visible := True;
+    end;
+
+   // Produção - Relatório de Apontamento Paletização
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(126,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_ApontamentoPaletizacao.Visible := False;
+          Sys_Principal.BTN_Producao_ApontamentoPaletizacao.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_ApontamentoPaletizacao.Visible := True;
+          Sys_Principal.BTN_Producao_ApontamentoPaletizacao.Visible := True;
+    end;
+
+    // Produção - Relatório Controle de Estoque
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(93,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Estoque_Controle.Visible := False else Sys_Principal.Estoque_Controle.Visible := True;
+
+    // Produção - Relatório Controle de Estoque
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(93,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Estoque_Controle.Visible := False else Sys_Principal.Estoque_Controle.Visible := True;
+
+    // Produção - Relatório Horas Improdutivas
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(54,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_HorasImprodutitvas.Visible := False;
+          Sys_Principal.BTN_Producao_HorasImprodutitvas.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_HorasImprodutitvas.Visible := True;
+          Sys_Principal.BTN_Producao_HorasImprodutitvas.Visible := True;
+    end;
+
+    // Produção - Relatório Controle de Entrada e Saida (Loop)
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(127,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_EntradaSaidaLoop.Visible := False else Sys_Principal.Producao_EntradaSaidaLoop.Visible := True;
+
+     // Produção Relatório - Posição de Estoque
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(114,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    Sys_Principal.Producao_MovimentosInternos.Visible := False else Sys_Principal.Producao_MovimentosInternos.Visible := True;
+
+    // Produção Relatório - Perdas de Produção
+    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(77,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+    begin
+          Sys_Principal.Producao_PerdasProducao.Visible := False;
+          Sys_Principal.BTN_Producao_PerdasProducao.Visible := False;
+    end
+    else
+    begin
+          Sys_Principal.Producao_PerdasProducao.Visible := True;
+          Sys_Principal.BTN_Producao_PerdasProducao.Visible := True;
+    end;
+end;
+
+
+procedure TSys_Inicializacao.AcessoMenuQualidade;
+begin
+
+  // Qualidade - Peso Insumo ********************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(157,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_PesoInsumo.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_PesoInsumo.Visible := True;
+  end;
+
+
+  // Qualidade - Teste de Qualidade ********************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(153,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_TesteQualidade.Visible := False;
+        Sys_Principal.BTN_Qualidade_TestesQualidade.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_TesteQualidade.Visible := True;
+        Sys_Principal.BTN_Qualidade_TestesQualidade.Visible := True;
+  end;
+
+  // Qualidade - Certificado de Qualidade ********************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(80,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_CertificadoQualidade.Visible := False;
+        Sys_Principal.BTN_Qualidade_CertificadoQualidade.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_CertificadoQualidade.Visible := True;
+        Sys_Principal.BTN_Qualidade_CertificadoQualidade.Visible := True;
+  end;
+
+  //Qualidade - Especificação Técnica **************************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(58,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_EspecificacaoTecnica.Visible := False;
+        Sys_Principal.BTN_Qualidade_EspecificacaoTecnica.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_EspecificacaoTecnica.Visible := True;
+        Sys_Principal.BTN_Qualidade_EspecificacaoTecnica.Visible := True;
+  end;
+
+  //Qualidade - Processo de Qualidade **************************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(132,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_ProcessoInspecao.Visible := False;
+        Sys_Principal.BTN_Qualidade_Inspecao.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_ProcessoInspecao.Visible := True;
+        Sys_Principal.BTN_Qualidade_Inspecao.Visible := True;
+  end;
+
+  // Qualidade - Rastreabilidade
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(150,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_Rastreabilidade.Visible := False;
+        Sys_Principal.BTN_Qualidade_Rastrabilidade.Visible := False;
+  end
+  else
+  begin
+       Sys_Principal.Qualidade_Rastreabilidade.Visible := True;
+       Sys_Principal.BTN_Qualidade_Rastrabilidade.Visible := True;
+  end;
+
+  // Qualidade - Certificado de Qualidade ********************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(152,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  Sys_Principal.Qualidade_ConfiguracaoMolde.Visible := False else Sys_Principal.Qualidade_ConfiguracaoMolde.Visible := True;
+
+  //Qualidade - Peça Padrão **************************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(145,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_PecaPadraoInsumo.Visible := False;
+        Sys_Principal.Qualidade_PecaPadrao.Visible := False;
+        Sys_Principal.BTN_Qualidade_PecaPadrao.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_PecaPadraoInsumo.Visible := True;
+        Sys_Principal.Qualidade_PecaPadrao.Visible := True;
+        Sys_Principal.BTN_Qualidade_PecaPadrao.Visible := True;
+  end;
+
+  //Qualidade - Medida Semanal **************************************************************************************************************
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(148,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+        Sys_Principal.Qualidade_MedidaSemanal.Visible := False;
+        Sys_Principal.BTN_Qualidade_MedidaSemanal.Visible := False;
+  end
+  else
+  begin
+        Sys_Principal.Qualidade_MedidaSemanal.Visible := True;
+        Sys_Principal.BTN_Qualidade_MedidaSemanal.Visible := True;
+  end;
+
+end;
+
+procedure TSys_Inicializacao.AcessoMenuGestaoPessoal;
+begin
+   // Gestão de Pessoas - Impressão de Crachá
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(99,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.GestaoPessoal_ImpressaoCracha.Visible := False;
+      Sys_Principal.BTN_GestaoPessoal_ImpressaoCracha.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.GestaoPessoal_ImpressaoCracha.Visible := True;
+      Sys_Principal.BTN_GestaoPessoal_ImpressaoCracha.Visible := True;
+  end;
+
+   // Gestão de Pessoas - Entrega Material
+  If Sys_FuncaoSistema.GetVerificaSeExistePermissao(137,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+  begin
+      Sys_Principal.GestaoPessoal_EntregaMaterias.Visible := False;
+      Sys_Principal.BTN_GestaoPessoal_EntregaMaterias.Visible := False;
+  end
+  else
+  begin
+      Sys_Principal.GestaoPessoal_EntregaMaterias.Visible := True;
+      Sys_Principal.BTN_GestaoPessoal_EntregaMaterias.Visible := True;
+  end;
+
+end;
+
+
+procedure TSys_Inicializacao.AjustarMenuConformePermissaoDoUsuario;
+begin
+
+  AcessoMenuPainelControle;
+  AcessoMenuComercial;
+  AcessoMenuPCPProducao;
+  AcessoMenuGestaoPessoal;
+  AcessoMenuQualidade;
+
+end;
+
+
+procedure TSys_Inicializacao.AjustarModulosConformePermissaoDoUsuario;
+begin
+
+{
+  // 06 - Menu Controladoria ********************************************************************************************************
+  if Sys_FuncaoSistema.GetVerificaSeExistePermissaoModulo('CONTROLADORIA',Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = True then
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[4].Visible := True;
+       Sys_Principal.PNL_MenuControladoria.Visible := True;
+       Sys_Principal.LBL_Modulo.Caption := 'Controladoria';
+  end
+  else
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[4].Visible := False;
+       Sys_Principal.PNL_MenuControladoria.Visible := False;
+  end;
+}
+  // 05 - Menu Qualidade ********************************************************************************************************
+  if Sys_FuncaoSistema.GetVerificaSeExistePermissaoModulo('QUALIDADE',Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = True then
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[3].Visible := True;
+       Sys_Principal.PNL_MenuQualidade.Visible := True;
+       Sys_Principal.LBL_Modulo.Caption := 'Qualidade';
+  end
+  else
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[3].Visible := False;
+       Sys_Principal.PNL_MenuQualidade.Visible := False;
+  end;
+
+  // 04 - Menu Gestão Pessoal ********************************************************************************************************
+  if Sys_FuncaoSistema.GetVerificaSeExistePermissaoModulo('GESTÂO PESSOAL',Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = True then
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[2].Visible := True;
+       Sys_Principal.PNL_MenuGestaoPessoal.Visible := True;
+       Sys_Principal.LBL_Modulo.Caption := 'Gestão Pessoal';
+  end
+  else
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[2].Visible := False;
+       Sys_Principal.PNL_MenuGestaoPessoal.Visible := False;
+  end;
+
+  // 03 - Menu Produção ******************************************************************************************************************
+  if Sys_FuncaoSistema.GetVerificaSeExistePermissaoModulo('PCP / PRODUÇÃO',Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = True then
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[1].Visible := True;
+       Sys_Principal.PNL_MenuProducaoPCP.Visible := True;
+       Sys_Principal.LBL_Modulo.Caption := 'PCP / Produção';
+  end
+  else
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[1].Visible := False;
+       Sys_Principal.PNL_MenuProducaoPCP.Visible := False;
+  end;
+
+  // 02 - Menu Comercial ******************************************************************************************************************
+  if Sys_FuncaoSistema.GetVerificaSeExistePermissaoModulo('COMERCIAL',Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = True then
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[0].Visible := True;
+       Sys_Principal.PNL_MenuComercial.Visible := True;
+       Sys_Principal.LBL_Modulo.Caption := 'Comercial';
+  end
+  else
+  begin
+       Sys_Principal.ActionMainMenuBar1.ActionControls[0].Visible := False;
+       Sys_Principal.PNL_MenuComercial.Visible := False;
+  end;
+
+   if Sys_Principal.LBL_Modulo.Caption = 'Comercial' then
+    begin
+      Sys_Principal.PNL_MenuComercial.Visible := True;
+      Sys_Principal.PNL_MenuProducaoPCP.Visible := False;
+      Sys_Principal.PNL_MenuQualidade.Visible := False;
+      Sys_Principal.PNL_MenuControladoria.Visible := False;
+      Sys_Principal.PNL_MenuGestaoPessoal.Visible := False;
+      Sys_Principal.PNL_MenuPainelControle.Visible := False;
+      Exit;
+    end;
+
+    if Sys_Principal.LBL_Modulo.Caption = 'PCP / Produção' then
+    begin
+      Sys_Principal.PNL_MenuComercial.Visible := False;
+      Sys_Principal.PNL_MenuProducaoPCP.Visible := True;
+      Sys_Principal.PNL_MenuQualidade.Visible := False;
+      Sys_Principal.PNL_MenuControladoria.Visible := False;
+      Sys_Principal.PNL_MenuGestaoPessoal.Visible := False;
+      Sys_Principal.PNL_MenuPainelControle.Visible := False;
+      Exit;
+    end;
+
+    if Sys_Principal.LBL_Modulo.Caption = 'Gestão Pessoal' then
+    begin
+      Sys_Principal.PNL_MenuComercial.Visible := False;
+      Sys_Principal.PNL_MenuProducaoPCP.Visible := False;
+      Sys_Principal.PNL_MenuQualidade.Visible := False;
+      Sys_Principal.PNL_MenuControladoria.Visible := False;
+      Sys_Principal.PNL_MenuGestaoPessoal.Visible := True;
+      Sys_Principal.PNL_MenuPainelControle.Visible := False;
+      Exit;
+    end;
+
+    if Sys_Principal.LBL_Modulo.Caption = 'Qualidade' then
+    begin
+      Sys_Principal.PNL_MenuComercial.Visible := False;
+      Sys_Principal.PNL_MenuProducaoPCP.Visible := False;
+      Sys_Principal.PNL_MenuQualidade.Visible := True;
+      Sys_Principal.PNL_MenuControladoria.Visible := False;
+      Sys_Principal.PNL_MenuGestaoPessoal.Visible := False;
+      Sys_Principal.PNL_MenuPainelControle.Visible := False;
+      Exit;
+    end;
+
+    if Sys_Principal.LBL_Modulo.Caption = 'Controladoria' then
+    begin
+      Sys_Principal.PNL_MenuComercial.Visible := False;
+      Sys_Principal.PNL_MenuProducaoPCP.Visible := False;
+      Sys_Principal.PNL_MenuQualidade.Visible := False;
+      Sys_Principal.PNL_MenuControladoria.Visible := True;
+      Sys_Principal.PNL_MenuGestaoPessoal.Visible := False;
+      Sys_Principal.PNL_MenuPainelControle.Visible := False;
+      Exit;
+    end;
+
+end;
+
+procedure TSys_Inicializacao.ProcessosDeConfiguracoesIniciaisDoSistema;
+begin
+
+   // Verifica se o Usuário tem Restrição de Informação para apenas alguma(s) Gerência(s)
+   if Sys_FuncaoRestricoesInformacoes.GetAcessoGerenciaDeFormaRestrita = True then
+   begin
+       Sys_FuncaoSistema.TXT_RestricaoComercial.Caption := 'Sim';
+   end
+   else
+   begin
+       Sys_FuncaoSistema.TXT_RestricaoComercial.Caption := 'Não';
+   end;
+
+   Sys_Principal.IMG_LogoBomix.Picture.LoadFromFile('C:\Bomix\LogoBomix.png');
+   Sys_FuncaoSistema.Img_LogoBomix.Picture.LoadFromFile('C:\Bomix\LogoBomix.png');
+
+   Sys_FuncaoSistema.LevantarPermissoes(Sys_FuncaoSistema.PNL_LoginAtivo.Caption);
+   Sys_FuncaoSistema.LevantarPermissoesModulo(Sys_FuncaoSistema.PNL_LoginAtivo.Caption);
+   Sys_Principal.TempoInicialAoAbrirTelaPrincipal;
+   Sys_Principal.Timer_Inicial.Enabled := True;
+
+   AjustarModulosConformePermissaoDoUsuario;
+   AjustarMenuConformePermissaoDoUsuario;
+
+   Sys_Principal.ActionMainMenuBar1.Font.Size := 12;
+   Sys_Principal.ActionMainMenuBar1.Font.Color := $00C08000;
+   Sys_Principal.ActionMainMenuBar1.Font.Style := [fsBold];
+
+
+end;
+
+function TSys_Inicializacao.GetUsuarioValido(PLC_Login, PLC_Senha: String): Boolean;
+Var
+   VLC_Select : String;
+   Query : TADOQuery;
+   VLC_Update : String;
+
+begin
+
+   VLC_Select := ' Select  ' + #13;
+   VLC_Select := VLC_Select + ' 	Usuario_ID, Login, Senha, Usuario.Bloqueio, Totvs, ' + #13;
+   VLC_Select := VLC_Select + ' 	Usuario.UsuarioGrupo_FK as Grupo_ID, Grupo, ' + #13;
+   VLC_Select := VLC_Select + ' 	Usuario.Setor_FK as Setor_ID, Setor, Cargo, ' + #13;
+   VLC_Select := VLC_Select + ' 	ArmazemPadrao, Matricula_FK, Funcionario,   ' + #13;
+   VLC_Select := VLC_Select + ' 	Usuario.Empresa, EmpresaIDTotvs as IDTotvs ' + #13;
+   VLC_Select := VLC_Select + '   ' + #13;
+   VLC_Select := VLC_Select + ' from BomixBI.[dbo].[Sys_TB_Usuario] Usuario (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Usuario.Bloqueio = ' + '''' + 'F' + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Login = ' + '''' + PLC_Login + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Senha = ' + '''' + PLC_Senha + '''' + #13;
+
+   Query := TADOQuery.Create(self);
+   With Query do
+   begin
+        Close;
+        Connection := Sys_ModuloConexaoDados.ADOConnection1;
+        SQL.Clear;
+        SQL.Text := VLC_Select;
+        Open;
+   end;
+
+   If Query.RecordCount = 0 then
+      Result := False
+   else
+   begin
+        Result := True;
+   end;
+
+   With Sys_FuncaoSistema do
+   begin
+       PNL_UsuarioAtivoID.Caption := IntToStr(Query.FieldByName('Usuario_ID').AsInteger);
+       PNL_UsuarioAtivo.Caption := Query.FieldByName('Login').AsString;
+       PNL_Totvs.Caption := Query.FieldByName('Totvs').AsString;
+       PNL_GrupoID.Caption := Query.FieldByName('Grupo_ID').AsString;
+       PNL_Grupo.Caption := Query.FieldByName('Grupo').AsString;
+       PNL_SetorID.Caption := Query.FieldByName('Setor_ID').AsString;
+       PNL_Setor.Caption := Query.FieldByName('Setor').AsString;
+       PNL_Matricula.Caption := Query.FieldByName('Matricula_FK').AsString;
+       PNL_Funcionario.Caption := Query.FieldByName('Funcionario').AsString;
+       PNL_Cargo.Caption := Query.FieldByName('Cargo').AsString;
+       PNL_ArmazemPadrao.Caption := Query.FieldByName('ArmazemPadrao').AsString;
+       PNL_LoginAtivo.Caption := TXT_Login.Text;
+       PNL_UsuarioSenha.Caption := Query.FieldByName('Senha').AsString;
+       if Query.FieldByName('IDTotvs').AsString = '010102' then PNL_EmpresaTotvs.Caption := '010101' else PNL_EmpresaTotvs.Caption := Query.FieldByName('IDTotvs').AsString;
+       PNL_Empresa_ID.Caption := Query.FieldByName('Empresa').AsString;
+   end;
+
+   VLC_Update := VLC_Update + ' Update BomixBI.[dbo].[Sys_TB_SistemaAtualizacao] ' + #13;
+   VLC_Update := VLC_Update + ' Set Empresa = ' + '''' + Query.FieldByName('Empresa').AsString + '''' + ', ' + #13;
+   VLC_Update := VLC_Update + ' IDTotvs = ' + '''' + Copy(Query.FieldByName('IDTotvs').AsString,1,4) + '''' + ', ' + #13;
+   VLC_Update := VLC_Update + ' Data = ' + 'GetDate()' + ', ' + #13;
+   VLC_Update := VLC_Update + ' Usuario = ' + '''' + Query.FieldByName('Login').AsString + '''' + ', ' + #13;
+   VLC_Update := VLC_Update + ' Funcionario = ' + '''' + Query.FieldByName('Funcionario').AsString + '''' + ', ' + #13;
+   VLC_Update := VLC_Update + ' Cargo = ' + '''' + Query.FieldByName('Cargo').AsString + '''' + ', ' + #13;
+   VLC_Update := VLC_Update + ' Setor = ' + '''' + Query.FieldByName('Setor').AsString + '''' + #13;
+   VLC_Update := VLC_Update + ' Where CPU = ' + '''' + Sys_FuncaoSistema.TXT_NomeComputador.Text + '''' + #13;
+
+      With Sys_ModuloConexaoDados.ADOCommand1 do
+      begin
+        CommandText := VLC_Update;
+        Execute;
+      end;
+
+   Sys_Principal.PNL_UsuarioAtivoPrincipal.Caption := Query.FieldByName('Login').AsString;
+   Sys_FuncaoSistema.TXT_PermissaoSetoresProducoes.Caption := Sys_FuncaoRestricoesInformacoes.GetPermissaoSetoresProducoes(Sys_FuncaoSistema.PNL_GrupoID.Caption, Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4));
+   Sys_FuncaoSistema.CBX_PermissaoSetoresProducoes.Items.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoSetoresProducoes.Items.Text;
+   Sys_FuncaoSistema.CBX_PermissaoSetoresProducoes.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoSetoresProducoes.Text;
+
+   Sys_FuncaoSistema.PNL_PermissaoAreasProdutivas.Caption := Sys_FuncaoRestricoesInformacoes.GetPermissaoTipoArea(Sys_FuncaoSistema.PNL_GrupoID.Caption, Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4));
+   Sys_FuncaoSistema.CBX_PermissaoAreasProdutivas.Items.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoTipoArea.Items.Text;
+   Sys_FuncaoSistema.CBX_PermissaoAreasProdutivas.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoTipoArea.Text;
+
+   Sys_FuncaoSistema.TXT_PermissaoAmazem.Caption := Sys_FuncaoRestricoesInformacoes.GetPermissaoArmazem(Sys_FuncaoSistema.PNL_LoginAtivo.Caption, Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4));
+   Sys_FuncaoSistema.CBX_PermissaoAmazem.Items.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoArmazem.Items.Text;
+   Sys_FuncaoSistema.CBX_PermissaoAmazem.Text := Sys_FuncaoRestricoesInformacoes.CBX_PermissaoArmazem.Text;
+
+   Query.Free;
+
+end;
+
+
+procedure TSys_Inicializacao.BNT_CancelarClick(Sender: TObject);
+begin
+   Close;
+   Sys_Principal.Close;
+end;
+
+procedure TSys_Inicializacao.BNT_ConfirmarClick(Sender: TObject);
+begin
+
+  if not FileExists('C:\Bomix\BomixUpdate.exe') then
+  begin
+      Application.MessageBox('Não foi encontrado na pasta do sistema o arquivo BomixUpdate.exe.' + #13 + 'Favor solicitar ao suporte TI a sua inclusão','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end;
+
+  If Sys_ModuloConexaoDados.ADOConnection1.ConnectionString = 'Provider=MSDASQL.1;Password=bomixbi;Persist Security Info=True;User ID=bomix;Data Source=BomixBI_TESTE;Initial Catalog=BomixBI' then
+  begin
+      Sys_Principal.LBL_BaseTeste.Visible := True;
+  end;
+
+  {Rotina de autenticação do Usuário}
+  {******************************************************************************************************************************}
+  If GetUsuarioValido(TXT_Login.Text, TXT_Senha.Text) = False then
+  begin
+       Application.MessageBox('Login ou Senha não conferem.' + #13 + 'Tente outra vez!','Atenção',mb_iconerror + mb_ok);
+       TXT_Senha.Text := '';
+       TXT_Login.Text := '';
+       TXT_Login.SetFocus;
+       Exit;
+  end
+  else
+  begin
+       ProcessosDeConfiguracoesIniciaisDoSistema;
+  end;
+
+  Close;
+
+end;
+
+end.

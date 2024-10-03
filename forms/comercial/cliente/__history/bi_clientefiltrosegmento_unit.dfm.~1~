@@ -1,0 +1,7 @@
+inherited PadraoBuscador1: TPadraoBuscador1
+  Caption = 'BI_RelacinamentoCliente_FiltroSegmento'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+end

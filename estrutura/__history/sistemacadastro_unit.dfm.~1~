@@ -1,0 +1,634 @@
+inherited Sys_SistemaCadastro: TSys_SistemaCadastro
+  Caption = 'Cadastro de Sistemas Bomix'
+  ClientHeight = 557
+  ClientWidth = 922
+  ExplicitWidth = 928
+  ExplicitHeight = 586
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Splitter1: TSplitter
+    Left = 517
+    Height = 495
+    ExplicitLeft = 524
+    ExplicitHeight = 508
+  end
+  inherited PNL_Top: TPanel
+    Width = 922
+    ExplicitWidth = 922
+    inherited IMG_Title: TImage
+      Width = 824
+      ExplicitWidth = 746
+    end
+    inherited BNT_Confirmar: TSpeedButton
+      Top = 3
+      ExplicitTop = 3
+    end
+    inherited PNL_Navegacao: TPanel
+      Left = 825
+      Width = 92
+      ExplicitLeft = 825
+      ExplicitWidth = 92
+      inherited PNL_Controles: TPanel
+        Left = 3
+        Width = 89
+        ExplicitLeft = 3
+        ExplicitWidth = 89
+      end
+    end
+    inherited PNL_Modo: TPanel
+      Width = 916
+      ExplicitWidth = 916
+      inherited SHP_Modo: TShape
+        Width = 916
+        ExplicitWidth = 916
+      end
+      inherited LBL_Modo: TLabel
+        Width = 916
+        Height = 14
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    Width = 517
+    Height = 495
+    ExplicitWidth = 517
+    ExplicitHeight = 495
+    inherited PNL_Topo: TPanel
+      Width = 511
+      Height = 12
+      ExplicitWidth = 511
+      ExplicitHeight = 12
+    end
+    inherited PGC_Principal: TPageControl
+      Top = 13
+      Width = 511
+      Height = 477
+      ExplicitTop = 13
+      ExplicitWidth = 511
+      ExplicitHeight = 477
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 503
+        ExplicitHeight = 446
+        object Label4: TLabel
+          Left = 11
+          Top = 47
+          Width = 137
+          Height = 16
+          Caption = 'Descri'#231#227'o do Sistema'
+          FocusControl = TXT_Descricao
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label5: TLabel
+          Left = 13
+          Top = 97
+          Width = 43
+          Height = 16
+          Caption = 'Vers'#227'o'
+          FocusControl = TXT_Versao
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label6: TLabel
+          Left = 13
+          Top = 148
+          Width = 169
+          Height = 16
+          Caption = 'Caminho para Atualiza'#231#227'o'
+          FocusControl = TXT_Caminho
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 12
+          Top = 0
+          Width = 13
+          Height = 16
+          Caption = 'ID'
+          FocusControl = TXT_ID
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label8: TLabel
+          Left = 94
+          Top = 0
+          Width = 104
+          Height = 16
+          Caption = 'C'#243'digo Empresa'
+          FocusControl = TXT_Empresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object TXT_Descricao: TDBEdit
+          Left = 12
+          Top = 64
+          Width = 466
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'Descricao'
+          DataSource = DS
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 8404992
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object TXT_Versao: TDBEdit
+          Left = 13
+          Top = 114
+          Width = 199
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'Versao'
+          DataSource = DS
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 8404992
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 3
+        end
+        object TXT_Caminho: TDBEdit
+          Left = 13
+          Top = 165
+          Width = 466
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'Caminho'
+          DataSource = DS
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 8404992
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 4
+        end
+        object TXT_ID: TDBEdit
+          Left = 13
+          Top = 16
+          Width = 75
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'Sistema_ID'
+          DataSource = DS
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object TXT_Empresa: TDBEdit
+          Left = 94
+          Top = 16
+          Width = 199
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'Empresa'
+          DataSource = DS
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 8404992
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 503
+        ExplicitHeight = 446
+        inherited Panel2: TPanel
+          Height = 446
+          ExplicitHeight = 446
+          inherited Memo_Filtro: TMemo
+            Height = 409
+            ExplicitHeight = 409
+          end
+        end
+        inherited Panel3: TPanel
+          Height = 446
+          ExplicitHeight = 446
+          inherited Memo_Query: TMemo
+            Height = 409
+            ExplicitHeight = 409
+          end
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Atualiza'#231#245'es'
+        ImageIndex = 2
+        object Panel6: TPanel
+          Left = 0
+          Top = 0
+          Width = 503
+          Height = 12
+          Align = alTop
+          BorderStyle = bsSingle
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object Panel7: TPanel
+          Left = 0
+          Top = 12
+          Width = 503
+          Height = 8
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Color = 7687936
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBGrid1: TDBGrid
+          Left = 0
+          Top = 20
+          Width = 503
+          Height = 426
+          Align = alClient
+          Color = clWhite
+          DataSource = DS_Atualizacao
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ParentFont = False
+          TabOrder = 2
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridDrawColumnCell
+          OnDblClick = BNT_ConfirmarClick
+          Columns = <
+            item
+              Expanded = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clNavy
+              Font.Height = -12
+              Font.Name = 'Arial'
+              Font.Style = []
+              Title.Color = 16744448
+              Title.Font.Charset = ANSI_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Arial'
+              Title.Font.Style = [fsBold]
+              Width = 24
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CPU'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clNavy
+              Font.Height = -12
+              Font.Name = 'Arial'
+              Font.Style = []
+              Title.Color = 16744448
+              Title.Font.Charset = ANSI_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Arial'
+              Title.Font.Style = [fsBold]
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Usuario'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Arial'
+              Title.Font.Style = [fsBold]
+              Width = 150
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Status'
+              Title.Alignment = taCenter
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -13
+              Title.Font.Name = 'Arial'
+              Title.Font.Style = [fsBold]
+              Width = 100
+              Visible = True
+            end>
+        end
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Left = 524
+    Height = 495
+    ExplicitLeft = 524
+    ExplicitHeight = 495
+    inherited Panel1: TPanel
+      Top = 446
+      ExplicitTop = 446
+    end
+    inherited Panel4: TPanel
+      inherited Label3: TLabel
+        Width = 386
+        Height = 27
+        Caption = 'Listagem dos Sistemas da Bomix'
+        ExplicitWidth = 253
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Height = 396
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Sistema'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 327
+          Visible = True
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end>
+    end
+    inherited PNL_Listagem2: TPanel
+      Top = 438
+      ExplicitTop = 438
+    end
+  end
+  inherited Query: TADOQuery
+    CursorType = ctStatic
+    SQL.Strings = (
+      'Select '
+      ''
+      #9'Empresa, Sistema_ID, Descricao, Versao, Caminho '
+      ''
+      'from BomixBI.[dbo].[Sys_TB_Sistema] (nolock)'
+      'Order by Descricao')
+    Left = 708
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object QuerySistema_ID: TIntegerField
+      FieldName = 'Sistema_ID'
+    end
+    object QueryDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 100
+    end
+    object QueryVersao: TStringField
+      FieldName = 'Versao'
+      Size = 50
+    end
+    object QueryCaminho: TStringField
+      FieldName = 'Caminho'
+      Size = 200
+    end
+  end
+  inherited CDS: TClientDataSet
+    Left = 672
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object CDSSistema_ID: TIntegerField
+      FieldName = 'Sistema_ID'
+    end
+    object CDSDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 100
+    end
+    object CDSVersao: TStringField
+      FieldName = 'Versao'
+      Size = 50
+    end
+    object CDSCaminho: TStringField
+      FieldName = 'Caminho'
+      Size = 200
+    end
+  end
+  inherited DS: TDataSource
+    Left = 744
+  end
+  inherited DSP: TDataSetProvider
+    Left = 778
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 625
+  end
+  object CDS_Atualizacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_Atualizacao'
+    Left = 672
+    Top = 304
+    object CDS_AtualizacaoEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object CDS_AtualizacaoCPU: TStringField
+      FieldName = 'CPU'
+      Size = 100
+    end
+    object CDS_AtualizacaoSistema: TStringField
+      FieldName = 'Sistema'
+      Size = 100
+    end
+    object CDS_AtualizacaoVersao: TStringField
+      FieldName = 'Versao'
+      Size = 50
+    end
+    object CDS_AtualizacaoVersaoAtualizacao: TStringField
+      FieldName = 'VersaoAtualizacao'
+      Size = 50
+    end
+    object CDS_AtualizacaoUsuario: TStringField
+      FieldName = 'Usuario'
+      Size = 50
+    end
+    object CDS_AtualizacaoData: TDateTimeField
+      FieldName = 'Data'
+    end
+    object CDS_AtualizacaoTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 11
+    end
+    object CDS_AtualizacaoStatus: TStringField
+      FieldName = 'Status'
+      ReadOnly = True
+      Size = 17
+    end
+    object CDS_AtualizacaoCaminho: TStringField
+      FieldName = 'Caminho'
+      Size = 200
+    end
+  end
+  object Query_Atualizacao: TADOQuery
+    Connection = DMADO_Geral.ADOConnection1
+    CursorType = ctStatic
+    DataSource = DS_Atualizacao
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      'Select * from BomixBI.[dbo].[Sys_VW_AtualizacaoSistema_Totvs]'
+      'Where Sistema = '#39'COMERCIAL BOMIX'#39
+      'Order by Status desc')
+    Left = 708
+    Top = 304
+    object Query_AtualizacaoEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object Query_AtualizacaoCPU: TStringField
+      FieldName = 'CPU'
+      Size = 100
+    end
+    object Query_AtualizacaoSistema: TStringField
+      FieldName = 'Sistema'
+      Size = 100
+    end
+    object Query_AtualizacaoVersao: TStringField
+      FieldName = 'Versao'
+      Size = 50
+    end
+    object Query_AtualizacaoVersaoAtualizacao: TStringField
+      FieldName = 'VersaoAtualizacao'
+      Size = 50
+    end
+    object Query_AtualizacaoUsuario: TStringField
+      FieldName = 'Usuario'
+      Size = 50
+    end
+    object Query_AtualizacaoData: TDateTimeField
+      FieldName = 'Data'
+    end
+    object Query_AtualizacaoTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 11
+    end
+    object Query_AtualizacaoStatus: TStringField
+      FieldName = 'Status'
+      ReadOnly = True
+      Size = 17
+    end
+    object Query_AtualizacaoCaminho: TStringField
+      FieldName = 'Caminho'
+      Size = 200
+    end
+  end
+  object DS_Atualizacao: TDataSource
+    DataSet = CDS_Atualizacao
+    Left = 744
+    Top = 304
+  end
+  object DSP_Atualizacao: TDataSetProvider
+    DataSet = Query_Atualizacao
+    Left = 778
+    Top = 304
+  end
+end

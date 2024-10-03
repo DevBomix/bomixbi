@@ -1,0 +1,72 @@
+object FrameAtualizacao: TFrameAtualizacao
+  Left = 0
+  Top = 0
+  Width = 243
+  Height = 40
+  Color = 6701568
+  ParentBackground = False
+  ParentColor = False
+  TabOrder = 0
+  OnEnter = FrameEnter
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 241
+    Height = 40
+    Align = alLeft
+    TabOrder = 0
+    ExplicitHeight = 63
+    object Label1: TLabel
+      Left = 10
+      Top = 5
+      Width = 102
+      Height = 14
+      Caption = 'Ultima Atualiza'#231#227'o:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 10
+      Top = 22
+      Width = 113
+      Height = 14
+      Caption = 'Pr'#243'xima Atualiza'#231#227'o:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 136
+      Top = 22
+      Width = 91
+      Height = 14
+      Caption = '12/09/2014 - 12:00'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 136
+      Top = 5
+      Width = 91
+      Height = 14
+      Caption = '12/09/2014 - 12:00'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+  end
+end

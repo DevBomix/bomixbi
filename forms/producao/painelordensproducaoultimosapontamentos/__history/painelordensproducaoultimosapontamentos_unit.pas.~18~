@@ -1,0 +1,156 @@
+unit PainelOrdensProducaoUltimosApontamentos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.Provider,
+  Data.Win.ADODB, Datasnap.DBClient, Vcl.DBCGrids, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TPainel_OrdensProducaoUltimosApontamentos = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    v: TDBCtrlGrid;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel2: TPanel;
+    Label6: TLabel;
+    DBText11: TDBText;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Shape1: TShape;
+    Panel_Titulo: TPanel;
+    LBL_Titulo: TLabel;
+    Image20: TImage;
+    CBX_Setor: TComboBox;
+    Shape2: TShape;
+    PNL_Injetora: TPanel;
+    DBText1: TDBText;
+    DBText5: TDBText;
+    DBText2: TDBText;
+    Label1: TLabel;
+    DBText6: TDBText;
+    Label2: TLabel;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    QueryRecno: TIntegerField;
+    QuerySetor: TStringField;
+    QueryRecurso: TStringField;
+    QueryProduto: TStringField;
+    QueryOrdemProducao: TStringField;
+    QueryOperador: TStringField;
+    QueryUltimosDados: TStringField;
+    QueryQuantidade: TFloatField;
+    QueryProduzida: TFloatField;
+    QuerySaldo: TFloatField;
+    QueryCiclo: TFloatField;
+    QueryCavidade: TFloatField;
+    QueryHorasParaTerminar: TFloatField;
+    QueryDataProxima: TDateTimeField;
+    QueryData: TDateTimeField;
+    QueryHora: TStringField;
+
+    // MInhas Procedures e Fucntions
+    procedure ListarSaldos;
+
+
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure vPaintPanel(DBCtrlGrid: TDBCtrlGrid; Index: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure CBX_SetorChange(Sender: TObject);
+
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Painel_OrdensProducaoUltimosApontamentos: TPainel_OrdensProducaoUltimosApontamentos;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, SysAtualizarStorecProcedure_Unit, ConexaoDados_Unit;
+
+procedure TPainel_OrdensProducaoUltimosApontamentos.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TPainel_OrdensProducaoUltimosApontamentos.CBX_SetorChange(
+  Sender: TObject);
+begin
+  ListarSaldos;
+end;
+
+procedure TPainel_OrdensProducaoUltimosApontamentos.FormCreate(Sender: TObject);
+begin
+      CBX_Setor.Items.Text := Sys_FuncaoSistema.CBX_PermissaoSetoresProducoes.Items.Text;
+      CBX_Setor.Text := Sys_FuncaoSistema.CBX_PermissaoSetoresProducoes.Text;
+end;
+
+procedure TPainel_OrdensProducaoUltimosApontamentos.ListarSaldos;
+Var
+   VLC_Select : String;
+begin
+
+  VLC_Select :=  VLC_Select + ' Select ' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '           Apontamento.Empresa, Apontamento.Area, Apontamento.Setor, OP.Status,' + #13;
+  VLC_Select :=  VLC_Select + '           Apontamento.Recurso,' + #13;
+  VLC_Select :=  VLC_Select + '           Apontamento.Produto_ID + ' + '''' + ' - ' + '''' + ' + Apontamento.Produto as Produto, Apontamento.OrdemProducao,	Operador,' + #13;
+  VLC_Select :=  VLC_Select + '           Apontamento.OrdemProducao + ' + '''' + '(' + '''' + ' + OP.Status + ' + '''' + ')' + '''' + ' as DadosOP,' + #13;
+  VLC_Select :=  VLC_Select + '           Convert(Varchar(10),DataTurno,103) + ' + ''''+ '   ' + '''' + ' + HoraIni + ' + '''' + ' -> ' + '''' + ' + HoraFin + ' + '''' + ' - ' + '''' + ' + TurnoDescricao as DadosPeriodo,' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '           OP.Quantidade, OP.Produzida, OP.Saldo, OP.QtdCarrinho, QtdPorEmbalagem,' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '           (OP.Saldo / OP.QtdCarrinho) as FaltaCarrinho,' + #13;
+  VLC_Select :=  VLC_Select + '           Case when OP.Saldo - (OP.Saldo / OP.QtdCarrinho) * OP.QtdCarrinho > 0 then (OP.Saldo - (OP.Saldo / OP.QtdCarrinho) * OP.QtdCarrinho) / QtdPorEmbalagem else 0 end FaltaFardo' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '         from BomixBI.dbo.Pcp_TB_OrdemProducaoApontamento Apontamento (Nolock)' + #13;
+  VLC_Select :=  VLC_Select + '         Inner Join BomixBI.dbo.Pcp_TB_OrdemProducao OP (nolock) ON OP.Recno = Apontamento.OrdemProducao_Recno' + #13;
+  VLC_Select :=  VLC_Select + '         Inner Join (' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '               Select' + #13;
+  VLC_Select :=  VLC_Select + '                   H6_FILIAL, H6_RECURSO, Max(R_E_C_N_O_) as Recno' + #13;
+  VLC_Select :=  VLC_Select + '               from P12OFICIAL.dbo.SH6010 H6 (nolock)' + #13;
+  VLC_Select :=  VLC_Select + '               Where H6_FILIAL = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption + '''' + #13;
+  VLC_Select :=  VLC_Select + '               AND D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select :=  VLC_Select + '               AND H6_TIPO = ' + '''' + 'P' + '''' + #13;
+  VLC_Select :=  VLC_Select + '               AND Convert(Datetime,H6_DTAPONT,112) Between GetDate() - 7 AND GetDate()' + #13;
+  VLC_Select :=  VLC_Select + '               AND H6_FSSETOR = ' + '''' + CBX_Setor.Text + '''' + #13;
+  VLC_Select :=  VLC_Select + '               Group by H6_FILIAL, H6_RECURSO' + #13;
+  VLC_Select :=  VLC_Select + '' + #13;
+  VLC_Select :=  VLC_Select + '         ) TB ON TB.Recno = Apontamento.Recno' + #13;
+  VLC_Select :=  VLC_Select + '         Order by Setor, Apontamento.Recno desc' + #13;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+procedure TPainel_OrdensProducaoUltimosApontamentos.vPaintPanel(
+  DBCtrlGrid: TDBCtrlGrid; Index: Integer);
+begin
+    if DBCtrlGrid.datasource.dataset.FieldByName('Status').AsString = 'FINALIZADA' then
+        PNL_Injetora.Color := clMaroon
+    else
+        PNL_Injetora.Color := $008C5F00;
+end;
+
+end.

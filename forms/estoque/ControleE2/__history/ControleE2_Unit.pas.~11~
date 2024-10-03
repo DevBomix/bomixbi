@@ -1,0 +1,192 @@
+unit ControleE2_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Data.DB, Datasnap.Provider, Data.Win.ADODB, System.Actions, Vcl.ActnList,
+  Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TControleE2 = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Splitter1: TSplitter;
+    Panel4: TPanel;
+    DBGrid1: TDBGrid;
+    CDS: TClientDataSet;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    PNL_Busca: TPanel;
+    Panel6: TPanel;
+    Shape2: TShape;
+    BTN_Buscar: TButton;
+    TXT_Buscador: TEdit;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryQtdManual: TFloatField;
+    QueryTotvs: TFloatField;
+    QuerySaldo: TFloatField;
+    QueryEndereco: TIntegerField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSQtdManual: TFloatField;
+    CDSTotvs: TFloatField;
+    CDSSaldo: TFloatField;
+    CDSEndereco: TIntegerField;
+    CDS_Planilha: TClientDataSet;
+    Query_Planilha: TADOQuery;
+    DS_Planilha: TDataSource;
+    DSP_Planilha: TDataSetProvider;
+    Query_PlanilhaRua: TStringField;
+    Query_PlanilhaEndereco: TStringField;
+    Query_PlanilhaProduto_ID: TStringField;
+    Query_PlanilhaProduto: TStringField;
+    Query_PlanilhaSemanaAno: TStringField;
+    Query_PlanilhaQuantidade: TFloatField;
+    Query_PlanilhaLote: TStringField;
+    CDS_PlanilhaRua: TStringField;
+    CDS_PlanilhaEndereco: TStringField;
+    CDS_PlanilhaProduto_ID: TStringField;
+    CDS_PlanilhaProduto: TStringField;
+    CDS_PlanilhaSemanaAno: TStringField;
+    CDS_PlanilhaQuantidade: TFloatField;
+    CDS_PlanilhaLote: TStringField;
+    Query_PlanilhaRank: TLargeintField;
+    CDS_PlanilhaRank: TLargeintField;
+    Panel5: TPanel;
+    Panel7: TPanel;
+    DBGrid3: TDBGrid;
+    Panel8: TPanel;
+    CDS_Total: TClientDataSet;
+    Query_Total: TADOQuery;
+    DS_Total: TDataSource;
+    DSP_Total: TDataSetProvider;
+    Query_TotalProduto_ID: TStringField;
+    Query_TotalProduto: TStringField;
+    Query_TotalQtdManual: TFloatField;
+    Query_TotalTotvs: TFloatField;
+    Query_TotalSaldo: TFloatField;
+    Query_TotalMovDia: TFloatField;
+    Query_TotalSaldoDia: TFloatField;
+    CDS_TotalProduto_ID: TStringField;
+    CDS_TotalProduto: TStringField;
+    CDS_TotalQtdManual: TFloatField;
+    CDS_TotalTotvs: TFloatField;
+    CDS_TotalSaldo: TFloatField;
+    CDS_TotalMovDia: TFloatField;
+    CDS_TotalSaldoDia: TFloatField;
+    DBGrid2: TDBGrid;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure FormShow(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ControleE2: TControleE2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TControleE2.BNT_ConfirmarClick(Sender: TObject);
+begin
+    Close;
+end;
+
+procedure TControleE2.BTN_BuscarClick(Sender: TObject);
+Var
+    VLC_Select : String;
+begin
+
+    VLC_Select := VLC_Select + ' Select ' + #13;
+    VLC_Select := VLC_Select + ' 	Produto_ID, Produto,Lote, Sum(Quantidade) as QtdManual, Saldo as Totvs, Saldo - Sum(Quantidade) as Saldo, Count(Endereco) as Endereco ' + #13;
+    VLC_Select := VLC_Select + ' ' + #13;
+    VLC_Select := VLC_Select + 'from (    ' + #13;
+    VLC_Select := VLC_Select + ' ' + #13;
+    VLC_Select := VLC_Select + '		Select ' + #13;
+    VLC_Select := VLC_Select + '			Rua, Endereco, Produto_ID, Produto, SemanaAno, Isnull(Quantidade,0) as Quantidade, Lote, Isnull(B8_SALDO,0) as Saldo ' + #13;
+    VLC_Select := VLC_Select + '		from BomixBI.[dbo].[Est_TB_ContagemManualE2] E2 (nolock) ' + #13;
+    VLC_Select := VLC_Select + '		Left Join (  ' + #13;
+    VLC_Select := VLC_Select + '					Select B8_PRODUTO, B8_DATA, B8_SALDO, B8_LOTECTL, B8_DTVALID from P12OFICIAL.dbo.SB8010 (nolock) ' + #13;
+    VLC_Select := VLC_Select + '					Where B8_LOCAL = ' + '''' + 'E2' + '''' + #13;
+    VLC_Select := VLC_Select + '					AND D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + '					AND B8_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + '		) B8 ON B8.B8_PRODUTO = E2.Produto_ID' + #13;
+    VLC_Select := VLC_Select + '									AND B8.B8_LOTECTL = E2.Lote' + #13;
+    VLC_Select := VLC_Select + '		Where Produto <> ' + '''' + '' + '''' + #13;
+    VLC_Select := VLC_Select + ') TB ' + #13;
+    VLC_Select := VLC_Select + 'Group by Produto_ID, Produto,Lote, Saldo  ' + #13;
+    VLC_Select := VLC_Select + ' Having (Produto_ID + Produto + Lote) Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+    VLC_Select := VLC_Select + 'Order by Produto_ID, Lote ' + #13;
+
+    CDS.Close;
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Text := VLC_Select;
+    CDS.Open;
+
+end;
+
+procedure TControleE2.DSDataChange(Sender: TObject; Field: TField);
+Var
+  VLC_Select : String;
+begin
+
+    VLC_Select := VLC_Select + '    Select  ' + #13;
+    VLC_Select := VLC_Select + '			RANK() OVER (ORDER BY Endereco) AS Rank, Rua, Endereco, Produto_ID, Produto, SemanaAno, Isnull(Quantidade,0) as Quantidade, Lote' + #13;
+    VLC_Select := VLC_Select + '		from BomixBI.[dbo].[Est_TB_ContagemManualE2] E2 (nolock) ' + #13;
+    VLC_Select := VLC_Select + '		Left Join ( ' + #13;
+    VLC_Select := VLC_Select + '					Select B8_PRODUTO, B8_DATA, B8_SALDO, B8_LOTECTL, B8_DTVALID from P12OFICIAL.dbo.SB8010 (nolock)' + #13;
+    VLC_Select := VLC_Select + '					Where B8_LOCAL = ' + '''' + 'E2' + '''' + #13;
+    VLC_Select := VLC_Select + '					AND D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + '					AND B8_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + '		) B8 ON B8.B8_PRODUTO = E2.Produto_ID ' + #13;
+    VLC_Select := VLC_Select + '									AND B8.B8_LOTECTL = E2.Lote ' + #13;
+    VLC_Select := VLC_Select + '		Where Produto_ID = ' + '''' + CDSProduto_ID.AsString + '''' + #13;
+    VLC_Select := VLC_Select + '		AND Lote = ' + '''' + CDSLote.AsString + '''' + #13;
+    VLC_Select := VLC_Select + '		Order by Endereco ' + #13;
+
+    if CDS.RecordCount > 0 then
+    begin
+        CDS_Planilha.Close;
+        Query_Planilha.Close;
+        Query_Planilha.SQL.Clear;
+        Query_Planilha.SQL.Text := VLC_Select;
+        CDS_Planilha.Open;
+
+        CDS_Total.Close;
+        Query_Total.Close;
+        Query_Total.Parameters.ParamByName('Produto').Value := CDSProduto_ID.AsString;
+        CDS_Total.Open;
+
+    end;
+
+end;
+
+procedure TControleE2.FormShow(Sender: TObject);
+begin
+  BTN_BuscarClick(nil);
+end;
+
+end.

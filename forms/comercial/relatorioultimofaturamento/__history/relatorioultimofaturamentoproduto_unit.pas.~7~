@@ -1,0 +1,392 @@
+unit RelatorioUltimoFaturamentoProduto_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit,
+  System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Datasnap.DBClient, Data.DB, Data.Win.ADODB, Datasnap.Provider,
+  ppDB, ppDBPipe, ppParameter, ppDesignLayer, ppBands, ppClass, ppCtrls,
+  ppPrnabl, ppCache, ppComm, ppRelatv, ppProd, ppReport;
+
+type
+  TRelatorioUltimoFaturamentoProduto = class(TPadraoBuscadorFiltro)
+    Panel4: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_TipoRelatorio: TComboBox;
+    Panel9: TPanel;
+    TXT_Valor2_UF: TMaskEdit;
+    CBX_OperadorUF: TComboBox;
+    TXT_Valor1_UF: TMaskEdit;
+    Panel10: TPanel;
+    PNL_SinalUF: TPanel;
+    CBX_Igual_UF: TComboBox;
+    Panel16: TPanel;
+    TXT_Valor2_Gerencia: TMaskEdit;
+    CBX_OperadorGerencia: TComboBox;
+    TXT_Valor1_Gerencia: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalGerencia: TPanel;
+    CBX_Igual_Gerencia: TComboBox;
+    Panel23: TPanel;
+    MaskEdit5: TMaskEdit;
+    ComboBox4: TComboBox;
+    MaskEdit6: TMaskEdit;
+    Panel24: TPanel;
+    Panel25: TPanel;
+    CBX_OrdenarPor: TComboBox;
+    Panel1: TPanel;
+    TXT_Valor2_Cliente: TMaskEdit;
+    CBX_OperadorCliente: TComboBox;
+    TXT_Valor1_Cliente: TMaskEdit;
+    Panel2: TPanel;
+    PNL_SinalCliente: TPanel;
+    CBX_Igual_Cliente: TComboBox;
+    Panel3: TPanel;
+    TXT_Valor2_ProdutoID: TMaskEdit;
+    CBX_OperadorProdutoID: TComboBox;
+    TXT_Valor1_ProdutoID: TMaskEdit;
+    Panel5: TPanel;
+    PNL_SinalProdutoID: TPanel;
+    CBX_Igual_ProdutoID: TComboBox;
+    Panel6: TPanel;
+    TXT_Valor2_Produto: TMaskEdit;
+    CBX_OperadorProduto: TComboBox;
+    TXT_Valor1_Produto: TMaskEdit;
+    Panel7: TPanel;
+    PNL_SinalProduto: TPanel;
+    CBX_Igual_Produto: TComboBox;
+    Panel8: TPanel;
+    MaskEdit3: TMaskEdit;
+    ComboBox2: TComboBox;
+    MaskEdit4: TMaskEdit;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    CBX_Grupo: TComboBox;
+    Panel13: TPanel;
+    MaskEdit7: TMaskEdit;
+    ComboBox5: TComboBox;
+    MaskEdit8: TMaskEdit;
+    Panel19: TPanel;
+    Panel20: TPanel;
+    CBX_Item: TComboBox;
+    ppRelatorio: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppImage4: TppImage;
+    ppLabel33: TppLabel;
+    ppLine29: TppLine;
+    ppShape1: TppShape;
+    ppLabel2: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppDetailBand5: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppLine5: TppLine;
+    ppDBText1: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText10: TppDBText;
+    ppFooterBand5: TppFooterBand;
+    ppLine12: TppLine;
+    ppLBL_Data: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    ppDBPipeline1: TppDBPipeline;
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    CDS: TClientDataSet;
+    QueryGrupo: TStringField;
+    QueryItem: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryUltimaVenda_Recno: TIntegerField;
+    QueryNota: TStringField;
+    QueryCliente: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryGerente: TStringField;
+    QueryPreco: TFloatField;
+    QueryUltimaVendaEmissao: TDateTimeField;
+    QueryQtdDias: TIntegerField;
+    QueryRecno: TIntegerField;
+    QueryEmpresa: TStringField;
+    CDSGrupo: TStringField;
+    CDSItem: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSUltimaVenda_Recno: TIntegerField;
+    CDSNota: TStringField;
+    CDSCliente: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSGerente: TStringField;
+    CDSPreco: TFloatField;
+    CDSUltimaVendaEmissao: TDateTimeField;
+    CDSQtdDias: TIntegerField;
+    CDSRecno: TIntegerField;
+    CDSEmpresa: TStringField;
+    ppLabel4: TppLabel;
+    ppDBText3: TppDBText;
+    ppDBText5: TppDBText;
+    ppLabel5: TppLabel;
+
+    procedure ListarItem;
+    procedure ListarGrupo;
+    procedure ListarGerencia;
+    procedure ListarCliente;
+
+    procedure FormCreate(Sender: TObject);
+    procedure PNL_SinalProdutoIDClick(Sender: TObject);
+    procedure PNL_SinalProdutoClick(Sender: TObject);
+    procedure PNL_SinalClick(Sender: TObject);
+    procedure CBX_OperadorChange(Sender: TObject);
+    procedure CBX_OperadorProdutoChange(Sender: TObject);
+    procedure CBX_OperadorProdutoIDChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioUltimoFaturamentoProduto: TRelatorioUltimoFaturamentoProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, ConexaoDados_Unit;
+
+procedure TRelatorioUltimoFaturamentoProduto.ListarItem;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+   VLN_Contador : Integer;
+
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct Item ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Pcp_TB_Produto] Produto (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND UltimaVendaNota is not NULL  ' + #13;
+  VLC_Select := VLC_Select + ' AND Grupo <> ' + '''' + '' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Item  ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  CBX_Item.Items.Clear;
+  Query.First;
+  CBX_Item.Text := Query.FieldByName('Item').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     CBX_Item.Items.Add(Query.FieldByName('Item').AsString);
+     Query.Next;
+  end;
+
+  CBX_Item.Items.Add('AMBOS');
+  CBX_Item.Text := 'AMBOS';
+  Query.Free;
+
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.PNL_SinalClick(Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_Sinal);
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.PNL_SinalProdutoClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalProduto);
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.PNL_SinalProdutoIDClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalProdutoID);
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.ListarCliente;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+   VLN_Contador : Integer;
+
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct UltimaVendaCliente as Cliente ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Pcp_TB_Produto] Produto (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND UltimaVendaNota is not NULL  ' + #13;
+  VLC_Select := VLC_Select + ' AND Grupo <> ' + '''' + '' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by UltimaVendaCliente  ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  CBX_Igual_Cliente.Items.Clear;
+  Query.First;
+  CBX_Igual_Cliente.Text := Query.FieldByName('Cliente').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     CBX_Igual_Cliente.Items.Add(Query.FieldByName('Cliente').AsString);
+     Query.Next;
+  end;
+
+  CBX_Igual_Cliente.Items.Add('TODOS');
+  CBX_Igual_Cliente.Text := 'TODOS';
+  Query.Free;
+
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.ListarGerencia;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+   VLN_Contador : Integer;
+
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct UltimaVendaGerente as Gerente ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Pcp_TB_Produto] Produto (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND UltimaVendaNota is not NULL  ' + #13;
+  VLC_Select := VLC_Select + ' AND Grupo <> ' + '''' + '' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by UltimaVendaGerente  ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  CBX_Igual_Gerencia.Items.Clear;
+  Query.First;
+  CBX_Igual_Gerencia.Text := Query.FieldByName('Gerente').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     CBX_Igual_Gerencia.Items.Add(Query.FieldByName('Gerente').AsString);
+     Query.Next;
+  end;
+
+  CBX_Igual_Gerencia.Items.Add('TODAS');
+  CBX_Igual_Gerencia.Text := 'TODAS';
+  Query.Free;
+
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.ListarGrupo;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+   VLN_Contador : Integer;
+
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct Grupo ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Pcp_TB_Produto] Produto (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND UltimaVendaNota is not NULL  ' + #13;
+  VLC_Select := VLC_Select + ' AND Grupo <> ' + '''' + '' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Grupo  ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  CBX_Grupo.Items.Clear;
+  Query.First;
+  CBX_Grupo.Text := Query.FieldByName('Grupo').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     CBX_Grupo.Items.Add(Query.FieldByName('Grupo').AsString);
+     Query.Next;
+  end;
+
+  CBX_Grupo.Items.Add('AMBOS');
+  CBX_Grupo.Text := 'AMBOS';
+  Query.Free;
+
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.CBX_OperadorChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_Operador, TXT_Valor1, TXT_Valor2, 160,'');
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.CBX_OperadorProdutoChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorProduto, TXT_Valor1_Produto, TXT_Valor2_Produto, 160,'');
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.CBX_OperadorProdutoIDChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorProdutoID, TXT_Valor1_ProdutoID, TXT_Valor2_ProdutoID, 160,'');
+end;
+
+procedure TRelatorioUltimoFaturamentoProduto.FormCreate(Sender: TObject);
+Var
+   TamanhoPadrao : Integer;
+begin
+   TamanhoPadrao := 160;
+  TXT_Valor1.Width := (TamanhoPadrao * 2) + 1;
+  TXT_Valor1_ProdutoID.Width := (TamanhoPadrao * 2) + 1;
+  TXT_Valor1_Produto.Width := (TamanhoPadrao * 2) + 1;
+  ListarItem;
+  ListarGrupo;
+  ListarGerencia;
+  ListarCliente;
+
+end;
+
+end.

@@ -1,0 +1,104 @@
+inherited Sys_Sistema: TSys_Sistema
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Sistema'
+  ClientHeight = 617
+  ClientWidth = 1014
+  WindowState = wsNormal
+  ExplicitWidth = 1020
+  ExplicitHeight = 645
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Splitter1: TSplitter
+    Left = 703
+    Height = 573
+  end
+  inherited PNL_Titulo: TPanel
+    Width = 1014
+    inherited PNL_Navegacao: TPanel
+      Left = 649
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Left = 714
+    Height = 573
+    inherited Panel5: TPanel
+      Top = 531
+    end
+    inherited Panel4: TPanel
+      Height = 497
+      inherited DBGrid: TDBGrid
+        Height = 589
+      end
+    end
+    inherited Panel6: TPanel
+      inherited Label45: TLabel
+        Width = 294
+        Height = 28
+        Caption = 'Cadastro de Sistema'
+        ExplicitWidth = 158
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    Width = 703
+    Height = 573
+    inherited PNL_Topo: TPanel
+      Width = 697
+      Height = 131
+      ExplicitWidth = 697
+      ExplicitHeight = 131
+    end
+    inherited PGC_Principal: TPageControl
+      Top = 140
+      Width = 697
+      Height = 430
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 679
+        ExplicitHeight = 443
+        inherited DBGrid1: TDBGrid
+          Width = 683
+          Height = 393
+        end
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 679
+        ExplicitHeight = 443
+        inherited Splitter20: TSplitter
+          Left = 337
+          Height = 399
+        end
+        inherited PNL_DesenvolvimentoTitulo2: TPanel
+          Left = 344
+          Height = 399
+          ExplicitLeft = 334
+          ExplicitHeight = 443
+          inherited PNL_DesenvolvimentoTitulo4: TPanel
+            Top = 357
+          end
+          inherited Memo_Filtros: TMemo
+            Height = 356
+          end
+        end
+        inherited PNL_DesenvolvimentoTitulo1: TPanel
+          Width = 337
+          Height = 399
+          ExplicitWidth = 327
+          ExplicitHeight = 443
+          inherited PNL_DesenvolvimentoTitulo3: TPanel
+            Top = 358
+            Width = 335
+          end
+          inherited Memo1: TMemo
+            Width = 335
+            Height = 357
+          end
+        end
+      end
+    end
+  end
+end

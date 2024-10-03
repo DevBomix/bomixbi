@@ -1,0 +1,180 @@
+object Atualizar_Form: TAtualizar_Form
+  Left = 151
+  Top = 444
+  BorderStyle = bsNone
+  Caption = 'Atualizador Bomix'
+  ClientHeight = 95
+  ClientWidth = 449
+  Color = 9412519
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Shape1: TShape
+    Left = 0
+    Top = 0
+    Width = 449
+    Height = 95
+    Align = alClient
+    Brush.Color = clGray
+    Pen.Width = 3
+  end
+  object Panel8: TPanel
+    Left = 9
+    Top = 8
+    Width = 433
+    Height = 78
+    Color = 13160660
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -29
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object LBL_ProcessandoStatus: TLabel
+      Left = 89
+      Top = 22
+      Width = 293
+      Height = 35
+      Caption = 'Atualizando Sistema....'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 8673536
+      Font.Height = -29
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Animate1: TAnimate
+      Left = 1
+      Top = 1
+      Width = 80
+      Height = 76
+      Align = alLeft
+      Active = True
+      CommonAVI = aviFindFolder
+      StopFrame = 29
+    end
+  end
+  object ADOConnection1: TADOConnection
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'MSDASQL.1'
+    Left = 376
+    Top = 10
+  end
+  object Timer1: TTimer
+    Interval = 2000
+    OnTimer = Timer1Timer
+    Left = 408
+    Top = 10
+  end
+  object CDS_XMLAtualizar1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 345
+    Top = 10
+    object CDS_XMLAtualizar1Sistema: TStringField
+      FieldName = 'Sistema'
+      Size = 50
+    end
+    object CDS_XMLAtualizar1Executavel: TStringField
+      FieldName = 'Executavel'
+      Size = 50
+    end
+    object CDS_XMLAtualizar1StringConexao2: TStringField
+      FieldName = 'StringConexao'
+      Size = 200
+    end
+    object CDS_XMLAtualizar1Database: TStringField
+      FieldName = 'Database'
+      Size = 50
+    end
+    object CDS_XMLAtualizar1Usuario: TStringField
+      FieldName = 'Usuario'
+      Size = 50
+    end
+    object CDS_XMLAtualizar1Versao: TStringField
+      FieldName = 'Versao'
+    end
+    object CDS_XMLAtualizar1PathSistema2: TStringField
+      FieldName = 'PathSistema'
+      Size = 200
+    end
+    object CDS_XMLAtualizar1PathServidor2: TStringField
+      FieldName = 'PathServidor'
+      Size = 200
+    end
+    object CDS_XMLAtualizar1PathXML2: TStringField
+      FieldName = 'PathXML'
+      Size = 200
+    end
+    object CDS_XMLAtualizar1Data: TStringField
+      FieldName = 'Data'
+    end
+    object CDS_XMLAtualizar1Computador2: TStringField
+      FieldName = 'Computador'
+      Size = 200
+    end
+  end
+  object ExecutarSQL: TADOCommand
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 315
+    Top = 10
+  end
+  object CDS_XMLAtualizar: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 281
+    Top = 8
+    object CDS_XMLAtualizarSistema: TStringField
+      FieldName = 'Sistema'
+      Size = 100
+    end
+    object CDS_XMLAtualizarExecutavel: TStringField
+      FieldName = 'Executavel'
+      Size = 200
+    end
+    object CDS_XMLAtualizarStringConexao: TStringField
+      FieldName = 'StringConexao'
+      Size = 300
+    end
+    object CDS_XMLAtualizarDatabase: TStringField
+      FieldName = 'Database'
+      Size = 200
+    end
+    object CDS_XMLAtualizarUsuario: TStringField
+      FieldName = 'Usuario'
+      Size = 200
+    end
+    object CDS_XMLAtualizarVersao: TStringField
+      FieldName = 'Versao'
+      Size = 100
+    end
+    object CDS_XMLAtualizarPathSistema: TStringField
+      FieldName = 'PathSistema'
+      Size = 400
+    end
+    object CDS_XMLAtualizarPathServidor: TStringField
+      FieldName = 'PathServidor'
+      Size = 400
+    end
+    object CDS_XMLAtualizarPathXML: TStringField
+      FieldName = 'PathXML'
+      Size = 400
+    end
+    object CDS_XMLAtualizarData: TStringField
+      FieldName = 'Data'
+    end
+    object CDS_XMLAtualizarComputador: TStringField
+      FieldName = 'Computador'
+      Size = 200
+    end
+  end
+end

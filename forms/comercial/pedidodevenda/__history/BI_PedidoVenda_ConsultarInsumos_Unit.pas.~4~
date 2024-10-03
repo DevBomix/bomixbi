@@ -1,0 +1,108 @@
+unit BI_PedidoVenda_ConsultarInsumos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppDB, ppDBPipe, ppParameter,
+  ppDesignLayer, ppBands, ppMemo, ppStrtch, ppCtrls, ppPrnabl, ppClass, ppCache,
+  ppComm, ppRelatv, ppProd, ppReport, Data.DB, Datasnap.DBClient,
+  Data.Win.ADODB, Datasnap.Provider, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TBI_PedidoVenda_ConsultarInsumos = class(TForm)
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    CDS: TClientDataSet;
+    ppPedidoPCP: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppImage2: TppImage;
+    ppLabel24: TppLabel;
+    ppLine21: TppLine;
+    LBL_PeriodoPedidoPCP: TppLabel;
+    ppShape5: TppShape;
+    ppLabel26: TppLabel;
+    ppLabel27: TppLabel;
+    ppLabel28: TppLabel;
+    ppLabel29: TppLabel;
+    ppLabel30: TppLabel;
+    ppLabel31: TppLabel;
+    ppLabel32: TppLabel;
+    ppLabel34: TppLabel;
+    ppLabel35: TppLabel;
+    ppLabel33: TppLabel;
+    ppLabel61: TppLabel;
+    ppLabel62: TppLabel;
+    ppLabel63: TppLabel;
+    ppDetailBand3: TppDetailBand;
+    ppLine31: TppLine;
+    ppDBText16: TppDBText;
+    ppShape6: TppShape;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
+    ppDBText19: TppDBText;
+    ppDBText21: TppDBText;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText26: TppDBText;
+    ppDBText25: TppDBText;
+    ppDBMemo1: TppDBMemo;
+    ppDBText49: TppDBText;
+    ppDBText24: TppDBText;
+    ppDBText51: TppDBText;
+    ppDBText52: TppDBText;
+    ppDBText53: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppLBL_UsuarioPedidoPCP: TppLabel;
+    ppLBL_DataPedidoPCP: TppLabel;
+    ppLine32: TppLine;
+    ppMemoFiltroPedidoPCP: TppMemo;
+    ppPageStyle3: TppPageStyle;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer5: TppDesignLayer;
+    ppDesignLayer6: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    ppDBPipeline2: TppDBPipeline;
+    QueryEmpresa: TStringField;
+    QueryTipo: TStringField;
+    QueryEstrutura_ID: TStringField;
+    QueryEstrutura: TStringField;
+    QuerySaldo: TFloatField;
+    QueryEstoque: TFloatField;
+    QueryUM: TStringField;
+    QueryArmazem: TStringField;
+    CDSEmpresa: TStringField;
+    CDSTipo: TStringField;
+    CDSEstrutura_ID: TStringField;
+    CDSEstrutura: TStringField;
+    CDSSaldo: TFloatField;
+    CDSEstoque: TFloatField;
+    CDSUM: TStringField;
+    CDSArmazem: TStringField;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel1: TPanel;
+    DBGrid3: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVenda_ConsultarInsumos: TBI_PedidoVenda_ConsultarInsumos;
+
+implementation
+
+{$R *.dfm}
+
+uses conexaodados_unit;
+
+end.

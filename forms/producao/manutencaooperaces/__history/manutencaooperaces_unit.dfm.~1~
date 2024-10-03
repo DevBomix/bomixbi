@@ -1,0 +1,40 @@
+inherited OperacoesProdutivas: TOperacoesProdutivas
+  Caption = 'Opera'#231#245'es'
+  ClientHeight = 745
+  ClientWidth = 1100
+  ExplicitWidth = 1106
+  ExplicitHeight = 774
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 1082
+    ExplicitWidth = 1082
+    inherited LBL_Titulo: TLabel
+      Width = 208
+      Caption = 'Opera'#231#245'es Produtivas'
+      ExplicitWidth = 208
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 1086
+    Height = 640
+    inherited Panel_Filtro: TPanel
+      Width = 1086
+      Height = 81
+      ExplicitWidth = 1086
+      ExplicitHeight = 81
+    end
+    inherited DBGrid: TDBGrid
+      Top = 87
+      Width = 1074
+      Height = 548
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 706
+    Width = 1100
+    inherited Panel3: TPanel
+      Left = 855
+    end
+  end
+end

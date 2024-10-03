@@ -1,0 +1,83 @@
+unit SysUsuarioGrupoBuscadorSetor_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TSys_UsuarioGrupoBuscadorSetor = class(TPadraoBuscador)
+    QueryZF_FILIAL: TStringField;
+    QueryZF_SETOR: TFloatField;
+    QueryZF_DESC: TStringField;
+    QueryZF_BLOQUEI: TStringField;
+    QueryD_E_L_E_T_: TStringField;
+    QueryR_E_C_N_O_: TIntegerField;
+    QueryBuscador: TStringField;
+    CDSZF_FILIAL: TStringField;
+    CDSZF_SETOR: TFloatField;
+    CDSZF_DESC: TStringField;
+    CDSZF_BLOQUEI: TStringField;
+    CDSD_E_L_E_T_: TStringField;
+    CDSR_E_C_N_O_: TIntegerField;
+    CDSBuscador: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_UsuarioGrupoBuscadorSetor: TSys_UsuarioGrupoBuscadorSetor;
+
+implementation
+
+{$R *.dfm}
+
+uses SysUsuarioGrupo_Unit;
+
+procedure TSys_UsuarioGrupoBuscadorSetor.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+
+end;
+
+procedure TSys_UsuarioGrupoBuscadorSetor.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+  Sys_UsuarioGrupo.TXT_BuscarID.Text := IntToStr(CDSZF_SETOR.AsInteger);
+  Sys_UsuarioGrupo.TXT_BuscarDescricao.Text := CDSZF_DESC.AsString;
+  Close;
+
+end;
+
+procedure TSys_UsuarioGrupoBuscadorSetor.BTN_BuscarClick(Sender: TObject);
+var
+  VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := 'Select * ' + #13;
+  VLC_Select := VLC_Select + ' from ( ' + #13;
+  VLC_Select := VLC_Select + ' 	Select *, (CAST(ZF_SETOR as Varchar(6)) + ZF_DESC) as Buscador from P11Oficial.dbo.SZF010 SZF (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' 	Where SZF.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' ) TB +  '  + #13;
+  VLC_Select := VLC_Select + '  Where Buscador  Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + '  Order by ZF_DESC';
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

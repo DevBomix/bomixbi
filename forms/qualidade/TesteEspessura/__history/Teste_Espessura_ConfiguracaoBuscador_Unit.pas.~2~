@@ -1,0 +1,40 @@
+unit Teste_Espessura_ConfiguracaoBuscador_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscadorfiltro_unit,
+  System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls;
+
+type
+  TTeste_Espessura_ConfiguracaoBuscador = class(TPadraoBuscadorFiltro)
+    Panel10: TPanel;
+    TXT_Valor2_TotvsID: TMaskEdit;
+    CBX_OperadorTotvsID: TComboBox;
+    TXT_Valor1_TotvsID: TMaskEdit;
+    Panel11: TPanel;
+    PNL_SinalTotvsID: TPanel;
+    CBX_Igual_TotvsID: TComboBox;
+    Panel19: TPanel;
+    TXT_Valor2_Restrincao: TMaskEdit;
+    CBX_OperadorRestrincao: TComboBox;
+    TXT_Valor1_Restrincao: TMaskEdit;
+    Panel20: TPanel;
+    PNL_SinalRestrincao: TPanel;
+    CBX_Igual_Restrincao: TComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura_ConfiguracaoBuscador: TTeste_Espessura_ConfiguracaoBuscador;
+
+implementation
+
+{$R *.dfm}
+
+end.

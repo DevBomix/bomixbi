@@ -1,0 +1,13 @@
+program Atualizar;
+
+uses
+  Forms,
+  AtualizarSistemas_Unit in 'Padrao\AtualizarSistemas_Unit.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

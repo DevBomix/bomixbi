@@ -1,0 +1,132 @@
+unit OrdemProducaoImprimirEtiquetaApontSaldo_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ExtCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, System.Actions, Vcl.ActnList;
+
+type
+  TOrdemProducaoImprimirEtiquetaApontSaldo = class(TForm)
+    CDS: TClientDataSet;
+    CDSID: TAutoIncField;
+    CDSOP: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSValidade: TDateTimeField;
+    CDSQuantidade: TFloatField;
+    CDSTipoProduto: TStringField;
+    CDSClassificacao: TStringField;
+    CDSArmazem: TStringField;
+    CDSSequencia: TStringField;
+    CDSIdentidade: TStringField;
+    CDSSetor: TStringField;
+    Query: TADOQuery;
+    QueryID: TAutoIncField;
+    QueryOP: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryValidade: TDateTimeField;
+    QueryQuantidade: TFloatField;
+    QueryTipoProduto: TStringField;
+    QueryClassificacao: TStringField;
+    QueryArmazem: TStringField;
+    QuerySequencia: TStringField;
+    QueryIdentidade: TStringField;
+    QuerySetor: TStringField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Panel1: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    ActionList1: TActionList;
+    Desenvolvimento: TAction;
+    Memo1: TMemo;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure Memo1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducaoImprimirEtiquetaApontSaldo: TOrdemProducaoImprimirEtiquetaApontSaldo;
+
+implementation
+
+{$R *.dfm}
+
+uses OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Unit;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo.BTN_BuscarClick(
+  Sender: TObject);
+Var
+  VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	B8_LOTECTL as Lote, Convert(Datetime,B8_DTVALID,112) as Validade ' + #13;
+  VLC_Select := VLC_Select + ' from P12OFICIAL.dbo.SB8010 (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where B8_PRODUTO = ' + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_ProdutoID.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' AND B8_LOCAL = ' + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Armazem.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' AND B8_LOTECTL like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Convert(Datetime,B8_DTVALID,112) ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo.DesenvolvimentoExecute(
+  Sender: TObject);
+begin
+    Memo1.Visible := True;
+end;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo.FormActivate(
+  Sender: TObject);
+begin
+  BTN_BuscarClick(nil);
+end;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo.Memo1DblClick(
+  Sender: TObject);
+begin
+    Memo1.Visible := False;
+end;
+
+end.

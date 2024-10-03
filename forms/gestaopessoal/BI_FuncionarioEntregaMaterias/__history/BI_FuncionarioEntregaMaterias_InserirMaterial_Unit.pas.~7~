@@ -1,0 +1,87 @@
+unit BI_FuncionarioEntregaMaterias_InserirMaterial_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TBI_FuncionarioEntregaMaterias_InserirMaterial = class(TPadraoBuscador)
+    Label7: TLabel;
+    TXT_Buscador2: TEdit;
+    QueryAcessorio_Id: TIntegerField;
+    QueryDescricao: TStringField;
+    QueryPrazoDias: TIntegerField;
+    CDSAcessorio_Id: TIntegerField;
+    CDSDescricao: TStringField;
+    CDSPrazoDias: TIntegerField;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_FuncionarioEntregaMaterias_InserirMaterial: TBI_FuncionarioEntregaMaterias_InserirMaterial;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_FuncionarioEntregaMaterias_InserirMaterialQtd_Unit;
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterial.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterial.BNT_ConfirmarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TBI_FuncionarioEntregaMaterias_InserirMaterialQtd, BI_FuncionarioEntregaMaterias_InserirMaterialQtd);
+  try
+     BI_FuncionarioEntregaMaterias_InserirMaterialQtd.DT_DataEntrega.Date := Date;
+     BI_FuncionarioEntregaMaterias_InserirMaterialQtd.ShowModal;
+  finally
+     BI_FuncionarioEntregaMaterias_InserirMaterialQtd.Release;
+     BI_FuncionarioEntregaMaterias_InserirMaterialQtd := nil;
+  end;
+end;
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterial.BTN_BuscarClick(
+  Sender: TObject);
+  Var
+      VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select Acessorio_Id, Descricao, PrazoDias ' + #13;
+  VLC_Select := VLC_Select + ' from [dbo].[Pes_TB_Acessorio] (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where 1=1' + #13;
+  VLC_Select := VLC_Select + ' AND Descricao like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+
+        If TXT_Buscador2.Text <> '' then
+              VLC_Select := VLC_Select + ' AND Descricao like ' + '''' + '%' + TXT_Buscador2.Text + '%' + '''' + #13;
+
+  VLC_Select := VLC_Select + ' AND Visibilidade = 0  ' + #13;
+  VLC_Select := VLC_Select + ' Order by Descricao  ' + #13;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

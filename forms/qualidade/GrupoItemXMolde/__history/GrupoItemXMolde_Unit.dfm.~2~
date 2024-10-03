@@ -1,0 +1,31 @@
+inherited GrupoItemXMolde: TGrupoItemXMolde
+  Caption = 'Grupo Item x Molde'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Top: TPanel
+    inherited PNL_Modo: TPanel
+      inherited LBL_Modo: TLabel
+        Width = 912
+        Height = 12
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    inherited PGC_Principal: TPageControl
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 341
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel4: TPanel
+      inherited Label3: TLabel
+        Width = 398
+        Height = 33
+      end
+    end
+  end
+end

@@ -1,0 +1,147 @@
+unit RelatorioMapeamentoAnualVendasPesoPorVendedor_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppParameter, ppDesignLayer, ppModule,
+  raCodMod, ppCtrls, ppBands, ppClass, ppPrnabl, ppCache, ppProd, ppReport,
+  ppComm, ppRelatv, ppDB, ppDBPipe, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, Vcl.StdCtrls, dxGDIPlusClasses, Vcl.ExtCtrls;
+
+type
+  TRelatorioMapaAnualVendasPesoPorVendedor = class(TForm)
+    Image2: TImage;
+    Label2: TLabel;
+    CDS: TClientDataSet;
+    CDSCliente: TStringField;
+    CDSUF: TStringField;
+    CDSSetorMercado: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSVendedor: TStringField;
+    CDSGerente: TStringField;
+    CDSAno: TIntegerField;
+    CDSTotalQuantidade: TIntegerField;
+    CDSJaneiro: TIntegerField;
+    CDSFevereiro: TIntegerField;
+    CDSMarco: TIntegerField;
+    CDSAbril: TIntegerField;
+    CDSMaio: TIntegerField;
+    CDSJunho: TIntegerField;
+    CDSJulho: TIntegerField;
+    CDSAgosto: TIntegerField;
+    CDSSetembro: TIntegerField;
+    CDSOutubro: TIntegerField;
+    CDSNovembro: TIntegerField;
+    CDSDezembro: TIntegerField;
+    Query: TADOQuery;
+    QueryCliente: TStringField;
+    QueryUF: TStringField;
+    QuerySetorMercado: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryVendedor: TStringField;
+    QueryGerente: TStringField;
+    QueryAno: TIntegerField;
+    QueryTotalQuantidade: TIntegerField;
+    QueryJaneiro: TIntegerField;
+    QueryFevereiro: TIntegerField;
+    QueryMarco: TIntegerField;
+    QueryAbril: TIntegerField;
+    QueryMaio: TIntegerField;
+    QueryJunho: TIntegerField;
+    QueryJulho: TIntegerField;
+    QueryAgosto: TIntegerField;
+    QuerySetembro: TIntegerField;
+    QueryOutubro: TIntegerField;
+    QueryNovembro: TIntegerField;
+    QueryDezembro: TIntegerField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppDBPipeline1: TppDBPipeline;
+    ppReport: TppReport;
+    ppHeaderBand16: TppHeaderBand;
+    ppLine142: TppLine;
+    Img_LogoBomix: TppImage;
+    ppLabel278: TppLabel;
+    LBL_Periodo: TppLabel;
+    ppDetailBand16: TppDetailBand;
+    ppDBText6: TppDBText;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText21: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText24: TppDBText;
+    ppDBText25: TppDBText;
+    ppDBText26: TppDBText;
+    ppDBText27: TppDBText;
+    ppDBText29: TppDBText;
+    ppLine143: TppLine;
+    ppDBText4: TppDBText;
+    ppDBText28: TppDBText;
+    ppFooterBand16: TppFooterBand;
+    LBL_Rodape: TppLabel;
+    ppLine1: TppLine;
+    ppSummaryBand16: TppSummaryBand;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    Linha_GerenciaXGerencia00: TppShape;
+    ppDBText1: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLabel13: TppLabel;
+    ppLabel14: TppLabel;
+    ppLabel15: TppLabel;
+    ppDBText30: TppDBText;
+    ppLabel9: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel18: TppLabel;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppShape1: TppShape;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppDBCalc3: TppDBCalc;
+    ppDBCalc4: TppDBCalc;
+    ppDBCalc5: TppDBCalc;
+    ppDBCalc6: TppDBCalc;
+    ppDBCalc7: TppDBCalc;
+    ppDBCalc8: TppDBCalc;
+    ppDBCalc9: TppDBCalc;
+    ppDBCalc10: TppDBCalc;
+    ppDBCalc11: TppDBCalc;
+    ppDBCalc12: TppDBCalc;
+    ppLabel17: TppLabel;
+    ppDBCalc13: TppDBCalc;
+    raCodeModule1: TraCodeModule;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList16: TppParameterList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioMapaAnualVendasPesoPorVendedor: TRelatorioMapaAnualVendasPesoPorVendedor;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,135 @@
+unit relatoriocontrolerotulos_porcliente_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ppParameter, ppDesignLayer,
+  ppBands, ppCtrls, ppClass, ppPrnabl, ppCache, ppProd, ppReport, ppDB, ppComm,
+  ppRelatv, ppDBPipe, Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TRelatorio_ControleRotulos_PorCliente = class(TForm)
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppDBPipeline1: TppDBPipeline;
+    ppDBPipeline1ppField1: TppField;
+    ppDBPipeline1ppField2: TppField;
+    ppDBPipeline1ppField3: TppField;
+    ppDBPipeline1ppField4: TppField;
+    ppDBPipeline1ppField5: TppField;
+    ppDBPipeline1ppField6: TppField;
+    ppDBPipeline1ppField7: TppField;
+    ppDBPipeline1ppField8: TppField;
+    ppDBPipeline1ppField9: TppField;
+    ppDBPipeline1ppField10: TppField;
+    ppDBPipeline1ppField11: TppField;
+    ppDBPipeline1ppField12: TppField;
+    ppDBPipeline1ppField13: TppField;
+    ppDBPipeline1ppField14: TppField;
+    ppDBPipeline1ppField15: TppField;
+    ppDBPipeline1ppField16: TppField;
+    ppDBPipeline1ppField17: TppField;
+    ppRelatorio: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppShape1: TppShape;
+    ppImage4: TppImage;
+    ppLabel33: TppLabel;
+    ppLine29: TppLine;
+    ppLabel2: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel9: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel13: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppLine1: TppLine;
+    ppLabel14: TppLabel;
+    ppLabel15: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel18: TppLabel;
+    ppDetailBand5: TppDetailBand;
+    ppFooterBand5: TppFooterBand;
+    ppLine12: TppLine;
+    ppLBL_Data: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppDBText2: TppDBText;
+    ppDBText1: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText15: TppDBText;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLine5: TppLine;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppDBText3: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText14: TppDBText;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    QueryEmpresa: TStringField;
+    QueryCliente_ID: TStringField;
+    QueryLoja: TStringField;
+    QueryRazaoSocial: TStringField;
+    QueryCidade: TStringField;
+    QueryUF: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryVendedor: TStringField;
+    QueryGerente: TStringField;
+    QueryID: TStringField;
+    QueryRotulo: TStringField;
+    QuerySaldoTotal: TFloatField;
+    QueryQtdPedido: TFloatField;
+    QueryProdutoAcabado: TFloatField;
+    QuerySaldoReal: TFloatField;
+    CDSEmpresa: TStringField;
+    CDSCliente_ID: TStringField;
+    CDSLoja: TStringField;
+    CDSRazaoSocial: TStringField;
+    CDSCidade: TStringField;
+    CDSUF: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSVendedor: TStringField;
+    CDSGerente: TStringField;
+    CDSID: TStringField;
+    CDSRotulo: TStringField;
+    CDSSaldoTotal: TFloatField;
+    CDSQtdPedido: TFloatField;
+    CDSProdutoAcabado: TFloatField;
+    CDSSaldoReal: TFloatField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ControleRotulos_PorCliente: TRelatorio_ControleRotulos_PorCliente;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,248 @@
+inherited SolicitacaoCadastroProduto: TSolicitacaoCadastroProduto
+  Caption = 'Solicita'#231#227'o de Cadastro de Produto'
+  ClientHeight = 618
+  ClientWidth = 992
+  ExplicitWidth = 998
+  ExplicitHeight = 647
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Splitter1: TSplitter
+    Left = 583
+    Height = 560
+  end
+  inherited PNL_Top: TPanel
+    Width = 992
+    inherited PNL_Navegacao: TPanel
+      Left = 808
+    end
+    inherited PNL_Modo: TPanel
+      Width = 992
+      inherited SHP_Modo: TShape
+        Width = 992
+      end
+      inherited LBL_Modo: TLabel
+        Width = 992
+        Height = 12
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    Width = 583
+    Height = 560
+    inherited PNL_Topo: TPanel
+      Width = 583
+      Height = 217
+      ExplicitHeight = 217
+      object Label7: TLabel
+        Left = 12
+        Top = 10
+        Width = 13
+        Height = 16
+        Caption = 'ID'
+        FocusControl = TXT_ID
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 97
+        Top = 10
+        Width = 28
+        Height = 16
+        Caption = 'Tipo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 12
+        Top = 54
+        Width = 136
+        Height = 16
+        Caption = 'Descri'#231#227'o do Produto'
+        FocusControl = TXT_Descricao
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 12
+        Top = 102
+        Width = 45
+        Height = 16
+        Caption = 'Cliente'
+        FocusControl = DBEdit1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object LBL_DataRegistro: TLabel
+        Left = 370
+        Top = 10
+        Width = 105
+        Height = 16
+        Caption = 'Data de Registro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object TXT_ID: TDBEdit
+        Left = 13
+        Top = 26
+        Width = 75
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Usuario_ID'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object CBX_Tipo: TComboBox
+        Left = 98
+        Top = 26
+        Width = 103
+        Height = 22
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Text = 'ATUALIZA'#199#195'O'
+        Items.Strings = (
+          'COMERCIAL'
+          'GEST'#194'O PESSOAL'
+          'PAINEL DE CONTROLE'
+          'PCP / PRODU'#199#195'O'
+          'SEM UTILIDADE'
+          'QUALIDADE'
+          'BOMIX LOG'
+          'CONTROLADORIA')
+      end
+      object TXT_Descricao: TDBEdit
+        Left = 12
+        Top = 72
+        Width = 473
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Descricao'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object DBEdit1: TDBEdit
+        Left = 12
+        Top = 120
+        Width = 473
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Descricao'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object DT_DataRegistro: TDateTimePicker
+        Left = 369
+        Top = 26
+        Width = 106
+        Height = 22
+        Date = 41345.337628194440000000
+        Time = 41345.337628194440000000
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+      end
+    end
+    inherited PGC_Principal: TPageControl
+      Top = 217
+      Width = 583
+      Height = 343
+      ExplicitTop = 176
+      ExplicitHeight = 324
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 341
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 341
+        inherited Panel2: TPanel
+          Height = 312
+          inherited Memo_Filtro: TMemo
+            Height = 262
+          end
+        end
+        inherited Panel3: TPanel
+          Height = 312
+          inherited Memo_Query: TMemo
+            Height = 262
+          end
+        end
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Left = 594
+    Height = 560
+    inherited Panel1: TPanel
+      Top = 521
+    end
+    inherited Panel4: TPanel
+      inherited Label3: TLabel
+        Width = 398
+        Height = 33
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Height = 472
+    end
+    inherited PNL_Listagem2: TPanel
+      Top = 513
+    end
+  end
+end

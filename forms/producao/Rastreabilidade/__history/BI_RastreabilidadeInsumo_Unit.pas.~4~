@@ -1,0 +1,144 @@
+unit BI_RastreabilidadeInsumo_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobi_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls;
+
+type
+  TBI_RastreabilidadeInsumo = class(TPadraoBI)
+    QueryNota: TStringField;
+    QueryFornecedor: TStringField;
+    QueryCNPJ: TStringField;
+    QueryCidade: TStringField;
+    QueryUF: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryGrupo: TStringField;
+    QueryTipoProduto: TStringField;
+    QueryProduto_FK: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryLoteFornecedor: TStringField;
+    QueryQuantidade: TFloatField;
+    QueryUnidade: TStringField;
+    QueryArmazem_FK: TStringField;
+    QueryArmazem: TStringField;
+    QueryClassificacaoDesc: TStringField;
+    QueryPedido: TStringField;
+    QueryPedidoEmissao: TDateTimeField;
+    QueryPedidoSaldo: TFloatField;
+    CDSNota: TStringField;
+    CDSFornecedor: TStringField;
+    CDSCNPJ: TStringField;
+    CDSCidade: TStringField;
+    CDSUF: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSGrupo: TStringField;
+    CDSTipoProduto: TStringField;
+    CDSProduto_FK: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSLoteFornecedor: TStringField;
+    CDSQuantidade: TFloatField;
+    CDSUnidade: TStringField;
+    CDSArmazem_FK: TStringField;
+    CDSArmazem: TStringField;
+    CDSClassificacaoDesc: TStringField;
+    CDSPedido: TStringField;
+    CDSPedidoEmissao: TDateTimeField;
+    CDSPedidoSaldo: TFloatField;
+    Memo1: TMemo;
+
+    // Minhas Procedures e Functions
+    procedure BuscarInsumos;
+
+    procedure FormShow(Sender: TObject);
+    procedure Memo1DblClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RastreabilidadeInsumo: TBI_RastreabilidadeInsumo;
+
+implementation
+
+{$R *.dfm}
+
+uses funcaosistema_unit;
+
+procedure TBI_RastreabilidadeInsumo.BTN_BuscarClick(Sender: TObject);
+begin
+  inherited;
+  BI_RastreabilidadeInsumo.BuscarInsumos;
+end;
+
+procedure TBI_RastreabilidadeInsumo.BuscarInsumos;
+Var
+  VLC_Select, VLC_OrderBy : String;
+begin
+
+    VLC_Select := VLC_Select + 'Select  ' + #13;
+    VLC_Select := VLC_Select + '	DataDigitacao as Emissao, TipoProduto,   ' + #13;
+    VLC_Select := VLC_Select + '	Produto_FK, Produto, Lote, LoteFornecedor, Quantidade, Unidade,  ' + #13;
+    VLC_Select := VLC_Select + '	Nota, Fornecedor, CNPJ, Cidade, UF,   ' + #13;
+    VLC_Select := VLC_Select + '	Armazem_FK, Armazem, ClassificacaoDesc, Grupo,   ' + #13;
+    VLC_Select := VLC_Select + '	Pedido, PedidoEmissao, PedidoSaldo    ' + #13;
+    VLC_Select := VLC_Select + 'from BomixBI.[dbo].[Com_TB_NotaFiscalCompra] Compras (nolock)   ' + #13;
+    VLC_Select := VLC_Select + 'Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+    VLC_Select := VLC_Select + 'AND Tes <> ' + '''' + 'SERVICO DE FRETE' + '''' + #13;
+    VLC_Select := VLC_Select + 'AND EstaNaEstrutura = ' + '''' + 'Sim' + '''' + #13;
+    VLC_Select := VLC_Select + 'AND (Produto_FK + Produto + Isnull(Lote,' + '''' + '' + '''' + ')' + ' + Isnull(LoteFornecedor,' + '''' + '' + '''' + ')' + ' + Nota + Fornecedor + Cidade)  like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+
+    if TXT_Buscador.Text <> ''  then
+        VLC_Select := VLC_Select + 'AND (Produto_FK + Produto + Isnull(Lote,' + '''' + '' + '''' + ')' + ' + Isnull(LoteFornecedor,' + '''' + '' + '''' + ')' + ' + Nota + Fornecedor + Cidade)  like ' + '''' + '%' + TXT_Buscador2.Text + '%' + '''' + #13;
+
+    VLC_Select := VLC_Select + 'AND TipoProduto <> ' + '''' + 'NÃO DEFINIDO' + '''' + #13;
+    VLC_Select := VLC_Select + 'AND DataDigitacao Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+    VLC_Select := VLC_Select + ' AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    VLC_OrderBy := 'Order by DataDigitacao desc ' + #13;
+
+    Memo1.Lines.Text := VLC_Select + ' ' + VLC_OrderBy;
+
+    CDS.Close;
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Text := VLC_Select + ' ' + VLC_OrderBy;
+    CDS.Open;
+
+end;
+
+procedure TBI_RastreabilidadeInsumo.DesenvolvimentoExecute(Sender: TObject);
+begin
+  inherited;
+  Memo1.Visible := True;
+end;
+
+procedure TBI_RastreabilidadeInsumo.FormShow(Sender: TObject);
+begin
+  ;
+  inherited;
+  DTP_DataInicial.Date := Date - 10;
+  DTP_DataFinal.Date:= Date;
+  MonthCalendar1.Date := Date - 10;
+  MonthCalendar1.EndDate := Date;
+  BNT_EncolherFiltroClick(nil);
+
+  BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_RastreabilidadeInsumo.Memo1DblClick(Sender: TObject);
+begin
+  inherited;
+   Memo1.Visible := False;
+end;
+
+end.

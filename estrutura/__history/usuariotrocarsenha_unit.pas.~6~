@@ -1,0 +1,95 @@
+unit UsuarioTrocarSenha_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, Data.DB, Data.Win.ADODB;
+
+type
+  TSys_UsuarioTrocarSenha = class(TForm)
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Label1: TLabel;
+    PNL_CorpoSenha: TPanel;
+    LBL_SenhaTitulo: TLabel;
+    Bevel4: TBevel;
+    LBL_Login: TLabel;
+    LBL_Senha: TLabel;
+    IMG_Login: TImage;
+    Label2: TLabel;
+    Label3: TLabel;
+    TXT_Login: TEdit;
+    TXT_SenhaAtual: TEdit;
+    TXT_SenhaNova: TEdit;
+    TXT_SenhaConfirmar: TEdit;
+    ActionList1: TActionList;
+    ACL_Confirmar: TAction;
+    ACL_Esc: TAction;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_UsuarioTrocarSenha: TSys_UsuarioTrocarSenha;
+
+implementation
+
+{$R *.dfm}
+
+uses ConexaoDados_Unit, FuncaoSistema_Unit;
+
+procedure TSys_UsuarioTrocarSenha.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TSys_UsuarioTrocarSenha.BNT_ConfirmarClick(Sender: TObject);
+Var
+   VLC_Select : String;
+   VLC_Update : String;
+
+begin
+
+// VALIDAÇÃO ****************************************************************************************************************
+// **************************************************************************************************************************
+  If TXT_SenhaAtual.Text <> Sys_FuncaoSistema.PNL_UsuarioSenha.Caption then
+  begin
+      Application.MessageBox('Senha atual não está correta!','Atenção',mb_iconwarning + mb_ok);
+      TXT_SenhaAtual.Setfocus;
+      Exit;
+  end;
+
+  If TXT_SenhaNova.Text <> TXT_SenhaConfirmar.Text Then
+  begin
+      Application.MessageBox('Defina a mesma senha nos campos "Nova Senha" e "Confirmar Senha"!','Atenção',mb_iconwarning + mb_ok);
+      TXT_SenhaNova.Setfocus;
+      Exit;
+  end;
+
+
+// GRAVAR A NOVA SENHA *****************************************************************************************************
+
+  VLC_Update := ' Update BomixBI.[dbo].[Sys_TB_Usuario]';
+  VLC_Update :=   VLC_Update + ' Set Senha = ' + '''' + TXT_SenhaConfirmar.Text + '''';
+  VLC_Update :=   VLC_Update + ' Where Login = ' + '''' + TXT_Login.Caption + '''';
+
+  With Sys_ModuloConexaoDados.ADOCommand1 do
+  begin
+      CommandText := VLC_Update;
+      Execute;
+  end;
+
+  Application.MessageBox('Troca de Senha foi confirmada com sucesso!','Atenção',mb_iconwarning + mb_ok);
+  Close;
+
+end;
+
+end.

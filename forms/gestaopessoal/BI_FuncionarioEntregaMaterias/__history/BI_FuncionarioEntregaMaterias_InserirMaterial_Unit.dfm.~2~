@@ -1,0 +1,36 @@
+inherited PadraoBuscador1: TPadraoBuscador1
+  Caption = 'Inserir Material'
+  ClientHeight = 533
+  ClientWidth = 860
+  ExplicitWidth = 866
+  ExplicitHeight = 562
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 842
+    ExplicitWidth = 842
+    inherited LBL_Titulo: TLabel
+      Width = 139
+      Caption = 'Inserir Material'
+      ExplicitWidth = 139
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 846
+    Height = 428
+    inherited Panel_Filtro: TPanel
+      Width = 846
+    end
+    inherited DBGrid: TDBGrid
+      Width = 834
+      Height = 370
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 494
+    Width = 860
+    inherited Panel3: TPanel
+      Left = 615
+    end
+  end
+end

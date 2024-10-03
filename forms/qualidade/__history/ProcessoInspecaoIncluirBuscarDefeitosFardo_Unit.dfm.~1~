@@ -1,0 +1,36 @@
+inherited ProcessoInspecao_IncluirBuscarDefeitosFardo: TProcessoInspecao_IncluirBuscarDefeitosFardo
+  Caption = 'Consultar Defeito de Fardo'
+  ClientHeight = 555
+  ClientWidth = 767
+  ExplicitWidth = 773
+  ExplicitHeight = 584
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 749
+    ExplicitWidth = 749
+    inherited LBL_Titulo: TLabel
+      Width = 153
+      Caption = 'Defeito de Fardo'
+      ExplicitWidth = 153
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 753
+    Height = 450
+    inherited Panel_Filtro: TPanel
+      Width = 753
+    end
+    inherited DBGrid: TDBGrid
+      Width = 741
+      Height = 392
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 516
+    Width = 767
+    inherited Panel3: TPanel
+      Left = 522
+    end
+  end
+end

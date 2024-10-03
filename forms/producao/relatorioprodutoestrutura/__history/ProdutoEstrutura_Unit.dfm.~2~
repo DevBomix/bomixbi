@@ -1,0 +1,23 @@
+inherited Relatorio_EstruturaProduto: TRelatorio_EstruturaProduto
+  Caption = 'Estrutura de Produto'
+  ClientHeight = 298
+  ClientWidth = 688
+  ExplicitWidth = 694
+  ExplicitHeight = 327
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 195
+      Caption = 'Estrutura de Produto'
+      ExplicitWidth = 195
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 259
+    Width = 688
+    inherited Panel_Navegador: TPanel
+      Left = 443
+    end
+  end
+end

@@ -1,0 +1,99 @@
+unit ProcessoInspecaoObservacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TProcessoInspecao_Observacao = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    LBL_Area: TLabel;
+    GroupBox2: TGroupBox;
+    TXT_Tipo: TEdit;
+    TXT_Descricao: TEdit;
+    Panel10: TPanel;
+    Shape2: TShape;
+    Image5: TImage;
+    BTN_BuscarInspector: TSpeedButton;
+    Label32: TLabel;
+    TXT_Observacao: TEdit;
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    procedure BTN_BuscarInspectorClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_Observacao: TProcessoInspecao_Observacao;
+
+implementation
+
+{$R *.dfm}
+
+uses ProcessoInspecaoObservacao_Tipo_Unit, ProcessoInspecao_Unit,
+  funcaosistema_unit, conexaodados_unit;
+
+procedure TProcessoInspecao_Observacao.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TProcessoInspecao_Observacao.BNT_ConfirmarClick(Sender: TObject);
+Var
+    VLN_Recno : Integer;
+    VLC_Insert : String;
+begin
+
+    VLN_Recno := ProcessoInspecao.CDSRecno.AsInteger;
+
+    VLC_Insert := VLC_Insert + ' Insert Into BomixBI.[dbo].[Icq_TB_InspecaoObservacao] (DataTurno, DataCadastro, Turno, Setor, Area, Produto_ID, Lote, Observacao_FK, Observacao, Inspetor_FK) Values (' + #13;
+    VLC_Insert := VLC_Insert + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(ProcessoInspecao.CDSDataTurno.AsDateTime),1) + '''' + ', ';
+    VLC_Insert := VLC_Insert + 'GetDate(), ';
+    VLC_Insert := VLC_Insert + '''' + ProcessoInspecao.CDSTurno.AsString + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + ProcessoInspecao.CDSSetor.AsString + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + ProcessoInspecao.CDSArea.AsString + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + ProcessoInspecao.CDSProduto_ID.AsString + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + ProcessoInspecao.CDSLote.AsString + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + TXT_Tipo.Text + '''' + ',';
+    VLC_Insert := VLC_Insert + '''' + TXT_Observacao.Text + '''' + ',';
+    VLC_Insert := VLC_Insert + Sys_FuncaoSistema.PNL_UsuarioAtivoID.Caption + ')';
+
+    ProcessoInspecao.Memo1.Lines.Text := VLC_Insert;
+
+    With Sys_ModuloConexaoDados.ADOCommand1 do begin CommandText := VLC_Insert; Execute;  end;
+
+    ProcessoInspecao.CDS.Close;
+    ProcessoInspecao.CDS.Open;
+    ProcessoInspecao.CDS.Locate('Recno',VLN_Recno,[]);
+    BNT_CancelarClick(nil);
+
+end;
+
+procedure TProcessoInspecao_Observacao.BTN_BuscarInspectorClick(
+  Sender: TObject);
+begin
+  Application.CreateForm(TProcessoInspecaoObservacao_Tipo, ProcessoInspecaoObservacao_Tipo);
+  try
+      ProcessoInspecaoObservacao_Tipo.BTN_BuscarClick(nil);
+      ProcessoInspecaoObservacao_Tipo.ShowModal;
+  finally
+      ProcessoInspecaoObservacao_Tipo.Release;
+      ProcessoInspecaoObservacao_Tipo := Nil;
+  end;
+
+end;
+
+end.

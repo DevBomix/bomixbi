@@ -1,0 +1,61 @@
+unit SysEtiquetaTomboTI;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, ppCtrls,
+  ppDB, ppDBPipe, ppDBBDE, ppParameter, ppDesignLayer, ppPrnabl, ppClass,
+  ppCache, ppBands, ppComm, ppRelatv, ppProd, ppReport;
+
+type
+  TSys_EtiquetaTomboTI = class(TPadraoBuscador)
+    ppReport: TppReport;
+    ppDetailBand3: TppDetailBand;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    ppImage1: TppImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel6: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Label3: TLabel;
+    Label4: TLabel;
+    QueryID: TIntegerField;
+    QueryTombo: TStringField;
+    QueryQtdImpressao: TIntegerField;
+    CDSID: TIntegerField;
+    CDSTombo: TStringField;
+    CDSQtdImpressao: TIntegerField;
+    ppDBText1: TppDBText;
+    ppDBPipeline1: TppDBPipeline;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_EtiquetaTomboTI: TSys_EtiquetaTomboTI;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSys_EtiquetaTomboTI.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+  ppReport.Print;
+end;
+
+end.

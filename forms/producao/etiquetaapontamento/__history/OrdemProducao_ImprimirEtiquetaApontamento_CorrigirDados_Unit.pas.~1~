@@ -1,0 +1,52 @@
+unit OrdemProducao_ImprimirEtiquetaApontamento_CorrigirDados_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Mask,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TOrdemProducao_ImprimirEtiquetaApontamento_CorrigirDados = class(TForm)
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Image2: TImage;
+    SpeedButton2: TSpeedButton;
+    Image4: TImage;
+    SpeedButton4: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    LBL_Recno: TLabel;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    TXT_HoraIni: TMaskEdit;
+    TXT_HoraFim: TMaskEdit;
+    TXT_Operador: TEdit;
+    TXT_Dosagem: TEdit;
+    TXT_Peso: TEdit;
+    TXT_Ciclo: TEdit;
+    DT_DataIni: TDateTimePicker;
+    DT_DataFim: TDateTimePicker;
+    CBX_Turno: TComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducao_ImprimirEtiquetaApontamento_CorrigirDados: TOrdemProducao_ImprimirEtiquetaApontamento_CorrigirDados;
+
+implementation
+
+{$R *.dfm}
+
+end.

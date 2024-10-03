@@ -1,0 +1,24 @@
+unit RelatorioApontamentoProducaoPorTurno_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TRelatorio_ApontamentoProducaoPorTurno = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoProducaoPorTurno: TRelatorio_ApontamentoProducaoPorTurno;
+
+implementation
+
+{$R *.dfm}
+
+end.

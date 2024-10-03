@@ -1,0 +1,27 @@
+unit CadastroTipoDefeito_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TPadraoCadastro1 = class(TPadraoCadastro)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PadraoCadastro1: TPadraoCadastro1;
+
+implementation
+
+{$R *.dfm}
+
+end.

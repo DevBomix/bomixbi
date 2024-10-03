@@ -1,0 +1,95 @@
+unit relatorioprimeirofaturamentoprodutoquery_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, Data.DB,
+  Data.Win.ADODB, Datasnap.Provider, ppDB, ppDBPipe, ppParameter, ppDesignLayer,
+  ppBands, ppClass, ppCtrls, ppPrnabl, ppCache, ppComm, ppRelatv, ppProd,
+  ppReport;
+
+type
+  TRelatorioPrimeiroFaturamentoCliente_Query = class(TForm)
+    ppRelatorio: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppImage4: TppImage;
+    ppLabel33: TppLabel;
+    ppLine29: TppLine;
+    ppShape1: TppShape;
+    ppLabel2: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel8: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel9: TppLabel;
+    ppDetailBand5: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppLine5: TppLine;
+    ppDBText1: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText5: TppDBText;
+    ppFooterBand5: TppFooterBand;
+    ppLine12: TppLine;
+    ppLBL_Data: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    ppDBPipeline1: TppDBPipeline;
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    QueryEmpresa: TStringField;
+    QueryCliente_ID: TStringField;
+    QueryLoja: TStringField;
+    QueryCliente: TStringField;
+    QueryCidade: TStringField;
+    QueryUF: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryVendedor: TStringField;
+    QueryGerente: TStringField;
+    QueryNota: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryQtdDias: TIntegerField;
+    CDS: TClientDataSet;
+    CDSEmpresa: TStringField;
+    CDSCliente_ID: TStringField;
+    CDSLoja: TStringField;
+    CDSCliente: TStringField;
+    CDSCidade: TStringField;
+    CDSUF: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSVendedor: TStringField;
+    CDSGerente: TStringField;
+    CDSNota: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSQtdDias: TIntegerField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioPrimeiroFaturamentoCliente_Query: TRelatorioPrimeiroFaturamentoCliente_Query;
+
+implementation
+
+{$R *.dfm}
+
+end.

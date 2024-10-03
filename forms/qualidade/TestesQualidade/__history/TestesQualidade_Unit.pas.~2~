@@ -1,0 +1,45 @@
+unit TestesQualidade_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  dxGDIPlusClasses;
+
+type
+  TTesteQualidade = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    GridPanel1: TGridPanel;
+    PNL_Espessura: TPanel;
+    Label2: TLabel;
+    Shape1: TShape;
+    Image1: TImage;
+    SpeedButton1: TSpeedButton;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TesteQualidade: TTesteQualidade;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTesteQualidade.FormShow(Sender: TObject);
+begin
+  TesteQualidade.Width := 871;
+  TesteQualidade.Height := 564;
+end;
+
+end.

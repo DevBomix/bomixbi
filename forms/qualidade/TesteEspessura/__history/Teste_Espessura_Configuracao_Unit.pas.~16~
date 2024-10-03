@@ -1,0 +1,208 @@
+unit Teste_Espessura_Configuracao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TTeste_Espessura_Configuracao = class(TPadraoCadastro)
+    TXT_ID: TDBEdit;
+    Label7: TLabel;
+    Panel6: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    QueryEmpresa: TStringField;
+    QueryID: TStringField;
+    QueryItem: TStringField;
+    QueryTipoProduto: TStringField;
+    QueryTemMedida: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSID: TStringField;
+    CDSItem: TStringField;
+    CDSTipoProduto: TStringField;
+    CDSTemMedida: TIntegerField;
+    DBEdit1: TDBEdit;
+    CDS_Medidas: TClientDataSet;
+    Query_Medidas: TADOQuery;
+    DS_Medidas: TDataSource;
+    DSP_Medidas: TDataSetProvider;
+    Query_MedidasRecno: TAutoIncField;
+    Query_MedidasEmpresa: TStringField;
+    Query_MedidasGrupo_FK: TStringField;
+    Query_MedidasPonto: TIntegerField;
+    Query_MedidasPadrao: TFloatField;
+    Query_MedidasVariacao: TFloatField;
+    Query_MedidasMinimo: TFloatField;
+    Query_MedidasMaximo: TFloatField;
+    CDS_MedidasRecno: TAutoIncField;
+    CDS_MedidasEmpresa: TStringField;
+    CDS_MedidasGrupo_FK: TStringField;
+    CDS_MedidasPonto: TIntegerField;
+    CDS_MedidasPadrao: TFloatField;
+    CDS_MedidasVariacao: TFloatField;
+    CDS_MedidasMinimo: TFloatField;
+    CDS_MedidasMaximo: TFloatField;
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure BTN_PesquisarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BTN_IncluirRestricaoClick(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure BTN_ExcluirRestricaoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura_Configuracao: TTeste_Espessura_Configuracao;
+
+implementation
+
+{$R *.dfm}
+
+uses funcaografica_unit, Teste_Espessura_ConfiguracaoBuscador_Unit,
+  Teste_Espessura_Configuracao_AdicionarMedidda_Unit, funcaosistema_unit,
+  conexaodados_unit;
+
+procedure TTeste_Espessura_Configuracao.BTN_ExcluirRestricaoClick(
+  Sender: TObject);
+  Var
+    VLC_Delete : String;
+
+begin
+  inherited;
+
+  if CDS_Medidas.RecordCount > 0 then
+  begin
+
+       VLC_Delete := 'Delete from BOMIXBI.[dbo].[Icq_TB_TesteCadastro_EspessuraDadoPadrao] where Recno = ' + CDS_MedidasRecno.AsString;
+
+       With  Sys_ModuloConexaoDados.ADOCommand1 do
+       begin
+           CommandText := VLC_Delete;
+           Execute;
+       end;
+
+       CDS_Medidas.Close;
+       CDS_Medidas.Open;
+
+  end;
+
+
+end;
+
+procedure TTeste_Espessura_Configuracao.BTN_IncluirRestricaoClick(
+  Sender: TObject);
+begin
+  inherited;
+
+  Application.CreateForm(TTeste_Espessura_Configuracao_AdicionarMedidda, Teste_Espessura_Configuracao_AdicionarMedidda);
+  Try
+    Teste_Espessura_Configuracao_AdicionarMedidda.LBL_Grupo.Caption := CDSID.AsString;
+    Teste_Espessura_Configuracao_AdicionarMedidda.LBL_Grupo.Caption := CDSID.AsString;
+    Teste_Espessura_Configuracao_AdicionarMedidda.ShowModal;
+  Finally
+    Teste_Espessura_Configuracao_AdicionarMedidda.Release;
+    Teste_Espessura_Configuracao_AdicionarMedidda := nil;
+  End;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.BTN_PesquisarClick(Sender: TObject);
+begin
+  inherited;
+
+  Application.CreateForm(TTeste_Espessura_ConfiguracaoBuscador, Teste_Espessura_ConfiguracaoBuscador);
+  Try
+     Teste_Espessura_ConfiguracaoBuscador.ShowModal;
+  Finally
+     Teste_Espessura_ConfiguracaoBuscador.Release;
+     Teste_Espessura_ConfiguracaoBuscador := nil;
+  End;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+   Bitmap : TBitmap;
+   I : Integer;
+
+begin
+
+      Bitmap := TBitmap.Create;
+
+     If DS.DataSet.RecordCount > 0 then
+     begin
+
+            If Column.Index = 0 then
+            begin
+
+                  if (DS.DataSet.FieldByName('TemMedida').AsInteger) = 0 then
+                       begin
+                             I := 0
+                       end
+                       else
+                       begin
+                             I := 1
+                  end;
+
+                  Case I of
+                       	  0 : Bitmap := Sys_FuncaoGrafica.IMG_Vermelho.Picture.Bitmap;
+                          1 : Bitmap := Sys_FuncaoGrafica.IMG_Verde.Picture.Bitmap;
+                          2 : Bitmap := Sys_FuncaoGrafica.IMG_Amarelo.Picture.Bitmap;
+                  end;
+
+            end;
+
+            with TDBGrid(Sender) do
+            begin
+                   Canvas.Draw((Rect.Right - Rect.Left - Bitmap.Width) div 2 + Rect.Left,
+                   (Rect.Bottom - Rect.Top - Bitmap.Height) div 2 + Rect.Top, Bitmap);
+            end;
+
+      end;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.DSDataChange(Sender: TObject;
+  Field: TField);
+Var
+   VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + 'Select ' + #13;
+  VLC_Select := VLC_Select + '	*   ' + #13;
+  VLC_Select := VLC_Select + 'from BOMIXBI.[dbo].[Icq_TB_TesteCadastro_EspessuraDadoPadrao] (nolock)   ' + #13;
+  VLC_Select := VLC_Select + 'Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + 'AND Grupo_FK = ' + '''' +  CDSID.AsString + '''' + #13;
+  VLC_Select := VLC_Select + 'Order by Empresa, Grupo_FK, Ponto, Padrao    ' + #13;
+
+  CDS_Medidas.Close;
+  Query_Medidas.Close;
+  Query_Medidas.SQL.Clear;
+  Query_Medidas.SQL.Text := VLC_Select;
+  CDS_Medidas.Open;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.FormShow(Sender: TObject);
+begin
+  inherited;
+  CDS.Close;
+  CDS.Open;
+end;
+
+end.

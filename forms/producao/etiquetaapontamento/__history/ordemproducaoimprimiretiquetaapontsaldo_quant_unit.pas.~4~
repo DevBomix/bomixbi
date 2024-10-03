@@ -1,0 +1,82 @@
+unit OrdemProducaoImprimirEtiquetaApontSaldo_Quant_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask;
+
+type
+  TOrdemProducaoImprimirEtiquetaApontSaldo_Quant = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    TXT_Quantidade: TMaskEdit;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ActionList1: TActionList;
+    Cancelar: TAction;
+    Confirmar: TAction;
+    Memo1: TMemo;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducaoImprimirEtiquetaApontSaldo_Quant: TOrdemProducaoImprimirEtiquetaApontSaldo_Quant;
+
+implementation
+
+{$R *.dfm}
+
+uses OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Unit,
+  OrdemProducaoImprimirEtiquetaApontSaldo_Unit, FuncaoSistema_Unit,
+  ConexaoDados_Unit;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo_Quant.BNT_CancelarClick(
+  Sender: TObject);
+begin
+Close;
+end;
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo_Quant.BNT_ConfirmarClick(
+  Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + '  Insert into BomixBI.[dbo].Pcp_TB_ApontamentoConsumoPorCarrinho (OP, Produto_ID, Produto, ' + #13;
+  VLC_Select := VLC_Select + '  Lote, Validade, Quantidade, TipoProduto, Classificacao, Armazem, Sequencia, Identidade, Setor) Values (' + #13;
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_OP.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_ProdutoID.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Produto.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducaoImprimirEtiquetaApontSaldo.CDSLote.DataSet.FieldByName('Lote').AsString + '''' + ',';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(OrdemProducaoImprimirEtiquetaApontSaldo.CDSLote.DataSet.FieldByName('Validade').AsDatetime),1) + '''' + ',';
+  VLC_Select := VLC_Select + TXT_Quantidade.Text + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_TipoProduto.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Classificacao.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Armazem.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Sequencia.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Identidade.Text + '''' + ',';
+  VLC_Select := VLC_Select + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Setor.Text + '''' + ')';
+
+  Memo1.Lines.Text := VLC_Select;
+
+  With  Sys_ModuloConexaoDados.ADOCommand1 do
+  begin
+       CommandText := VLC_Select;
+       Execute;
+  end;
+
+end;
+
+end.
+

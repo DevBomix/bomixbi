@@ -1,0 +1,393 @@
+unit BI_PedidoVendaEstrutura_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Datasnap.Provider, Data.DB,
+  Data.Win.ADODB, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
+  Vcl.StdCtrls, System.Actions, Vcl.ActnList, Vcl.Imaging.jpeg;
+
+type
+  TBI_PedidoVendaEstrutura = class(TForm)
+    Panel2: TPanel;
+    LBL_Titulo: TLabel;
+    Image2: TImage;
+    PNL_Auxiliar: TPanel;
+    DBGrid1: TDBGrid;
+    DBGrid4: TDBGrid;
+    CDS_Estrutura: TClientDataSet;
+    Query_Estrutura: TADOQuery;
+    DS_Estrutura: TDataSource;
+    DSP_Estrutura: TDataSetProvider;
+    CDS_ConsultarLote: TClientDataSet;
+    Query_ConsultarLote: TADOQuery;
+    DS_ConsultarLote: TDataSource;
+    DSP_ConsultarLote: TDataSetProvider;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    Panel4: TPanel;
+    DBGrid3: TDBGrid;
+    Panel5: TPanel;
+    Label1: TLabel;
+    Image1: TImage;
+    DSP_ProdutoPrincipal: TDataSetProvider;
+    DS_ProdutoPrincipal: TDataSource;
+    Query_ProdutoPrincipal: TADOQuery;
+    CDS_ProdutoPrincipal: TClientDataSet;
+    CDS_ConsultarProduto: TClientDataSet;
+    Query_ConsultarProduto: TADOQuery;
+    DS_ConsultarProduto: TDataSource;
+    DSP_ConsultarProduto: TDataSetProvider;
+    TXT_ProdutoID: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    Label2: TLabel;
+    Panel6: TPanel;
+    Image6: TImage;
+    BTN_BuscarProduto: TSpeedButton;
+    CDS_ConsultarProdutoEmpresa: TStringField;
+    DBGrid2: TDBGrid;
+    Query_EstruturaProduto_ID: TStringField;
+    Query_EstruturaProduto: TStringField;
+    Query_EstruturaClassificacao: TStringField;
+    Query_EstruturaBloqueado: TStringField;
+    Query_EstruturaPersonalizado: TStringField;
+    Query_EstruturaRevisaoEstrutura: TStringField;
+    Query_EstruturaEstrutura_ID: TStringField;
+    Query_EstruturaGrupo: TStringField;
+    Query_EstruturaEstrutura: TStringField;
+    Query_EstruturaQtdBase: TFloatField;
+    Query_EstruturaPeso: TFloatField;
+    Query_EstruturaQuantidade: TFloatField;
+    Query_EstruturaPerda: TFloatField;
+    Query_EstruturaEmpresa: TStringField;
+    Query_EstruturaRecno: TIntegerField;
+    CDS_EstruturaProduto_ID: TStringField;
+    CDS_EstruturaProduto: TStringField;
+    CDS_EstruturaClassificacao: TStringField;
+    CDS_EstruturaBloqueado: TStringField;
+    CDS_EstruturaPersonalizado: TStringField;
+    CDS_EstruturaRevisaoEstrutura: TStringField;
+    CDS_EstruturaEstrutura_ID: TStringField;
+    CDS_EstruturaGrupo: TStringField;
+    CDS_EstruturaEstrutura: TStringField;
+    CDS_EstruturaQtdBase: TFloatField;
+    CDS_EstruturaPeso: TFloatField;
+    CDS_EstruturaQuantidade: TFloatField;
+    CDS_EstruturaPerda: TFloatField;
+    CDS_EstruturaEmpresa: TStringField;
+    CDS_EstruturaRecno: TIntegerField;
+    Query_ConsultarLoteEmpresa: TStringField;
+    Query_ConsultarLoteItem_FK: TStringField;
+    Query_ConsultarLoteItem: TStringField;
+    Query_ConsultarLoteProduto_ID: TStringField;
+    Query_ConsultarLoteProduto: TStringField;
+    Query_ConsultarLoteTipoProduto: TStringField;
+    Query_ConsultarLoteBloqueado: TStringField;
+    Query_ConsultarLoteRastro: TStringField;
+    Query_ConsultarLoteArmazem: TStringField;
+    Query_ConsultarLoteB2_Saldo: TFloatField;
+    Query_ConsultarLoteB8_Saldo: TFloatField;
+    Query_ConsultarLoteEmpenhoPedido: TFloatField;
+    Query_ConsultarLoteB2_Empenho: TFloatField;
+    Query_ConsultarLoteD4_Empenho: TFloatField;
+    Query_ConsultarLoteB8_Empenho: TFloatField;
+    Query_ConsultarLoteB2_Reserva: TFloatField;
+    Query_ConsultarLoteC9_Reserva: TFloatField;
+    Query_ConsultarLoteB2_SolicArmazem: TFloatField;
+    Query_ConsultarLoteCP_Saldo: TFloatField;
+    CDS_ConsultarLoteEmpresa: TStringField;
+    CDS_ConsultarLoteItem_FK: TStringField;
+    CDS_ConsultarLoteItem: TStringField;
+    CDS_ConsultarLoteProduto_ID: TStringField;
+    CDS_ConsultarLoteProduto: TStringField;
+    CDS_ConsultarLoteTipoProduto: TStringField;
+    CDS_ConsultarLoteBloqueado: TStringField;
+    CDS_ConsultarLoteRastro: TStringField;
+    CDS_ConsultarLoteArmazem: TStringField;
+    CDS_ConsultarLoteB2_Saldo: TFloatField;
+    CDS_ConsultarLoteB8_Saldo: TFloatField;
+    CDS_ConsultarLoteEmpenhoPedido: TFloatField;
+    CDS_ConsultarLoteB2_Empenho: TFloatField;
+    CDS_ConsultarLoteD4_Empenho: TFloatField;
+    CDS_ConsultarLoteB8_Empenho: TFloatField;
+    CDS_ConsultarLoteB2_Reserva: TFloatField;
+    CDS_ConsultarLoteC9_Reserva: TFloatField;
+    CDS_ConsultarLoteB2_SolicArmazem: TFloatField;
+    CDS_ConsultarLoteCP_Saldo: TFloatField;
+    Query_ProdutoPrincipalGrupo: TStringField;
+    Query_ProdutoPrincipalProduto_ID: TStringField;
+    Query_ProdutoPrincipalProduto: TStringField;
+    CDS_ProdutoPrincipalGrupo: TStringField;
+    CDS_ProdutoPrincipalProduto_ID: TStringField;
+    CDS_ProdutoPrincipalProduto: TStringField;
+    Query_ConsultarProdutoEmpresa: TStringField;
+    Query_ConsultarProdutoItem_FK: TStringField;
+    Query_ConsultarProdutoItem: TStringField;
+    Query_ConsultarProdutoProduto_ID: TStringField;
+    Query_ConsultarProdutoProduto: TStringField;
+    Query_ConsultarProdutoTipoProduto: TStringField;
+    Query_ConsultarProdutoBloqueado: TStringField;
+    Query_ConsultarProdutoRastro: TStringField;
+    Query_ConsultarProdutoArmazem: TStringField;
+    Query_ConsultarProdutoB2_Saldo: TFloatField;
+    Query_ConsultarProdutoB8_Saldo: TFloatField;
+    Query_ConsultarProdutoEmpenhoPedido: TFloatField;
+    Query_ConsultarProdutoB2_Empenho: TFloatField;
+    Query_ConsultarProdutoD4_Empenho: TFloatField;
+    Query_ConsultarProdutoB8_Empenho: TFloatField;
+    Query_ConsultarProdutoB2_Reserva: TFloatField;
+    Query_ConsultarProdutoC9_Reserva: TFloatField;
+    Query_ConsultarProdutoB2_SolicArmazem: TFloatField;
+    Query_ConsultarProdutoCP_Saldo: TFloatField;
+    CDS_ConsultarProdutoItem_FK: TStringField;
+    CDS_ConsultarProdutoItem: TStringField;
+    CDS_ConsultarProdutoProduto_ID: TStringField;
+    CDS_ConsultarProdutoProduto: TStringField;
+    CDS_ConsultarProdutoTipoProduto: TStringField;
+    CDS_ConsultarProdutoBloqueado: TStringField;
+    CDS_ConsultarProdutoRastro: TStringField;
+    CDS_ConsultarProdutoArmazem: TStringField;
+    CDS_ConsultarProdutoB2_Saldo: TFloatField;
+    CDS_ConsultarProdutoB8_Saldo: TFloatField;
+    CDS_ConsultarProdutoEmpenhoPedido: TFloatField;
+    CDS_ConsultarProdutoB2_Empenho: TFloatField;
+    CDS_ConsultarProdutoD4_Empenho: TFloatField;
+    CDS_ConsultarProdutoB8_Empenho: TFloatField;
+    CDS_ConsultarProdutoB2_Reserva: TFloatField;
+    CDS_ConsultarProdutoC9_Reserva: TFloatField;
+    CDS_ConsultarProdutoB2_SolicArmazem: TFloatField;
+    CDS_ConsultarProdutoCP_Saldo: TFloatField;
+    Panel7: TPanel;
+    Image3: TImage;
+    SpeedButton1: TSpeedButton;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+
+    // Minhas Functions e Procedures
+    procedure ListarConsultarLote;
+    procedure ListarConsultarEstoqueProdutoPrincipal;
+    procedure DS_EstruturaDataChange(Sender: TObject; Field: TField);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure DS_ProdutoPrincipalDataChange(Sender: TObject; Field: TField);
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BTN_BuscarProdutoClick(Sender: TObject);
+    procedure DBGrid4DblClick(Sender: TObject);
+    procedure DBGrid3DblClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaEstrutura: TBI_PedidoVendaEstrutura;
+  VCP_ProdutoAnteriorID : String;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVenda_Unit, BI_PedidoVendaEstruturaBuscarProduto_Unit,
+  FuncaoSistema_Unit;
+
+procedure TBI_PedidoVendaEstrutura.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TBI_PedidoVendaEstrutura.BTN_BuscarClick(Sender: TObject);
+Var
+   VLC_Select, VLC_Produto : String;
+begin
+
+   if BI_PedidoVenda.SHP_OpcaoPorPedidodeVenda.Brush.Color = $00FF8000 then
+   begin
+
+       VLC_Select := VLC_Select + '  Select ' + #13;
+       VLC_Select := VLC_Select + '  Produto_ID, Produto, Classificacao, Bloqueado, Personalizado, ' + #13;
+       VLC_Select := VLC_Select + '  RevisaoEstrutura, Estrutura_ID, Grupo, Estrutura, Peso,  ' + #13;
+       VLC_Select := VLC_Select + '  Quantidade, Perda, Empresa, Recno, ' + #13;
+
+       If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+          VLC_Select := VLC_Select + ' 0.00 as QtdBase ' + #13
+       else
+          VLC_Select := VLC_Select + ' QtdBase ' + #13;
+
+       VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_ProdutoEstrutura (nolock)' + #13;
+       VLC_Select := VLC_Select + ' Where Produto_ID = ' + '''' + TXT_ProdutoID.Text + '''' + #13;
+       VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+       If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+       begin
+            VLC_Select := VLC_Select + ' AND (Substring(Estrutura_ID,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+            VLC_Select := VLC_Select + ' OR  Substring(Estrutura_ID,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
+       end;
+
+       VLC_Select := VLC_Select + ' Order by Estrutura_ID Desc ';
+
+       VLC_Produto := ' Select Grupo, Produto_ID, Produto from BomixBI.dbo.Pcp_TB_Produto (nolock)' + #13;
+       VLC_Produto := VLC_Produto + ' Where Produto_ID = ' + '''' + TXT_ProdutoID.Text + '''' + #13;
+       VLC_Produto := VLC_Produto + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   end
+   else
+   begin
+
+       VLC_Select := VLC_Select + '  Select ' + #13;
+       VLC_Select := VLC_Select + '  Produto_ID, Produto, Classificacao, Bloqueado, Personalizado, ' + #13;
+       VLC_Select := VLC_Select + '  RevisaoEstrutura, Estrutura_ID, Grupo, Estrutura, Peso,  ' + #13;
+       VLC_Select := VLC_Select + '  Quantidade, Perda, Empresa, Recno, ' + #13;
+
+       If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+          VLC_Select := VLC_Select + ' 0.00 as QtdBase ' + #13
+       else
+          VLC_Select := VLC_Select + ' QtdBase ' + #13;
+
+       VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_ProdutoEstrutura (nolock)' + #13;
+       VLC_Select := VLC_Select + ' Where Produto_ID = ' + '''' + TXT_ProdutoID.Text + '''' + #13;
+       VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+       If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+       begin
+            VLC_Select := VLC_Select + ' AND (Substring(Estrutura_ID,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+            VLC_Select := VLC_Select + ' OR  Substring(Estrutura_ID,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
+       end;
+
+       VLC_Select := VLC_Select + ' Order by Estrutura_ID Desc ';
+
+       VLC_Produto := ' Select Grupo, Produto_ID, Produto from BomixBI.dbo.Pcp_TB_Produto (nolock)' + #13;
+       VLC_Produto := VLC_Produto + ' Where Produto_ID = ' + '''' + TXT_ProdutoID.Text + '''' + #13;
+       VLC_Produto := VLC_Produto + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   end;
+
+   BI_PedidoVendaEstrutura.CDS_Estrutura.Close;
+   BI_PedidoVendaEstrutura.Query_Estrutura.Close;
+   BI_PedidoVendaEstrutura.Query_Estrutura.SQL.Clear;
+   BI_PedidoVendaEstrutura.Query_Estrutura.SQL.Text := VLC_Select;
+   BI_PedidoVendaEstrutura.CDS_Estrutura.Open;
+
+   BI_PedidoVendaEstrutura.CDS_ProdutoPrincipal.Close;
+   BI_PedidoVendaEstrutura.Query_ProdutoPrincipal.Close;
+   BI_PedidoVendaEstrutura.Query_ProdutoPrincipal.SQL.Clear;
+   BI_PedidoVendaEstrutura.Query_ProdutoPrincipal.SQL.Text := VLC_Produto;
+   BI_PedidoVendaEstrutura.CDS_ProdutoPrincipal.Open;
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.DBGrid3DblClick(Sender: TObject);
+begin
+  VCP_ProdutoAnteriorID := TXT_ProdutoID.Text;
+  TXT_ProdutoID.Text := CDS_ProdutoPrincipalProduto_ID.AsString;
+  BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.DBGrid4DblClick(Sender: TObject);
+begin
+  VCP_ProdutoAnteriorID := TXT_ProdutoID.Text;
+  TXT_ProdutoID.Text := CDS_EstruturaEstrutura_ID.AsString;
+  BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.DS_EstruturaDataChange(Sender: TObject;
+  Field: TField);
+begin
+   ListarConsultarLote;
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.DS_ProdutoPrincipalDataChange(
+  Sender: TObject; Field: TField);
+begin
+   ListarConsultarEstoqueProdutoPrincipal;
+end;
+
+procedure TBI_PedidoVendaEstrutura.ListarConsultarLote;
+Var
+   VLC_Select : String;
+begin
+
+   VLC_Select := ' Select * from BomixBI.dbo.Est_TB_EstoqueMapeamento (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Produto_ID = ' + '''' + CDS_EstruturaEstrutura_ID.AsString + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+   begin
+      VLC_Select := VLC_Select + ' AND (Substring(Produto_ID,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+      VLC_Select := VLC_Select + ' OR  Substring(Produto_ID,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
+   end;
+
+   VLC_Select := VLC_Select + ' Order by Armazem desc ' + #13;
+
+   CDS_ConsultarLote.Close;
+   Query_ConsultarLote.Close;
+   Query_ConsultarLote.SQL.Clear;
+   Query_ConsultarLote.SQL.Text := VLC_Select;
+   CDS_ConsultarLote.Open;
+
+end;
+
+
+procedure TBI_PedidoVendaEstrutura.SpeedButton1Click(Sender: TObject);
+begin
+
+  if VCP_ProdutoAnteriorID = '' then
+    VCP_ProdutoAnteriorID := TXT_ProdutoID.Text;
+
+  TXT_ProdutoID.Text := VCP_ProdutoAnteriorID;
+  BTN_BuscarClick(nil);
+
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.BTN_BuscarProdutoClick(Sender: TObject);
+begin
+
+  inherited;
+  Application.CreateForm(TBI_PedidoVendaEstrutura_BuscarProduto, BI_PedidoVendaEstrutura_BuscarProduto);
+  try
+      BI_PedidoVendaEstrutura_BuscarProduto.CDS.Open;
+      BI_PedidoVendaEstrutura_BuscarProduto.ShowModal;
+  finally
+      BI_PedidoVendaEstrutura_BuscarProduto.Release;
+      BI_PedidoVendaEstrutura_BuscarProduto := Nil;
+  end;
+
+end;
+
+procedure TBI_PedidoVendaEstrutura.ListarConsultarEstoqueProdutoPrincipal;
+Var
+   VLC_Select : String;
+begin
+
+   VLC_Select := ' Select * from BomixBI.dbo.Est_TB_EstoqueMapeamento (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Produto_ID = ' + '''' + CDS_ProdutoPrincipalProduto_ID.AsString + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
+   begin
+      VLC_Select := VLC_Select + ' AND (Substring(Produto_ID,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+      VLC_Select := VLC_Select + ' OR  Substring(Produto_ID,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
+   end;
+
+   VLC_Select := VLC_Select + ' Order by Armazem desc ' + #13;
+
+   CDS_ConsultarProduto.Close;
+   Query_ConsultarProduto.Close;
+   Query_ConsultarProduto.SQL.Clear;
+   Query_ConsultarProduto.SQL.Text := VLC_Select;
+   CDS_ConsultarProduto.Open;
+
+end;
+
+end.

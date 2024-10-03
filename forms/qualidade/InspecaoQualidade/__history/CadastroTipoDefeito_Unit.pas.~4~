@@ -1,0 +1,91 @@
+unit CadastroTipoDefeito_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TInspecaoQualidade_CadastroTipoDefeito = class(TPadraoCadastro)
+    QueryDefeito_ID: TAutoIncField;
+    QueryDefeito: TStringField;
+    QueryTipo: TStringField;
+    QueryArea: TStringField;
+    QueryBloqueado: TStringField;
+    CDSDefeito_ID: TAutoIncField;
+    CDSDefeito: TStringField;
+    CDSTipo: TStringField;
+    CDSArea: TStringField;
+    CDSBloqueado: TStringField;
+    Label5: TLabel;
+    DBEdit2: TDBEdit;
+    Label6: TLabel;
+    DBEdit3: TDBEdit;
+    Label7: TLabel;
+    CHK_Bloquear: TCheckBox;
+    TXT_ID: TDBEdit;
+    Label9: TLabel;
+    CBX_Area: TComboBox;
+
+    // Minhas Functions e Procedures
+    procedure PadraoTela;
+
+    procedure BTN_NovoClick(Sender: TObject);
+    procedure BTN_EditarClick(Sender: TObject);
+    procedure BTN_ExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  InspecaoQualidade_CadastroTipoDefeito: TInspecaoQualidade_CadastroTipoDefeito;
+
+implementation
+
+{$R *.dfm}
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.PadraoTela;
+begin
+  IMG_Abrir.Visible := False;
+  IMG_Fechar.Visible := False;;
+  Panel1.Align := alBottom;
+  DBGrid.Align := alClient;
+end;
+
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_EditarClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_ExcluirClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_NovoClick(Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+
+
+
+end;
+
+
+end.

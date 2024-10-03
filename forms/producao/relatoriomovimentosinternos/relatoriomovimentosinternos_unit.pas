@@ -1,0 +1,333 @@
+unit RelatorioMovimentosInternos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit, Vcl.StdCtrls,
+  Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.Mask,
+  Vcl.ComCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TRelatorio_MovimentosInternos = class(TPadraoBuscadorFiltro)
+    Panel4: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_TipoRelatorio: TComboBox;
+    Panel5: TPanel;
+    TXT_Valor2_ProdutoID: TMaskEdit;
+    CBX_OperadorProdutoID: TComboBox;
+    TXT_Valor1_ProdutoID: TMaskEdit;
+    Panel6: TPanel;
+    PNL_SinalProdutoID: TPanel;
+    CBX_Igual_ProdutoID: TComboBox;
+    Panel7: TPanel;
+    TXT_Valor2_Produto: TMaskEdit;
+    CBX_OperadorProduto: TComboBox;
+    TXT_Valor1_Produto: TMaskEdit;
+    Panel8: TPanel;
+    PNL_SinalProduto: TPanel;
+    CBX_Igual_Produto: TComboBox;
+    Panel9: TPanel;
+    TXT_Valor2_Armazem: TMaskEdit;
+    CBX_OperadorArmazem: TComboBox;
+    TXT_Valor1_Armazem: TMaskEdit;
+    Panel10: TPanel;
+    PNL_SinalArmazem: TPanel;
+    CBX_Igual_Armazem: TComboBox;
+    Panel26: TPanel;
+    CBX_OperadorDataEmissao: TComboBox;
+    Panel27: TPanel;
+    PNL_SinalDataEmissao: TPanel;
+    CBX_Igual_DataEmissao: TComboBox;
+    TXT_Valor1_DataEmissao: TMaskEdit;
+    TXT_Valor2_DataEmissao: TMaskEdit;
+    DT_DataEmissao1: TDateTimePicker;
+    DT_DataEmissao2: TDateTimePicker;
+    Panel1: TPanel;
+    MaskEdit1: TMaskEdit;
+    ComboBox1: TComboBox;
+    MaskEdit2: TMaskEdit;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    CBX_Igual_TipoMovimento: TComboBox;
+    Panel14: TPanel;
+    TXT_Valor2_Documento: TMaskEdit;
+    CBX_OperadorDocumento: TComboBox;
+    TXT_Valor1_Documento: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalDocumento: TPanel;
+    CBX_Igual_Documento: TComboBox;
+    Panel11: TPanel;
+    MaskEdit3: TMaskEdit;
+    ComboBox3: TComboBox;
+    MaskEdit4: TMaskEdit;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    CBX_Igual_Classificacao: TComboBox;
+    Panel15: TPanel;
+    TXT_Valor2_Lote: TMaskEdit;
+    CBX_OperadorLote: TComboBox;
+    TXT_Valor1_Lote: TMaskEdit;
+    Panel16: TPanel;
+    PNL_SinalLote: TPanel;
+    CBX_Igual_Lote: TComboBox;
+    Panel18: TPanel;
+    TXT_Valor2_Estornado: TMaskEdit;
+    CBX_OperadorEstornado: TComboBox;
+    TXT_Valor1_Estornado: TMaskEdit;
+    Panel19: TPanel;
+    PNL_SinalEstornado: TPanel;
+    CBX_Igual_Estornado: TComboBox;
+    Panel20: TPanel;
+    TXT_Valor2_NumSeq: TMaskEdit;
+    CBX_OperadorNumSeq: TComboBox;
+    TXT_Valor1_NumSeq: TMaskEdit;
+    Panel21: TPanel;
+    PNL_SinalNumSeq: TPanel;
+    ComboBox4: TComboBox;
+    Panel22: TPanel;
+    TXT_Valor2_OrdemProducao: TMaskEdit;
+    CBX_OperadorOrdemProducao: TComboBox;
+    TXT_Valor1_OrdemProducao: TMaskEdit;
+    Panel23: TPanel;
+    PNL_SinalOrdemProducao: TPanel;
+    CBX_Igual_OrdemProducao: TComboBox;
+
+    // Minhas Procedure e Functions
+    procedure ListarArmazem;
+
+    procedure FormShow(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure MemoSQLDblClick(Sender: TObject);
+    procedure CBX_OperadorProdutoIDChange(Sender: TObject);
+    procedure CBX_OperadorProdutoChange(Sender: TObject);
+    procedure CBX_OperadorDocumentoChange(Sender: TObject);
+    procedure PNL_SinalProdutoIDClick(Sender: TObject);
+    procedure PNL_SinalProdutoClick(Sender: TObject);
+    procedure PNL_SinalLoteClick(Sender: TObject);
+    procedure PNL_SinalDocumentoClick(Sender: TObject);
+    procedure PNL_SinalNumSeqClick(Sender: TObject);
+    procedure CBX_OperadorNumSeqChange(Sender: TObject);
+    procedure PNL_SinalOrdemProducaoClick(Sender: TObject);
+    procedure CBX_OperadorOrdemProducaoChange(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_MovimentosInternos: TRelatorio_MovimentosInternos;
+
+implementation
+
+{$R *.dfm}
+
+uses RelatorioMovimentosInternos_Consulta_Unit, FuncaoSistema_Unit,
+  ConexaoDados_Unit;
+
+procedure TRelatorio_MovimentosInternos.ListarArmazem;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+   VLN_Contador : Integer;
+
+begin
+
+
+  VLC_Select := VLC_Select + ' Select   ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct Armazem.Z1_COD as Armazem_FK,  ' + #13;
+  VLC_Select := VLC_Select + ' 	Rtrim(Armazem.Z1_COD) + ' + '''' + ' - ' + '''' + ' + Rtrim(Armazem.Z1_DESC) as Armazem  ' + #13;
+  VLC_Select := VLC_Select + ' from P12OFICIAL.dbo.SZ7010 Z7 (nolock)  ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join P12OFICIAL.dbo.SZ1010 Armazem (nolock) ON Z1_FILIAL = Z7_FILIAL  ' + #13;
+  VLC_Select := VLC_Select + ' 												                          AND Z1_COD = Z7_LOCAL   ' + #13;
+  VLC_Select := VLC_Select + ' Where Z7_FILIAL  = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Z7_CUSERID = ' + '''' + Sys_FuncaoSistema.PNL_Totvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Z7.D_E_L_E_T_  <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Armazem.Z1_COD ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CBX_Igual_Armazem.Items.Clear;
+  Query.First;
+  CBX_Igual_Armazem.Text := Query.FieldByName('Armazem').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     CBX_Igual_Armazem.Items.Add(Query.FieldByName('Armazem').AsString);
+     Query.Next;
+  end;
+
+  CBX_Igual_Armazem.Items.Add('AMBOS');
+  CBX_Igual_Armazem.Text := 'AMBOS';
+  Query.Free;
+
+end;
+
+procedure TRelatorio_MovimentosInternos.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TRelatorio_MovimentosInternos.BNT_ConfirmarClick(Sender: TObject);
+begin
+
+    if CBX_TipoRelatorio.Text = 'RELATÓRIO DE MOVIMENTOS INTERNOS' then
+    begin
+
+          Application.CreateForm(TRelatorioMovimentosInternos_Consulta, RelatorioMovimentosInternos_Consulta);
+          try
+
+                 If RelatorioMovimentosInternos_Consulta.ImprimirRelatorio = False then
+                 begin
+                      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+                      Exit;
+                 end
+                 else
+                 begin
+                    RelatorioMovimentosInternos_Consulta.ppLBL_Periodo.Caption :=  ' Data de Emissão Entre ' + ' ' + DateToStr(DT_DataEmissao1.Date) + ' a ' + DateToStr(DT_DataEmissao2.Date);
+                    RelatorioMovimentosInternos_Consulta.ppLBL_Status.Caption := 'Data Impressão: ' + DateTimeToStr(Date()) + ' - ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+                    RelatorioMovimentosInternos_Consulta.ppRelatorio.PrintReport;
+                 end;
+
+          finally
+
+                 RelatorioMovimentosInternos_Consulta.Release;
+                 RelatorioMovimentosInternos_Consulta := Nil;
+
+          end;
+
+    end;
+
+
+end;
+
+procedure TRelatorio_MovimentosInternos.CBX_OperadorDocumentoChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorDocumento, TXT_Valor1_Documento, TXT_Valor2_Documento, 160,'');
+end;
+
+procedure TRelatorio_MovimentosInternos.CBX_OperadorNumSeqChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorNumSeq, TXT_Valor1_NumSeq, TXT_Valor2_NumSeq, 160,'');
+end;
+
+procedure TRelatorio_MovimentosInternos.CBX_OperadorOrdemProducaoChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorOrdemProducao, TXT_Valor1_OrdemProducao, TXT_Valor2_OrdemProducao, 160,'');
+end;
+
+procedure TRelatorio_MovimentosInternos.CBX_OperadorProdutoChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorProduto, TXT_Valor1_Produto, TXT_Valor2_Produto, 160,'');
+end;
+
+procedure TRelatorio_MovimentosInternos.CBX_OperadorProdutoIDChange(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.OrganizarCampos(CBX_OperadorProdutoID, TXT_Valor1_ProdutoID, TXT_Valor2_ProdutoID, 160,'');
+end;
+
+procedure TRelatorio_MovimentosInternos.DesenvolvimentoExecute(Sender: TObject);
+begin
+  inherited;
+  Relatorio_MovimentosInternos.Width := 1132;
+end;
+
+procedure TRelatorio_MovimentosInternos.FormShow(Sender: TObject);
+Var
+   TamanhoPadrao : Integer;
+
+begin
+   if DayOfWeek(Date()) = 2 then
+   begin
+       DT_DataEmissao1.Date := Date - 2;
+       DT_DataEmissao2.Date := Date;
+   end
+   else
+   begin
+       DT_DataEmissao1.Date := Date - 1;
+       DT_DataEmissao2.Date := Date;
+   end;
+
+   inherited;
+   TamanhoPadrao := 160;
+   TXT_Valor1.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_ProdutoID.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Produto.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Lote.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Documento.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_OrdemProducao.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_NumSeq.Width := (TamanhoPadrao * 2) + 1;
+   ListarArmazem;
+
+end;
+
+procedure TRelatorio_MovimentosInternos.MemoSQLDblClick(Sender: TObject);
+begin
+  inherited;
+  Relatorio_MovimentosInternos.Width := 693;
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalDocumentoClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalDocumento);
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalLoteClick(Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalLote);
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalNumSeqClick(Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalNumSeq);
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalOrdemProducaoClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalOrdemProducao);
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalProdutoClick(Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalProduto);
+end;
+
+procedure TRelatorio_MovimentosInternos.PNL_SinalProdutoIDClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalProdutoID);
+end;
+
+end.

@@ -1,0 +1,249 @@
+inherited BI_PedidoVenda_FiltroCliente: TBI_PedidoVenda_FiltroCliente
+  Caption = 'Consultar Cliente'
+  ClientHeight = 579
+  ClientWidth = 970
+  ExplicitWidth = 976
+  ExplicitHeight = 607
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Auxiliar: TPanel
+    Width = 954
+    Height = 473
+    ExplicitWidth = 954
+    ExplicitHeight = 473
+    DesignSize = (
+      954
+      473)
+    inherited Panel_Filtro: TPanel
+      Width = 954
+    end
+    inherited DBGrid: TDBGrid
+      Width = 931
+      Height = 404
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Cliente_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cliente'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 300
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cidade'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 150
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'UF'
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 40
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Gerente'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Vendedor'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Segmento'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 200
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 540
+    Width = 970
+  end
+  inherited CDS: TClientDataSet
+    object CDSCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      Size = 6
+    end
+    object CDSCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 40
+    end
+    object CDSCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 60
+    end
+    object CDSUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object CDSSegmento: TStringField
+      FieldName = 'Segmento'
+      Size = 55
+    end
+    object CDSVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object CDSGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      
+        ' Select Distinct Cliente_ID, Cliente, Cidade, UF, Segmento, Vend' +
+        'edor, Gerente from (  '
+      ' Select Distinct'
+      '        Status, PedidoVenda_ID, Emissao,'
+      '        Dia, Ano, Mes, TipoDocumento, Cliente_ID,'
+      '        Cliente, Cidade, UF, Segmento, Vendedor_FK,'
+      '        Vendedor, Gerencia_FK, Gerente, Transportadora_FK,'
+      '        Transportadora, TransportadoraRedespacho_FK,'
+      '        TransportadoraRedespacho, DataPCP, Pendencia, Estado, '
+      
+        '        Max(DataEntrega) as DataEntregaMax, Sum(Peso) as PesoTot' +
+        'al, Sum(Valor) as ValorTotal '
+      ' from ( '
+      #9#9'    Select  * '
+      ' from dbo.BMX_TB_PedidoVenda '
+      
+        ' Inner Join dbo.BMX_TB_PedidoVendaItem On BMX_TB_PedidoVendaItem' +
+        '.Pedido_FK = BMX_TB_PedidoVenda.PedidoVenda_ID '
+      
+        ' Where Emissao Between CONVERT(Datetime,Convert(Varchar(10),'#39'27/' +
+        '04/2013 10:10:49'#39',103),103)'
+      
+        ' AND CONVERT(Datetime,Convert(Varchar(10),'#39'02/05/2013 10:10:49'#39',' +
+        '103),103)'
+      
+        '  AND Status in ('#39#39','#39'ABERTO'#39','#39'LIBERADO'#39','#39'PARCIAL'#39') AND '#9#9'    (St' +
+        'atus + PedidoVenda_ID + Cliente_ID + Cliente + Cidade + UF + Est' +
+        'ado + '
+      
+        '        Segmento + Vendedor_FK + Vendedor + Gerencia_FK + Gerent' +
+        'e + Isnull(Transportadora,'#39#39')'
+      
+        '        + Produto_ID + Grupo + Produto + TipoProduto + Tamanho +' +
+        ' StatusArte + TES) '
+      ' Like '#39'%%'#39
+      ' ) TB '
+      ' Group by Status, PedidoVenda_ID, Emissao,'
+      ' Dia, Ano, Mes, TipoDocumento, Cliente_ID,'
+      ' Cliente, Cidade, UF, Segmento, Vendedor_FK,'
+      ' Vendedor, Gerencia_FK, Gerente, Transportadora_FK,'
+      ' Transportadora, TransportadoraRedespacho_FK,'
+      ' TransportadoraRedespacho, DataPCP, Pendencia, Estado'
+      ''
+      ' ) TB '
+      
+        '  Where (Cliente_ID + Cliente + Cidade + UF + Segmento + Vendedo' +
+        'r + Gerente) Like '#39'%%'#39'  Order by Cliente')
+    object QueryCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      Size = 6
+    end
+    object QueryCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 40
+    end
+    object QueryCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 60
+    end
+    object QueryUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object QuerySegmento: TStringField
+      FieldName = 'Segmento'
+      Size = 55
+    end
+    object QueryVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object QueryGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+  end
+end

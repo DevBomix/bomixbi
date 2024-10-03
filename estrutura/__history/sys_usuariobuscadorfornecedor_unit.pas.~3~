@@ -1,0 +1,43 @@
+unit sys_usuariobuscadorfornecedor_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TSys_UsuarioBuscadorFornecedor = class(TPadraoBuscador)
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_UsuarioBuscadorFornecedor: TSys_UsuarioBuscadorFornecedor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSys_UsuarioBuscadorFornecedor.BTN_BuscarClick(Sender: TObject);
+begin
+  inherited;
+
+Select
+	R_E_C_N_O_ as Recno, A2_FILIAL as Empresa, Rtrim(A2_COD) as Fornecedor_FK, Rtrim(A2_LOJA) as Loja, Rtrim(A2_NOME) as RazaoSocial,
+	Rtrim(A2_NREDUZ) as NomeFantasia, Rtrim(A2_MUN) as Cidade, Rtrim(A2_EST) as UF,
+	Case when A2_MSBLQL = 1 then 'Sim' else 'Não' end as Bloqueado
+from P12OFICIAL.dbo.SA2010 A2 (nolock)
+Where 1=1
+AND A2_FILIAL = '0101'
+AND (Rtrim(A2_COD) + Rtrim(A2_NOME) + Rtrim(A2_NREDUZ) + Rtrim(A2_MUN)) like '%%'
+Order by A2.R_E_C_N_O_ desc
+
+end;
+
+end.

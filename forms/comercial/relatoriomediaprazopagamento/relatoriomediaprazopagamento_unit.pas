@@ -1,0 +1,623 @@
+unit RelatorioMediaPrazoPagamento_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit,
+  System.Actions, Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls,
+  Vcl.Buttons, ppDesignLayer, Vcl.ComCtrls, Data.DB, ppDB, ppDBPipe,
+  ppParameter, ppBands, ppClass, ppCtrls, ppStrtch, ppMemo, ppPrnabl, ppCache,
+  ppComm, ppRelatv, ppProd, ppReport, Data.Win.ADODB, Datasnap.DBClient,
+  Datasnap.Provider, ppVar, ppModule, raCodMod;
+
+type
+  TRelatorio_MediaPrazoPagamento = class(TPadraoBuscadorFiltro)
+    DSP_MediaPrazo: TDataSetProvider;
+    CDS_MediaPrazo: TClientDataSet;
+    DS_MediaPrazo: TDataSource;
+    Query_MediaPrazo: TADOQuery;
+    ppReport: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDBPipeline1: TppDBPipeline;
+    Panel26: TPanel;
+    CBX_OperadorDataEmissao: TComboBox;
+    Panel27: TPanel;
+    PNL_SinalDataEmissao: TPanel;
+    CBX_Igual_DataEmissao: TComboBox;
+    TXT_Valor1_DataEmissao: TMaskEdit;
+    TXT_Valor2_DataEmissao: TMaskEdit;
+    DT_DataEmissao1: TDateTimePicker;
+    DT_DataEmissao2: TDateTimePicker;
+    Panel10: TPanel;
+    TXT_Valor2_Cliente: TMaskEdit;
+    CBX_OperadorCliente: TComboBox;
+    TXT_Valor1_Cliente: TMaskEdit;
+    Panel11: TPanel;
+    PNL_SinalCliente: TPanel;
+    CBX_Igual_Cliente: TComboBox;
+    Panel12: TPanel;
+    TXT_Valor2_NotaFiscal: TMaskEdit;
+    CBX_OperadorNotaFiscal: TComboBox;
+    TXT_Valor1_NotaFiscal: TMaskEdit;
+    Panel15: TPanel;
+    PNL_SinalNotaFiscal: TPanel;
+    CBX_Igual_NotaFiscal: TComboBox;
+    Panel16: TPanel;
+    TXT_Valor2_Gerencia: TMaskEdit;
+    CBX_OperadorGerencia: TComboBox;
+    TXT_Valor1_Gerencia: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalGerencia: TPanel;
+    CBX_Igual_Gerencia: TComboBox;
+    Panel13: TPanel;
+    TXT_Valor2_Cliente_ID: TMaskEdit;
+    CBX_OperadorCliente_ID: TComboBox;
+    TXT_Valor1_Cliente_ID: TMaskEdit;
+    Panel14: TPanel;
+    PNL_SinalCliente_ID: TPanel;
+    CBX_Igual_Cliente_ID: TComboBox;
+    Panel4: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_Tipo: TComboBox;
+    DSP_PorGerencia: TDataSetProvider;
+    CDS_PorGerencia: TClientDataSet;
+    DS_PorGerencia: TDataSource;
+    Query_PorGerencia: TADOQuery;
+    ppReportPorGerencia: TppReport;
+    ppParameterList2: TppParameterList;
+    ppDBPipeline2: TppDBPipeline;
+    DSP_ResumoBomix: TDataSetProvider;
+    CDS_ResumoBomix: TClientDataSet;
+    DS_ResumoBomix: TDataSource;
+    Query_ResumoBomix: TADOQuery;
+    ppReportResumoBomix: TppReport;
+    ppParameterList3: TppParameterList;
+    ppDBPipeline3: TppDBPipeline;
+    Panel9: TPanel;
+    TXT_Valor2_UF: TMaskEdit;
+    CBX_OperadorUF: TComboBox;
+    TXT_Valor1_UF: TMaskEdit;
+    Panel5: TPanel;
+    PNL_SinalUF: TPanel;
+    CBX_Igual_UF: TComboBox;
+    DSP_PorCliente: TDataSetProvider;
+    CDS_PorCliente: TClientDataSet;
+    DS_PorCliente: TDataSource;
+    Query_PorCliente: TADOQuery;
+    ppReportPorCliente: TppReport;
+    ppParameterList4: TppParameterList;
+    ppDBPipeline4: TppDBPipeline;
+    ppHeaderBand4: TppHeaderBand;
+    ppImage3: TppImage;
+    ppLabel12: TppLabel;
+    ppLabel17: TppLabel;
+    ppLine9: TppLine;
+    ppShape5: TppShape;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppLabel22: TppLabel;
+    ppLabel23: TppLabel;
+    ppLabel24: TppLabel;
+    ppDetailBand4: TppDetailBand;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppLine10: TppLine;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText14: TppDBText;
+    ppFooterBand4: TppFooterBand;
+    ppLine11: TppLine;
+    ppMemo3: TppMemo;
+    ppLabel20: TppLabel;
+    ppLabel21: TppLabel;
+    ppPageStyle4: TppPageStyle;
+    ppGroup4: TppGroup;
+    ppGroupHeaderBand4: TppGroupHeaderBand;
+    ppGroupFooterBand4: TppGroupFooterBand;
+    raCodeModule4: TraCodeModule;
+    ppDesignLayers4: TppDesignLayers;
+    ppDesignLayer7: TppDesignLayer;
+    ppDesignLayer8: TppDesignLayer;
+    Query_PorGerenciaGerencia_FK: TStringField;
+    Query_PorGerenciaGerente: TStringField;
+    Query_PorGerenciaPrazoMedio: TFloatField;
+    CDS_PorGerenciaGerencia_FK: TStringField;
+    CDS_PorGerenciaGerente: TStringField;
+    CDS_PorGerenciaPrazoMedio: TFloatField;
+    Query_MediaPrazoGerencia_FK: TStringField;
+    Query_MediaPrazoGerente: TStringField;
+    Query_MediaPrazoVendedor_FK: TStringField;
+    Query_MediaPrazoVendedor: TStringField;
+    Query_MediaPrazoPrazoMedio: TFloatField;
+    CDS_MediaPrazoGerencia_FK: TStringField;
+    CDS_MediaPrazoGerente: TStringField;
+    CDS_MediaPrazoVendedor_FK: TStringField;
+    CDS_MediaPrazoVendedor: TStringField;
+    CDS_MediaPrazoPrazoMedio: TFloatField;
+    Query_PorClienteCliente_ID: TStringField;
+    Query_PorClienteCliente: TStringField;
+    Query_PorClienteCidade: TStringField;
+    Query_PorClienteUF: TStringField;
+    Query_PorClienteVendedor_FK: TStringField;
+    Query_PorClienteVendedor: TStringField;
+    Query_PorClienteGerencia_FK: TStringField;
+    Query_PorClienteGerente: TStringField;
+    Query_PorClientePrazoMedio: TFloatField;
+    CDS_PorClienteCliente_ID: TStringField;
+    CDS_PorClienteCliente: TStringField;
+    CDS_PorClienteCidade: TStringField;
+    CDS_PorClienteUF: TStringField;
+    CDS_PorClienteVendedor_FK: TStringField;
+    CDS_PorClienteVendedor: TStringField;
+    CDS_PorClienteGerencia_FK: TStringField;
+    CDS_PorClienteGerente: TStringField;
+    CDS_PorClientePrazoMedio: TFloatField;
+    Query_ResumoBomixAno: TIntegerField;
+    Query_ResumoBomixMes: TStringField;
+    Query_ResumoBomixPrazoMedio: TFloatField;
+    CDS_ResumoBomixAno: TIntegerField;
+    CDS_ResumoBomixMes: TStringField;
+    CDS_ResumoBomixPrazoMedio: TFloatField;
+    ppHeaderBand2: TppHeaderBand;
+    ppImage1: TppImage;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLine3: TppLine;
+    ppShape3: TppShape;
+    ppLabel9: TppLabel;
+    ppLabel10: TppLabel;
+    ppDetailBand2: TppDetailBand;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppLine4: TppLine;
+    ppFooterBand2: TppFooterBand;
+    ppLine5: TppLine;
+    ppMemo1: TppMemo;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppPageStyle2: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    raCodeModule2: TraCodeModule;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppDesignLayer4: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppIMG_Logo: TppImage;
+    ppLBL_TituloRelatorio: TppLabel;
+    ppLBL_Periodo: TppLabel;
+    ppLine1: TppLine;
+    ppDetailBand1: TppDetailBand;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppLine125: TppLine;
+    ppFooterBand1: TppFooterBand;
+    ppLine2: TppLine;
+    ppMemoFiltros: TppMemo;
+    ppLBL_Data: TppLabel;
+    ppLBL_Usuario: TppLabel;
+    ppPageStyle1: TppPageStyle;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppShape2: TppShape;
+    ppDBText2: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    raCodeModule1: TraCodeModule;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand3: TppHeaderBand;
+    ppImage2: TppImage;
+    ppLabel8: TppLabel;
+    ppLabel11: TppLabel;
+    ppLine6: TppLine;
+    ppDetailBand3: TppDetailBand;
+    ppLine7: TppLine;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppLine8: TppLine;
+    ppMemo2: TppMemo;
+    ppLabel14: TppLabel;
+    ppLabel15: TppLabel;
+    ppPageStyle3: TppPageStyle;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppShape4: TppShape;
+    ppDBText6: TppDBText;
+    ppLabel13: TppLabel;
+    ppLabel16: TppLabel;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    raCodeModule3: TraCodeModule;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer5: TppDesignLayer;
+    ppDesignLayer6: TppDesignLayer;
+
+    // Minhas Procedures e Functions
+    Function SQLPrincipal : String;
+    procedure ListarGerencia;
+    procedure ImprimirPorVendedor;
+    procedure ImprimirPorGerencia;
+    procedure ImprimirPorCliente;
+    procedure ImprimirResumoBomix;
+
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_MediaPrazoPagamento: TRelatorio_MediaPrazoPagamento;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, FuncaoRestricoesInformacoes_Unit, ConexaoDados_Unit;
+
+procedure TRelatorio_MediaPrazoPagamento.ImprimirResumoBomix;
+Var
+   VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select  ' + #13;
+  VLC_Select := VLC_Select + '   Ano, Mes, Round((SUM(ValorPonderado)/SUM(Valor)),1) as PrazoMedio' + #13;
+  VLC_Select := VLC_Select + '     from (   ' + #13;
+  VLC_Select := VLC_Select + SQLPrincipal;
+  VLC_Select := VLC_Select + ' ) TB' + #13;
+  VLC_Select := VLC_Select + ' Group by Ano, Mes' + #13;
+  VLC_Select := VLC_Select + ' Order by Ano, Mes' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_ResumoBomix.Close;
+  Query_ResumoBomix.Close;
+  Query_ResumoBomix.SQL.Clear;
+  Query_ResumoBomix.SQL.Text := VLC_Select;
+  CDS_ResumoBomix.Open;
+
+  If CDS_ResumoBomix.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+     // ppMemoFiltro.Lines.Text := 'Filtros: ' + GetFiltros;
+     ppLabel11.Caption :=  ' Data de Saída Entre ' + ' ' + DateToStr(DT_DataEmissao1.Date) + ' a ' + DateToStr(DT_DataEmissao2.Date);
+     ppLabel14.Caption :=  'Data Impressão: ' + DateTimeToStr(Date());
+     ppLabel15.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+     ppImage2.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+     ppReportResumoBomix.PrintReport;
+  end;
+
+end;
+
+procedure TRelatorio_MediaPrazoPagamento.ListarGerencia;
+var
+  VLC_Select : String;
+  Query : TADOQuery;
+  VLN_Contador : Integer;
+  I: Integer;
+
+begin
+
+   VLC_Select := VLC_Select + ' Select Distinct Gerente ' + #13;
+   VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_VendedorGerente Vendedor (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Vendedor.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+   begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_ID');
+   end;
+
+   VLC_Select := VLC_Select + ' Order by Gerente  ' + #13;
+
+   Query := TADOQuery.Create(self);
+   With Query do
+   begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+   end;
+
+   CBX_Igual_Gerencia.Items.Clear;
+   Query.First;
+   for VLN_Contador := 0 to Query.RecordCount -1 do
+   begin
+      CBX_Igual_Gerencia.Items.Add(Query.FieldByName('Gerente').AsString);
+      Query.Next;
+   end;
+   CBX_Igual_Gerencia.Items.Add('TODAS');
+   Query.Free;
+
+end;
+
+function TRelatorio_MediaPrazoPagamento.SQLPrincipal : String;
+Var
+   VLC_Select : String;
+begin
+
+  VLC_Select := '	Select ' + #13;
+  VLC_Select := VLC_Select + '		F2_Empresa as Empresa, Nota, Nota.Emissao, Mes, Ano, ComissaoVendedor, ' + #13;
+  VLC_Select := VLC_Select + '		Cliente_ID, Cliente, Cidade, UF, Gerencia_FK, Gerente, Vendedor_FK, Vendedor, PrazoMedio, Sum(ValorLiquido) as Valor, ' + #13;
+  VLC_Select := VLC_Select + '		(PrazoMedio * Sum(ValorLiquido)) as ValorPonderado ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_NotaFiscalVenda Nota ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join BomixBI.dbo.Fat_TB_NotaFiscalVendaItem Item On Nota.F2_Recno = Item.F2_RecnoFK ' + #13;
+  VLC_Select := VLC_Select + ' Where Emissao Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataEmissao1.Date) + '''' +  ',103),103)' + #13;
+  VLC_Select := VLC_Select + ' AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataEmissao2.Date) + '''' +  ',103),103)' + #13;
+  VLC_Select := VLC_Select + ' AND Faturamento <> ' + '''' +  'Não Comercial' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND F2_Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Isnull(PrazoMedio,0) > 0 ' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+        VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  if CBX_Igual_Gerencia.Text <> 'TODAS' then
+      VLC_Select := VLC_Select + ' AND Gerente = ' + '''' + CBX_Igual_Gerencia.Text + '''';
+
+  if CBX_Igual_UF.Text <> '' then
+      VLC_Select := VLC_Select + ' AND UF = ' + '''' + CBX_Igual_UF.Text + '''';
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente_ID,PNL_SinalCliente_ID,TXT_Valor1_Cliente_ID,TXT_Valor2_Cliente_ID,'Cliente_ID','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente_ID,PNL_SinalCliente_ID,TXT_Valor1_Cliente_ID,TXT_Valor2_Cliente_ID,'Cliente_ID','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente,PNL_SinalCliente,TXT_Valor1_Cliente,TXT_Valor2_Cliente,'Cliente','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente,PNL_SinalCliente,TXT_Valor1_Cliente,TXT_Valor2_Cliente,'Cliente','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_Operador,PNL_Sinal,TXT_Valor1,TXT_Valor2,'Vendedor','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_Operador,PNL_Sinal,TXT_Valor1,TXT_Valor2,'Vendedor','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorNotaFiscal,PNL_SinalNotaFiscal,TXT_Valor1_NotaFiscal,TXT_Valor2_NotaFiscal,'Nota','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorNotaFiscal,PNL_SinalNotaFiscal,TXT_Valor1_NotaFiscal,TXT_Valor2_NotaFiscal,'Nota','Caracter');
+
+  VLC_Select := VLC_Select + ' Group by F2_Empresa, Nota, Emissao, Ano, Mes, ComissaoVendedor, Gerencia_FK, Gerente, Vendedor_FK, Vendedor, Cliente_ID, Cliente, Cidade, UF, PrazoMedio ' + #13;
+
+  VLC_Select := VLC_Select + ' Union All ' + #13;
+
+  VLC_Select := VLC_Select + '	Select ' + #13;
+  VLC_Select := VLC_Select + '				F2_Empresa as Empresa, Nota, Nota.Emissao, Mes, Ano, ComissaoVendedor, ' + #13;
+  VLC_Select := VLC_Select + '			Cliente_ID, Cliente, Cidade, UF, Gerencia_FK, Gerente, Vendedor_FK, Vendedor, PrazoMedio, Sum(ValorLiquido) as Valor, ' + #13;
+  VLC_Select := VLC_Select + '			(PrazoMedio * Sum(ValorLiquido)) as ValorPonderado ' + #13;
+  VLC_Select := VLC_Select + '	from BomixBI.dbo.Fat_TB_NotaFiscalVendaDevolucao Nota ' + #13;
+  VLC_Select := VLC_Select + '	Inner Join BomixBI.dbo.Fat_TB_NotaFiscalVendaDevolucaoItem Item On Nota.F2_Recno = Item.F2_RecnoFK ' + #13;
+  VLC_Select := VLC_Select + ' Where Emissao Between CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataEmissao1.Date) + '''' +  ',103),103)' + #13;
+  VLC_Select := VLC_Select + ' AND CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataEmissao2.Date) + '''' +  ',103),103)' + #13;
+  VLC_Select := VLC_Select + ' AND Faturamento <> ' + '''' +  'Não Comercial' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND F2_Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Isnull(PrazoMedio,0) > 0 ' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+        VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  if CBX_Igual_Gerencia.Text <> 'TODAS' then
+      VLC_Select := VLC_Select + ' AND Gerente = ' + '''' + CBX_Igual_Gerencia.Text + '''';
+
+  if CBX_Igual_UF.Text <> '' then
+      VLC_Select := VLC_Select + ' AND UF = ' + '''' + CBX_Igual_UF.Text + '''';
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente_ID,PNL_SinalCliente_ID,TXT_Valor1_Cliente_ID,TXT_Valor2_Cliente_ID,'Cliente_ID','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente_ID,PNL_SinalCliente_ID,TXT_Valor1_Cliente_ID,TXT_Valor2_Cliente_ID,'Cliente_ID','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente,PNL_SinalCliente,TXT_Valor1_Cliente,TXT_Valor2_Cliente,'Cliente','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorCliente,PNL_SinalCliente,TXT_Valor1_Cliente,TXT_Valor2_Cliente,'Cliente','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_Operador,PNL_Sinal,TXT_Valor1,TXT_Valor2,'Vendedor','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_Operador,PNL_Sinal,TXT_Valor1,TXT_Valor2,'Vendedor','Caracter');
+
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorNotaFiscal,PNL_SinalNotaFiscal,TXT_Valor1_NotaFiscal,TXT_Valor2_NotaFiscal,'Nota','Caracter') <> '' then
+       VLC_Select := VLC_Select + ' AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(CBX_OperadorNotaFiscal,PNL_SinalNotaFiscal,TXT_Valor1_NotaFiscal,TXT_Valor2_NotaFiscal,'Nota','Caracter');
+
+  VLC_Select := VLC_Select + ' Group by F2_Empresa, Nota, Emissao, Ano, Mes, ComissaoVendedor, Gerencia_FK, Gerente, Vendedor_FK, Vendedor, Cliente_ID, Cliente, Cidade, UF, PrazoMedio ' + #13;
+
+  Result := VLC_Select;
+
+end;
+
+procedure TRelatorio_MediaPrazoPagamento.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+
+end;
+
+procedure TRelatorio_MediaPrazoPagamento.ImprimirPorCliente;
+Var
+   VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select  ' + #13;
+  VLC_Select := VLC_Select + '     Cliente_ID, Cliente, Cidade, UF, Vendedor_FK, Vendedor, ' + #13;
+  VLC_Select := VLC_Select + '     Gerencia_FK, Gerente, Round((SUM(ValorPonderado)/SUM(Valor)),1) as PrazoMedio ' + #13;
+  VLC_Select := VLC_Select + '     from (   ' + #13;
+  VLC_Select := VLC_Select + SQLPrincipal;
+  VLC_Select := VLC_Select + ' ) TB' + #13;
+  VLC_Select := VLC_Select + ' Group by Cliente_ID, Cliente, Cidade, UF, Vendedor_FK, Vendedor, Gerencia_FK, Gerente' + #13;
+  VLC_Select := VLC_Select + ' Order by Cliente' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_PorCliente.Close;
+  Query_PorCliente.Close;
+  Query_PorCliente.SQL.Clear;
+  Query_PorCliente.SQL.Text := VLC_Select;
+  CDS_PorCliente.Open;
+
+  If CDS_PorCliente.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+     // ppMemoFiltro.Lines.Text := 'Filtros: ' + GetFiltros;
+     ppLabel17.Caption :=  ' Data de Saída Entre ' + ' ' + DateToStr(DT_DataEmissao1.Date) + ' a ' + DateToStr(DT_DataEmissao2.Date);
+     ppLabel20.Caption :=  'Data Impressão: ' + DateTimeToStr(Date());
+     ppLabel21.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+     ppImage3.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+     ppReportPorCliente.PrintReport;
+  end;
+
+end;
+
+
+procedure TRelatorio_MediaPrazoPagamento.ImprimirPorGerencia;
+Var
+   VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + 'Select  Gerencia_FK, Gerente, Round((SUM(ValorPonderado)/SUM(Valor)),1) as PrazoMedio from (   ' + #13;
+  VLC_Select := VLC_Select + SQLPrincipal;
+  VLC_Select := VLC_Select + ' ) TB' + #13;
+  VLC_Select := VLC_Select + ' Group by Gerencia_FK, Gerente' + #13;
+  VLC_Select := VLC_Select + ' Order by Gerente' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_PorGerencia.Close;
+  Query_PorGerencia.Close;
+  Query_PorGerencia.SQL.Clear;
+  Query_PorGerencia.SQL.Text := VLC_Select;
+  CDS_PorGerencia.Open;
+
+  If CDS_PorGerencia.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+     // ppMemoFiltro.Lines.Text := 'Filtros: ' + GetFiltros;
+     ppLabel5.Caption :=  ' Data de Saída Entre ' + ' ' + DateToStr(DT_DataEmissao1.Date) + ' a ' + DateToStr(DT_DataEmissao2.Date);
+     ppLabel6.Caption :=  'Data Impressão: ' + DateTimeToStr(Date());
+     ppLabel7.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+     ppImage1.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+     ppReportPorGerencia.PrintReport;
+  end;
+
+end;
+
+
+
+procedure TRelatorio_MediaPrazoPagamento.ImprimirPorVendedor;
+Var
+   VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + 'Select  Gerencia_FK, Gerente, Vendedor_FK, Vendedor,  Round((SUM(ValorPonderado)/SUM(Valor)),1) as PrazoMedio from (   ' + #13;
+  VLC_Select := VLC_Select + SQLPrincipal;
+  VLC_Select := VLC_Select + ' ) TB' + #13;
+  VLC_Select := VLC_Select + ' Group by Gerencia_FK, Gerente, Vendedor_FK, Vendedor' + #13;
+  VLC_Select := VLC_Select + ' Order by Gerente, Vendedor' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_MediaPrazo.Close;
+  Query_MediaPrazo.Close;
+  Query_MediaPrazo.SQL.Clear;
+  Query_MediaPrazo.SQL.Text := VLC_Select;
+  CDS_MediaPrazo.Open;
+
+  If CDS_MediaPrazo.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+     // ppMemoFiltro.Lines.Text := 'Filtros: ' + GetFiltros;
+     ppLBL_Periodo.Caption :=  ' Data de Saída Entre ' + ' ' + DateToStr(DT_DataEmissao1.Date) + ' a ' + DateToStr(DT_DataEmissao2.Date);
+     ppLBL_Data.Caption :=  'Data Impressão: ' + DateTimeToStr(Date());
+     ppLBL_Usuario.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+     ppIMG_Logo.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+     ppReport.PrintReport;
+  end;
+
+end;
+
+
+procedure TRelatorio_MediaPrazoPagamento.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+
+
+  if CBX_Tipo.Text = 'POR VENDEDOR' then
+  begin
+      ImprimirPorVendedor;
+  end;
+
+  if CBX_Tipo.Text = 'POR GERÊNCIA' then
+  begin
+      ImprimirPorGerencia;
+  end;
+
+  if CBX_Tipo.Text = 'POR CLIENTE' then
+  begin
+      ImprimirPorCliente;
+  end;
+
+  if CBX_Tipo.Text = 'RESUMO GERAL DA BOMIX' then
+  begin
+      ImprimirResumoBomix;
+  end;
+
+
+end;
+
+procedure TRelatorio_MediaPrazoPagamento.DesenvolvimentoExecute(
+  Sender: TObject);
+begin
+   Relatorio_MediaPrazoPagamento.Width := 1300;
+
+end;
+
+procedure TRelatorio_MediaPrazoPagamento.FormShow(Sender: TObject);
+Var
+   VLN_Mes: Integer;
+   TamanhoPadrao : Integer;
+
+begin
+
+   ListarGerencia;
+   TamanhoPadrao := 160;
+   TXT_Valor1_Cliente_ID.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Cliente.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_NotaFiscal.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1.Width := (TamanhoPadrao * 2) + 1;
+
+  //Configuração Inicial das Datas
+  DT_DataEmissao2.Date := Date;
+  VLN_Mes := StrToInt(FormatDateTime('mm',date));
+  DT_DataEmissao1.Date := StrToDate('01/' + FormatFloat('00',VLN_Mes) + '/' + FormatDateTime('yyyy',Date));
+
+end;
+
+
+
+end.
+

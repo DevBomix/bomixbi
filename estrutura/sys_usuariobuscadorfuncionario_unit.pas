@@ -1,0 +1,119 @@
+unit Sys_UsuarioBuscadorFuncionario_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TSys_UsuarioBuscadorFuncionario = class(TPadraoBuscador)
+    TXT_Buscador2: TEdit;
+    Label7: TLabel;
+    QueryEmpresa_ID: TStringField;
+    QueryEmpresa: TStringField;
+    QueryIDTotvs: TStringField;
+    QueryMatricula: TStringField;
+    QueryFuncionario: TStringField;
+    QueryCargo: TStringField;
+    QueryTipoFuncao: TStringField;
+    QuerySituacao: TStringField;
+    QuerySituacaoDesc: TStringField;
+    CDSEmpresa_ID: TStringField;
+    CDSEmpresa: TStringField;
+    CDSIDTotvs: TStringField;
+    CDSMatricula: TStringField;
+    CDSFuncionario: TStringField;
+    CDSCargo: TStringField;
+    CDSTipoFuncao: TStringField;
+    CDSSituacao: TStringField;
+    CDSSituacaoDesc: TStringField;
+    QueryCentroCusto_FK: TStringField;
+    QueryCentroCusto: TStringField;
+    CDSCentroCusto_FK: TStringField;
+    CDSCentroCusto: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_UsuarioBuscadorFuncionario: TSys_UsuarioBuscadorFuncionario;
+
+implementation
+
+{$R *.dfm}
+
+uses SysUsuarioCadastro_Unit, SysSetorCadastro_Unit;
+
+procedure TSys_UsuarioBuscadorFuncionario.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TSys_UsuarioBuscadorFuncionario.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+
+  if Sys_UsuarioBuscadorFuncionario.Caption = 'Usuário' then
+  begin
+      Sys_UsuarioCadastro.TXT_FuncionarioID.Text := CDSMatricula.AsString;
+      Sys_UsuarioCadastro.TXT_BuscarFuncionario.Text := CDSFuncionario.AsString;
+      Sys_UsuarioCadastro.TXT_BuscarCargoFuncionario.Text := CDSCargo.AsString;
+
+      Sys_UsuarioCadastro.TXT_BuscarFuncionarioCentroCusto_FK.Text := CDSCentroCusto_FK.AsString;
+      Sys_UsuarioCadastro.TXT_BuscarFuncionarioCentroCusto_FK.Text := CDSCentroCusto.AsString;
+
+      Sys_UsuarioCadastro.TXT_BuscarFuncionarioSituacao.Text := CDSSituacao.AsString;
+      Sys_UsuarioCadastro.TXT_BuscarFuncionarioEmpresa.Text := CDSEmpresa_ID.AsString;
+      Sys_UsuarioCadastro.TXT_BuscarEmpresaFunc.Text := CDSIDTotvs.AsString;
+
+      Close;
+      Exit;
+  end;
+
+  if Sys_UsuarioBuscadorFuncionario.Caption = 'Setor' then
+  begin
+      Sys_SetorCadastro.TXT_FuncionarioID.Text := CDSMatricula.AsString;
+      Sys_SetorCadastro.TXT_BuscarFuncionario.Text := CDSFuncionario.AsString;
+      Sys_SetorCadastro.TXT_BuscarCargoFuncionario.Text := CDSCargo.AsString;
+      Sys_SetorCadastro.TXT_BuscarFuncionarioSituacao.Text := CDSSituacao.AsString;
+      Sys_SetorCadastro.TXT_BuscarFuncionarioEmpresa.Text := CDSEmpresa_ID.AsString;
+      Close;
+      Exit;
+  end;
+
+end;
+
+procedure TSys_UsuarioBuscadorFuncionario.BTN_BuscarClick(Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select Distinct Top 10 ' + #13;
+  VLC_Select := VLC_Select + ' Empresa_ID, Empresa, IDTotvs, Matricula, NomeCompleto as Funcionario, Apelido, Situacao, Funcao + ' + '''' + ' - ' + '''' + ' + Departamento as Cargo, TipoFuncao, SituacaoDesc, CentroCusto_FK, CentroCusto' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Pes_TB_Funcionario (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where (Chapa + Matricula + NomeCompleto + Departamento + Funcao + TipoFuncao)  Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + ' AND (Chapa + Matricula + NomeCompleto + Departamento + Funcao + TipoFuncao)  Like ' + '''' + '%' + TXT_Buscador2.Text + '%' + '''';
+//  VLC_Select := VLC_Select + ' AND Situacao = 7' + #13;
+  VLC_Select := VLC_Select + ' Order by NomeCompleto' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

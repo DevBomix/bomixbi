@@ -1,0 +1,78 @@
+unit BI_PedidoVenda_PedidosSemOP_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TBI_PedidoVenda_PedidosSemOP = class(TPadraoBuscador)
+    QueryRecno: TIntegerField;
+    QueryPedidoVenda_ID: TStringField;
+    QueryItem: TStringField;
+    QueryGerarOP: TStringField;
+    QueryGerarEstoque: TStringField;
+    QueryStatus: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryDataPCP: TDateTimeField;
+    QueryCliente_ID: TStringField;
+    QueryCliente: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryVendedor: TStringField;
+    QueryGerencia_FK: TStringField;
+    QueryGerente: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryAreaFabricacao: TStringField;
+    QueryC6_NUMOP: TStringField;
+    QueryC6_ITEMOP: TStringField;
+    QueryC6_OP: TStringField;
+    QueryC6_QTDVEN: TFloatField;
+    QueryC2_NUM: TStringField;
+    QueryC2_ITEM: TStringField;
+    QueryC2_QUANT: TFloatField;
+    QueryC2_BRSTATU: TStringField;
+    CDSRecno: TIntegerField;
+    CDSPedidoVenda_ID: TStringField;
+    CDSItem: TStringField;
+    CDSGerarOP: TStringField;
+    CDSGerarEstoque: TStringField;
+    CDSStatus: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSDataPCP: TDateTimeField;
+    CDSCliente_ID: TStringField;
+    CDSCliente: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSVendedor: TStringField;
+    CDSGerencia_FK: TStringField;
+    CDSGerente: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSAreaFabricacao: TStringField;
+    CDSC6_NUMOP: TStringField;
+    CDSC6_ITEMOP: TStringField;
+    CDSC6_OP: TStringField;
+    CDSC6_QTDVEN: TFloatField;
+    CDSC2_NUM: TStringField;
+    CDSC2_ITEM: TStringField;
+    CDSC2_QUANT: TFloatField;
+    CDSC2_BRSTATU: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVenda_PedidosSemOP: TBI_PedidoVenda_PedidosSemOP;
+
+implementation
+
+{$R *.dfm}
+
+uses conexaodados_unit;
+
+end.

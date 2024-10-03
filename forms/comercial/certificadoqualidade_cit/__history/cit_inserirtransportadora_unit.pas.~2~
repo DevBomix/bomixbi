@@ -1,0 +1,33 @@
+unit CIT_InserirTransportadora_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TCIT_Inserir_Transportadora = class(TPadraoBuscador)
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CIT_Inserir_Transportadora: TCIT_Inserir_Transportadora;
+
+implementation
+
+{$R *.dfm}
+
+procedure TCIT_Inserir_Transportadora.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

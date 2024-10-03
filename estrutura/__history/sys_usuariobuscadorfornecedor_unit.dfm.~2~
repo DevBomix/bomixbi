@@ -1,0 +1,5 @@
+inherited Sys_UsuarioBuscadorFornecedor: TSys_UsuarioBuscadorFornecedor
+  Caption = 'Sys_UsuarioBuscadorFornecedor'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

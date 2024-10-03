@@ -1,0 +1,24 @@
+unit ColetaSemanal_NovaColetaQTD_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TColetaSemanal_NovaColetaQtd = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ColetaSemanal_NovaColetaQtd: TColetaSemanal_NovaColetaQtd;
+
+implementation
+
+{$R *.dfm}
+
+end.

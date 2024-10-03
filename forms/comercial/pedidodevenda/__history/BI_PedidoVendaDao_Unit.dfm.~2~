@@ -1,0 +1,5 @@
+object BI_PedidoVenda_DAO: TBI_PedidoVenda_DAO
+  OldCreateOrder = False
+  Height = 452
+  Width = 511
+end

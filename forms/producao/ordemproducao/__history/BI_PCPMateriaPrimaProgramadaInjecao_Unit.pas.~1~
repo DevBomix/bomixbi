@@ -1,0 +1,26 @@
+unit BI_PCPMateriaPrimaProgramadaInjecao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TBI_PCP_MateriaPrimaProgramadaInjecao = class(TPadraoBuscador)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PCP_MateriaPrimaProgramadaInjecao: TBI_PCP_MateriaPrimaProgramadaInjecao;
+
+implementation
+
+{$R *.dfm}
+
+end.

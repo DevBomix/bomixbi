@@ -1,0 +1,37 @@
+unit OrdemSeparacaoArquivosModificarQuantidade_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask;
+
+type
+  TOrdemSeparacao_Arquivos_ModificarQuantidade = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    TXT_Quantidade: TMaskEdit;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ActionList1: TActionList;
+    Cancelar: TAction;
+    Confirmar: TAction;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemSeparacao_Arquivos_ModificarQuantidade: TOrdemSeparacao_Arquivos_ModificarQuantidade;
+
+implementation
+
+{$R *.dfm}
+
+end.

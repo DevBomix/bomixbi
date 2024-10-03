@@ -1,0 +1,26 @@
+unit BI_PedidoVenda_PedidosSemOP_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TBI_PedidoVenda_PedidosSemOP = class(TPadraoBuscador)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVenda_PedidosSemOP: TBI_PedidoVenda_PedidosSemOP;
+
+implementation
+
+{$R *.dfm}
+
+end.

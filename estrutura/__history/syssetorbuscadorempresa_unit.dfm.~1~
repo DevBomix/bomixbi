@@ -1,0 +1,48 @@
+inherited PadraoBuscador1: TPadraoBuscador1
+  Caption = 'PadraoBuscador1'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel_Filtro: TPanel
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSID: TStringField
+      FieldName = 'ID'
+      Size = 4
+    end
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 100
+    end
+    object CDSIDTotvs: TStringField
+      FieldName = 'IDTotvs'
+      Size = 6
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select * from BomixBI.[dbo].[Sys_TB_Empresa]'
+      'Where (ID + Empresa + IDTotvs) like '#39'%%'#39
+      'Order by ID')
+    object QueryID: TStringField
+      FieldName = 'ID'
+      Size = 4
+    end
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 100
+    end
+    object QueryIDTotvs: TStringField
+      FieldName = 'IDTotvs'
+      Size = 6
+    end
+  end
+end

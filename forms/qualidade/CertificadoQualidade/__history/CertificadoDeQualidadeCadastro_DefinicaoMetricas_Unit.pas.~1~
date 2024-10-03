@@ -1,0 +1,74 @@
+unit CertificadoDeQualidadeCadastro_DefinicaoMetricas_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, cxTextEdit, cxDBEdit,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    Image1: TImage;
+    SpeedButton1: TSpeedButton;
+    TXT_Especificacao: TcxDBTextEdit;
+    TXT_Variacao: TcxDBTextEdit;
+    TXT_Maximo: TcxDBTextEdit;
+    TXT_Minimo: TcxDBTextEdit;
+    DBGrid: TDBGrid;
+    Memo1: TMemo;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    CDSR_E_C_N_O_: TIntegerField;
+    CDSZN_FILIAL: TStringField;
+    CDSZN_ORDEM: TStringField;
+    CDSZN_MEDIDA: TStringField;
+    CDSZN_ESPECIF: TStringField;
+    CDSZN_VARIA: TStringField;
+    CDSZN_MAXIMO: TStringField;
+    CDSZN_MINIMO: TStringField;
+    Query: TADOQuery;
+    QueryR_E_C_N_O_: TIntegerField;
+    QueryZN_FILIAL: TStringField;
+    QueryZN_ORDEM: TStringField;
+    QueryZN_MEDIDA: TStringField;
+    QueryZN_ESPECIF: TStringField;
+    QueryZN_VARIA: TStringField;
+    QueryZN_MAXIMO: TStringField;
+    QueryZN_MINIMO: TStringField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

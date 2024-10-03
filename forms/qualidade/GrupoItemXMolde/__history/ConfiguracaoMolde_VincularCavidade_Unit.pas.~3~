@@ -1,0 +1,42 @@
+unit ConfiguracaoMolde_VincularCavidade_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TConfiguracaoMolde_VincularCavidade = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Panel1: TPanel;
+    TXT_Cavidade: TEdit;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ConfiguracaoMolde_VincularCavidade: TConfiguracaoMolde_VincularCavidade;
+
+implementation
+
+{$R *.dfm}
+
+procedure TConfiguracaoMolde_VincularCavidade.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  Close;
+end;
+
+end.

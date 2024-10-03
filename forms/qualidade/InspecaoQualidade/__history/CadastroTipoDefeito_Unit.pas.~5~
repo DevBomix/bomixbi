@@ -1,0 +1,168 @@
+unit CadastroTipoDefeito_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TInspecaoQualidade_CadastroTipoDefeito = class(TPadraoCadastro)
+    QueryDefeito_ID: TAutoIncField;
+    QueryDefeito: TStringField;
+    QueryTipo: TStringField;
+    QueryArea: TStringField;
+    QueryBloqueado: TStringField;
+    CDSDefeito_ID: TAutoIncField;
+    CDSDefeito: TStringField;
+    CDSTipo: TStringField;
+    CDSArea: TStringField;
+    CDSBloqueado: TStringField;
+    Label5: TLabel;
+    TXT_Defeito: TDBEdit;
+    Label6: TLabel;
+    TXT_Tipo: TDBEdit;
+    Label7: TLabel;
+    CHK_Bloquear: TCheckBox;
+    TXT_ID: TDBEdit;
+    Label9: TLabel;
+    CBX_Area: TComboBox;
+
+    // Minhas Functions e Procedures
+    procedure PadraoTela;
+
+    procedure BTN_NovoClick(Sender: TObject);
+    procedure BTN_EditarClick(Sender: TObject);
+    procedure BTN_ExcluirClick(Sender: TObject);
+    procedure BNT_DesistirClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  InspecaoQualidade_CadastroTipoDefeito: TInspecaoQualidade_CadastroTipoDefeito;
+
+implementation
+
+{$R *.dfm}
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.PadraoTela;
+begin
+  IMG_Abrir.Visible := False;
+  IMG_Fechar.Visible := False;;
+  Panel1.Align := alBottom;
+  DBGrid.Align := alClient;
+end;
+
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BNT_ConfirmarClick(
+  Sender: TObject);
+begin
+  inherited;
+// Validação **********************************************************************************************************
+  if TXT_Defeito.Text = '' then
+  begin
+       Application.MessageBox('Campo Obrigatório: Defina o Defeito!' + #13 + '','Atenção',mb_iconerror + mb_ok);
+       TXT_Defeito.SetFocus;
+       Exit;
+  end;
+
+  CDS.Cancel;
+  CBX_Area.Enabled := False;
+  TXT_Defeito.Enabled := False;
+  TXT_Tipo.Enabled := False;
+  CHK_Bloquear.Enabled := False;
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BNT_DesistirClick(
+  Sender: TObject);
+begin
+  inherited;
+  CDS.Cancel;
+  CBX_Area.Enabled := False;
+  TXT_Defeito.Enabled := False;
+  TXT_Tipo.Enabled := False;
+  CHK_Bloquear.Enabled := False;
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_EditarClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+  TXT_Defeito.Enabled := True;
+  TXT_Tipo.Enabled := False;
+  CHK_Bloquear.Enabled := True;
+
+  if CBX_Area.Style = csDropDown then
+  begin
+      CBX_Area.Enabled := True;
+  end
+  else
+  begin
+      CBX_Area.Enabled := False;
+  end;
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_ExcluirClick(
+  Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+  CBX_Area.Enabled := False;
+  TXT_Defeito.Enabled := False;
+  TXT_Tipo.Enabled := False;
+  CHK_Bloquear.Enabled := False;
+
+end;
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.BTN_NovoClick(Sender: TObject);
+begin
+  inherited;
+  PadraoTela;
+
+  TXT_Defeito.Enabled := True;
+  TXT_Tipo.Enabled := False;
+  CHK_Bloquear.Enabled := True;
+
+  if CBX_Area.Style = csDropDown then
+  begin
+      CBX_Area.Enabled := True;
+  end
+  else
+  begin
+      CBX_Area.Enabled := False;
+  end;
+
+end;
+
+
+procedure TInspecaoQualidade_CadastroTipoDefeito.DSDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+
+  If CDSBloqueado.AsString = 'Sim' then
+  begin
+     CHK_Bloquear.Checked := True;
+  end
+  else
+  begin
+     CHK_Bloquear.Checked := False;
+  end;
+
+end;
+
+end.

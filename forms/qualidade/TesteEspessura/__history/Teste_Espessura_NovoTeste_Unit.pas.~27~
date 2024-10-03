@@ -1,0 +1,544 @@
+unit Teste_Espessura_NovoTeste_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.Buttons, Vcl.ExtCtrls, Datasnap.DBClient,
+  Data.Win.ADODB, Datasnap.Provider, System.Actions, Vcl.ActnList;
+
+type
+  TTeste_Espessura_NovoTeste = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    PageControl1: TPageControl;
+    TabSheet_DefinicaoGrupo: TTabSheet;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    DBGrid: TDBGrid;
+    Memo_DefinicaoGrupo: TMemo;
+    Panel_Titulo: TPanel;
+    LBL_Titulo: TLabel;
+    Image3: TImage;
+    IMG_Anterior: TImage;
+    IMG_Esquerda: TImage;
+    DSP_DefinicaoGrupo: TDataSetProvider;
+    DS_DefinicaoGrupo: TDataSource;
+    Query_DefinicaoGrupo: TADOQuery;
+    Query_DefinicaoGrupoID: TStringField;
+    Query_DefinicaoGrupoItem: TStringField;
+    Query_DefinicaoGrupoGrupo: TStringField;
+    Query_DefinicaoGrupoTipo: TStringField;
+    Query_DefinicaoGrupoTamanho: TStringField;
+    Query_DefinicaoGrupoFormato: TStringField;
+    Query_DefinicaoGrupoRosca: TStringField;
+    Query_DefinicaoGrupoBuscador: TStringField;
+    Query_DefinicaoGrupoGrupo_FK: TStringField;
+    Query_DefinicaoGrupoPeso: TFloatField;
+    Query_DefinicaoGrupoPesoAlca: TIntegerField;
+    Query_DefinicaoGrupoPesoTotal: TFloatField;
+    Query_DefinicaoGrupoEmpresa: TStringField;
+    Query_DefinicaoGrupoRecno: TIntegerField;
+    CDS_DefinicaoGrupo: TClientDataSet;
+    CDS_DefinicaoGrupoID: TStringField;
+    CDS_DefinicaoGrupoItem: TStringField;
+    CDS_DefinicaoGrupoGrupo: TStringField;
+    CDS_DefinicaoGrupoTipo: TStringField;
+    CDS_DefinicaoGrupoTamanho: TStringField;
+    CDS_DefinicaoGrupoFormato: TStringField;
+    CDS_DefinicaoGrupoRosca: TStringField;
+    CDS_DefinicaoGrupoBuscador: TStringField;
+    CDS_DefinicaoGrupoGrupo_FK: TStringField;
+    CDS_DefinicaoGrupoPeso: TFloatField;
+    CDS_DefinicaoGrupoPesoAlca: TIntegerField;
+    CDS_DefinicaoGrupoPesoTotal: TFloatField;
+    CDS_DefinicaoGrupoEmpresa: TStringField;
+    CDS_DefinicaoGrupoRecno: TIntegerField;
+    BNT_Proximo: TSpeedButton;
+    BNT_Anterior: TSpeedButton;
+    TabSheet_MedidaPadrao: TTabSheet;
+    Panel1: TPanel;
+    LBL_GrupoPadrao_Grupo: TLabel;
+    BTN_SemMedida: TButton;
+    LBL_GrupoPadrao_GrupoID: TLabel;
+    DSP_Medidas: TDataSetProvider;
+    DS_Medidas: TDataSource;
+    Query_Medidas: TADOQuery;
+    Query_MedidasRecno: TAutoIncField;
+    Query_MedidasEmpresa: TStringField;
+    Query_MedidasGrupo_FK: TStringField;
+    Query_MedidasPonto: TIntegerField;
+    Query_MedidasPadrao: TFloatField;
+    Query_MedidasVariacao: TFloatField;
+    Query_MedidasMinimo: TFloatField;
+    Query_MedidasMaximo: TFloatField;
+    CDS_Medidas: TClientDataSet;
+    CDS_MedidasRecno: TAutoIncField;
+    CDS_MedidasEmpresa: TStringField;
+    CDS_MedidasGrupo_FK: TStringField;
+    CDS_MedidasPonto: TIntegerField;
+    CDS_MedidasPadrao: TFloatField;
+    CDS_MedidasVariacao: TFloatField;
+    CDS_MedidasMinimo: TFloatField;
+    CDS_MedidasMaximo: TFloatField;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Action_Passo01_Proximo_DefinicaoDoGrupo: TAction;
+    SHP_SemMedida: TShape;
+    TabSheet_Coletado: TTabSheet;
+    Panel2: TPanel;
+    LBL_Coletado_Grupo: TLabel;
+    LBL_Coletado_GrupoID: TLabel;
+    Action_AbrirEstaTela: TAction;
+    Action_Passo02_Anterior_MedidaPadrao: TAction;
+    PNL_GridMedidaPadrao: TPanel;
+    DBGrid_MPadrao: TDBGrid;
+    Label3: TLabel;
+    DS_ItensColetados: TDataSource;
+    CDS_ItensColetados: TClientDataSet;
+    CDS_ItensColetadosRecno: TIntegerField;
+    CDS_ItensColetadosArea: TStringField;
+    CDS_ItensColetadosSetor: TStringField;
+    CDS_ItensColetadosOrdemProducao: TStringField;
+    CDS_ItensColetadosCliente: TStringField;
+    CDS_ItensColetadosSetorMercado: TStringField;
+    CDS_ItensColetadosStatus: TStringField;
+    CDS_ItensColetadosEmissao: TDateTimeField;
+    CDS_ItensColetadosItem: TStringField;
+    CDS_ItensColetadosProduto_ID: TStringField;
+    CDS_ItensColetadosProduto: TStringField;
+    CDS_ItensColetadosLote: TStringField;
+    CDS_ItensColetadosInjetora_FK: TStringField;
+    CDS_ItensColetadosCicloPadrao: TFloatField;
+    CDS_ItensColetadosMolde_ID: TStringField;
+    CDS_ItensColetadosMolde: TStringField;
+    CDS_ItensColetadosResina1_ID: TStringField;
+    CDS_ItensColetadosResina1: TStringField;
+    CDS_ItensColetadosResina1Perc: TFloatField;
+    CDS_ItensColetadosResina2_ID: TStringField;
+    CDS_ItensColetadosResina2: TStringField;
+    CDS_ItensColetadosResina2Perc: TFloatField;
+    CDS_ItensColetadosMaster_ID: TStringField;
+    CDS_ItensColetadosMaster: TStringField;
+    CDS_ItensColetadosMasterPerc: TFloatField;
+    CDS_ItensColetadosQuantidade: TIntegerField;
+    CDS_ItensColetadosCavidade: TIntegerField;
+    CDS_ItensColetadosAno: TIntegerField;
+    CDS_ItensColetadosSemanaAno: TIntegerField;
+    CDS_ItensColetadosSemana: TIntegerField;
+    CDS_ItensColetadosInicio: TDateTimeField;
+    CDS_ItensColetadosFim: TDateTimeField;
+    CDS_ItensColetadosID: TAutoIncField;
+    CDS_ItensColetadosColetado: TStringField;
+    Query_ItensColetados: TADOQuery;
+    Query_ItensColetadosRecno: TIntegerField;
+    Query_ItensColetadosArea: TStringField;
+    Query_ItensColetadosSetor: TStringField;
+    Query_ItensColetadosOrdemProducao: TStringField;
+    Query_ItensColetadosCliente: TStringField;
+    Query_ItensColetadosSetorMercado: TStringField;
+    Query_ItensColetadosStatus: TStringField;
+    Query_ItensColetadosEmissao: TDateTimeField;
+    Query_ItensColetadosItem: TStringField;
+    Query_ItensColetadosProduto_ID: TStringField;
+    Query_ItensColetadosProduto: TStringField;
+    Query_ItensColetadosLote: TStringField;
+    Query_ItensColetadosInjetora_FK: TStringField;
+    Query_ItensColetadosCicloPadrao: TFloatField;
+    Query_ItensColetadosMolde_ID: TStringField;
+    Query_ItensColetadosMolde: TStringField;
+    Query_ItensColetadosResina1_ID: TStringField;
+    Query_ItensColetadosResina1: TStringField;
+    Query_ItensColetadosResina1Perc: TFloatField;
+    Query_ItensColetadosResina2_ID: TStringField;
+    Query_ItensColetadosResina2: TStringField;
+    Query_ItensColetadosResina2Perc: TFloatField;
+    Query_ItensColetadosMaster_ID: TStringField;
+    Query_ItensColetadosMaster: TStringField;
+    Query_ItensColetadosMasterPerc: TFloatField;
+    Query_ItensColetadosQuantidade: TIntegerField;
+    Query_ItensColetadosCavidade: TIntegerField;
+    Query_ItensColetadosAno: TIntegerField;
+    Query_ItensColetadosSemanaAno: TIntegerField;
+    Query_ItensColetadosSemana: TIntegerField;
+    Query_ItensColetadosInicio: TDateTimeField;
+    Query_ItensColetadosFim: TDateTimeField;
+    Query_ItensColetadosID: TAutoIncField;
+    Query_ItensColetadosColetado: TStringField;
+    DSP_ItensColetados: TDataSetProvider;
+    Panel4: TPanel;
+    DBGrid2: TDBGrid;
+    Shape1: TShape;
+    Button1: TButton;
+    Action_Passo02_Proximo_MedidaPadrao: TAction;
+    Memo_Coletado: TMemo;
+    Query_ItensColetadosFinalizado: TStringField;
+    Query_ItensColetadosUsuario_ID: TIntegerField;
+    Query_ItensColetadosMatricula: TStringField;
+    Query_ItensColetadosFuncionario: TStringField;
+    Query_ItensColetadosCargo: TStringField;
+    CDS_ItensColetadosFinalizado: TStringField;
+    CDS_ItensColetadosUsuario_ID: TIntegerField;
+    CDS_ItensColetadosMatricula: TStringField;
+    CDS_ItensColetadosFuncionario: TStringField;
+    CDS_ItensColetadosCargo: TStringField;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormShow(Sender: TObject);
+    procedure Action_Passo01_Proximo_DefinicaoDoGrupoExecute(Sender: TObject);
+    procedure BNT_ProximoClick(Sender: TObject);
+    procedure BTN_SemMedidaClick(Sender: TObject);
+    procedure BNT_AnteriorClick(Sender: TObject);
+    procedure Action_Passo02_Anterior_MedidaPadraoExecute(Sender: TObject);
+    procedure Action_AbrirEstaTelaExecute(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure Label3Click(Sender: TObject);
+    procedure Action_Passo02_Proximo_MedidaPadraoExecute(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure Memo_ColetadoDblClick(Sender: TObject);
+    procedure Memo_DefinicaoGrupoDblClick(Sender: TObject);
+    procedure DBGrid_MPadraoDblClick(Sender: TObject);
+    procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura_NovoTeste: TTeste_Espessura_NovoTeste;
+
+implementation
+
+{$R *.dfm}
+
+uses funcaosistema_unit, funcaografica_unit, Teste_Espessura_Configuracao_Unit,
+  Teste_Espessura_ConfiguracaoBuscador_Unit;
+
+procedure TTeste_Espessura_NovoTeste.Action_AbrirEstaTelaExecute(
+  Sender: TObject);
+begin
+    BTN_BuscarClick(nil);
+    TabSheet_DefinicaoGrupo.TabVisible := True;
+    TabSheet_MedidaPadrao.TabVisible := False;
+    TabSheet_Coletado.TabVisible := False;
+    IMG_Anterior.Visible := False;
+    BNT_Anterior.Visible := False;
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.Action_Passo01_Proximo_DefinicaoDoGrupoExecute(
+  Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+
+  if CDS_DefinicaoGrupo.RecordCount = 0 then
+  begin
+      Application.MessageBox('Nenhum registro definido!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end;
+
+  TabSheet_DefinicaoGrupo.TabVisible := False;
+  TabSheet_MedidaPadrao.TabVisible := True;
+  IMG_Anterior.Visible := True;
+  BNT_Anterior.Visible := True;
+
+  LBL_GrupoPadrao_GrupoID.Caption := CDS_DefinicaoGrupoID.AsString;
+  LBL_GrupoPadrao_Grupo.Caption := CDS_DefinicaoGrupoItem.AsString;
+
+  VLC_Select := VLC_Select + 'Select ' + #13;
+  VLC_Select := VLC_Select + '	*   ' + #13;
+  VLC_Select := VLC_Select + 'from BOMIXBI.[dbo].[Icq_TB_Teste_Espessura_CadastroDadoPadrao] (nolock)   ' + #13;
+  VLC_Select := VLC_Select + 'Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + 'AND Grupo_FK = ' + '''' +  CDS_DefinicaoGrupoID.AsString + '''' + #13;
+  VLC_Select := VLC_Select + 'Order by Empresa, Grupo_FK, Ponto, Padrao    ' + #13;
+
+  CDS_Medidas.Close;
+  Query_Medidas.Close;
+  Query_Medidas.SQL.Clear;
+  Query_Medidas.SQL.Text := VLC_Select;
+  CDS_Medidas.Open;
+
+  if CDS_Medidas.RecordCount = 0 then
+  begin
+    PNL_GridMedidaPadrao.Visible := False;
+    SHP_SemMedida.Brush.Color := clRed;
+    BTN_SemMedida.Caption := 'Sem Medida Padrão Configurada';
+  end
+  else
+  begin
+    PNL_GridMedidaPadrao.Visible := True;
+    SHP_SemMedida.Brush.Color := clGreen;
+    BTN_SemMedida.Caption := 'Atualizar Registros das Medidas';
+  end;
+
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.Action_Passo02_Anterior_MedidaPadraoExecute(
+  Sender: TObject);
+begin
+  TabSheet_DefinicaoGrupo.TabVisible := True;
+  TabSheet_MedidaPadrao.TabVisible := False;
+  IMG_Anterior.Visible := False;
+  BNT_Anterior.Visible := False;
+end;
+
+procedure TTeste_Espessura_NovoTeste.Action_Passo02_Proximo_MedidaPadraoExecute(
+  Sender: TObject);
+Var
+   VLC_Select : String;
+
+begin
+
+  if PNL_GridMedidaPadrao.Visible = False then
+  begin
+      Application.MessageBox('Nenhum registro definido!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end;
+
+  TabSheet_MedidaPadrao.TabVisible := False;
+  TabSheet_Coletado.TabVisible := True;
+  LBL_Coletado_GrupoID.Caption := LBL_GrupoPadrao_GrupoID.Caption;
+  LBL_Coletado_Grupo.Caption := LBL_GrupoPadrao_Grupo.Caption;
+
+  VLC_Select := VLC_Select + ' Select * from Icq_TB_ColetaSemanal_ItensColetados (nolock) ' + #13;
+  VLC_Select := VLC_Select + '  Where Item = ' + '''' +  LBL_Coletado_GrupoID.Caption + '''' + #13;
+  VLC_Select := VLC_Select + '  AND Finalizado = ' + '''' + 'Não' + '''' + #13;
+  VLC_Select := VLC_Select + '  Order by Emissao desc ' + #13;
+
+  Memo_Coletado.Lines.Text := VLC_Select;
+
+  CDS_ItensColetados.Close;
+  Query_ItensColetados.SQL.Clear;
+  Query_ItensColetados.SQL.Text :=  VLC_Select;
+  CDS_ItensColetados.Open;
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.BNT_AnteriorClick(Sender: TObject);
+begin
+
+    if TabSheet_MedidaPadrao.TabVisible = True then
+    begin
+        Action_Passo02_Anterior_MedidaPadraoExecute(nil);
+        Exit;
+    end;
+
+    if TabSheet_Coletado.TabVisible = True then
+    begin
+        Exit;
+    end;
+
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TTeste_Espessura_NovoTeste.FormShow(Sender: TObject);
+begin
+    Action_AbrirEstaTelaExecute(nil);
+end;
+
+procedure TTeste_Espessura_NovoTeste.Label3Click(Sender: TObject);
+begin
+      Application.CreateForm(TTeste_Espessura_Configuracao, Teste_Espessura_Configuracao);
+      Try
+        Application.CreateForm(TTeste_Espessura_ConfiguracaoBuscador, Teste_Espessura_ConfiguracaoBuscador);
+        Teste_Espessura_ConfiguracaoBuscador.TXT_Valor1.Text := LBL_GrupoPadrao_GrupoID.Caption;
+        Teste_Espessura_ConfiguracaoBuscador.BNT_ConfirmarClick(nil);
+        Teste_Espessura_Configuracao.ShowModal;
+      Finally
+        Teste_Espessura_Configuracao.Release;
+        Teste_Espessura_Configuracao := nil;
+      End;
+end;
+
+procedure TTeste_Espessura_NovoTeste.Memo_ColetadoDblClick(Sender: TObject);
+begin
+  Memo_Coletado.Visible := False;
+end;
+
+procedure TTeste_Espessura_NovoTeste.Memo_DefinicaoGrupoDblClick(
+  Sender: TObject);
+begin
+  Memo_DefinicaoGrupo.Visible := False;
+end;
+
+procedure TTeste_Espessura_NovoTeste.BNT_ProximoClick(Sender: TObject);
+begin
+
+    if TabSheet_DefinicaoGrupo.TabVisible = True then
+    begin
+        Action_Passo01_Proximo_DefinicaoDoGrupoExecute(nil);
+        Exit;
+    end;
+
+    if TabSheet_MedidaPadrao.TabVisible = True then
+    begin
+        Action_Passo02_Proximo_MedidaPadraoExecute(nil);
+        Exit;
+    end;
+
+
+
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.BTN_BuscarClick(Sender: TObject);
+Var
+   VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select * from ( ' + #13;
+  VLC_Select := VLC_Select + ' Select *, ' + #13;
+  VLC_Select := VLC_Select + ' (ID + Item + Grupo + Tipo + Tamanho + Formato) as Buscador' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_ProdutoGrupoItem GrupoItem (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Grupo is not null ' + #13;
+//  VLC_Select := VLC_Select + ' AND Tipo in (' + '''' + 'BALDE' + '''' + ',' + '''' + 'TAMPA' + '''' + ',' + '''' + 'BOMBONA' + '''' + ',' + '''' + 'SUPORTE' + '''' + ',' + '''' + 'ALÇA' + '''' + ')' + #13;
+  VLC_Select := VLC_Select + ' ) TB' + #13;
+  VLC_Select := VLC_Select + '  Where Buscador  Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + ' Order by ID' + #13;
+
+  Memo_DefinicaoGrupo.Lines.Text := VLC_Select;
+
+  CDS_DefinicaoGrupo.Close;
+  Query_DefinicaoGrupo.Close;
+  Query_DefinicaoGrupo.SQL.Clear;
+  Query_DefinicaoGrupo.SQL.Text := VLC_Select;
+  CDS_DefinicaoGrupo.Open;
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.BTN_SemMedidaClick(Sender: TObject);
+Var
+   VLC_Select : String;
+begin
+
+  if  BTN_SemMedida.Caption = 'Atualizar Registros das Medidas' then
+  begin
+
+        VLC_Select := VLC_Select + 'Select ' + #13;
+        VLC_Select := VLC_Select + '	*   ' + #13;
+        VLC_Select := VLC_Select + 'from BOMIXBI.[dbo].[Icq_TB_Teste_Espessura_CadastroDadoPadrao] (nolock)   ' + #13;
+        VLC_Select := VLC_Select + 'Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+        VLC_Select := VLC_Select + 'AND Grupo_FK = ' + '''' +  CDS_DefinicaoGrupoID.AsString + '''' + #13;
+        VLC_Select := VLC_Select + 'Order by Empresa, Grupo_FK, Ponto, Padrao    ' + #13;
+
+        CDS_Medidas.Close;
+        Query_Medidas.Close;
+        Query_Medidas.SQL.Clear;
+        Query_Medidas.SQL.Text := VLC_Select;
+        CDS_Medidas.Open;
+
+        if CDS_Medidas.RecordCount = 0 then
+        begin
+          SHP_SemMedida.Brush.Color := clRed;
+          BTN_SemMedida.Caption := 'Sem Medida Padrão Configurada';
+          PNL_GridMedidaPadrao.Visible := False;
+        end
+        else
+        begin
+          SHP_SemMedida.Brush.Color := clGreen;
+          BTN_SemMedida.Caption := 'Atualizar Registros das Medidas';
+          PNL_GridMedidaPadrao.Visible := True;
+        end;
+
+  end
+  else
+  begin
+
+      Application.CreateForm(TTeste_Espessura_Configuracao, Teste_Espessura_Configuracao);
+      Try
+        Application.CreateForm(TTeste_Espessura_ConfiguracaoBuscador, Teste_Espessura_ConfiguracaoBuscador);
+        Teste_Espessura_ConfiguracaoBuscador.TXT_Valor1.Text := LBL_GrupoPadrao_GrupoID.Caption;
+        Teste_Espessura_ConfiguracaoBuscador.BNT_ConfirmarClick(nil);
+        Teste_Espessura_Configuracao.ShowModal;
+        BTN_SemMedida.Caption := 'Atualizar Registros das Medidas';
+      Finally
+        Teste_Espessura_Configuracao.Release;
+        Teste_Espessura_Configuracao := nil;
+      End;
+
+  end;
+
+end;
+
+procedure TTeste_Espessura_NovoTeste.DBGrid2DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+   Bitmap : TBitmap;
+
+begin
+
+      Bitmap := TBitmap.Create;
+      If Column.Index = 0 then
+      begin
+              Bitmap := Sys_FuncaoGrafica.IMG_FREE.Picture.Bitmap;
+
+            with TDBGrid(Sender) do
+            begin
+               Canvas.Draw((Rect.Right - Rect.Left - Bitmap.Width) div 2 + Rect.Left,
+              (Rect.Bottom - Rect.Top - Bitmap.Height) div 2 + Rect.Top, Bitmap);
+            end;
+
+      end;
+end;
+
+procedure TTeste_Espessura_NovoTeste.DBGridDblClick(Sender: TObject);
+begin
+    BNT_ProximoClick(nil);
+end;
+
+procedure TTeste_Espessura_NovoTeste.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+   Bitmap : TBitmap;
+
+begin
+
+      Bitmap := TBitmap.Create;
+      If Column.Index = 0 then
+      begin
+              Bitmap := Sys_FuncaoGrafica.IMG_FREE.Picture.Bitmap;
+
+            with TDBGrid(Sender) do
+            begin
+               Canvas.Draw((Rect.Right - Rect.Left - Bitmap.Width) div 2 + Rect.Left,
+              (Rect.Bottom - Rect.Top - Bitmap.Height) div 2 + Rect.Top, Bitmap);
+            end;
+
+      end;
+end;
+
+
+
+procedure TTeste_Espessura_NovoTeste.DBGrid_MPadraoDblClick(Sender: TObject);
+begin
+    BNT_ProximoClick(nil);
+end;
+
+procedure TTeste_Espessura_NovoTeste.DesenvolvimentoExecute(Sender: TObject);
+begin
+  Memo_Coletado.Visible := True;
+  Memo_DefinicaoGrupo.Visible := True;
+end;
+
+end.

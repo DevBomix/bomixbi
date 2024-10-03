@@ -1,0 +1,350 @@
+unit FuncaoRestricoesInformacoes_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Vcl.StdCtrls;
+
+type
+  TSys_FuncaoRestricoesInformacoes = class(TForm)
+    GroupBox6: TGroupBox;
+    Query_ListarGerencia: TADOQuery;
+    Query_ListarGerenciaVendedorGerencia_ID: TStringField;
+    Query_ListarGerenciaGerencia: TStringField;
+    ListarGerencia: TDataSetProvider;
+    DS_ListarGerencia: TDataSource;
+    CDS_ListarGerencia: TClientDataSet;
+    CDS_ListarGerenciaVendedorGerencia_ID: TStringField;
+    CDS_ListarGerenciaGerencia: TStringField;
+    ListarVendedor: TDataSetProvider;
+    Query_ListarVendedor: TADOQuery;
+    DS_ListarVendedor: TDataSource;
+    CDS_ListarVendedor: TClientDataSet;
+    CDS_ListarVendedorVendedor: TStringField;
+    CDS_ListarVendedorVendedor_ID: TStringField;
+    DS_ListarClientes: TDataSource;
+    CDS_ListarClientes: TClientDataSet;
+    CDS_ListarClientesRazaoSocial: TStringField;
+    CDS_ListarClientesCliente_ID: TStringField;
+    ListarClientes: TDataSetProvider;
+    Query_ListarClientes: TADOQuery;
+    Query_ListarClientesRazaoSocial: TStringField;
+    Query_ListarClientesCliente_ID: TStringField;
+    Query_ListarVendedorVendedor_ID: TStringField;
+    Query_ListarVendedorVendedor: TStringField;
+    DS_ListarUsuarioPermissaoSetoresProducoes: TDataSource;
+    CDS_ListarUsuarioPermissaoSetoresProducoes: TClientDataSet;
+    ListarUsuarioPermissaoSetoresProducoes: TDataSetProvider;
+    Query_ListarUsuarioPermissaoSetoresProducoes: TADOQuery;
+    GroupBox1: TGroupBox;
+    Query_ListarUsuarioPermissaoSetoresProducoesGrupo_FK: TIntegerField;
+    Query_ListarUsuarioPermissaoSetoresProducoesGrupo: TStringField;
+    Query_ListarUsuarioPermissaoSetoresProducoesEvento_FK: TIntegerField;
+    Query_ListarUsuarioPermissaoSetoresProducoesEvento: TStringField;
+    Query_ListarUsuarioPermissaoSetoresProducoesSetor: TStringField;
+    Query_ListarUsuarioPermissaoSetoresProducoesEmpresa: TStringField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesGrupo_FK: TIntegerField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesGrupo: TStringField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesEvento_FK: TIntegerField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesEvento: TStringField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesSetor: TStringField;
+    CDS_ListarUsuarioPermissaoSetoresProducoesEmpresa: TStringField;
+    CBX_PermissaoSetoresProducoes: TComboBox;
+    GroupBox2: TGroupBox;
+    CBX_PermissaoArmazem: TComboBox;
+    CDS_ListarUsuarioPermissaoArmazem: TClientDataSet;
+    ListarUsuarioPermissaoArmazem: TDataSetProvider;
+    DS_ListarUsuarioPermissaoArmazem: TDataSource;
+    Query_ListarUsuarioPermissaoArmazem: TADOQuery;
+    CBX_PermissaoTipoArea: TComboBox;
+    CDS_ListarPermissaoTipoArea: TClientDataSet;
+    DS_ListarPermissaoTipoArea: TDataSource;
+    Query_ListarPermissaoTipoArea: TADOQuery;
+    ListarPermissaoTipoArea: TDataSetProvider;
+    Query_ListarPermissaoTipoAreaTipoArea: TStringField;
+    Query_ListarPermissaoTipoAreaGrupo_FK: TIntegerField;
+    Query_ListarPermissaoTipoAreaEmpresa: TStringField;
+    CDS_ListarPermissaoTipoAreaTipoArea: TStringField;
+    CDS_ListarPermissaoTipoAreaGrupo_FK: TIntegerField;
+    CDS_ListarPermissaoTipoAreaEmpresa: TStringField;
+    Query_ListarUsuarioPermissaoArmazemID: TIntegerField;
+    Query_ListarUsuarioPermissaoArmazemTotvs: TStringField;
+    Query_ListarUsuarioPermissaoArmazemUsuario: TStringField;
+    Query_ListarUsuarioPermissaoArmazemLogin: TStringField;
+    Query_ListarUsuarioPermissaoArmazemGrupo: TStringField;
+    Query_ListarUsuarioPermissaoArmazemSetor: TStringField;
+    Query_ListarUsuarioPermissaoArmazemCodigo: TStringField;
+    Query_ListarUsuarioPermissaoArmazemArmazem: TStringField;
+    Query_ListarUsuarioPermissaoArmazemArmazemCompleto: TStringField;
+    Query_ListarUsuarioPermissaoArmazemTipo: TStringField;
+    Query_ListarUsuarioPermissaoArmazemZ7_Recno: TIntegerField;
+    Query_ListarUsuarioPermissaoArmazemZ7_Empresa: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemID: TIntegerField;
+    CDS_ListarUsuarioPermissaoArmazemTotvs: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemUsuario: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemLogin: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemGrupo: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemSetor: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemCodigo: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemArmazem: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemArmazemCompleto: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemTipo: TStringField;
+    CDS_ListarUsuarioPermissaoArmazemZ7_Recno: TIntegerField;
+    CDS_ListarUsuarioPermissaoArmazemZ7_Empresa: TStringField;
+
+    // Minhas Procedures e Functions
+    function GetRestricaoComercial(PLC_CampoVendedor : String) : String;
+    function GetPermissaoArmazem(PLC_Login : String; PLC_Empresa: String): String;
+    function GetAcessoGerenciaDeFormaRestrita: Boolean;
+    function GetPermissaoSetoresProducoes(PLC_GrupoFK : String; PLC_Empresa: String): String;
+    function GetPermissaoTipoArea(PLC_GrupoFK : String; PLC_Empresa: String): String;
+
+    procedure ListarGerente;
+    procedure ListarCliente;
+    procedure ListarVendedores;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_FuncaoRestricoesInformacoes: TSys_FuncaoRestricoesInformacoes;
+
+implementation
+
+{$R *.dfm}
+
+uses ConexaoDados_Unit, FuncaoSistema_Unit;
+
+
+
+function TSys_FuncaoRestricoesInformacoes.GetRestricaoComercial(PLC_CampoVendedor : String) : String;
+Var
+   VLC_Select : String;
+
+begin
+
+  VLC_Select := VLC_Select +  '			AND ' + PLC_CampoVendedor +  ' in ' + #13;
+  VLC_Select := VLC_Select +  '			(Select Z6_CODVEND from P12Oficial.dbo.SZ6010 (nolock) Where D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select +  '     AND Substring(Z6_FILIAL,1,4) = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select +  '		  AND Z6_CUSERID = ' + '''' + Sys_FuncaoSistema.PNL_Totvs.Caption + '''' + ')' + #13;
+
+//  VLC_Select := VLC_Select + ' (Select Totvs from BomixBI.dbo.Sys_TB_Usuario (nolock) where Usuario_ID = ' + Sys_FuncaoSistema.PNL_UsuarioAtivoID.Caption + '))' + #13;
+
+  Result := VLC_Select;
+
+end;
+
+
+function TSys_FuncaoRestricoesInformacoes.GetAcessoGerenciaDeFormaRestrita: Boolean;
+var
+  VLC_Select : String;
+  Query : TADOQuery;
+
+begin
+
+   VLC_Select := ' Select * from P12Oficial.dbo.SZ6010 (nolock) Where D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Substring(Z6_FILIAL,1,4) = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+   VLC_Select := VLC_Select + ' AND Z6_CUSERID = ' + '''' + Sys_FuncaoSistema.PNL_Totvs.Caption + '''' + #13;
+
+   Query := TADOQuery.Create(self);
+   With Query do
+   begin
+        Close;
+        Connection := Sys_ModuloConexaoDados.ADOConnection1;
+        SQL.Clear;
+        SQL.Text := VLC_Select;
+        Open;
+   end;
+
+   if Query.RecordCount = 0 then
+     Result := False
+   else
+     Result := True;
+
+   Query.Free;
+
+end;
+
+function TSys_FuncaoRestricoesInformacoes.GetPermissaoArmazem(
+PLC_Login : String; PLC_Empresa: String): String;
+Var
+   VLC_Select : String;
+   VLC_Filtro : String;
+
+begin
+
+    VLC_Select := VLC_Select + ' Select ' + #13;
+    VLC_Select := VLC_Select + ' 	ID, Totvs, Usuario, Login, Grupo, Setor, Codigo, Armazem, ' + #13;
+    VLC_Select := VLC_Select + ' 	ArmazemCompleto, Tipo, Z7_Recno, Z7_Empresa ' + #13;
+    VLC_Select := VLC_Select + ' from BomixBI.dbo.Est_TB_ArmazemControle (nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Where Login = ' + '''' + PLC_Login + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Z7_Empresa = ' + '''' + PLC_Empresa + '''' + #13;
+    VLC_Select := VLC_Select + ' Order by ArmazemCompleto ' + #13;
+
+    Query_ListarUsuarioPermissaoArmazem.Close;
+    CDS_ListarUsuarioPermissaoArmazem.Close;
+    Query_ListarUsuarioPermissaoArmazem.SQL.Clear;
+    Query_ListarUsuarioPermissaoArmazem.SQL.Text := VLC_Select;
+    CDS_ListarUsuarioPermissaoArmazem.Open;
+
+    CDS_ListarUsuarioPermissaoArmazem.First;
+    VLC_Filtro := '(';
+
+    repeat
+        VLC_Filtro := VLC_Filtro + '''' + CDS_ListarUsuarioPermissaoArmazem.FieldByName('ArmazemCompleto').AsString + '''' + ',';
+        CBX_PermissaoArmazem.Items.Add(CDS_ListarUsuarioPermissaoArmazem.FieldByName('ArmazemCompleto').AsString);
+        CDS_ListarUsuarioPermissaoArmazem.Next;
+    until (CDS_ListarUsuarioPermissaoArmazem.Eof);
+
+    VLC_Filtro := VLC_Filtro + ')';
+    CBX_PermissaoArmazem.Text := CDS_ListarUsuarioPermissaoArmazem.FieldByName('ArmazemCompleto').AsString;
+    Result := (StringReplace(VLC_Filtro,',)',')', [rfReplaceAll]));;
+
+end;
+
+function TSys_FuncaoRestricoesInformacoes.GetPermissaoSetoresProducoes(
+  PLC_GrupoFK, PLC_Empresa: String): String;
+Var
+  VLC_Select : String;
+  VLC_Filtro : String;
+begin
+
+    VLC_Select := ' Select * ' + #13;
+    VLC_Select := VLC_Select + ' from BomixBI.dbo.Sys_TB_UsuarioPermissaoSetoresProducoes (nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Where Grupo_FK = ' + '''' + PLC_GrupoFK + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + PLC_Empresa + '''' + #13;
+
+    Query_ListarUsuarioPermissaoSetoresProducoes.Close;
+    CDS_ListarUsuarioPermissaoSetoresProducoes.Close;
+    Query_ListarUsuarioPermissaoSetoresProducoes.SQL.Clear;
+    Query_ListarUsuarioPermissaoSetoresProducoes.SQL.Text := VLC_Select;
+    CDS_ListarUsuarioPermissaoSetoresProducoes.Open;
+
+    CDS_ListarUsuarioPermissaoSetoresProducoes.First;
+    VLC_Filtro := '(';
+
+    repeat
+        VLC_Filtro := VLC_Filtro + '''' + CDS_ListarUsuarioPermissaoSetoresProducoes.FieldByName('Setor').AsString + '''' + ',';
+        CBX_PermissaoSetoresProducoes.Items.Add(CDS_ListarUsuarioPermissaoSetoresProducoes.FieldByName('Setor').AsString);
+        CDS_ListarUsuarioPermissaoSetoresProducoes.Next;
+    until (CDS_ListarUsuarioPermissaoSetoresProducoes.Eof);
+
+    VLC_Filtro := VLC_Filtro + ')';
+    CBX_PermissaoSetoresProducoes.Text := CDS_ListarUsuarioPermissaoSetoresProducoes.FieldByName('Setor').AsString;
+    Result := (StringReplace(VLC_Filtro,',)',')', [rfReplaceAll]));;
+
+end;
+
+function TSys_FuncaoRestricoesInformacoes.GetPermissaoTipoArea(PLC_GrupoFK,
+  PLC_Empresa: String): String;
+Var
+  VLC_Select : String;
+  VLC_Filtro : String;
+begin
+
+    VLC_Select := ' Select Distinct TipoArea, Grupo_FK, Empresa  ' + #13;
+    VLC_Select := VLC_Select + ' from BomixBI.dbo.Sys_TB_UsuarioPermissaoSetoresProducoes (nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Where Grupo_FK = ' + '''' + PLC_GrupoFK + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + PLC_Empresa + '''' + #13;
+
+    Query_ListarPermissaoTipoArea.Close;
+    CDS_ListarPermissaoTipoArea.Close;
+    Query_ListarPermissaoTipoArea.SQL.Clear;
+    Query_ListarPermissaoTipoArea.SQL.Text := VLC_Select;
+    CDS_ListarPermissaoTipoArea.Open;
+
+    CDS_ListarPermissaoTipoArea.First;
+    VLC_Filtro := '(';
+
+    repeat
+        VLC_Filtro := VLC_Filtro + '''' + CDS_ListarPermissaoTipoArea.FieldByName('TipoArea').AsString + '''' + ',';
+        CBX_PermissaoTipoArea.Items.Add(CDS_ListarPermissaoTipoArea.FieldByName('TipoArea').AsString);
+        CDS_ListarPermissaoTipoArea.Next;
+    until (CDS_ListarPermissaoTipoArea.Eof);
+
+    VLC_Filtro := VLC_Filtro + ')';
+    CBX_PermissaoTipoArea.Text := CDS_ListarPermissaoTipoArea.FieldByName('TipoArea').AsString;
+    Result := (StringReplace(VLC_Filtro,',)',')', [rfReplaceAll]));;
+
+end;
+
+procedure TSys_FuncaoRestricoesInformacoes.ListarVendedores;
+var
+  VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select Distinct Vendedor_ID, Vendedor ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_VendedorGerente (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+        VLC_Select := VLC_Select + GetRestricaoComercial('Vendedor_ID');
+  end;
+
+  VLC_Select := VLC_Select + ' Order by Vendedor ';
+
+  CDS_ListarVendedor.Close;
+  Query_ListarVendedor.Close;
+  Query_ListarVendedor.SQL.Clear;
+  Query_ListarVendedor.SQL.Text := VLC_Select;
+  CDS_ListarVendedor.Open;
+
+end;
+
+procedure TSys_FuncaoRestricoesInformacoes.ListarGerente;
+var
+  VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select Distinct Gerencia_FK as VendedorGerencia_ID, Gerente as Gerencia ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_VendedorGerente Gerente (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+        VLC_Select := VLC_Select + GetRestricaoComercial('Vendedor_ID');
+  end;
+
+  VLC_Select := VLC_Select + ' Order by Gerente ';
+
+  CDS_ListarGerencia.Close;
+  Query_ListarGerencia.Close;
+  Query_ListarGerencia.SQL.Clear;
+  Query_ListarGerencia.SQL.Text := VLC_Select;
+  CDS_ListarGerencia.Open;
+
+end;
+
+procedure TSys_FuncaoRestricoesInformacoes.ListarCliente;
+var
+  VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select Cliente_ID, RazaoSocial from BomixBI.dbo.Fat_TB_Cliente (nolock) Cliente ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+        VLC_Select := VLC_Select + GetRestricaoComercial('Vendedor_ID');
+  end;
+
+  VLC_Select := VLC_Select + ' Order by RazaoSocial ';
+
+  CDS_ListarClientes.Close;
+  Query_ListarClientes.Close;
+  Query_ListarClientes.SQL.Clear;
+  Query_ListarClientes.SQL.Text := VLC_Select;
+  CDS_ListarClientes.Open;
+
+end;
+
+end.

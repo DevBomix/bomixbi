@@ -1,0 +1,22 @@
+inherited PadraoBuscador1: TPadraoBuscador1
+  Caption = 'Tipo de Observa'#231#227'o'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 188
+      Caption = 'Tipo de Observa'#231#227'o'
+      ExplicitWidth = 188
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      ''
+      'Select * from [dbo].[Icq_TB_InspecaoTabelaObservacao]'
+      'where Area = '#39'INJECAO'#39
+      'AND Descricao like '#39'%%'#39
+      'Order by Descricao')
+  end
+end

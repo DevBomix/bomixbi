@@ -1,0 +1,44 @@
+unit ProcessoInspecaoObservacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TProcessoInspecao_Observacao = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    LBL_CodigoInspecao: TLabel;
+    LBL_NumInspector: TLabel;
+    GroupBox2: TGroupBox;
+    TXT_Tipo: TEdit;
+    TXT_Descricao: TEdit;
+    Panel10: TPanel;
+    Shape2: TShape;
+    Image5: TImage;
+    BTN_BuscarInspector: TSpeedButton;
+    Label32: TLabel;
+    TXT_Observacao: TEdit;
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_Observacao: TProcessoInspecao_Observacao;
+
+implementation
+
+{$R *.dfm}
+
+end.

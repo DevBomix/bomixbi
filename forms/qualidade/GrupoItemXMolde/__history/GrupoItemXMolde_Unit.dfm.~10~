@@ -1,0 +1,312 @@
+inherited GrupoItemXMolde: TGrupoItemXMolde
+  Caption = 'Grupo Item x Molde'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Top: TPanel
+    inherited PNL_Modo: TPanel
+      inherited LBL_Modo: TLabel
+        Width = 912
+        Height = 12
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    inherited PNL_Topo: TPanel
+      Height = 105
+      ExplicitHeight = 105
+      object Label7: TLabel
+        Left = 12
+        Top = 0
+        Width = 13
+        Height = 16
+        Caption = 'ID'
+        FocusControl = TXT_ID
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 12
+        Top = 47
+        Width = 62
+        Height = 16
+        Caption = 'Descri'#231#227'o'
+        FocusControl = TXT_Descricao
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 408
+        Top = 47
+        Width = 53
+        Height = 16
+        Caption = 'Semana'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 303
+        Top = 47
+        Width = 28
+        Height = 16
+        Caption = 'Tipo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object TXT_ID: TDBEdit
+        Left = 13
+        Top = 17
+        Width = 75
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'ID'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object TXT_Descricao: TDBEdit
+        Left = 12
+        Top = 65
+        Width = 285
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Item'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object TXT_Ordem: TDBEdit
+        Left = 408
+        Top = 65
+        Width = 59
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Semana'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object DBEdit1: TDBEdit
+        Left = 303
+        Top = 65
+        Width = 98
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Tipo'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 10907648
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+    end
+    inherited PGC_Principal: TPageControl
+      Top = 105
+      Height = 395
+      ExplicitTop = 105
+      ExplicitHeight = 395
+      inherited TabSheet1: TTabSheet
+        Caption = 'Molde'
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 364
+        inherited Panel2: TPanel
+          Height = 364
+          ExplicitHeight = 364
+          inherited Memo_Filtro: TMemo
+            Height = 314
+            ExplicitHeight = 314
+          end
+        end
+        inherited Panel3: TPanel
+          Height = 364
+          ExplicitHeight = 364
+          inherited Memo_Query: TMemo
+            Height = 314
+            ExplicitHeight = 314
+          end
+        end
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel4: TPanel
+      inherited Label3: TLabel
+        Width = 398
+        Height = 33
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 40
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Item'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 151
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Semana'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end>
+    end
+  end
+  inherited Query: TADOQuery
+    CursorType = ctStatic
+    SQL.Strings = (
+      ''
+      'Select '
+      #9'Recno, Empresa, ID, Item, Tipo, Semana '
+      'from Pcp_TB_ProdutoGrupoItem Grupo'
+      'Where Empresa = '#39'0101'#39
+      'AND Tipo is not Null'
+      'Order by Recno desc'
+      '')
+    object QueryRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object QueryID: TStringField
+      FieldName = 'ID'
+      Size = 4
+    end
+    object QueryItem: TStringField
+      FieldName = 'Item'
+      Size = 50
+    end
+    object QueryTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 8
+    end
+    object QuerySemana: TStringField
+      FieldName = 'Semana'
+      Size = 4
+    end
+  end
+  inherited CDS: TClientDataSet
+    Active = True
+    object CDSRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object CDSID: TStringField
+      FieldName = 'ID'
+      Size = 4
+    end
+    object CDSItem: TStringField
+      FieldName = 'Item'
+      Size = 50
+    end
+    object CDSTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 8
+    end
+    object CDSSemana: TStringField
+      FieldName = 'Semana'
+      Size = 4
+    end
+  end
+end

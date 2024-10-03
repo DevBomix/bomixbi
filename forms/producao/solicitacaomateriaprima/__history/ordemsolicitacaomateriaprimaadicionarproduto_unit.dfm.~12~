@@ -1,0 +1,381 @@
+inherited OrdemSolicitacaoMateriaPrima_AdicionarProduto: TOrdemSolicitacaoMateriaPrima_AdicionarProduto
+  Caption = 'Adicionar Produto'
+  ClientHeight = 602
+  ClientWidth = 889
+  ExplicitWidth = 895
+  ExplicitHeight = 631
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 871
+    ExplicitWidth = 871
+    inherited LBL_Titulo: TLabel
+      Width = 182
+      Caption = 'Consultar Produtos'
+      ExplicitWidth = 182
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 873
+    Height = 500
+    ExplicitWidth = 873
+    ExplicitHeight = 500
+    inherited Panel_Filtro: TPanel
+      Width = 873
+      ExplicitWidth = 873
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+      object CHK_ApenasSaldo: TCheckBox
+        Left = 690
+        Top = 12
+        Width = 162
+        Height = 17
+        Caption = 'Apenas com Saldo'
+        Checked = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        State = cbChecked
+        TabOrder = 2
+        OnClick = BTN_BuscarClick
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 678
+      Height = 439
+      Font.Color = clBlack
+      Font.Height = -11
+      Columns = <
+        item
+          Expanded = False
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Item_FK'
+          Title.Alignment = taCenter
+          Title.Caption = 'Grupo ID'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 61
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Produto_ID'
+          Title.Alignment = taCenter
+          Title.Caption = 'Produto ID'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 89
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produto'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 341
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Estoque'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 71
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'UndMedida'
+          Title.Alignment = taCenter
+          Title.Caption = 'Unid.'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 42
+          Visible = True
+        end
+        item
+          Expanded = False
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 0
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          Title.Alignment = taCenter
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 0
+          Visible = True
+        end
+        item
+          Expanded = False
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 0
+          Visible = True
+        end>
+    end
+    inherited Memo1: TMemo
+      TabOrder = 3
+    end
+    object DBGrid1: TDBGrid
+      Left = 690
+      Top = 55
+      Width = 175
+      Height = 437
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Color = clWhite
+      DataSource = DS_ConsultarLote
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = BNT_ConfirmarClick
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Armazem'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Local'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 48
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Saldo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 61
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 563
+    Width = 889
+    ExplicitTop = 563
+    ExplicitWidth = 889
+    inherited Panel3: TPanel
+      Left = 644
+      ExplicitLeft = 644
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 5
+    end
+    object CDSArmazem: TStringField
+      FieldName = 'Armazem'
+      ReadOnly = True
+      Size = 2
+    end
+    object CDSItem_FK: TStringField
+      FieldName = 'Item_FK'
+      Size = 10
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 10
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object CDSEstoque: TFloatField
+      FieldName = 'Estoque'
+    end
+    object CDSUndMedida: TStringField
+      FieldName = 'UndMedida'
+      Size = 5
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      ' Select '
+      
+        #9'Empresa, Rtrim(B2_LOCAL) as Armazem, Item_FK, Produto_ID, Produ' +
+        'to, B2_QATU as Estoque, UndMedida '
+      ' from P12OFICIAL.dbo.SB2010 B2 (nolock)'
+      
+        ' Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (Nolock) ON Empre' +
+        'sa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'   AND Produto_ID = B2_COD'
+      ' Where B2.D_E_L_E_T_ <> '#39'*'#39
+      ' AND B2_FILIAL = '#39'010101'#39
+      
+        ' AND (Grupo + Item_FK + Item + Produto_ID + Produto + B2_LOCAL) ' +
+        'Like '#39'%%'#39
+      ' AND B2_LOCAL = '#39'B1'#39
+      ' AND B2_QATU > 0'
+      ' Order by Produto ')
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 5
+    end
+    object QueryArmazem: TStringField
+      FieldName = 'Armazem'
+      ReadOnly = True
+      Size = 2
+    end
+    object QueryItem_FK: TStringField
+      FieldName = 'Item_FK'
+      Size = 10
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 10
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object QueryEstoque: TFloatField
+      FieldName = 'Estoque'
+    end
+    object QueryUndMedida: TStringField
+      FieldName = 'UndMedida'
+      Size = 5
+    end
+  end
+  inherited DS: TDataSource
+    OnDataChange = DSDataChange
+  end
+  object CDS_ConsultarLote: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_ConsultarLote'
+    Left = 256
+    Top = 311
+    object CDS_ConsultarLoteEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 5
+    end
+    object CDS_ConsultarLoteProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 10
+    end
+    object CDS_ConsultarLoteArmazem: TStringField
+      FieldName = 'Armazem'
+      Size = 2
+    end
+    object CDS_ConsultarLoteSaldo: TFloatField
+      FieldName = 'Saldo'
+    end
+  end
+  object Query_ConsultarLote: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'Select Empresa, Produto_ID, Armazem, B2_Saldo as Saldo from Bomi' +
+        'xBI.dbo.Est_TB_EstoqueMapeamento'
+      'Where Armazem <> '#39#39
+      'AND Produto_ID = '#39'A12A00009'#39
+      'Order by Armazem')
+    Left = 292
+    Top = 311
+    object Query_ConsultarLoteEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 5
+    end
+    object Query_ConsultarLoteProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 10
+    end
+    object Query_ConsultarLoteArmazem: TStringField
+      FieldName = 'Armazem'
+      Size = 2
+    end
+    object Query_ConsultarLoteSaldo: TFloatField
+      FieldName = 'Saldo'
+    end
+  end
+  object DS_ConsultarLote: TDataSource
+    DataSet = CDS_ConsultarLote
+    Left = 328
+    Top = 311
+  end
+  object DSP_ConsultarLote: TDataSetProvider
+    DataSet = Query_ConsultarLote
+    Constraints = False
+    Left = 362
+    Top = 311
+  end
+end

@@ -1,0 +1,44 @@
+unit OrdemProducaoImprimirEtiquetaApontSaldo_Quant_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask;
+
+type
+  TOrdemProducaoImprimirEtiquetaApontSaldo_Quant = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    TXT_Quantidade: TMaskEdit;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ActionList1: TActionList;
+    Cancelar: TAction;
+    Confirmar: TAction;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducaoImprimirEtiquetaApontSaldo_Quant: TOrdemProducaoImprimirEtiquetaApontSaldo_Quant;
+
+implementation
+
+{$R *.dfm}
+
+procedure TOrdemProducaoImprimirEtiquetaApontSaldo_Quant.BNT_CancelarClick(
+  Sender: TObject);
+begin
+Close;
+end;
+
+end.

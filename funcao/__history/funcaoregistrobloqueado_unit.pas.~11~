@@ -1,0 +1,72 @@
+unit FuncaoRegistroBloqueado_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Datasnap.DBClient, Data.DB, Data.Win.ADODB, Datasnap.Provider;
+
+type
+  TFuncaoRegistroBloqueado = class(TForm)
+    IMG_LOCK: TImage;
+    IMG_FREE: TImage;
+
+    // Minhas Procedures e Functions
+    procedure Bloquear(VLC_Tela : String; VLC_Usuario : String; VLC_Registro : String; VLC_Descricao : String);
+    procedure Desbloquear(VLC_Tela : String; VLC_Usuario : String; VLC_Registro : String);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FuncaoRegistroBloqueado : TFuncaoRegistroBloqueado;
+
+implementation
+
+{$R *.dfm}
+
+uses DataModule_Unit;
+
+procedure TFuncaoRegistroBloqueado.Bloquear(VLC_Tela : String; VLC_Usuario : String; VLC_Registro : String; VLC_Descricao : String);
+var
+    VLC_Insert : String;
+
+begin
+
+  VLC_Insert := ' Insert into Sys_RegistroBloqueado (Tela, Usuario, Descricao, Registro) Values (' + #13;
+  VLC_Insert := VLC_Insert + '''' +  VLC_Tela + '''' + ',';
+  VLC_Insert := VLC_Insert + '''' +  VLC_Usuario + '''' + ',';
+  VLC_Insert := VLC_Insert + '''' +  VLC_Descricao + '''' + ',';
+  VLC_Insert := VLC_Insert + '''' +  VLC_Registro + '''' + ')';
+
+   With DMADO_Geral.ADOCommand1 do
+   begin
+        CommandText := VLC_Insert;
+        Execute;
+   end;
+end;
+
+procedure TFuncaoRegistroBloqueado.Desbloquear(VLC_Tela, VLC_Usuario, VLC_Registro : String);
+Var
+   VLC_Delete : String;
+begin
+
+  VLC_Delete := 'Delete from Sys_RegistroBloqueado ' + #13;
+  VLC_Delete := VLC_Delete + 'Where Tela = ' + '''' + VLC_Tela + '''' + #13;
+  VLC_Delete := VLC_Delete + 'AND Usuario = ' + '''' + VLC_Usuario + '''' + #13;
+  VLC_Delete := VLC_Delete + 'AND Registro = ' + '''' + VLC_Registro + '''' + #13;
+
+   With DMADO_Geral.ADOCommand1 do
+   begin
+        CommandText := VLC_Delete;
+        Execute;
+   end;
+
+end;
+
+
+end.

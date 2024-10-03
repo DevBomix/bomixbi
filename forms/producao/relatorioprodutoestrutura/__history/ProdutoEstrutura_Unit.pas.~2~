@@ -1,0 +1,26 @@
+unit ProdutoEstrutura_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscadorfiltro_unit,
+  System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls;
+
+type
+  TRelatorio_EstruturaProduto = class(TPadraoBuscadorFiltro)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_EstruturaProduto: TRelatorio_EstruturaProduto;
+
+implementation
+
+{$R *.dfm}
+
+end.

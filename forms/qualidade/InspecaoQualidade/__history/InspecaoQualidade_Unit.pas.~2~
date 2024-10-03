@@ -1,0 +1,45 @@
+unit InspecaoQualidade_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxGDIPlusClasses, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TInspecaoQualidade = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    GridPanel1: TGridPanel;
+    PNL_ColetaSemanal: TPanel;
+    SpeedButton2: TSpeedButton;
+    Shape2: TShape;
+    Label1: TLabel;
+    Image2: TImage;
+    BTN_ColetaSemanal: TSpeedButton;
+    PNL_Espessura: TPanel;
+    SpeedButton1: TSpeedButton;
+    Shape1: TShape;
+    Label2: TLabel;
+    Image1: TImage;
+    BTN_TesteEspessura: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  InspecaoQualidade: TInspecaoQualidade;
+
+implementation
+
+{$R *.dfm}
+
+end.

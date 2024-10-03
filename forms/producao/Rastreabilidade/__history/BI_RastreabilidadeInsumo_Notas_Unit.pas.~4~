@@ -1,0 +1,58 @@
+unit BI_RastreabilidadeInsumo_Notas_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.Provider, Data.Win.ADODB,
+  Datasnap.DBClient;
+
+type
+  TBI_RastreabilidadeInsumo_Notas = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Panel1: TPanel;
+    Image38: TImage;
+    LBL_Titulo: TLabel;
+    CDS_Nota: TClientDataSet;
+    Query_Nota: TADOQuery;
+    DSP_Nota: TDataSetProvider;
+    DS_Nota: TDataSource;
+    Panel2: TPanel;
+    DBGrid2: TDBGrid;
+    Query_NotaProduto_ID: TStringField;
+    Query_NotaProduto: TStringField;
+    Query_NotaLote: TStringField;
+    Query_NotaDataValidade: TDateTimeField;
+    Query_NotaQuantidade: TIntegerField;
+    Query_NotaConsumo: TFloatField;
+    Query_NotaUM: TStringField;
+    CDS_NotaProduto_ID: TStringField;
+    CDS_NotaProduto: TStringField;
+    CDS_NotaLote: TStringField;
+    CDS_NotaDataValidade: TDateTimeField;
+    CDS_NotaQuantidade: TIntegerField;
+    CDS_NotaConsumo: TFloatField;
+    CDS_NotaUM: TStringField;
+    Query_NotaGrupo: TStringField;
+    CDS_NotaGrupo: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RastreabilidadeInsumo_Notas: TBI_RastreabilidadeInsumo_Notas;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,135 @@
+unit Teste_Espessura_Configuracao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TTeste_Espessura_Configuracao = class(TPadraoCadastro)
+    TXT_ID: TDBEdit;
+    Label7: TLabel;
+    Panel6: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    QueryEmpresa: TStringField;
+    QueryID: TStringField;
+    QueryItem: TStringField;
+    QueryTipoProduto: TStringField;
+    QueryTemMedida: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSID: TStringField;
+    CDSItem: TStringField;
+    CDSTipoProduto: TStringField;
+    CDSTemMedida: TIntegerField;
+    DBEdit1: TDBEdit;
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure BTN_PesquisarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BTN_IncluirRestricaoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura_Configuracao: TTeste_Espessura_Configuracao;
+
+implementation
+
+{$R *.dfm}
+
+uses funcaografica_unit, Teste_Espessura_ConfiguracaoBuscador_Unit,
+  Teste_Espessura_Configuracao_AdicionarMedidda_Unit;
+
+procedure TTeste_Espessura_Configuracao.BTN_IncluirRestricaoClick(
+  Sender: TObject);
+begin
+  inherited;
+
+  Application.CreateForm(TTeste_Espessura_Configuracao_AdicionarMedidda, Teste_Espessura_Configuracao_AdicionarMedidda);
+  Try
+    Teste_Espessura_Configuracao_AdicionarMedidda.LBL_Grupo.Caption := CDSID.AsString;
+    Teste_Espessura_Configuracao_AdicionarMedidda.ShowModal;
+  Finally
+    Teste_Espessura_Configuracao_AdicionarMedidda.Release;
+    Teste_Espessura_Configuracao_AdicionarMedidda := nil;
+  End;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.BTN_PesquisarClick(Sender: TObject);
+begin
+  inherited;
+
+  Application.CreateForm(TTeste_Espessura_ConfiguracaoBuscador, Teste_Espessura_ConfiguracaoBuscador);
+  Try
+     Teste_Espessura_ConfiguracaoBuscador.ShowModal;
+  Finally
+     Teste_Espessura_ConfiguracaoBuscador.Release;
+     Teste_Espessura_ConfiguracaoBuscador := nil;
+  End;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+   Bitmap : TBitmap;
+   I : Integer;
+
+begin
+
+      Bitmap := TBitmap.Create;
+
+     If DS.DataSet.RecordCount > 0 then
+     begin
+
+            If Column.Index = 0 then
+            begin
+
+                  if (DS.DataSet.FieldByName('TemMedida').AsInteger) = 0 then
+                       begin
+                             I := 0
+                       end
+                       else
+                       begin
+                             I := 1
+                  end;
+
+                  Case I of
+                       	  0 : Bitmap := Sys_FuncaoGrafica.Image1.Picture.Bitmap;
+                          1 : Bitmap := Sys_FuncaoGrafica.Image2.Picture.Bitmap;
+                          2 : Bitmap := Sys_FuncaoGrafica.IMG_Anotacao.Picture.Bitmap;
+                  end;
+
+            end;
+
+            with TDBGrid(Sender) do
+            begin
+                   Canvas.Draw((Rect.Right - Rect.Left - Bitmap.Width) div 2 + Rect.Left,
+                   (Rect.Bottom - Rect.Top - Bitmap.Height) div 2 + Rect.Top, Bitmap);
+            end;
+
+      end;
+
+end;
+
+procedure TTeste_Espessura_Configuracao.FormShow(Sender: TObject);
+begin
+  inherited;
+  CDS.Close;
+  CDS.Open;
+end;
+
+end.

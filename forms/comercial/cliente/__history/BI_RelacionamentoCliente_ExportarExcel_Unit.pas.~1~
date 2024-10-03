@@ -1,0 +1,29 @@
+unit BI_RelacionamentoCliente_ExportarExcel_Unit;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, ppDesignLayer, ppParameter, ppProd, ppClass,
+  ppReport, ppComm, ppRelatv, ppDB, ppDBPipe;
+
+type
+  TBI_RelacionamentoCliente_ExportarExcel = class(TDataModule)
+    ppDBPipeline1: TppDBPipeline;
+    ppReport1: TppReport;
+    ppParameterList1: TppParameterList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RelacionamentoCliente_ExportarExcel: TBI_RelacionamentoCliente_ExportarExcel;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

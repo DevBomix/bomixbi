@@ -1,0 +1,189 @@
+unit ConfiguracaoMolde_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TConfiguracaoMolde = class(TPadraoCadastro)
+    TXT_ID: TDBEdit;
+    Label7: TLabel;
+    Label4: TLabel;
+    TXT_Descricao: TDBEdit;
+    DBEdit1: TDBEdit;
+    Label5: TLabel;
+    Panel6: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    CDS_Cavidade: TClientDataSet;
+    Query_Cavidade: TADOQuery;
+    DS_Cavidade: TDataSource;
+    DSP_Cavidade: TDataSetProvider;
+    QueryMolde_ID: TStringField;
+    QueryMolde: TStringField;
+    QueryNumeroCavidade: TIntegerField;
+    CDSMolde_ID: TStringField;
+    CDSMolde: TStringField;
+    CDSNumeroCavidade: TIntegerField;
+    TabSheet2: TTabSheet;
+    Panel5: TPanel;
+    Image3: TImage;
+    Image4: TImage;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Panel8: TPanel;
+    CDS_Item: TClientDataSet;
+    Query_Item: TADOQuery;
+    DS_Item: TDataSource;
+    DSP_Item: TDataSetProvider;
+    DBGrid2: TDBGrid;
+    Query_ItemRecno: TAutoIncField;
+    Query_ItemEmpresa: TStringField;
+    Query_ItemMolde_FK: TStringField;
+    Query_ItemItem_FK: TStringField;
+    Query_ItemItem: TStringField;
+    CDS_ItemRecno: TAutoIncField;
+    CDS_ItemEmpresa: TStringField;
+    CDS_ItemMolde_FK: TStringField;
+    CDS_ItemItem_FK: TStringField;
+    CDS_ItemItem: TStringField;
+    Query_CavidadeRecno: TAutoIncField;
+    Query_CavidadeEmpresa: TStringField;
+    Query_CavidadeMolde_FK: TStringField;
+    Query_CavidadeCavidade: TStringField;
+    CDS_CavidadeRecno: TAutoIncField;
+    CDS_CavidadeEmpresa: TStringField;
+    CDS_CavidadeMolde_FK: TStringField;
+    CDS_CavidadeCavidade: TStringField;
+
+    procedure GetVerificarSeTemMoldeNovoNoSigma;
+    procedure ListarCavidade;
+    procedure ListarItem;
+
+    procedure BTN_IncluirRestricaoClick(Sender: TObject);
+    procedure BTN_PesquisarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ConfiguracaoMolde: TConfiguracaoMolde;
+
+implementation
+
+{$R *.dfm}
+
+uses ConfiguracaoMolde_VincularItem_Unit, conexaodados_unit,
+  ConfiguracaoMolde_VincularCavidade_Unit;
+
+procedure TConfiguracaoMolde.BTN_IncluirRestricaoClick(Sender: TObject);
+begin
+
+  inherited;
+  Application.CreateForm(TConfiguracaoMolde_VincularItem, ConfiguracaoMolde_VincularItem);
+  Try
+    ConfiguracaoMolde_VincularItem.LBL_Molde.Caption := TXT_ID.Text;
+    ConfiguracaoMolde_VincularItem.ShowModal;
+  Finally
+    ConfiguracaoMolde_VincularItem.Release;
+    ConfiguracaoMolde_VincularItem := nil;
+  End;
+
+end;
+
+procedure TConfiguracaoMolde.BTN_PesquisarClick(Sender: TObject);
+begin
+  inherited;
+  GetVerificarSeTemMoldeNovoNoSigma;
+
+end;
+
+procedure TConfiguracaoMolde.DSDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+  ListarCavidade;
+end;
+
+procedure TConfiguracaoMolde.GetVerificarSeTemMoldeNovoNoSigma;
+Var
+  VLC_Insert : String;
+
+begin
+
+   VLC_Insert := VLC_Insert + 'Insert Into BomixBI.[dbo].[Icq_TB_Molde] (Molde_ID, Molde, NumeroCavidade) ' + #13;
+   VLC_Insert := VLC_Insert + '   ' + #13;
+   VLC_Insert := VLC_Insert + 'SELECT Molde_ID, Molde, 0 FROM (   ' + #13;
+   VLC_Insert := VLC_Insert + '   Select  ' + #13;
+   VLC_Insert := VLC_Insert + '      EQUI_CODIG as Molde_ID, EQUI_DESCR as Molde  ' + #13;
+   VLC_Insert := VLC_Insert + '   from [SIGMA_OFICIAL].dbo.EQUIPAM (nolock)  ' + #13;
+   VLC_Insert := VLC_Insert + 'Where EQUI_CODIG like ' + '''' + 'MOL%' + '''' + #13;
+   VLC_Insert := VLC_Insert + 'AND EQUI_CODIG not in (Select Molde_ID Collate Latin1_General_BIN from BomixBI.[dbo].[Icq_TB_Molde] (nolock)) ' + #13;
+   VLC_Insert := VLC_Insert + ') TB  ' + #13;
+   VLC_Insert := VLC_Insert + 'Order by Molde_ID desc ' + #13;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do begin CommandText := VLC_Insert; Execute; end;
+
+end;
+
+procedure TConfiguracaoMolde.ListarCavidade;
+Var
+  VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + ' Select * from BomixBI.[dbo].[Icq_TB_MoldeCavidade] (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Molde_FK = ' + '''' + TXT_ID.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Cavidade ' + #13;
+
+  CDS_Cavidade.Close;
+  Query_Cavidade.SQL.Clear;
+  Query_Cavidade.SQL.Text := VLC_Select;
+  CDS_Cavidade.Open;
+
+end;
+
+procedure TConfiguracaoMolde.ListarItem;
+Var
+  VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + ' Select * from BomixBI.[dbo].[Icq_TB_MoldeItem] (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Molde_FK = ' + '''' + TXT_ID.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Item_FK ' + #13;
+
+  CDS_Item.Close;
+  Query_Item.SQL.Clear;
+  Query_Item.SQL.Text := VLC_Select;
+  CDS_Item.Open;
+
+end;
+
+procedure TConfiguracaoMolde.SpeedButton1Click(Sender: TObject);
+begin
+
+    inherited;
+    Application.CreateForm(TConfiguracaoMolde_VincularCavidade, ConfiguracaoMolde_VincularCavidade);
+    Try
+        ConfiguracaoMolde_VincularCavidade.TXT_Cavidade.Text := '';
+        ConfiguracaoMolde_VincularCavidade.LBL_Molde.Caption := TXT_ID.Text;
+        ConfiguracaoMolde_VincularCavidade.ShowModal;
+    Finally
+        ConfiguracaoMolde_VincularCavidade.Release;
+        ConfiguracaoMolde_VincularCavidade := nil;
+    End;
+
+end;
+
+end.

@@ -1,0 +1,317 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 391
+  Width = 570
+  object Query_ItensColetados: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      ' Select * from Icq_TB_ColetaSemanal_ItensColetados'
+      ' Where Item = '#39'B16H'#39)
+    Left = 106
+    Top = 175
+    object Query_ItensColetadosRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object Query_ItensColetadosArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object Query_ItensColetadosSetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object Query_ItensColetadosOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object Query_ItensColetadosCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object Query_ItensColetadosSetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 60
+    end
+    object Query_ItensColetadosStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object Query_ItensColetadosEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object Query_ItensColetadosItem: TStringField
+      FieldName = 'Item'
+      Size = 4
+    end
+    object Query_ItensColetadosProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object Query_ItensColetadosProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object Query_ItensColetadosLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object Query_ItensColetadosInjetora_FK: TStringField
+      FieldName = 'Injetora_FK'
+      Size = 6
+    end
+    object Query_ItensColetadosCicloPadrao: TFloatField
+      FieldName = 'CicloPadrao'
+    end
+    object Query_ItensColetadosMolde_ID: TStringField
+      FieldName = 'Molde_ID'
+      Size = 15
+    end
+    object Query_ItensColetadosMolde: TStringField
+      FieldName = 'Molde'
+      Size = 50
+    end
+    object Query_ItensColetadosResina1_ID: TStringField
+      FieldName = 'Resina1_ID'
+      Size = 15
+    end
+    object Query_ItensColetadosResina1: TStringField
+      FieldName = 'Resina1'
+      Size = 150
+    end
+    object Query_ItensColetadosResina1Perc: TFloatField
+      FieldName = 'Resina1Perc'
+    end
+    object Query_ItensColetadosResina2_ID: TStringField
+      FieldName = 'Resina2_ID'
+      Size = 15
+    end
+    object Query_ItensColetadosResina2: TStringField
+      FieldName = 'Resina2'
+      Size = 150
+    end
+    object Query_ItensColetadosResina2Perc: TFloatField
+      FieldName = 'Resina2Perc'
+    end
+    object Query_ItensColetadosMaster_ID: TStringField
+      FieldName = 'Master_ID'
+      Size = 15
+    end
+    object Query_ItensColetadosMaster: TStringField
+      FieldName = 'Master'
+      Size = 150
+    end
+    object Query_ItensColetadosMasterPerc: TFloatField
+      FieldName = 'MasterPerc'
+    end
+    object Query_ItensColetadosQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object Query_ItensColetadosCavidade: TIntegerField
+      FieldName = 'Cavidade'
+    end
+    object Query_ItensColetadosAno: TIntegerField
+      FieldName = 'Ano'
+    end
+    object Query_ItensColetadosSemanaAno: TIntegerField
+      FieldName = 'SemanaAno'
+    end
+    object Query_ItensColetadosSemana: TIntegerField
+      FieldName = 'Semana'
+    end
+    object Query_ItensColetadosInicio: TDateTimeField
+      FieldName = 'Inicio'
+    end
+    object Query_ItensColetadosFim: TDateTimeField
+      FieldName = 'Fim'
+    end
+    object Query_ItensColetadosID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object Query_ItensColetadosColetado: TStringField
+      FieldName = 'Coletado'
+      Size = 3
+    end
+    object Query_ItensColetadosFinalizado: TStringField
+      FieldName = 'Finalizado'
+      Size = 3
+    end
+    object Query_ItensColetadosUsuario_ID: TIntegerField
+      FieldName = 'Usuario_ID'
+    end
+    object Query_ItensColetadosMatricula: TStringField
+      FieldName = 'Matricula'
+      Size = 6
+    end
+    object Query_ItensColetadosFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 120
+    end
+    object Query_ItensColetadosCargo: TStringField
+      FieldName = 'Cargo'
+      Size = 150
+    end
+  end
+  object DSP_ItensColetados: TDataSetProvider
+    DataSet = Query_ItensColetados
+    Left = 346
+    Top = 192
+  end
+  object CDS_ItensColetados: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_ItensColetados'
+    Left = 146
+    Top = 56
+    object CDS_ItensColetadosRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object CDS_ItensColetadosArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDS_ItensColetadosSetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object CDS_ItensColetadosOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object CDS_ItensColetadosCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object CDS_ItensColetadosSetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 60
+    end
+    object CDS_ItensColetadosStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object CDS_ItensColetadosEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object CDS_ItensColetadosItem: TStringField
+      FieldName = 'Item'
+      Size = 4
+    end
+    object CDS_ItensColetadosProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object CDS_ItensColetadosProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object CDS_ItensColetadosLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object CDS_ItensColetadosInjetora_FK: TStringField
+      FieldName = 'Injetora_FK'
+      Size = 6
+    end
+    object CDS_ItensColetadosCicloPadrao: TFloatField
+      FieldName = 'CicloPadrao'
+    end
+    object CDS_ItensColetadosMolde_ID: TStringField
+      FieldName = 'Molde_ID'
+      Size = 15
+    end
+    object CDS_ItensColetadosMolde: TStringField
+      FieldName = 'Molde'
+      Size = 50
+    end
+    object CDS_ItensColetadosResina1_ID: TStringField
+      FieldName = 'Resina1_ID'
+      Size = 15
+    end
+    object CDS_ItensColetadosResina1: TStringField
+      FieldName = 'Resina1'
+      Size = 150
+    end
+    object CDS_ItensColetadosResina1Perc: TFloatField
+      FieldName = 'Resina1Perc'
+    end
+    object CDS_ItensColetadosResina2_ID: TStringField
+      FieldName = 'Resina2_ID'
+      Size = 15
+    end
+    object CDS_ItensColetadosResina2: TStringField
+      FieldName = 'Resina2'
+      Size = 150
+    end
+    object CDS_ItensColetadosResina2Perc: TFloatField
+      FieldName = 'Resina2Perc'
+    end
+    object CDS_ItensColetadosMaster_ID: TStringField
+      FieldName = 'Master_ID'
+      Size = 15
+    end
+    object CDS_ItensColetadosMaster: TStringField
+      FieldName = 'Master'
+      Size = 150
+    end
+    object CDS_ItensColetadosMasterPerc: TFloatField
+      FieldName = 'MasterPerc'
+    end
+    object CDS_ItensColetadosQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object CDS_ItensColetadosCavidade: TIntegerField
+      FieldName = 'Cavidade'
+    end
+    object CDS_ItensColetadosAno: TIntegerField
+      FieldName = 'Ano'
+    end
+    object CDS_ItensColetadosSemanaAno: TIntegerField
+      FieldName = 'SemanaAno'
+    end
+    object CDS_ItensColetadosSemana: TIntegerField
+      FieldName = 'Semana'
+    end
+    object CDS_ItensColetadosInicio: TDateTimeField
+      FieldName = 'Inicio'
+    end
+    object CDS_ItensColetadosFim: TDateTimeField
+      FieldName = 'Fim'
+    end
+    object CDS_ItensColetadosID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object CDS_ItensColetadosColetado: TStringField
+      FieldName = 'Coletado'
+      Size = 3
+    end
+    object CDS_ItensColetadosFinalizado: TStringField
+      FieldName = 'Finalizado'
+      Size = 3
+    end
+    object CDS_ItensColetadosUsuario_ID: TIntegerField
+      FieldName = 'Usuario_ID'
+    end
+    object CDS_ItensColetadosMatricula: TStringField
+      FieldName = 'Matricula'
+      Size = 6
+    end
+    object CDS_ItensColetadosFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 120
+    end
+    object CDS_ItensColetadosCargo: TStringField
+      FieldName = 'Cargo'
+      Size = 150
+    end
+  end
+  object DS_ItensColetados: TDataSource
+    DataSet = CDS_ItensColetados
+    Left = 306
+    Top = 56
+  end
+end

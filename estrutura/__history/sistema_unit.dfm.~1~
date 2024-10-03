@@ -1,0 +1,39 @@
+inherited Sys_Sistema: TSys_Sistema
+  Caption = 'Sistema'
+  ExplicitWidth = 1020
+  ExplicitHeight = 645
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel6: TPanel
+      inherited Label45: TLabel
+        Width = 294
+        Height = 28
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    inherited PGC_Principal: TPageControl
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 679
+        ExplicitHeight = 443
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 679
+        ExplicitHeight = 443
+        inherited PNL_DesenvolvimentoTitulo2: TPanel
+          ExplicitLeft = 334
+          ExplicitHeight = 443
+        end
+        inherited PNL_DesenvolvimentoTitulo1: TPanel
+          ExplicitWidth = 327
+          ExplicitHeight = 443
+        end
+      end
+    end
+  end
+end

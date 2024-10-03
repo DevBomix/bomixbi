@@ -1,0 +1,163 @@
+inherited BI_FuncionarioEntregaMaterias_InserirMaterial: TBI_FuncionarioEntregaMaterias_InserirMaterial
+  Caption = 'Inserir Material'
+  ClientHeight = 533
+  ClientWidth = 860
+  ExplicitWidth = 866
+  ExplicitHeight = 562
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 842
+    ExplicitWidth = 842
+    inherited LBL_Titulo: TLabel
+      Width = 139
+      Caption = 'Inserir Material'
+      ExplicitWidth = 139
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 846
+    Height = 428
+    inherited Panel_Filtro: TPanel
+      Width = 846
+      Height = 109
+      ExplicitWidth = 846
+      ExplicitHeight = 109
+      inherited Label5: TLabel
+        Top = 22
+        ExplicitTop = 22
+      end
+      inherited TXT_Buscador: TEdit
+        Top = 21
+        Width = 298
+        ExplicitTop = 21
+        ExplicitWidth = 298
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 364
+        Top = 19
+        ExplicitLeft = 364
+        ExplicitTop = 19
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Top = 115
+      Width = 834
+      Height = 310
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'Acessorio_Id'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 41
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Material'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 545
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PrazoDias'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Prazo Dias'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 90
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 494
+    Width = 860
+    inherited Panel3: TPanel
+      Left = 615
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSAcessorio_Id: TIntegerField
+      FieldName = 'Acessorio_Id'
+    end
+    object CDSDescricao: TStringField
+      FieldName = 'Descricao'
+      FixedChar = True
+      Size = 40
+    end
+    object CDSPrazoDias: TIntegerField
+      FieldName = 'PrazoDias'
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select Acessorio_Id, Descricao, PrazoDias '
+      'from [dbo].[Pes_TB_Acessorio]'
+      'Where Descricao like '#39'%%'#39
+      'AND Visibilidade = 0'
+      'Order by Descricao ')
+    object QueryAcessorio_Id: TIntegerField
+      FieldName = 'Acessorio_Id'
+    end
+    object QueryDescricao: TStringField
+      FieldName = 'Descricao'
+      FixedChar = True
+      Size = 40
+    end
+    object QueryPrazoDias: TIntegerField
+      FieldName = 'PrazoDias'
+    end
+  end
+end

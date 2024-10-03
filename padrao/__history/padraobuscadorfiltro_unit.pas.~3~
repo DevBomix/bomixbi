@@ -1,0 +1,351 @@
+unit PadraoBuscadorFiltro_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB, Datasnap.DBClient,
+  System.Actions, Vcl.ActnList, System.StrUtils;
+
+type
+  TPadraoBuscadorFiltro = class(TForm)
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel2: TPanel;
+    CBX_Operador: TComboBox;
+    TXT_Valor1: TMaskEdit;
+    TXT_Valor2: TMaskEdit;
+    Panel3: TPanel;
+    PNL_Sinal: TPanel;
+    CBX_Igual: TComboBox;
+    MemoSQL: TMemo;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    Panel_Botoes: TPanel;
+    Panel5: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+
+    // Minhas Procedures e Functions
+    procedure OrganizarCampos(Operador : TCombobox; Valor1 : TMaskEdit; Valor2 : TMaskEdit; TamanhoOriginal : Integer; TipoInformacao: String);
+    procedure DefinirPolaridade(Painel : TPanel);
+    function RetornarWhereFiltro(Operador: TCombobox; Painel : TPanel; Valor1 : TMaskEdit; Valor2 : TMaskEdit; CampoPesquisa : String; TipoInformacao : String) : String;
+
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure MemoSQLDblClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PadraoBuscadorFiltro: TPadraoBuscadorFiltro;
+
+implementation
+
+
+uses FuncaoSistema_Unit;
+
+procedure TPadraoBuscadorFiltro.DesenvolvimentoExecute(Sender: TObject);
+begin
+      Self.Width := 986;
+end;
+
+procedure TPadraoBuscadorFiltro.MemoSQLDblClick(Sender: TObject);
+begin
+    Self.Width := 691;
+end;
+
+// *****************************************************************************************************************************
+// Data: 19/11/2009
+// Desenvolvedor: André Brito
+// Função: Rotina para que quando o Campo 2 precisar ser visivel, se ajuste conforme o tamanho do Campo 1
+// Exemplo: Operador Entre: ambos os campos estarão visivel e seu tamanho é definido conforme variavel TamanhoOriginal. Já para
+// outros Operadores o Campo 1 é o dobro desta varivel somando mais 1.
+// *****************************************************************************************************************************
+procedure TPadraoBuscadorFiltro.OrganizarCampos(Operador: TCombobox;
+  Valor1, Valor2: TMaskEdit; TamanhoOriginal: Integer; TipoInformacao: String);
+begin
+
+  Valor1.Text := '';
+  Valor2.Text := '';
+
+  If (Operador.Text = 'Iniciado por') or (Operador.Text = 'Igual') or (Operador.Text = 'Terminado por')
+     or (Operador.Text = 'Contém') or (Operador.Text = 'Está contido')then
+  begin
+     Valor1.width := (TamanhoOriginal * 2) + 1;
+     Valor2.Visible := False;
+  end;
+
+  If Operador.Text = 'Entre' then
+  begin
+     Valor1.Width := TamanhoOriginal;
+     Valor2.Width := TamanhoOriginal;
+     Valor2.Visible := True;
+  end;
+
+  If TipoInformacao = 'Data' then
+     begin
+         Valor1.Text := DateTimeToStr(Date());
+         Valor2.Text := DateTimeToStr(Date());
+         Valor1.EditMask := '';
+     end;
+
+  Valor1.SetFocus;
+
+end;
+// *****************************************************************************************************************************
+// Rotina: DefinirPolaridadedoFiltro
+// Data: 19/11/2009
+// Função: Quando o Usuário selecionar o Panel de Polaridade, deverá pintar de Azul para Positivo e Vermelho para Negativo.
+// Exemplo: Operador Igual com Negativo ficará <> (Diferente).
+// *****************************************************************************************************************************
+procedure TPadraoBuscadorFiltro.BNT_CancelarClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TPadraoBuscadorFiltro.BNT_ConfirmarClick(Sender: TObject);
+begin
+ //
+end;
+
+procedure TPadraoBuscadorFiltro.DefinirPolaridade(Painel: TPanel);
+begin
+
+  If Painel.Color = clAqua then
+  begin
+      Painel.Color := clred;
+  end
+  else
+  begin
+      Painel.Color := clAqua;
+  end;
+end;
+
+// *****************************************************************************************************************************
+// Rotina: RetornarWhereFiltro
+// Data: 19/11/2009
+// Função: Trata as opções dos Filtros confirmadas pelo usuário. Aonde se um Valor for vazio, o operador é automaticamente
+// descartado da Consulta Final.
+// *****************************************************************************************************************************
+function TPadraoBuscadorFiltro.RetornarWhereFiltro(Operador: TCombobox; Painel : TPanel; Valor1 : TMaskEdit;
+Valor2 : TMaskEdit; CampoPesquisa : String; TipoInformacao: String): String;
+begin
+  // TipoInformacao pode ser [Caracter, Numero ou Data]
+  If Valor1.Text <> '' then
+  begin
+       If Operador.Text = 'Iniciado por' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' + Valor1.Text + '%' + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' + Valor1.Text + '%' + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' + Valor1.Text + '%' + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' + Valor1.Text + '%' + '''';
+              end;
+       Exit;
+       end;
+
+       If Operador.Text = 'Igual' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' = ' + '''' +  Valor1.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' = ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),'+ CampoPesquisa + ', 103) = ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' <> ' + '''' +  Valor1.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' <> ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),'+ CampoPesquisa + ', 103) <> ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Terminado por' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' +  '%' + Valor1.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' +  '%' + Valor1.Text + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' +  '%' + Valor1.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' +  '%' + Valor1.Text + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Contém' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' +  '%' + Valor1.Text + '%' + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' like ' + '''' +  '%' + Valor1.Text + '%' + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' +  '%' + Valor1.Text + '%' + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT like ' + '''' +  '%' + Valor1.Text + '%' + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Está contido' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' in (' + '''' + AnsiReplaceStr(Valor1.Text,',',''',''') + '''' + ')';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' in (' +  AnsiReplaceStr(Valor1.Text,',',',') + ')';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT in (' + '''' + AnsiReplaceStr(Valor1.Text,',',''',''') + '''' + ')';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT in (' +  AnsiReplaceStr(Valor1.Text,',',',') + ')';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Entre' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' between ' + '''' + Valor1.Text + '''' + ' AND ' + '''' + Valor2.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' between ' +  Valor1.Text + ' AND ' + Valor2.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := CampoPesquisa + ' between ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,1) + '''' +  ' AND ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor2.Text,2) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Caracter' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT between ' + '''' + Valor1.Text + '''' + ' AND ' + '''' + Valor2.Text + '''';
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT between ' +  Valor1.Text + ' AND ' + Valor2.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := CampoPesquisa + ' NOT between ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,1) + '''' +  ' AND ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor2.Text,2) + '''';
+              end;
+          exit;
+          end;
+
+       If Operador.Text = 'Maior' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' > ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) > ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' < ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) < ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Maior ou Igual' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' >= ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) >= ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' <= ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) <= ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Menor' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' < ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) < ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' > ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) > ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end;
+          Exit;
+          end;
+
+       If Operador.Text = 'Menor ou Igual' then
+          begin
+              If Painel.Color = clAqua then
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' <= ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) <= ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end
+              else
+              begin
+                  If TipoInformacao = 'Numero' then
+                      RetornarWhereFiltro := CampoPesquisa + ' >= ' + Valor1.Text;
+                  If TipoInformacao = 'Data' then
+                      RetornarWhereFiltro := ' Convert(char(10),' + CampoPesquisa + ', 103) >= ' + '''' +  Sys_FuncaoSistema.TransformarDataFormatoSQLServer(Valor1.Text,3) + '''';
+              end;
+          Exit;
+          end;
+  end;
+end;
+
+
+
+{$R *.dfm}
+
+end.

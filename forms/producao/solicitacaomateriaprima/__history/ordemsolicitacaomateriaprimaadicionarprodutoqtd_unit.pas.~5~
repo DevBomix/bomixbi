@@ -1,0 +1,144 @@
+unit OrdemSolicitacaoMateriaPrimaAdicionarProdutoQtd_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.Buttons, Datasnap.Provider, Data.DB,
+  Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Memo1: TMemo;
+    ActionList1: TActionList;
+    Cancelar: TAction;
+    Confirmar: TAction;
+    TXT_Quantidade: TEdit;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+
+    // Minhas Functions e Procedures
+    procedure InserirProduto;
+    function GetSequencia : String;
+
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure TXT_QuantidadeKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd: TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, OrdemSolicitacaoMateriaPrima_Unit,
+  OrdemSolicitacaoMateriaPrimaAdicionarProduto_Unit, ConexaoDados_Unit;
+
+function TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd.GetSequencia : String;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select IsNULL(MAX(Sequencia),0) + 1 as Codigo from BomixBI.[dbo].[Est_TB_EstoqueSolicitacaoMateriaPrimaItem] ' + #13;
+  VLC_Select := VLC_Select + ' Where  Solicitacao_FK = ' + '''' + OrdemSolicitacao_MateriaPrima.TXT_ID.Text + '''';
+  VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + '0101' + '''' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  Result := Query.FieldByName('Codigo').AsString;
+  Query.Free;
+
+end;
+
+procedure TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd.InserirProduto;
+Var
+  VLC_Query : String;
+  VLC_RECNO : String;
+  X  : TReplaceFlags;
+
+begin
+
+   VLC_Query := ' Insert Into P11Oficial.dbo.SZS010 (Empresa, Solicitacao_FK, Sequencia, Produto_FK, Quantidade, Unidade, Grupo_FK) Values (' + #13;
+   VLC_Query := VLC_Query + '''' + Sys_FuncaoSistema.PNL_EmpresaID.Caption + '''' + ',';
+   VLC_Query := VLC_Query + '''' + OrdemSolicitacao_MateriaPrima.TXT_ID.Text + '''' + ',';
+   VLC_Query := VLC_Query + '''' + GetSequencia + '''' + ',';
+   VLC_Query := VLC_Query + '''' + OrdemSolicitacaoMateriaPrima_AdicionarProduto.CDSProduto_ID.AsString + '''' + ',';
+   VLC_Query := VLC_Query + StringReplace(TXT_Quantidade.Text, ',', '.', X) + ',';
+  // VLC_Query := VLC_Query + '''' + TXT_Quantidade.Text + '''' + ',';
+   VLC_Query := VLC_Query + VLC_RECNO + ')';
+
+   Memo1.Lines.Text := VLC_Query;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Query;
+       Execute;
+   end;
+
+end;
+
+procedure TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd.BNT_ConfirmarClick(
+  Sender: TObject);
+Var
+      X  : TReplaceFlags;
+begin
+
+  If TXT_Quantidade.Text = '' then
+  begin
+      Application.MessageBox('Campo Obrigatório: Defina a quantidade!','Atenção',mb_iconwarning + mb_ok);
+      TXT_Quantidade.SetFocus;
+      Exit;
+  end;
+
+  if StrToFloat(TXT_Quantidade.Text) > OrdemSolicitacaoMateriaPrima_AdicionarProduto.CDSEstoque.AsFloat then
+  begin
+      Application.MessageBox('Quantidade no Estoque não atende ao que solicitou!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end;
+
+  InserirProduto;
+  OrdemSolicitacao_MateriaPrima.ListarProdutos;
+  Close;
+
+end;
+
+
+
+
+
+procedure TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd.TXT_QuantidadeKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+    if not (key in ['0'..'9',#13, ',']) then key := #0;
+end;
+
+procedure TOrdemSolicitacaoMateriaPrima_AdicionarProdutoQtd.BNT_CancelarClick(
+  Sender: TObject);
+begin
+ Close;
+end;
+
+end.

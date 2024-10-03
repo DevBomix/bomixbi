@@ -1,0 +1,80 @@
+unit OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.ExtCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, System.Actions, Vcl.ActnList;
+
+type
+  TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos = class(TForm)
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    CDSLote: TStringField;
+    CDSValidade: TDateTimeField;
+    Query: TADOQuery;
+    QueryLote: TStringField;
+    QueryValidade: TDateTimeField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    DBGrid: TDBGrid;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos: TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos;
+
+implementation
+
+{$R *.dfm}
+
+uses OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Unit;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos.BTN_BuscarClick(Sender: TObject);
+Var
+  VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	B8_LOTECTL as Lote, Convert(Datetime,B8_DTVALID,112) as Validade ' + #13;
+  VLC_Select := VLC_Select + ' from P12OFICIAL.dbo.SB8010 (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where B8_PRODUTO = ' + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_ProdutoID.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' AND B8_LOCAL = ' + '''' + OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.TXT_Armazem.Text + '''' + #13;
+  VLC_Select := VLC_Select + ' AND B8_LOTECTL like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Convert(Datetime,B8_DTVALID,112) ' + #13;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

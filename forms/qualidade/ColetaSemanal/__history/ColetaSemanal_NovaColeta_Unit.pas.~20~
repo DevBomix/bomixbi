@@ -1,0 +1,153 @@
+unit ColetaSemanal_NovaColeta_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.Mask, Vcl.ComCtrls;
+
+type
+  TColetaSemanal_NovaColeta = class(TPadraoBuscador)
+    DTP_DataColeta: TDateTimePicker;
+    Label2: TLabel;
+    TXT_HoraColeta: TMaskEdit;
+    Label4: TLabel;
+    CBX_Cavidade: TComboBox;
+    TXT_MoldeID: TEdit;
+    TXT_Molde: TEdit;
+    Label3: TLabel;
+    Label7: TLabel;
+    Label1: TLabel;
+    QueryRecno: TIntegerField;
+    QueryArea: TStringField;
+    QuerySetor: TStringField;
+    QueryOrdemProducao: TStringField;
+    QueryCliente: TStringField;
+    QuerySetorMercado: TStringField;
+    QueryStatus: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryItem: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryDataAjustadaIni: TDateTimeField;
+    QueryHoraAjustadaIni: TStringField;
+    QueryPrioridade: TIntegerField;
+    QueryLote: TStringField;
+    QueryInjetora_FK: TStringField;
+    QueryCicloPadrao: TFloatField;
+    QueryMolde_ID: TStringField;
+    QueryMolde: TStringField;
+    QueryResina1_ID: TStringField;
+    QueryResina1: TStringField;
+    QueryResina1Perc: TFloatField;
+    QueryResina2_ID: TStringField;
+    QueryResina2: TStringField;
+    QueryResina2Perc: TFloatField;
+    QueryMaster_ID: TStringField;
+    QueryMaster: TStringField;
+    QueryMasterPerc: TFloatField;
+    CDSRecno: TIntegerField;
+    CDSArea: TStringField;
+    CDSSetor: TStringField;
+    CDSOrdemProducao: TStringField;
+    CDSCliente: TStringField;
+    CDSSetorMercado: TStringField;
+    CDSStatus: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSItem: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSDataAjustadaIni: TDateTimeField;
+    CDSLote: TStringField;
+    CDSHoraAjustadaIni: TStringField;
+    CDSPrioridade: TIntegerField;
+    CDSInjetora_FK: TStringField;
+    CDSCicloPadrao: TFloatField;
+    CDSMolde_ID: TStringField;
+    CDSMolde: TStringField;
+    CDSResina1_ID: TStringField;
+    CDSResina1Perc: TFloatField;
+    CDSResina1: TStringField;
+    CDSResina2_ID: TStringField;
+    CDSResina2: TStringField;
+    CDSResina2Perc: TFloatField;
+    CDSMaster_ID: TStringField;
+    CDSMaster: TStringField;
+    CDSMasterPerc: TFloatField;
+    TXT_Recurso: TEdit;
+    Label6: TLabel;
+    Memo2: TMemo;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ColetaSemanal_NovaColeta: TColetaSemanal_NovaColeta;
+
+implementation
+
+{$R *.dfm}
+
+uses ColetaSemanal_Unit, ColetaSemanal_NovaColetaQTD_Unit;
+
+procedure TColetaSemanal_NovaColeta.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TColetaSemanal_NovaColeta.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+    Application.CreateForm(TColetaSemanal_NovaColetaQtd, ColetaSemanal_NovaColetaQtd);
+    Try
+         ColetaSemanal_NovaColetaQtd.ShowModal;
+    Finally
+         ColetaSemanal_NovaColetaQtd.Release;
+         ColetaSemanal_NovaColetaQtd := Nil;
+    End;
+end;
+
+procedure TColetaSemanal_NovaColeta.BTN_BuscarClick(Sender: TObject);
+Var
+  VLC_Select : String;
+
+begin
+
+    inherited;
+
+    VLC_Select := VLC_Select + ' Select ' + #13;
+    VLC_Select := VLC_Select + '    Recno, Area, Setor, OrdemProducao, Cliente, SetorMercado, Status, Emissao, ' + #13;
+    VLC_Select := VLC_Select + ' 	SUBSTRING(Produto_ID,1,4) as Item, Produto_ID, Produto, DataAjustadaIni, HoraAjustadaIni, Prioridade, ' + #13;
+    VLC_Select := VLC_Select + ' 	CASE  ' + #13;
+    VLC_Select := VLC_Select + ' 			WHEN DATEPART(WEEK, DataAjustadaIni) <= 9 THEN ' + '''' + '0' + '''' + ' + CAST(DATEPART(WEEK, DataAjustadaIni) AS varchar(1))  ' + #13;
+    VLC_Select := VLC_Select + ' 	ELSE CAST(DATEPART(WEEK, DataAjustadaIni) AS varchar(2)) END + SUBSTRING(Produto_ID,1,4) + CAST(YEAR(DataAjustadaIni) AS varchar(4)) AS Lote, ' + #13;
+    VLC_Select := VLC_Select + ' 	Injetora_FK, CicloPadrao, Molde_ID, Molde, Resina1_ID, Resina1, Resina1Perc, Resina2_ID, Resina2, Resina2Perc, Master_ID, Master, MasterPerc ' + #13;
+    VLC_Select := VLC_Select + ' from BOMIXBI.dbo.Pcp_TB_OrdemProducao (nolock) ' + #13;
+    VLC_Select := VLC_Select + ' Where DataAjustadaIni >= CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(ColetaSemanal.DTP_DataInicial.Date) + '''' +  ',103),103)' + #13;
+    VLC_Select := VLC_Select + ' AND DataAjustadaIni <= CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(ColetaSemanal.DTP_DataFinal.Date) + '''' +  ',103),103)' + #13;
+    VLC_Select := VLC_Select + ' AND Setor + OrdemProducao + Cliente + SetorMercado + Injetora_FK + Produto_ID + Produto like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Injetora_FK = ' + '''' + ColetaSemanal.CDSRecurso.AsString + '''' + #13;
+    VLC_Select := VLC_Select + ' AND SUBSTRING(Produto_ID,1,4) = ' + '''' + ColetaSemanal.CDSItem_FK.AsString + '''' + #13;
+
+    VLC_Select := VLC_Select + ' Order by DataAjustadaIni, HoraAjustadaIni, Prioridade ' + #13;
+
+    Memo1.Lines.Text := VLC_Select;
+
+    CDS.Close;
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Text := VLC_Select;
+    CDS.Open;
+
+end;
+
+end.

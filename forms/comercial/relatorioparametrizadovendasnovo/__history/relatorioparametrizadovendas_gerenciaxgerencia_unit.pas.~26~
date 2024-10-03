@@ -1,0 +1,252 @@
+unit RelatorioParametrizadoVendas_GerenciaXGerencia_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Datasnap.Provider,
+  Datasnap.DBClient, Data.DB, Data.Win.ADODB, ppParameter, ppDesignLayer,
+  ppCtrls, ppBands, ppClass, ppStrtch, ppMemo, ppPrnabl, ppCache, ppProd,
+  ppReport, ppComm, ppRelatv, ppDB, ppDBPipe;
+
+type
+  TRelatorioParametrizadoVendas_GerenciaXGerencia = class(TForm)
+    ppDB: TppDBPipeline;
+    ppRelatorio: TppReport;
+    ppHeaderBand16: TppHeaderBand;
+    ppLine142: TppLine;
+    ppImage15: TppImage;
+    ppLabel278: TppLabel;
+    LBL_Periodo: TppLabel;
+    ppDetailBand16: TppDetailBand;
+    TXT_PesoGerenciaXGerencia: TppDBText;
+    ppLine143: TppLine;
+    TXT_ValorLiquidoGerenciaXGerencia: TppDBText;
+    TXT_GerenteGerenciaXGerencia: TppDBText;
+    TXT_QTDGerenciaXGerencia: TppDBText;
+    ppDBText113: TppDBText;
+    ppDBText155: TppDBText;
+    TXT_ValorBrutoGerenciaXGerencia: TppDBText;
+    ppFooterBand16: TppFooterBand;
+    ppLine144: TppLine;
+    LBL_Filtros: TppMemo;
+    LBL_Data: TppLabel;
+    LBL_NumeroPagina: TppLabel;
+    LBL_Usuario: TppLabel;
+    ppShape61: TppShape;
+    ppSummaryBand16: TppSummaryBand;
+    ppLabel314: TppLabel;
+    ppLabel315: TppLabel;
+    ppLabel316: TppLabel;
+    ppLabel317: TppLabel;
+    ppLabel318: TppLabel;
+    ppLabel319: TppLabel;
+    ppDBText238: TppDBText;
+    ppDBText239: TppDBText;
+    ppDBText240: TppDBText;
+    ppDBText241: TppDBText;
+    ppDBText242: TppDBText;
+    ppLabel260: TppLabel;
+    ppDBText156: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDBText1: TppDBText;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppGroup30_GerenciaXGerencia: TppGroup;
+    ppGroupHeaderBand30: TppGroupHeaderBand;
+    Linha_GerenciaXGerencia00: TppShape;
+    LBL_PesoGerenciaXGerencia: TppLabel;
+    LBL_LiquidoGerenciaXGerencia: TppLabel;
+    LBL_BrutoGerenciaXGerencia: TppLabel;
+    LBL_GerenteGerenciaXGerencia: TppLabel;
+    LBL_QTDGerenciaXGerencia: TppLabel;
+    ppDBText192: TppDBText;
+    ppLabel253: TppLabel;
+    ppLabel259: TppLabel;
+    ppGroupFooterBand30: TppGroupFooterBand;
+    ShapeTotalComissao: TppShape;
+    LBL_TotalComissao: TppLabel;
+    TXT_ValorBrutoTotalComissao: TppDBCalc;
+    TXT_ValorPCCTotal: TppDBCalc;
+    TXT_PesoTotalComissao: TppDBCalc;
+    TXT_QtdTotalComissao: TppDBCalc;
+    TXT_MediaComissao: TppDBCalc;
+    ppDBCalc86: TppDBCalc;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList16: TppParameterList;
+    Query: TADOQuery;
+    QueryComissaoVendedor: TStringField;
+    QueryGerente: TStringField;
+    QueryQuantidade: TIntegerField;
+    QueryValorUnitario: TFloatField;
+    QueryMediaKG: TFloatField;
+    QueryPeso: TFloatField;
+    QueryValorLiquido: TFloatField;
+    QueryValorBruto: TFloatField;
+    QueryValorPCC: TFloatField;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    CDSComissaoVendedor: TStringField;
+    CDSGerente: TStringField;
+    CDSQuantidade: TIntegerField;
+    CDSValorUnitario: TFloatField;
+    CDSMediaKG: TFloatField;
+    CDSPeso: TFloatField;
+    CDSValorLiquido: TFloatField;
+    CDSValorBruto: TFloatField;
+    CDSValorPCC: TFloatField;
+    DSP: TDataSetProvider;
+    QueryValorLiquidoMP: TFloatField;
+    QueryValorPCCMP: TFloatField;
+    QueryValorBrutoMP: TFloatField;
+    CDSValorLiquidoMP: TFloatField;
+    CDSValorPCCMP: TFloatField;
+    CDSValorBrutoMP: TFloatField;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppDBCalc2: TppDBCalc;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBCalc3: TppDBCalc;
+    ppLabel4: TppLabel;
+    ppDBText4: TppDBText;
+    ppDBCalc1: TppDBCalc;
+    QueryMediaKGMP: TFloatField;
+    CDSMediaKGMP: TFloatField;
+
+    // Minhas Procedures e Functions
+    function GetSelect : String;
+    function ImprimirRelatorio : Boolean;
+    procedure TXT_MediaComissaoPrint(Sender: TObject);
+    procedure ppRelatorioStartPage(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendas_GerenciaXGerencia: TRelatorioParametrizadoVendas_GerenciaXGerencia;
+
+implementation
+
+{$R *.dfm}
+
+uses RelatorioParametrizadoVendasNOVO_Unit, ConexaoDados_Unit,
+  FuncaoSistema_Unit;
+
+function TRelatorioParametrizadoVendas_GerenciaXGerencia.GetSelect: String;
+Var
+  VLC_Select : String;
+begin
+
+   if RelatorioParametrizadoVendasNOVO.CBX_ListarComissaoSimples.Text = 'Soma/Subtrai (Consolidada)' then
+   begin
+
+         VLC_Select := VLC_Select + 'SELECT ' + #13;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + '   ' + '''' + 'Soma / Subtrai' + '''' + ' as ComissaoVendedor, Gerente, SUM(Quantidade) as Quantidade, Sum(ValorUnitario) as ValorUnitario,' + #13;
+         VLC_Select := VLC_Select + '   Case When SUM(Peso) > 0 Then Round((Sum(ValorPCC)/ SUM(Peso)),2) else 0  end as MediaKG,' + #13;
+         VLC_Select := VLC_Select + '   Case When SUM(Peso) > 0 Then Round((Sum(ValorPCCMP)/ SUM(Peso)),2) else 0  end as MediaKGMP,' + #13;
+         VLC_Select := VLC_Select + '   Sum(Peso) as Peso, Sum(ValorLiquido) as ValorLiquido, Sum(ValorLiquidoMP) as ValorLiquidoMP,' + #13;
+         VLC_Select := VLC_Select + '   Sum(ValorPCC) as ValorPCC, Sum(ValorPCCMP) as ValorPCCMP,' + #13;
+         VLC_Select := VLC_Select + '   Sum(ValorBruto) as ValorBruto, Sum(ValorBrutoMP) as ValorBrutoMP ' + #13;
+         VLC_Select := VLC_Select + '' + #13;
+         VLC_Select := VLC_Select + 'FROM (  ' + #13;
+         VLC_Select := VLC_Select + '' + #13;
+         VLC_Select := VLC_Select + '    SELECT' + #13;
+         VLC_Select := VLC_Select + '' + #13;
+         VLC_Select := VLC_Select + '		ComissaoVendedor, Gerente,' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(Quantidade) ELSE SUM(Quantidade) END) as Quantidade,' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorUnitario) ELSE SUM(ValorUnitario) END) as ValorUnitario,' + #13;
+         VLC_Select := VLC_Select + ' 		(Case When SUM(Peso) > 0 Then (Sum(ValorPCC)/ SUM(Peso)) else 0  end) as MediaKG,' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(Peso) ELSE SUM(Peso) END) as Peso,' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorLiquido) ELSE SUM(ValorLiquido) END) as ValorLiquido, ' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorLiquidoMP) ELSE SUM(ValorLiquidoMP) END) as ValorLiquidoMP, ' + #13;
+         VLC_Select := VLC_Select + '	  	(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorPCC) ELSE SUM(ValorPCC) END) as ValorPCC, ' + #13;
+         VLC_Select := VLC_Select + '	  	(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorPCCMP) ELSE SUM(ValorPCCMP) END) as ValorPCCMP, ' + #13;
+         VLC_Select := VLC_Select + ' 		(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorBruto) ELSE SUM(ValorBruto) END) as ValorBruto, ' + #13;
+         VLC_Select := VLC_Select + '	  	(CASE WHEN ComissaoVendedor = ' + '''' + 'Subtrai' + '''' + ' THEN -1 * SUM(ValorBrutoMP) ELSE SUM(ValorBrutoMP) END) as ValorBrutoMP ' + #13;
+         VLC_Select := VLC_Select + '  ' + #13;
+         VLC_Select := VLC_Select + '    FROM ( ' + #13;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + RelatorioParametrizadoVendasNOVO.SelectPadrao;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + '	) TB' + #13;
+         VLC_Select := VLC_Select + '    Group By ComissaoVendedor, Gerente' + #13;
+         VLC_Select := VLC_Select + '' + #13;
+         VLC_Select := VLC_Select + ') TB Group by Gerente' + #13;
+         VLC_Select := VLC_Select + 'Order By Gerente' + #13;
+
+   end
+   else
+   begin
+
+         VLC_Select := VLC_Select + 'SELECT ' + #13;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + '     ComissaoVendedor, Gerente, SUM(Quantidade) as Quantidade, Sum(ValorUnitario) as ValorUnitario,' + #13;
+         VLC_Select := VLC_Select + '     Case When SUM(Peso) > 0 Then Round((Sum(ValorLiquido)/ SUM(Peso)),2) else 0 end as MediaKG,' + #13;
+         VLC_Select := VLC_Select + '     SUM(Peso) as Peso, Sum(ValorLiquido) as ValorLiquido, Sum(ValorLiquidoMP) as ValorLiquidoMP,' + #13;
+         VLC_Select := VLC_Select + '     Sum(ValorPCC) as ValorPCC, Sum(ValorPCCMP) as ValorPCCMP,' + #13;
+         VLC_Select := VLC_Select + '     Sum(ValorBruto) as ValorBruto, Sum(ValorBrutoMP) as ValorBrutoMP ' + #13;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + 'FROM (   ' + #13;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + RelatorioParametrizadoVendasNOVO.SelectPadrao;
+         VLC_Select := VLC_Select + ' ' + #13;
+         VLC_Select := VLC_Select + ') TB ' + #13;
+         VLC_Select := VLC_Select + 'Group by ComissaoVendedor, Gerente Order By ComissaoVendedor, Gerente  ' + #13;
+
+   end;
+
+   Result := VLC_Select;
+
+end;
+
+function TRelatorioParametrizadoVendas_GerenciaXGerencia.ImprimirRelatorio: Boolean;
+Var
+   VLC_Select : String;
+begin
+
+   VLC_Select := GetSelect;
+
+   RelatorioParametrizadoVendasNOVO.MemoSQL.Lines.Text := VLC_Select;
+
+   CDS.Close;
+   Query.Close;
+   Query.SQL.Clear;
+   Query.SQL.Text := VLC_Select;
+   CDS.Open;
+
+   If CDS.RecordCount = 0 Then
+   begin
+      Result := False;
+   end
+   else
+   begin
+      RelatorioParametrizadoVendasNOVO.FazerCalculoTotalizador(CDS);
+      Result := True;
+   end;
+
+end;
+
+procedure TRelatorioParametrizadoVendas_GerenciaXGerencia.ppRelatorioStartPage(
+  Sender: TObject);
+begin
+  LBL_Data.Caption := 'Data Impressão: ' + DateTimeToStr(Date());
+  LBL_NumeroPagina.Caption := ('Página ' + IntToStr(ppRelatorio.Page) + ' de ' + IntToStr(ppRelatorio.PageCount));
+  LBL_Usuario.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+
+end;
+
+procedure TRelatorioParametrizadoVendas_GerenciaXGerencia.TXT_MediaComissaoPrint(
+  Sender: TObject);
+begin
+  if TXT_PesoTotalComissao.Value > 0 then
+       TXT_MediaComissao.Value:=TXT_ValorPCCTotal.Value/TXT_PesoTotalComissao.Value;
+end;
+
+end.

@@ -1,0 +1,33 @@
+unit SolicitacaoCadastroProduto_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Vcl.Mask,
+  Vcl.DBCtrls, System.Actions, Vcl.ActnList, Datasnap.Provider, Data.DB,
+  Datasnap.DBClient, Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TSolicitacaoCadastroProduto = class(TPadraoCadastro)
+    Label7: TLabel;
+    TXT_ID: TDBEdit;
+    Label5: TLabel;
+    CBX_Tipo: TComboBox;
+    Label4: TLabel;
+    TXT_Descricao: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SolicitacaoCadastroProduto: TSolicitacaoCadastroProduto;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,464 @@
+unit PadraoCadastro_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg, Data.DB,
+  Data.Win.ADODB, Vcl.Buttons, Datasnap.Provider, Datasnap.DBClient,
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, System.Actions,
+  Vcl.ActnList;
+
+type
+  TPadraoCadastro = class(TForm)
+    PNL_Top: TPanel;
+    IMG_Novo: TImage;
+    PNL_Navegacao: TPanel;
+    PNL_Controles: TPanel;
+    IMG_Direita: TImage;
+    IMG_Esquerda: TImage;
+    IMG_Pesquisar: TImage;
+    IMG_Imprimir: TImage;
+    IMG_Excluir: TImage;
+    IMG_Editar: TImage;
+    IMG_Confirmar: TImage;
+    IMG_Desistir: TImage;
+    Query: TADOQuery;
+    CDS: TClientDataSet;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    BTN_Novo: TSpeedButton;
+    BTN_Editar: TSpeedButton;
+    BTN_Excluir: TSpeedButton;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Desistir: TSpeedButton;
+    SHP_MenutencaoDados: TShape;
+    BTN_Direita: TSpeedButton;
+    BTN_Esquerda: TSpeedButton;
+    BTN_Imprimir: TSpeedButton;
+    BTN_Pesquisar: TSpeedButton;
+    PNL_Conteudo: TPanel;
+    PNL_Auxiliar: TPanel;
+    Splitter1: TSplitter;
+    PNL_Topo: TPanel;
+    PGC_Principal: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet_Desenvolvimento: TTabSheet;
+    Panel1: TPanel;
+    IMG_Abrir: TImage;
+    IMG_Fechar: TImage;
+    Panel2: TPanel;
+    Bevel2: TBevel;
+    Label2: TLabel;
+    Memo_Filtro: TMemo;
+    Panel3: TPanel;
+    Label1: TLabel;
+    Bevel1: TBevel;
+    Memo_Query: TMemo;
+    Panel4: TPanel;
+    Label3: TLabel;
+    DBGrid: TDBGrid;
+    BTN_Abrir: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Novo: TAction;
+    Editar: TAction;
+    Excluir: TAction;
+    Confirmar: TAction;
+    Desistir: TAction;
+    Pesquisar: TAction;
+    Imprimir: TAction;
+    PNL_Modo: TPanel;
+    SHP_Modo: TShape;
+    LBL_Modo: TLabel;
+    PNL_Listagem1: TPanel;
+    PNL_Listagem2: TPanel;
+    PNL_TopControles: TPanel;
+
+    // Minhas Procedures e Functions
+    procedure Form_ModoCadastramentoDados(Sender: TObject);
+    procedure Form_ModoPesquisaDados(Sender: TObject);
+    procedure Menu_ModoConfirmacaoDados(Sender: TObject);
+    procedure Menu_ModoOperacaoDados(Sender: TObject);
+
+    procedure FormShow(Sender: TObject);
+    procedure BTN_AbrirClick(Sender: TObject);
+    procedure BTN_NovoClick(Sender: TObject);
+    procedure BTN_EditarClick(Sender: TObject);
+    procedure BTN_ExcluirClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_DesistirClick(Sender: TObject);
+    procedure BTN_PesquisarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure ImprimirExecute(Sender: TObject);
+    procedure PesquisarExecute(Sender: TObject);
+    procedure ConfirmarExecute(Sender: TObject);
+    procedure DesistirExecute(Sender: TObject);
+    procedure ExcluirExecute(Sender: TObject);
+    procedure EditarExecute(Sender: TObject);
+    procedure NovoExecute(Sender: TObject);
+    procedure BTN_ImprimirClick(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure BTN_DireitaClick(Sender: TObject);
+    procedure BTN_EsquerdaClick(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure FormResize(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PadraoCadastro: TPadraoCadastro;
+
+implementation
+
+{$R *.dfm}
+
+uses ConexaoDados_Unit, FuncaoGrafica_Unit;
+
+
+// *****************************************************************************************************************************
+// Rotina: Form_ModoCadastramentoDados
+// Data: 26/11/2009
+// Função: Preparar o Pedido de Venda para modo de Cadastramento
+// *****************************************************************************************************************************
+procedure TPadraoCadastro.Form_ModoCadastramentoDados(Sender: TObject);
+begin
+   If Self.WindowState = wsMaximized then
+       PNL_Auxiliar.Width := Self.Width - (627 + 80)
+   else
+       PNL_Auxiliar.Width := Self.Width - (500 + 80);
+
+   IMG_Abrir.Visible := True;
+   IMG_Fechar.Visible := False;
+end;
+
+// *****************************************************************************************************************************
+// Rotina: VendedoresDestruirLista
+// Data: 26/11/2009
+// Função: Rotina para destruir a Lista de Vendedores
+// *****************************************************************************************************************************
+procedure TPadraoCadastro.Form_ModoPesquisaDados(Sender: TObject);
+begin
+   PNL_Auxiliar.Width := Self.Width - 50;
+   IMG_Abrir.Visible := False;
+   IMG_Fechar.Visible := True;
+
+end;
+
+procedure TPadraoCadastro.ImprimirExecute(Sender: TObject);
+begin
+   if PNL_Navegacao.Visible = True then
+        BTN_ImprimirClick(nil);
+end;
+
+procedure TPadraoCadastro.NovoExecute(Sender: TObject);
+begin
+  if BTN_Novo.Visible = True then
+     BTN_NovoClick(nil);
+
+end;
+
+// *****************************************************************************************************************************
+// Rotina: Menu_ModoConfirmacaoDados
+// Data: 26/11/2009
+// Função: Preparar o Pedido de Venda para modo de Confirmação
+// *****************************************************************************************************************************
+procedure TPadraoCadastro.Menu_ModoConfirmacaoDados(Sender: TObject);
+begin
+  BTN_Novo.Visible := False;
+  IMG_Novo.Visible := False;
+  BTN_Editar.Visible := False;
+  IMG_Editar.Visible := False;
+  BTN_Excluir.Visible := False;
+  IMG_Excluir.Visible := False;
+  BTN_Imprimir.Visible := False;
+  IMG_Imprimir.Visible := False;
+  BTN_Direita.Visible := False;
+  IMG_Direita.Visible := False;
+  BTN_Esquerda.Visible := False;
+  IMG_Esquerda.Visible := False;
+  BTN_Pesquisar.Visible := False;
+  IMG_Pesquisar.Visible := False;
+  PNL_Navegacao.Visible := False;
+
+  BNT_Confirmar.Visible := True;
+  IMG_Confirmar.Visible := True;
+  BNT_Confirmar.Left := BTN_Novo.Left;
+  IMG_Confirmar.Left := IMG_Novo.Left;
+
+  BNT_Desistir.Visible := True;
+  IMG_Desistir.Visible := True;
+  BNT_Desistir.Left := BNT_Confirmar.Width + 6;
+  IMG_Desistir.Left := BNT_Confirmar.Width + 10;
+end;
+
+// *****************************************************************************************************************************
+// Rotina: Menu_ModoOperacaoDados
+// Data: 26/11/2009
+// Função: Preparar o Pedido de Venda para modo de Confirmação
+// *****************************************************************************************************************************
+procedure TPadraoCadastro.Menu_ModoOperacaoDados(Sender: TObject);
+begin
+  BTN_Novo.Visible := True;
+  IMG_Novo.Visible := True;
+  BTN_Editar.Visible := True;
+  IMG_Editar.Visible := True;
+  BTN_Excluir.Visible := True;
+  IMG_Excluir.Visible := True;
+  BTN_Imprimir.Visible := True;
+  IMG_Imprimir.Visible := True;
+  BTN_Direita.Visible := True;
+  IMG_Direita.Visible := True;
+  BTN_Esquerda.Visible := True;
+  IMG_Esquerda.Visible := True;
+  BTN_Pesquisar.Visible := True;
+  IMG_Pesquisar.Visible := True;
+  PNL_Navegacao.Visible := True;
+  BNT_Confirmar.Visible := False;
+  IMG_Confirmar.Visible := False;
+  BNT_Desistir.Visible := False;
+  IMG_Desistir.Visible := False;
+end;
+
+
+procedure TPadraoCadastro.PesquisarExecute(Sender: TObject);
+begin
+   if PNL_Navegacao.Visible = True then
+       BTN_PesquisarClick(nil);
+end;
+
+procedure TPadraoCadastro.BNT_DesistirClick(Sender: TObject);
+begin
+    PGC_Principal.ActivePage := TabSheet1;
+    Menu_ModoOperacaoDados(nil);
+    SHP_MenutencaoDados.Visible := False;
+    DBGrid.Enabled := True;
+    DS.DataSet.Cancel;
+    LBL_Modo.Caption := 'Modo de Visualização';
+    PNL_Modo.Color:= clWhite;
+    LBL_Modo.Font.Color := $00916200;
+    Exit;
+end;
+
+procedure TPadraoCadastro.BNT_ConfirmarClick(Sender: TObject);
+begin
+    PGC_Principal.ActivePage := TabSheet1;
+    Menu_ModoOperacaoDados(nil);
+    SHP_MenutencaoDados.Visible := False;
+    DBGrid.Enabled := True;
+    DS.DataSet.Cancel;
+    LBL_Modo.Caption := 'Modo de Visualização';
+    PNL_Modo.Color:= clWhite;
+    LBL_Modo.Font.Color := $00916200;
+    Exit;
+end;
+
+procedure TPadraoCadastro.BTN_AbrirClick(Sender: TObject);
+begin
+
+    If IMG_Abrir.Visible = True then
+    begin
+       Form_ModoPesquisaDados(nil);
+       IMG_Abrir.Visible := False;
+       IMG_Fechar.Visible := True;
+    end
+    else
+    begin
+       Form_ModoCadastramentoDados(nil);
+       IMG_Abrir.Visible := True;
+       IMG_Fechar.Visible := False;
+
+    end;
+end;
+
+procedure TPadraoCadastro.BTN_DireitaClick(Sender: TObject);
+begin
+  CDS.Prior;
+end;
+
+procedure TPadraoCadastro.BTN_EditarClick(Sender: TObject);
+begin
+  PGC_Principal.ActivePage := TabSheet1;
+  Menu_ModoConfirmacaoDados(nil);
+  Form_ModoCadastramentoDados(nil);
+  SHP_MenutencaoDados.Visible := True;
+  SHP_MenutencaoDados.Brush.Color := $00804000;
+  DBGrid.Enabled := False;
+  LBL_Modo.Caption := 'Modo de Edição';
+  PNL_Modo.Color := $00804000;
+  LBL_Modo.Font.Color := clWhite;
+  CDS.Edit;
+
+end;
+
+procedure TPadraoCadastro.BTN_EsquerdaClick(Sender: TObject);
+begin
+  CDS.Next;
+end;
+
+procedure TPadraoCadastro.BTN_ExcluirClick(Sender: TObject);
+begin
+  PGC_Principal.ActivePage := TabSheet1;
+  Menu_ModoConfirmacaoDados(nil);
+  Form_ModoCadastramentoDados(nil);
+  SHP_MenutencaoDados.Visible := True;
+  SHP_MenutencaoDados.Brush.Color := $00000091;
+  LBL_Modo.Caption := 'Modo de Exclusão';
+  PNL_Modo.Color:= $00000091;
+  LBL_Modo.Font.Color := clWhite;
+  DBGrid.Enabled := False;
+end;
+
+procedure TPadraoCadastro.BTN_ImprimirClick(Sender: TObject);
+begin
+   // Imprimir
+end;
+
+procedure TPadraoCadastro.BTN_NovoClick(Sender: TObject);
+begin
+  PGC_Principal.ActivePage := TabSheet1;
+  Menu_ModoConfirmacaoDados(nil);
+  Form_ModoCadastramentoDados(nil);
+  SHP_MenutencaoDados.Visible := True;
+  SHP_MenutencaoDados.Brush.Color := $00404000;
+  DBGrid.Enabled := False;
+  LBL_Modo.Caption := 'Modo de Inserção';
+  PNL_Modo.Color := $00404000;
+  LBL_Modo.Font.Color := clWhite;
+  CDS.Insert;
+end;
+
+procedure TPadraoCadastro.BTN_PesquisarClick(Sender: TObject);
+begin
+   Form_ModoPesquisaDados(nil);
+   LBL_Modo.Caption := 'Modo de Pesquisa';
+   PNL_Modo.Color:= $00616161;
+   LBL_Modo.Font.Color := clWhite;
+end;
+
+procedure TPadraoCadastro.ConfirmarExecute(Sender: TObject);
+begin
+   if BNT_Confirmar.Visible = True then
+      BNT_ConfirmarClick(nil);
+end;
+
+procedure TPadraoCadastro.DBGridDblClick(Sender: TObject);
+begin
+    Form_ModoCadastramentoDados(nil);
+    IMG_Abrir.Visible := True;
+    IMG_Fechar.Visible := False;
+end;
+
+procedure TPadraoCadastro.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+   Bitmap : TBitmap;
+
+begin
+
+      Bitmap := TBitmap.Create;
+      If Column.Index = 0 then
+      begin
+             Bitmap := Sys_FuncaoGrafica.IMG_FREE.Picture.Bitmap;
+
+            with TDBGrid(Sender) do
+            begin
+               Canvas.Draw((Rect.Right - Rect.Left - Bitmap.Width) div 2 + Rect.Left,
+              (Rect.Bottom - Rect.Top - Bitmap.Height) div 2 + Rect.Top, Bitmap);
+            end;
+
+      end;
+end;
+
+procedure TPadraoCadastro.DesenvolvimentoExecute(Sender: TObject);
+begin
+
+if TabSheet_Desenvolvimento.TabVisible = False then
+begin
+    TabSheet_Desenvolvimento.TabVisible := True;
+    PGC_Principal.ActivePage := TabSheet_Desenvolvimento;
+end
+else
+    TabSheet_Desenvolvimento.TabVisible := False;
+
+end;
+
+procedure TPadraoCadastro.DesistirExecute(Sender: TObject);
+begin
+   if BNT_Desistir.Visible = True then
+      BNT_DesistirClick(nil);
+end;
+
+procedure TPadraoCadastro.DSDataChange(Sender: TObject; Field: TField);
+begin
+   if DS.State = dsBrowse then
+   begin
+       LBL_Modo.Caption := 'Modo de Visualização';
+       PNL_Modo.Color:= clWhite;
+       LBL_Modo.Font.Color := $00916200;
+   end;
+end;
+
+procedure TPadraoCadastro.EditarExecute(Sender: TObject);
+begin
+  if BTN_Editar.Visible = True then
+     BTN_EditarClick(nil);
+
+end;
+
+procedure TPadraoCadastro.ExcluirExecute(Sender: TObject);
+begin
+  if BTN_Excluir.Visible = True then
+     BTN_ExcluirClick(nil);
+
+end;
+
+procedure TPadraoCadastro.FormActivate(Sender: TObject);
+begin
+  Menu_ModoOperacaoDados(nil);
+  Form_ModoCadastramentoDados(nil);
+end;
+
+procedure TPadraoCadastro.FormClick(Sender: TObject);
+begin
+  TabSheet_Desenvolvimento.TabVisible := True;
+end;
+
+procedure TPadraoCadastro.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  If BNT_Confirmar.Visible = true then
+  begin
+      With Application  Do
+      begin
+          CanClose := MessageBox ('Você está em momento de decisão (inclusão, alteração ou exclusão). ' + #13 +
+          'Deseja sai do formulário perdendo este processo?','Pergunta',mb_YesNo Or mb_IconQuestion) = idYes;
+          If CanClose = True then BNT_Desistir.OnClick(nil);
+      end;
+   end;
+end;
+
+procedure TPadraoCadastro.FormResize(Sender: TObject);
+begin
+  BTN_AbrirClick(nil);
+  BTN_AbrirClick(nil);
+end;
+
+procedure TPadraoCadastro.FormShow(Sender: TObject);
+begin
+  PGC_Principal.ActivePage := TabSheet1;
+  try CDS.Open; except end;
+
+end;
+
+
+end.

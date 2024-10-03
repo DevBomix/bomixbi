@@ -1,0 +1,154 @@
+unit imprimirespecificacaotecnicaeditardados_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppParameter, ppDesignLayer, ppBands,
+  ppClass, ppStrtch, ppMemo, ppCtrls, ppPrnabl, ppCache, ppProd, ppReport,
+  ppComm, ppRelatv, ppDB, ppDBPipe, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, System.Actions, Vcl.ActnList, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TRelatorio_ImprimirEspecificacaoTecnica_EditarDados = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    DBGrid: TDBGrid;
+    Memo1: TMemo;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    CDSID: TStringField;
+    CDSItem: TStringField;
+    CDSGrupo: TStringField;
+    CDSTipo: TStringField;
+    CDSTamanho: TStringField;
+    CDSFormato: TStringField;
+    CDSRosca: TStringField;
+    CDSBuscador: TStringField;
+    CDSGrupo_FK: TStringField;
+    CDSPeso: TFloatField;
+    CDSPesoAlca: TIntegerField;
+    CDSPesoTotal: TFloatField;
+    CDSEmpresa: TStringField;
+    CDSRecno: TIntegerField;
+    Query: TADOQuery;
+    QueryID: TStringField;
+    QueryItem: TStringField;
+    QueryGrupo: TStringField;
+    QueryTipo: TStringField;
+    QueryTamanho: TStringField;
+    QueryFormato: TStringField;
+    QueryRosca: TStringField;
+    QueryBuscador: TStringField;
+    QueryGrupo_FK: TStringField;
+    QueryPeso: TFloatField;
+    QueryPesoAlca: TIntegerField;
+    QueryPesoTotal: TFloatField;
+    QueryEmpresa: TStringField;
+    QueryRecno: TIntegerField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppDBPipeline4: TppDBPipeline;
+    ppRelatorio: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppImage3: TppImage;
+    ppLabel71: TppLabel;
+    ppLine15: TppLine;
+    ppShape67: TppShape;
+    ppDBText1: TppDBText;
+    ppDBText70: TppDBText;
+    ppDBText3: TppDBText;
+    ppDetailBand3: TppDetailBand;
+    ppLine16: TppLine;
+    ppDBText49: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText2: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppLBL_Usuario: TppLabel;
+    ppLBL_Data: TppLabel;
+    ppMemo3: TppMemo;
+    ppLine17: TppLine;
+    ppPageStyle3: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppShape1: TppShape;
+    ppDBText69: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer5: TppDesignLayer;
+    ppDesignLayer6: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    CDS_Relatorio: TClientDataSet;
+    CDS_RelatorioTipoEspecificacao: TStringField;
+    CDS_RelatorioID: TStringField;
+    CDS_RelatorioItem: TStringField;
+    CDS_RelatorioGrupo: TStringField;
+    CDS_RelatorioTipo: TStringField;
+    CDS_RelatorioTamanho: TStringField;
+    CDS_RelatorioFormato: TStringField;
+    CDS_RelatorioOrdem: TStringField;
+    CDS_RelatorioMedida: TStringField;
+    CDS_RelatorioUnidade: TStringField;
+    CDS_RelatorioEspecificacao: TStringField;
+    CDS_RelatorioVariacao: TStringField;
+    CDS_RelatorioMinino: TStringField;
+    CDS_RelatorioMaximo: TStringField;
+    Query_Relatorio: TADOQuery;
+    Query_RelatorioTipoEspecificacao: TStringField;
+    Query_RelatorioID: TStringField;
+    Query_RelatorioItem: TStringField;
+    Query_RelatorioGrupo: TStringField;
+    Query_RelatorioTipo: TStringField;
+    Query_RelatorioTamanho: TStringField;
+    Query_RelatorioFormato: TStringField;
+    Query_RelatorioOrdem: TStringField;
+    Query_RelatorioMedida: TStringField;
+    Query_RelatorioUnidade: TStringField;
+    Query_RelatorioEspecificacao: TStringField;
+    Query_RelatorioVariacao: TStringField;
+    Query_RelatorioMinino: TStringField;
+    Query_RelatorioMaximo: TStringField;
+    DS_Relatorio: TDataSource;
+    DSP_Relatorio: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ImprimirEspecificacaoTecnica_EditarDados: TRelatorio_ImprimirEspecificacaoTecnica_EditarDados;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,801 @@
+unit BI_PedidoVendaCarregamento_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Data.DB, Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.Buttons, Vcl.ExtCtrls, ppBands, ppClass, ppDB, ppDBPipe,
+  ppParameter, ppDesignLayer, ppCtrls, ppPrnabl, ppCache, ppComm, ppRelatv,
+  ppProd, ppReport, Vcl.ComCtrls, Vcl.Mask;
+
+type
+  TBI_PedidoVendaCarregamento = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel4: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    SHP_Caminhao: TShape;
+    BTN_PorRegiao: TBitBtn;
+    SHP_Cabotagem: TShape;
+    BTN_PorPedido: TBitBtn;
+    Image2: TImage;
+    BTN_RetirarPedido: TSpeedButton;
+    PNL_Carga: TPanel;
+    Label9: TLabel;
+    SHP_Carregamento: TShape;
+    Image4: TImage;
+    BNT_CriarCarga: TSpeedButton;
+    BNT_Carregamento: TSpeedButton;
+    Image3: TImage;
+    Shape1: TShape;
+    Label1: TLabel;
+    Image5: TImage;
+    BTN_ExcluirCarga: TSpeedButton;
+    BNT_DefinirCarga: TSpeedButton;
+    CBX_Carga: TComboBox;
+    IMG_Imprimir: TImage;
+    BTN_Imprimir: TSpeedButton;
+    LBL_NumeroPaleteCarga: TLabel;
+    CDS_Cargas: TClientDataSet;
+    Query_Cargas: TADOQuery;
+    DS_Cargas: TDataSource;
+    DSP_Cargas: TDataSetProvider;
+    Query_CargasEmpresa: TStringField;
+    Query_CargasCarga: TStringField;
+    Query_CargasCapacidade: TStringField;
+    Query_CargasNumeroCarga: TFloatField;
+    CDS_CargasEmpresa: TStringField;
+    CDS_CargasCarga: TStringField;
+    CDS_CargasCapacidade: TStringField;
+    CDS_CargasNumeroCarga: TFloatField;
+    LBL_CapacidadePaleteCarga: TLabel;
+    Label3: TLabel;
+    ppRelatorioCarga: TppReport;
+    ppHeaderBand4: TppHeaderBand;
+    ppLine1: TppLine;
+    ppImage3: TppImage;
+    ppLabelTitulo: TppLabel;
+    ppShape7: TppShape;
+    ppLabel38: TppLabel;
+    ppLabel44: TppLabel;
+    ppDetailBand4: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppDBText14: TppDBText;
+    ppDBText39: TppDBText;
+    ppFooterBand4: TppFooterBand;
+    ppLine44: TppLine;
+    ppLBL_Data: TppLabel;
+    ppLBL_Usuario: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppDBCalc3: TppDBCalc;
+    ppPageStyle4: TppPageStyle;
+    ppDesignLayers4: TppDesignLayers;
+    ppDesignLayer7: TppDesignLayer;
+    ppDesignLayer8: TppDesignLayer;
+    ppParameterList4: TppParameterList;
+    ppDBPipeline1: TppDBPipeline;
+    DSP_CargasImprimir: TDataSetProvider;
+    DS_CargasImprimir: TDataSource;
+    Query_CargasImprimir: TADOQuery;
+    CDS_CargasImprimir: TClientDataSet;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppShape2: TppShape;
+    ppLabel4: TppLabel;
+    ppShape3: TppShape;
+    Image7: TImage;
+    Label2: TLabel;
+    Label4: TLabel;
+    SpeedButton2: TSpeedButton;
+    Image8: TImage;
+    SpeedButton3: TSpeedButton;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppLabel3: TppLabel;
+    ppLabel5: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    ppShape5: TppShape;
+    ppDBCalc2: TppDBCalc;
+    ppLabel6: TppLabel;
+    ppDBCalc4: TppDBCalc;
+    ppLine3: TppLine;
+    SHP_TemObservacao: TShape;
+    DT_DataCarragamento: TDateTimePicker;
+    Shape2: TShape;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBCalc5: TppDBCalc;
+    ppLabel7: TppLabel;
+    ppShape1: TppShape;
+    ppDBText13: TppDBText;
+    GridPorPedido: TDBGrid;
+    Memo: TMemo;
+    QueryRecno: TAutoIncField;
+    QueryRecno_Pedido: TIntegerField;
+    QueryRecno_Item: TIntegerField;
+    QueryEmpresa: TStringField;
+    QueryUF: TStringField;
+    QueryMunicipio: TStringField;
+    QueryDataPCP: TDateTimeField;
+    QueryCliente_ID: TStringField;
+    QueryLoja: TStringField;
+    QueryRazaoSocial: TStringField;
+    QuerySetorMercado: TStringField;
+    QueryPedidoVenda_FK: TStringField;
+    QuerySequencia: TStringField;
+    QueryDataPedido: TDateTimeField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryQuantidade: TIntegerField;
+    QueryPallete: TFloatField;
+    QueryObservacao: TStringField;
+    QueryDataCarregamento: TDateTimeField;
+    QueryCarga: TStringField;
+    QueryTipoCarga: TStringField;
+    CDSRecno: TAutoIncField;
+    CDSRecno_Pedido: TIntegerField;
+    CDSRecno_Item: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSUF: TStringField;
+    CDSMunicipio: TStringField;
+    CDSDataPCP: TDateTimeField;
+    CDSCliente_ID: TStringField;
+    CDSLoja: TStringField;
+    CDSRazaoSocial: TStringField;
+    CDSSetorMercado: TStringField;
+    CDSPedidoVenda_FK: TStringField;
+    CDSSequencia: TStringField;
+    CDSDataPedido: TDateTimeField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSQuantidade: TIntegerField;
+    CDSPallete: TFloatField;
+    CDSObservacao: TStringField;
+    CDSDataCarregamento: TDateTimeField;
+    CDSCarga: TStringField;
+    CDSTipoCarga: TStringField;
+    QuerySaldo: TIntegerField;
+    CDSSaldo: TIntegerField;
+    Query_CargasImprimirCarga: TStringField;
+    Query_CargasImprimirCliente: TStringField;
+    Query_CargasImprimirSetorMercado: TStringField;
+    Query_CargasImprimirCidade: TStringField;
+    Query_CargasImprimirUF: TStringField;
+    Query_CargasImprimirPedidoVenda_FK: TStringField;
+    Query_CargasImprimirSequencia: TStringField;
+    Query_CargasImprimirProduto_ID: TStringField;
+    Query_CargasImprimirProduto: TStringField;
+    Query_CargasImprimirQuantidade: TIntegerField;
+    Query_CargasImprimirSaldo: TIntegerField;
+    Query_CargasImprimirPeso: TFloatField;
+    Query_CargasImprimirPallete: TFloatField;
+    Query_CargasImprimirObservacao: TStringField;
+    Query_CargasImprimirDataPCP: TDateTimeField;
+    CDS_CargasImprimirCarga: TStringField;
+    CDS_CargasImprimirCliente: TStringField;
+    CDS_CargasImprimirSetorMercado: TStringField;
+    CDS_CargasImprimirCidade: TStringField;
+    CDS_CargasImprimirUF: TStringField;
+    CDS_CargasImprimirPedidoVenda_FK: TStringField;
+    CDS_CargasImprimirSequencia: TStringField;
+    CDS_CargasImprimirProduto_ID: TStringField;
+    CDS_CargasImprimirProduto: TStringField;
+    CDS_CargasImprimirQuantidade: TIntegerField;
+    CDS_CargasImprimirSaldo: TIntegerField;
+    CDS_CargasImprimirPeso: TFloatField;
+    CDS_CargasImprimirPallete: TFloatField;
+    CDS_CargasImprimirObservacao: TStringField;
+    CDS_CargasImprimirDataPCP: TDateTimeField;
+    Query_CargasImprimirTipoCarga: TStringField;
+    CDS_CargasImprimirTipoCarga: TStringField;
+    ppDBText15: TppDBText;
+    QueryPesoItem: TFloatField;
+    QueryPeso: TFloatField;
+    CDSPesoItem: TFloatField;
+    CDSPeso: TFloatField;
+
+    // Minhas Procedures e Functions
+    procedure DefinirCarga;
+    procedure AcoesDuploCliqueNoGrid;
+    procedure ListagemCargaUsadas;
+    procedure ConsultarEstoque;
+    function GetPedidoObservacao (PLC_Pedido : String) : String;
+    procedure ListarCargas(Combo: TComboBox);
+
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure MemoDblClick(Sender: TObject);
+    procedure BTN_PorRegiaoClick(Sender: TObject);
+    procedure BTN_PorProdutoClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure GridPorPedidoDblClick(Sender: TObject);
+    procedure GridPorProdutoDblClick(Sender: TObject);
+    procedure GridPorRegiaoDblClick(Sender: TObject);
+    procedure BTN_RetirarPedidoClick(Sender: TObject);
+    procedure BNT_DefinirCargaClick(Sender: TObject);
+    procedure BNT_CriarCargaClick(Sender: TObject);
+    procedure BTN_ExcluirCargaClick(Sender: TObject);
+    procedure CBX_CargaCloseUp(Sender: TObject);
+    procedure BTN_ImprimirClick(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure BTN_PorPedidoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaCarregamento: TBI_PedidoVendaCarregamento;
+  VPC_CargaAtiva : String;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVenda_Unit, BI_PedidoVendaEstrutura_Unit,
+  BI_PedidoVendaCarregamentoCriarCarga_Unit, FuncaoSistema_Unit,
+  BI_PedidoVendaCarregamentoOBS_Unit,
+  BI_PedidoVendaCarregamentoModificarSaldo_Unit, ConexaoDados_Unit,
+  FuncaoRestricoesInformacoes_Unit;
+
+
+procedure TBI_PedidoVendaCarregamento.ListarCargas(Combo: TComboBox);
+var
+   Query : TADOQuery;
+   VLC_Select, VLC_TipoCarga : String;
+   VLN_Contador : Integer;
+begin
+
+      if SHP_Caminhao.Brush.Color = $00A67000 then
+           VLC_TipoCarga := 'CAMINHÃO'
+      else
+           VLC_TipoCarga := 'CABOTAGEM';
+
+  VLC_Select := ' Select Descricao FROM [BOMIXBI].[dbo].[Fat_TB_PedidoVenda_OrdemCarregamento_Cargas] (nolock)  ' + #13;
+  VLC_Select := VLC_Select + ' Where TipoCarga = ' + '''' + VLC_TipoCarga + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Data =  ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(BI_PedidoVendaCarregamento.DT_DataCarragamento.Date),1) + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Descricao desc ' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  Combo.Items.Clear;
+  Query.First;
+  Combo.Text := Query.FieldByName('Descricao').AsString;
+  For VLN_Contador := 0 To Query.RecordCount - 1 do
+  begin
+     Combo.Items.Add(Query.FieldByName('Descricao').AsString);
+     Query.Next;
+  end;
+  Query.Free;
+
+end;
+
+function TBI_PedidoVendaCarregamento.GetPedidoObservacao(
+  PLC_Pedido: String): String;
+Var
+  VLC_Select : String;
+   Query : TADOQuery;
+
+begin
+
+  VLC_Select := ' Select Distinct Observacao ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where PedidoVenda_FK = ' + '''' + PLC_Pedido + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Empresa = ' + '''' + CDSEmpresa.AsString + '''' + #13;
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := Sys_ModuloConexaoDados.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  Result := Query.FieldByName('Observacao').AsString;
+  Query.Free;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.AcoesDuploCliqueNoGrid;
+begin
+
+   if PNL_Carga.Width > 79 then
+     begin
+
+          VPC_CargaAtiva := CBX_Carga.Text;
+
+          if CBX_Carga.Text <> '' then
+          begin
+              DefinirCarga;
+              CBX_CargaCloseUp(nil);
+              BTN_BuscarClick(nil);
+          end;
+
+          CBX_Carga.Text := VPC_CargaAtiva;
+
+     end;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.GridPorRegiaoDblClick(Sender: TObject);
+begin
+    AcoesDuploCliqueNoGrid;
+end;
+
+procedure TBI_PedidoVendaCarregamento.ListagemCargaUsadas;
+Var
+   VLC_Select : String;
+   VLC_TipoCarga : String;
+
+begin
+      if SHP_Caminhao.Brush.Color = $00A67000 then
+           VLC_TipoCarga := 'CAMINHÃO'
+      else
+           VLC_TipoCarga := 'CABOTAGEM';
+
+    VLC_Select := ' Select ' + #13;
+    VLC_Select := VLC_Select + ' Empresa, Carga, SUBSTRING(Carga,12,2) as Capacidade, Sum(Pallete) as NumeroCarga ' +#13;
+    VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento (nolock)  ' +#13;
+    VLC_Select := VLC_Select + ' Where DataCarregamento = CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataCarragamento.Date) + '''' +  ',103),103)' + #13;
+    VLC_Select := VLC_Select + ' AND TipoCarga = ' + '''' + VLC_TipoCarga + '''' + #13;
+    VLC_Select := VLC_Select + ' Group By Empresa, Carga ' +#13;
+    VLC_Select := VLC_Select + ' Having Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+    VLC_Select := VLC_Select + ' AND Carga <> ' + '''' + '' + '''' + #13;
+
+    CDS_Cargas.Close;
+    Query_Cargas.Close;
+    Query_Cargas.SQL.Clear;
+    Query_Cargas.SQL.Text := VLC_Select;
+    CDS_Cargas.Open;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.CBX_CargaCloseUp(Sender: TObject);
+begin
+
+   ListagemCargaUsadas;
+   If DS_Cargas.DataSet.Locate('Carga',CBX_Carga.Text,[loPartialKey]) then
+   begin
+       LBL_NumeroPaleteCarga.Caption := CDS_CargasNumeroCarga.AsString;
+       LBL_CapacidadePaleteCarga.Caption := CDS_CargasCapacidade.AsString;
+   end
+   else
+   begin
+       LBL_NumeroPaleteCarga.Caption := '0';
+       LBL_CapacidadePaleteCarga.Caption := '0';
+   end;
+
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_PorRegiaoClick(Sender: TObject);
+begin
+
+      SHP_Caminhao.Brush.Color := $00A67000;
+      SHP_Cabotagem.Brush.Color := clGray;
+      BTN_BuscarClick(nil);
+
+end;
+
+
+
+procedure TBI_PedidoVendaCarregamento.ConsultarEstoque;
+begin
+
+ inherited;
+  Application.CreateForm(TBI_PedidoVendaEstrutura, BI_PedidoVendaEstrutura);
+  try
+      BI_PedidoVendaEstrutura.TXT_ProdutoID.Text := CDSProduto_ID.AsString;
+      BI_PedidoVendaEstrutura.BTN_BuscarClick(nil);
+      BI_PedidoVendaEstrutura.ShowModal;
+  finally
+      BI_PedidoVendaEstrutura.Release;
+      BI_PedidoVendaEstrutura := Nil;
+  end;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.DefinirCarga;
+Var
+   VLC_Update : String;
+   VLC_TipoCarga : String;
+
+begin
+      if SHP_Caminhao.Brush.Color = $00A67000 then
+           VLC_TipoCarga := 'CAMINHÃO'
+      else
+           VLC_TipoCarga := 'CABOTAGEM';
+
+
+  if CDSCarga.AsString = '' then
+  begin
+       VLC_Update := VLC_Update + ' Update BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento ' + #13;
+       VLC_Update := VLC_Update + ' Set Carga = ' + '''' + CBX_Carga.Text + '''' + ',' + #13;
+       VLC_Update := VLC_Update + ' TipoCarga = ' + '''' + VLC_TipoCarga + '''' + ',' + #13;
+       VLC_Update := VLC_Update + ' DataCarregamento = ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_DataCarragamento.Date),1) + '''' + ',';
+       VLC_Update := VLC_Update + ' Observacao = ' + '''' + '' + '''' + #13;
+       VLC_Update := VLC_Update + ' Where Recno = ' + IntToStr(CDSRecno.AsInteger) + #13;
+
+  end
+  else
+  begin
+       VLC_Update := VLC_Update + ' Update BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento ' + #13;
+       VLC_Update := VLC_Update + ' Set Carga = ' + '''' + '' + '''' + ',' + #13;
+       VLC_Update := VLC_Update + ' TipoCarga = ' + '''' + '' + '''' + ',' + #13;
+       VLC_Update := VLC_Update + ' DataCarregamento = NULL';
+       VLC_Update := VLC_Update + ' Where Recno = ' + IntToStr(CDSRecno.AsInteger) + #13;
+  end;
+
+       With Sys_ModuloConexaoDados.ADOCommand1 Do begin CommandText := VLC_Update; Execute; end;
+end;
+
+
+procedure TBI_PedidoVendaCarregamento.BTN_PorPedidoClick(Sender: TObject);
+begin
+      SHP_Caminhao.Brush.Color := clGray;
+      SHP_Cabotagem.Brush.Color := $00A67000;
+      BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_PorProdutoClick(Sender: TObject);
+begin
+
+      SHP_Caminhao.Brush.Color := clGray;
+      SHP_Cabotagem.Brush.Color := $00A67000;
+      BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_BuscarClick(Sender: TObject);
+Var
+   VLC_Select, VLC_TipoCarga : String;
+
+begin
+
+    if SHP_Caminhao.Brush.Color = $00A67000 then
+           VLC_TipoCarga := 'CAMINHÃO'
+    else
+         VLC_TipoCarga := 'CABOTAGEM';
+
+    if DT_DataCarragamento.Date >= Date then
+    begin
+
+          VLC_Select := VLC_Select + 'Select  ' + #13;
+          VLC_Select := VLC_Select + '	Recno, Recno_Pedido, Recno_Item, Empresa, UnidadeFederativa as UF, Municipio, DataPCP,  ' + #13;
+          VLC_Select := VLC_Select + '	Cliente_ID, Loja, RazaoSocial,SetorMercado, PedidoVenda_FK, Sequencia, DataPedido,  ' + #13;
+          VLC_Select := VLC_Select + '	Produto_ID, Produto, Quantidade, Saldo, PesoItem, Peso, Pallete, Observacao, DataCarregamento, Carga, TipoCarga  ' + #13;
+          VLC_Select := VLC_Select + 'from BOMIXBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento (nolock)  ' + #13;
+          VLC_Select := VLC_Select + 'Where Fechado = 0  ' + #13;
+          VLC_Select := VLC_Select + 'AND DataCarregamento is NULL  ' + #13;
+          VLC_Select := VLC_Select + 'AND PedidoVenda_FK + Produto_ID + Produto + RazaoSocial + Cliente_ID + Municipio like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+          VLC_Select := VLC_Select + 'AND TipoCarga in ('+ ''''+ '' + '''' + ',' + '''' + VLC_TipoCarga + '''' + ')' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'UNION ALL   ' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'Select  ' + #13;
+          VLC_Select := VLC_Select + '	Recno, Recno_Pedido, Recno_Item, Empresa, UnidadeFederativa as UF, Municipio, DataPCP,  ' + #13;
+          VLC_Select := VLC_Select + '	Cliente_ID, Loja, RazaoSocial,SetorMercado, PedidoVenda_FK, Sequencia, DataPedido,   ' + #13;
+          VLC_Select := VLC_Select + '	Produto_ID, Produto, Quantidade, Saldo, PesoItem, Peso, Pallete, Observacao, DataCarregamento, Carga, TipoCarga ' + #13;
+          VLC_Select := VLC_Select + 'from BOMIXBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento (nolock)   ' + #13;
+          VLC_Select := VLC_Select + 'Where Fechado = 0   ' + #13;
+          VLC_Select := VLC_Select + 'AND PedidoVenda_FK + Produto_ID + Produto + RazaoSocial + Cliente_ID + Municipio like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+          VLC_Select := VLC_Select + 'AND DataCarregamento = ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_DataCarragamento.Date),1) + '''' + #13;
+          VLC_Select := VLC_Select + 'AND TipoCarga in ('+ ''''+ '' + '''' + ',' + '''' + VLC_TipoCarga + '''' + ')' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'Order by UnidadeFederativa, Municipio, DataPCP, PedidoVenda_FK, Sequencia, Carga ' + #13;
+    end
+    else
+    begin
+          VLC_Select := VLC_Select + 'Select  ' + #13;
+          VLC_Select := VLC_Select + '	Recno, Recno_Pedido, Recno_Item, Empresa, UnidadeFederativa as UF, Municipio, DataPCP,  ' + #13;
+          VLC_Select := VLC_Select + '	Cliente_ID, Loja, RazaoSocial,SetorMercado, PedidoVenda_FK, Sequencia, DataPedido,  ' + #13;
+          VLC_Select := VLC_Select + '	Produto_ID, Produto, Quantidade, Saldo, PesoItem, Peso, Pallete, Observacao, DataCarregamento, Carga, TipoCarga  ' + #13;
+          VLC_Select := VLC_Select + 'from BOMIXBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento_Historico (nolock)  ' + #13;
+          VLC_Select := VLC_Select + 'Where Fechado = 0  ' + #13;
+          VLC_Select := VLC_Select + 'AND DataCarregamento is NULL  ' + #13;
+          VLC_Select := VLC_Select + 'AND PedidoVenda_FK + Produto_ID + Produto + RazaoSocial + Cliente_ID + Municipio like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+          VLC_Select := VLC_Select + 'AND TipoCarga in (' + '''' + VLC_TipoCarga + '''' + ')' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'UNION ALL   ' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'Select  ' + #13;
+          VLC_Select := VLC_Select + '	Recno, Recno_Pedido, Recno_Item, Empresa, UnidadeFederativa as UF, Municipio, DataPCP,  ' + #13;
+          VLC_Select := VLC_Select + '	Cliente_ID, Loja, RazaoSocial,SetorMercado, PedidoVenda_FK, Sequencia, DataPedido,   ' + #13;
+          VLC_Select := VLC_Select + '	Produto_ID, Produto, Quantidade, Saldo, PesoItem, Peso, Pallete, Observacao, DataCarregamento, Carga, TipoCarga ' + #13;
+          VLC_Select := VLC_Select + 'from BOMIXBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento_Historico (nolock)   ' + #13;
+          VLC_Select := VLC_Select + 'Where Fechado = 0   ' + #13;
+          VLC_Select := VLC_Select + 'AND PedidoVenda_FK + Produto_ID + Produto + RazaoSocial + Cliente_ID + Municipio like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+          VLC_Select := VLC_Select + 'AND DataCarregamento = ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_DataCarragamento.Date),1) + '''' + #13;
+          VLC_Select := VLC_Select + 'AND TipoCarga in (' + '''' + VLC_TipoCarga + '''' + ')' + #13;
+          VLC_Select := VLC_Select + '  ' + #13;
+          VLC_Select := VLC_Select + 'Order by Carga, UnidadeFederativa, Municipio, DataPCP, PedidoVenda_FK, Sequencia ' + #13;
+    end;
+
+    Memo.Text :=  VLC_Select;
+
+    CDS.Close;
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Text := VLC_Select;
+    CDS.Open;
+
+    ListarCargas(BI_PedidoVendaCarregamento.CBX_Carga);
+    CBX_CargaCloseUp(nil);
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_ExcluirCargaClick(Sender: TObject);
+Var
+   VLC_Insert : String;
+   VLC_TipoCarga : String;
+
+begin
+
+   If Application.MessageBox('Deseja deletar a Carga?','Atenção',MB_YESNO) = 6 then
+   begin
+
+        if SHP_Caminhao.Brush.Color = $00A67000 then
+            VLC_TipoCarga := 'CAMINHÃO'
+        else
+            VLC_TipoCarga := 'CABOTAGEM';
+
+        VLC_Insert := 'Exec BomixBI.[dbo].[Fat_SP_AtualizarBase_PedidoVenda_Carregamento_CargaExcluir] ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(BI_PedidoVendaCarregamento.DT_DataCarragamento.Date),1) + '''' + ',' + '''' + VLC_TipoCarga + ''''+ ',' + '''' + CBX_Carga.Text + '''';
+
+        Memo.Lines.Text := VLC_Insert;
+
+        With Sys_ModuloConexaoDados.ADOCommand1 Do begin CommandText := VLC_Insert; Execute; end;
+
+        BTN_BuscarClick(nil);
+
+   end;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_ImprimirClick(Sender: TObject);
+Var
+   VLC_Select : String;
+   VLC_TipoCarga : String;
+
+begin
+      if SHP_Caminhao.Brush.Color = $00A67000 then
+           VLC_TipoCarga := 'CAMINHÃO'
+      else
+           VLC_TipoCarga := 'CABOTAGEM';
+
+    if DT_DataCarragamento.Date >= Date then
+    begin
+
+          VLC_Select := VLC_Select + ' 	Select Distinct ' + #13;
+          VLC_Select := VLC_Select + ' 		TipoCarga, Carga, RazaoSocial as Cliente, Case when Carga.SetorMercado = ' + '''' + 'ALIMENTOS' + '''' + ' then ' + '''' + 'ALIMENTOS' + '''' + ' else ' + '''' + '' + '''' + ' end as SetorMercado, ' + #13;
+          VLC_Select := VLC_Select + ' 		Municipio as Cidade, UnidadeFederativa as UF, PedidoVenda_FK, Sequencia, Produto_ID, Produto, Quantidade, ' +#13;
+          VLC_Select := VLC_Select + ' 		Saldo, Saldo * PesoItem  as Peso, Pallete, Carga.Observacao, Carga.DataPCP' + #13;
+          VLC_Select := VLC_Select + ' 	from BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento Carga (Nolock) ' + #13;
+          VLC_Select := VLC_Select + ' 	Inner Join BomixBI.dbo.Fat_TB_PedidoVenda Pedido ON Recno_Pedido = Pedido.Recno ' + #13;
+          VLC_Select := VLC_Select + ' 	Where Carga <> ' + '''' + '' + '''' + #13;
+          VLC_Select := VLC_Select + '  AND DataCarregamento = CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataCarragamento.Date) + '''' +  ',103),103)' + #13;
+          VLC_Select := VLC_Select + '  AND TipoCarga = ' +  '''' + VLC_TipoCarga + '''' + #13;
+
+                  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+                  begin
+                        VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Pedido.Vendedor_FK');
+                  end;
+
+          VLC_Select := VLC_Select + ' 	AND Carga.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+          VLC_Select := VLC_Select + ' 	AND Fechado = 0 ' + #13;
+          VLC_Select := VLC_Select + ' Order by Carga, PedidoVenda_FK, Sequencia, Produto_ID ' + #13;
+
+    end
+    else
+    begin
+
+          VLC_Select := VLC_Select + ' 	Select Distinct ' + #13;
+          VLC_Select := VLC_Select + ' 		TipoCarga, Carga, RazaoSocial as Cliente, Case when Carga.SetorMercado = ' + '''' + 'ALIMENTOS' + '''' + ' then ' + '''' + 'ALIMENTOS' + '''' + ' else ' + '''' + '' + '''' + ' end as SetorMercado, ' + #13;
+          VLC_Select := VLC_Select + ' 		Municipio as Cidade, UnidadeFederativa as UF, PedidoVenda_FK, Sequencia, Produto_ID, Produto, Quantidade, ' +#13;
+          VLC_Select := VLC_Select + ' 		Saldo, Saldo * PesoItem  as Peso, Pallete, Carga.Observacao, Historico.DataPCP ' + #13;
+          VLC_Select := VLC_Select + ' 	from BomixBI.dbo.Fat_TB_PedidoVenda_OrdemCarregamento_Historico CargaCarga (Nolock) ' + #13;
+          VLC_Select := VLC_Select + ' 	Inner Join BomixBI.dbo.Fat_TB_PedidoVenda Pedido ON Recno_Pedido = Pedido.Recno ' + #13;
+          VLC_Select := VLC_Select + ' 	Where Carga <> ' + '''' + '' + '''' + #13;
+          VLC_Select := VLC_Select + '  AND DataCarregamento = CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(DT_DataCarragamento.Date) + '''' +  ',103),103)' + #13;
+          VLC_Select := VLC_Select + '  AND TipoCarga = ' +  '''' + VLC_TipoCarga + '''' + #13;
+
+                  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+                  begin
+                        VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Pedido.Vendedor_FK');
+                  end;
+
+          VLC_Select := VLC_Select + ' 	AND Carga.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+          VLC_Select := VLC_Select + ' 	AND Fechado = 0 ' + #13;
+          VLC_Select := VLC_Select + ' Order by Carga, PedidoVenda_FK, Sequencia, Produto_ID ' + #13;
+
+    end;
+
+    Memo.Lines.Text := VLC_Select;
+
+    CDS_CargasImprimir.Close;
+    Query_CargasImprimir.Close;
+    Query_CargasImprimir.SQL.Clear;
+    Query_CargasImprimir.SQL.Text := VLC_Select;
+    CDS_CargasImprimir.Open;
+
+    if CDS_CargasImprimir.RecordCount = 0 then
+    begin
+        Application.MessageBox('Nenhuma Carga definida para a impressão','Atenção',mb_iconwarning + mb_ok);
+        Exit;
+    end;
+
+    ppLBL_Data.Caption :=  'Data Impressão: ' + DateTimeToStr(Date());
+    ppLBL_Usuario.Caption := Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+    ppLabelTitulo.Caption := 'Programação de Expedição - Dia: ' + DateToStr(DT_DataCarragamento.Date);
+    ppImage3.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+    ppRelatorioCarga.Print;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.DesenvolvimentoExecute(Sender: TObject);
+begin
+    Memo.Visible := True;
+end;
+
+procedure TBI_PedidoVendaCarregamento.DSDataChange(Sender: TObject;
+  Field: TField);
+begin
+ if CDSObservacao.AsString <> '' then
+    SHP_TemObservacao.Visible := True
+ else
+    SHP_TemObservacao.Visible := False;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.MemoDblClick(Sender: TObject);
+begin
+    Memo.Visible := False;
+end;
+
+procedure TBI_PedidoVendaCarregamento.BTN_RetirarPedidoClick(Sender: TObject);
+begin
+
+    BI_PedidoVenda.DesmarcarCarregamento(CDSPedidoVenda_FK.AsString,CDSEmpresa.AsString);
+    BTN_BuscarClick(nil);
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.SpeedButton2Click(Sender: TObject);
+begin
+
+  if StrToFloat(LBL_NumeroPaleteCarga.Caption) = 0 then
+  begin
+       Application.MessageBox('Necessária a vinculação desta carga com algum Pedido','Atenção',mb_iconwarning + mb_ok);
+       Exit;
+  end
+  else
+  begin
+
+        Application.CreateForm(TBI_PedidoVendaCarregamentoOBS, BI_PedidoVendaCarregamentoOBS);
+        try
+            BI_PedidoVendaCarregamentoOBS.LBL_PedidoVenda.Caption := CDSPedidoVenda_FK.Text;
+            BI_PedidoVendaCarregamentoOBS.TXT_Observacao.Text := GetPedidoObservacao(CDSPedidoVenda_FK.AsString);
+            BI_PedidoVendaCarregamentoOBS.ShowModal;
+        finally
+            BI_PedidoVendaCarregamentoOBS.Release;
+            BI_PedidoVendaCarregamentoOBS := Nil;
+        end;
+
+  end;
+
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.SpeedButton3Click(Sender: TObject);
+begin
+
+  Application.CreateForm(TBI_PedidoVendaCarregamentoModificarSaldo, BI_PedidoVendaCarregamentoModificarSaldo);
+  try
+      BI_PedidoVendaCarregamentoModificarSaldo.ShowModal;
+  finally
+      BI_PedidoVendaCarregamentoModificarSaldo.Release;
+      BI_PedidoVendaCarregamentoModificarSaldo := Nil;
+  end;
+
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BNT_CriarCargaClick(Sender: TObject);
+begin
+
+  Application.CreateForm(TBI_PedidoVendaCarregamentoCriar, BI_PedidoVendaCarregamentoCriar);
+  try
+
+      if SHP_Caminhao.Brush.Color = $00A67000 then
+           BI_PedidoVendaCarregamentoCriar.BTN_TipoCarga.Caption := 'CAMINHÃO'
+      else
+           BI_PedidoVendaCarregamentoCriar.BTN_TipoCarga.Caption := 'CABOTAGEM';
+
+      BI_PedidoVendaCarregamentoCriar.Caption := DateTimeToStr(DT_DataCarragamento.Date);
+
+      BI_PedidoVendaCarregamentoCriar.ShowModal;
+  finally
+      BI_PedidoVendaCarregamentoCriar.Release;
+      BI_PedidoVendaCarregamentoCriar := Nil;
+  end;
+
+end;
+
+procedure TBI_PedidoVendaCarregamento.BNT_DefinirCargaClick(Sender: TObject);
+begin
+
+      if PNL_Carga.Width = 79 then
+        begin
+            PNL_Carga.Width := 672;
+            Exit;
+        end;
+
+        if PNL_Carga.Width = 672 then
+        begin
+            PNL_Carga.Width := 79;
+            Exit;
+        end;
+
+end;
+
+
+procedure TBI_PedidoVendaCarregamento.GridPorPedidoDblClick(Sender: TObject);
+begin
+     AcoesDuploCliqueNoGrid;
+end;
+
+procedure TBI_PedidoVendaCarregamento.GridPorProdutoDblClick(Sender: TObject);
+begin
+      AcoesDuploCliqueNoGrid;
+end;
+
+end.

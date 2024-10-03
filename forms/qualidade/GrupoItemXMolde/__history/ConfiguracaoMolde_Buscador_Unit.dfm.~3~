@@ -1,0 +1,17 @@
+inherited ConfiguracaoMolde_Buscador: TConfiguracaoMolde_Buscador
+  Caption = 'Buscador'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 164
+      Caption = 'Consultar Moldes'
+      ExplicitWidth = 164
+    end
+  end
+  inherited Panel_Padrao: TPanel
+    inherited Panel_Caption: TPanel
+      Caption = '  ID'
+    end
+  end
+end

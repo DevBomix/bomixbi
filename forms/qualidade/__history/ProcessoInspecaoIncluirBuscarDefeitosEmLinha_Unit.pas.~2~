@@ -1,0 +1,26 @@
+unit ProcessoInspecaoIncluirBuscarDefeitosEmLinha_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TProcessoInspecao_IncluirBuscarDefeitosEmLinha = class(TPadraoBuscador)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_IncluirBuscarDefeitosEmLinha: TProcessoInspecao_IncluirBuscarDefeitosEmLinha;
+
+implementation
+
+{$R *.dfm}
+
+end.

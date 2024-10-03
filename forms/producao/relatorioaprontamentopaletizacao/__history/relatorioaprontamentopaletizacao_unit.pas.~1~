@@ -1,0 +1,108 @@
+unit RelatorioAprontamentoPaletizacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit, Vcl.ComCtrls,
+  Vcl.StdCtrls, Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Vcl.Buttons,
+  Vcl.Mask;
+
+type
+  TRelatorio_ApontamentoPaletizacao = class(TPadraoBuscadorFiltro)
+    Panel10: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_Tipo: TComboBox;
+    Panel4: TPanel;
+    TXT_Valor2_Turno: TMaskEdit;
+    CBX_OperadorTurno: TComboBox;
+    TXT_Valor1_Turno: TMaskEdit;
+    Panel5: TPanel;
+    PNL_SinalTurno: TPanel;
+    CBX_Igual_Turno: TComboBox;
+    Panel7: TPanel;
+    TXT_Valor2_GrupoProduto: TMaskEdit;
+    CBX_OperadorGrupoProduto: TComboBox;
+    TXT_Valor1_GrupoProduto: TMaskEdit;
+    Panel8: TPanel;
+    PNL_SinalGrupoProduto: TPanel;
+    CHK_GrupoProduto: TCheckBox;
+    CBX_Igual_GrupoProduto: TComboBox;
+    Panel20: TPanel;
+    MaskEdit5: TMaskEdit;
+    ComboBox5: TComboBox;
+    MaskEdit6: TMaskEdit;
+    Panel21: TPanel;
+    Panel22: TPanel;
+    CBX_TipoProduto: TComboBox;
+    Panel12: TPanel;
+    TXT_Valor2_Produto: TMaskEdit;
+    CBX_OperadorProduto: TComboBox;
+    TXT_Valor1_Produto: TMaskEdit;
+    Panel13: TPanel;
+    PNL_SinalProduto: TPanel;
+    CHK_Produto: TCheckBox;
+    CBX_Igual_Produto: TComboBox;
+    Panel_FiltroItem: TPanel;
+    TXT_Valor2_Item: TMaskEdit;
+    CBX_OperadorItem: TComboBox;
+    TXT_Valor1_Item: TMaskEdit;
+    Panel16: TPanel;
+    PNL_SinalItem: TPanel;
+    CHK_Item: TCheckBox;
+    CBX_Igual_Item: TComboBox;
+    Panel_FiltroLote: TPanel;
+    TXT_Valor2_Lote: TMaskEdit;
+    CBX_OperadorLote: TComboBox;
+    TXT_Valor1_Lote: TMaskEdit;
+    Panel24: TPanel;
+    PNL_SinalLote: TPanel;
+    CBX_Igual_Lote: TComboBox;
+    Panel26: TPanel;
+    CBX_OperadorDataEmissao: TComboBox;
+    Panel27: TPanel;
+    PNL_SinalDataEmissao: TPanel;
+    CBX_Igual_DataEmissao: TComboBox;
+    TXT_Valor1_DataEmissao: TMaskEdit;
+    TXT_Valor2_DataEmissao: TMaskEdit;
+    DT_DataEmissao2: TDateTimePicker;
+    DT_DataEmissao1: TDateTimePicker;
+    Panel6: TPanel;
+    TXT_Valor2_ProdutoID: TMaskEdit;
+    CBX_OperadorProdutoID: TComboBox;
+    TXT_Valor1_ProdutoID: TMaskEdit;
+    Panel9: TPanel;
+    PNL_SinalProdutoID: TPanel;
+    CHK_ProdutoID: TCheckBox;
+    CBX_Igual_ProdutoID: TComboBox;
+    Panel14: TPanel;
+    TXT_Valor2_InjetoraID: TMaskEdit;
+    CBX_OperadorInjetoraID: TComboBox;
+    TXT_Valor1_InjetoraID: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalInjetoraID: TPanel;
+    CHK_Recurso: TCheckBox;
+    CBX_Igual_InjetoraID: TComboBox;
+    Panel_FiltroOrdemProducao: TPanel;
+    TXT_Valor2_OrdemProducao: TMaskEdit;
+    CBX_OperadorOrdemProducao: TComboBox;
+    TXT_Valor1_OrdemProducao: TMaskEdit;
+    Panel15: TPanel;
+    PNL_SinalOrdemProducao: TPanel;
+    CHK_OrdemProducao: TCheckBox;
+    CBX_Igual_OrdemProducao: TComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoPaletizacao: TRelatorio_ApontamentoPaletizacao;
+
+implementation
+
+{$R *.dfm}
+
+end.

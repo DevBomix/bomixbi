@@ -1,0 +1,69 @@
+unit Relatorio_ApontamentoProducao_QuantidadeCicloMolde_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ppParameter, ppDesignLayer,
+  ppCtrls, ppBands, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
+  Datasnap.DBClient, Data.Win.ADODB, Datasnap.Provider, ppComm, ppRelatv, ppDB,
+  ppDBPipe;
+
+type
+  TRelatorio_ApontamentoProducao_QuantidadeCicloMolde = class(TForm)
+    Pipeline: TppDBPipeline;
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    CDS: TClientDataSet;
+    ppRelatorio: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppImage3: TppImage;
+    ppLabel38: TppLabel;
+    ppLabel37: TppLabel;
+    ppLine20: TppLine;
+    ppDetailBand3: TppDetailBand;
+    ppDBText44: TppDBText;
+    ppLine21: TppLine;
+    ppDBText33: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppLabel39: TppLabel;
+    ppLine23: TppLine;
+    ppPageStyle3: TppPageStyle;
+    ppShape5: TppShape;
+    ppLabel44: TppLabel;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer5: TppDesignLayer;
+    ppDesignLayer6: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    QueryRecurso_ID: TStringField;
+    QueryItem: TStringField;
+    QueryCavidade: TIntegerField;
+    QueryCiclo: TFloatField;
+    CDSRecurso_ID: TStringField;
+    CDSItem: TStringField;
+    CDSCavidade: TIntegerField;
+    CDSCiclo: TFloatField;
+    QueryRecurso: TStringField;
+    CDSRecurso: TStringField;
+    ppDBText1: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppColumnHeaderBand1: TppColumnHeaderBand;
+    ppColumnFooterBand1: TppColumnFooterBand;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoProducao_QuantidadeCicloMolde: TRelatorio_ApontamentoProducao_QuantidadeCicloMolde;
+
+implementation
+
+{$R *.dfm}
+
+end.

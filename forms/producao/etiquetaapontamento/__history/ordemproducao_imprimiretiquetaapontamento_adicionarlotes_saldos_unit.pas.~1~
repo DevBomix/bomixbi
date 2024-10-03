@@ -1,0 +1,26 @@
+unit OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos = class(TPadraoBuscador)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos: TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos;
+
+implementation
+
+{$R *.dfm}
+
+end.

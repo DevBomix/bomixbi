@@ -1,0 +1,26 @@
+unit ManutencaoOperaces_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TManuntecaoOperacoes = class(TPadraoBuscador)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ManuntecaoOperacoes: TManuntecaoOperacoes;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,422 @@
+unit Setor_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, PadraoCadastroSimples_Unit, ADODB, Provider, DB, DBClient,
+  ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, Buttons, jpeg, ExtCtrls,
+  Mask;
+
+type
+  TSistema_Setor = class(TPadraoCadastroSimples_Form)
+    LBL_Pedido: TLabel;
+    TXT_ID: TDBEdit;
+    TXT_Descricao: TDBEdit;
+    Label1: TLabel;
+    Query_Setor: TADOQuery;
+    DS_Setor: TDataSource;
+    CDS_Setor: TClientDataSet;
+    DSP_Setor: TDataSetProvider;
+    Panel1: TPanel;
+    CHK_DesativarRegistro: TDBCheckBox;
+    Query_SetorSetor_ID: TIntegerField;
+    Query_SetorDescricao: TStringField;
+    Query_SetorflgVisibilidade: TBooleanField;
+    Query_SetorResponsavel: TStringField;
+    Query_SetorDataCadastro: TDateTimeField;
+    Query_SetorIDRegistro: TStringField;
+    CDS_SetorSetor_ID: TIntegerField;
+    CDS_SetorDescricao: TStringField;
+    CDS_SetorflgVisibilidade: TBooleanField;
+    CDS_SetorResponsavel: TStringField;
+    CDS_SetorDataCadastro: TDateTimeField;
+    CDS_SetorIDRegistro: TStringField;
+    CHK_SetorFisico: TDBCheckBox;
+    Query_SetorflgSetorFisico: TBooleanField;
+    CDS_SetorflgSetorFisico: TBooleanField;
+
+    // Minhas Procedures e Functions
+    procedure InserirSetor(Sender: TObject);
+    procedure EditarSetor(Sender: TObject);
+    procedure DeletarSetor(PLN_ID: Integer);
+    procedure SetContadorID;
+    procedure AtualizarRegistrosDoGrid;
+    function  GetVerificarSeTemRelacionamento(PLN_ID: Integer): String;
+    function  GetContadorID: Integer;
+    function  GetIDRegistro: String;
+    function  GetStatusExportarSetor(PLC_IDRegistro: String): String;
+
+    procedure BTN_IncluirClick(Sender: TObject);
+    procedure BTN_EditarClick(Sender: TObject);
+    procedure BTN_ExcluirClick(Sender: TObject);
+    procedure BTN_EsquerdaClick(Sender: TObject);
+    procedure BTN_DireitaClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BTN_PesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sistema_Setor: TSistema_Setor;
+
+implementation
+
+uses DMADO_Geral_Unit, AcessoAoSistema_Unit, FuncoesBomix_Unit, SetorBuscador_Unit;
+
+{$R *.dfm}
+
+function TSistema_Setor.GetStatusExportarSetor(PLC_IDRegistro: String): String;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+
+begin
+
+  VLC_Select := 'Select Sys_Setor.Exportar from dbo.Sys_Setor (nolock) Where IDRegistro = ' + '''' + PLC_IDRegistro + '''';
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := DMADO_Geral.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  Result := Query.FieldByName('Exportar').AsString;
+  Query.Free;
+
+end;
+
+// *****************************************************************************************************************************
+// Rotina: GetIDRegistro
+// Data: 07/07/2011
+// Função: Retorna o IDRegistro do registro ativado
+// *****************************************************************************************************************************
+function TSistema_Setor.GetIDRegistro: String;
+begin
+  If DS_Setor.DataSet.Active = True then
+        Result := DS_Setor.DataSet.FieldByName('IDRegistro').AsString;
+end;
+
+// *****************************************************************************************************************************
+// Rotina: AtualizarRegistrosDoGrid
+// Data: 07/07/2011
+// Função: Quando o usuário selecionar um registro no Grid, ter a certeza que é o mais recente que está na base de dados
+// pois a rotina fecha, abre e localiza o registro.
+// *****************************************************************************************************************************
+procedure TSistema_Setor.AtualizarRegistrosDoGrid;
+Var
+   VLC_IDRegistro : String;
+begin
+    VLC_IDRegistro := GetIDRegistro;
+    CDS_Setor.Close;
+    CDS_Setor.Open;
+    CDS_Setor.Locate('IDRegistro',VLC_IDRegistro,[]);
+end;
+
+function TSistema_Setor.GetContadorID: Integer;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+begin
+
+  VLC_Select := 'Select Setor_ID from Sys_Contador (nolock)';
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := DMADO_Geral.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  Result := Query.FieldByName('Setor_ID').AsInteger;
+  Query.Free;
+
+end;
+
+procedure TSistema_Setor.SetContadorID;
+var
+   VLC_Update: String;
+   VLN_SetorID : Integer;
+
+begin
+
+  VLN_SetorID := GetContadorID + 1;
+  VLC_Update := 'Update Sys_Contador Set Setor_ID = ' + IntToStr(VLN_SetorID);
+
+  With DMADO_Geral.ADOCommand1 do
+  begin
+     CommandText := VLC_Update;
+     Execute;
+  end;
+
+end;
+
+procedure TSistema_Setor.InserirSetor(Sender: TObject);
+Var
+   VLC_Insert : String;
+   VLC_Visibilidade, VLC_SetorFisico : String;
+   VLN_CodigoSetor : Integer;
+
+begin
+
+   SetContadorID;
+   VLN_CodigoSetor := GetContadorID;
+   If CHK_DesativarRegistro.Checked = True then VLC_Visibilidade := '1' else VLC_Visibilidade := '0';
+   If CHK_SetorFisico.Checked = True then VLC_SetorFisico := '1' else VLC_SetorFisico := '0';
+
+    VLC_Insert := 'Insert Into SYS_Setor (Setor_ID, Descricao, Responsavel, DataCadastro, IDRegistro, flgSetorFisico, flgVisibilidade)';
+    VLC_Insert := VLC_Insert + ' Values ( ' + #13;
+    VLC_Insert := VLC_Insert + IntToStr(VLN_CodigoSetor) + ',' + #13;
+    VLC_Insert := VLC_Insert + '''' + TXT_Descricao.Text + '''' + ',' + #13;
+    VLC_Insert := VLC_Insert + '''' + FuncoesBomix.GetUsuarioAtivo + '''' + ', ';
+    VLC_Insert := VLC_Insert + '''' + FuncoesBomix.TransformarDataFormatoSQLServer(DateTimeToStr(Date),4) + '''' + ', ';
+    VLC_Insert := VLC_Insert + '''' + FuncoesBomix.GeraUkey + '''' + ',';
+    VLC_Insert := VLC_Insert + VLC_SetorFisico + ',';
+    VLC_Insert := VLC_Insert + VLC_Visibilidade + ')';
+
+    With DMADO_Geral.ADOCommand1 do
+    begin
+        CommandText := VLC_Insert;
+        Execute;
+    end;
+
+end;
+
+procedure TSistema_Setor.EditarSetor(Sender: TObject);
+Var
+   VLC_Update : String;
+   VLC_Visibilidade, VLC_SetorFisico : String;
+
+begin
+
+   If CHK_DesativarRegistro.Checked = True then VLC_Visibilidade := '1' else VLC_Visibilidade := '0';
+   If CHK_SetorFisico.Checked = True then VLC_SetorFisico := '1' else VLC_SetorFisico := '0';
+
+   VLC_Update := 'Update dbo.SYS_Setor ';
+   VLC_Update := VLC_Update + ' Set Descricao = ' + '''' + TXT_Descricao.Text + '''' + ',';
+   VLC_Update := VLC_Update + ' Responsavel = ' + '''' + FuncoesBomix.GetUsuarioAtivo + '''' + ',';
+   VLC_Update := VLC_Update + ' DataCadastro = ' +  '''' + FuncoesBomix.TransformarDataFormatoSQLServer(DateTimeToStr(Date),4) + '''' + ', ';
+   VLC_Update := VLC_Update + ' flgSetorFisico = ' + VLC_SetorFisico + ',';
+   VLC_Update := VLC_Update + ' flgVisibilidade = ' + VLC_Visibilidade;
+   VLC_Update := VLC_Update + ' Where Setor_ID = ' + TXT_ID.Text;
+
+    With DMADO_Geral.ADOCommand1 do
+    begin
+        CommandText := VLC_Update;
+        Execute;
+    end;
+
+end;
+
+procedure TSistema_Setor.DeletarSetor(PLN_ID: Integer);
+Var
+   VLC_Delete : String;
+
+begin
+
+   VLC_Delete := 'Delete from SYS_Setor ';
+   VLC_Delete := VLC_Delete + ' Where SYS_Setor.Setor_ID = ' + IntToStr(PLN_ID);
+
+   // Deletar do Banco de Dados
+   With DMADO_Geral.ADOCommand1 do
+   begin
+       CommandText := VLC_Delete;
+       Execute;
+   end;
+
+end;
+
+function TSistema_Setor.GetVerificarSeTemRelacionamento(PLN_ID: Integer): String;
+var
+   Query : TADOQuery;
+   VLC_Select : String;
+begin
+
+  VLC_Select := ' Select top 1 Setor_FK from Sys_UsuarioGrupo (nolock) where Sys_UsuarioGrupo.Setor_FK = ' + IntToStr(PLN_ID);
+
+  Query := TADOQuery.Create(self);
+  With Query do
+  begin
+      Close;
+      Connection := DMADO_Geral.ADOConnection1;
+      SQL.Clear;
+      SQL.Text := VLC_Select;
+      Open;
+  end;
+
+  If Query.FieldByName('Setor_FK').IsNull then
+      Result := 'Não' else Result := 'Sim';
+
+  Query.Free;
+
+end;
+
+procedure TSistema_Setor.BTN_IncluirClick(Sender: TObject);
+begin
+  Application.CreateForm(TSistema_AcessoAoSistema, Sistema_AcessoAoSistema);
+  VPN_FormularioID := Sistema_AcessoAoSistema.GetFormularioID('SISTEMA_SETOR');
+  VPN_EventoID := 53;
+  VPC_Usuario := FuncoesBomix.GetUsuarioAtivo;
+
+  If Sistema_AcessoAoSistema.ListarEventosdaTela(VPN_FormularioID,VPN_EventoID,VPC_Usuario) = 'Não' Then
+  begin
+       Application.MessageBox('Acesso negado para incluir o setor.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+  end
+  else
+  begin
+       inherited;
+       DBGrid.Enabled := False;
+       TXT_Descricao.Enabled := True;
+       CHK_DesativarRegistro.Enabled := True;
+       CHK_SetorFisico.Enabled := True;
+       TXT_Descricao.SetFocus;
+       CDS_Setor.Append;
+       DS_Setor.DataSet.FieldByName('flgVisibilidade').AsVariant := 0;
+  end;
+        
+end;
+
+procedure TSistema_Setor.BTN_EditarClick(Sender: TObject);
+begin
+  Application.CreateForm(TSistema_AcessoAoSistema, Sistema_AcessoAoSistema);
+  VPN_FormularioID := Sistema_AcessoAoSistema.GetFormularioID('SISTEMA_SETOR');
+  VPN_EventoID := 54;
+  VPC_Usuario := FuncoesBomix.GetUsuarioAtivo;
+
+  If Sistema_AcessoAoSistema.ListarEventosdaTela(VPN_FormularioID,VPN_EventoID,VPC_Usuario) = 'Não' Then
+  begin
+     Application.MessageBox('Acesso negado para editar o setor.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+  end
+  else
+  begin
+        inherited;
+        DBGrid.Enabled := False;
+        TXT_Descricao.Enabled := True;
+        CHK_DesativarRegistro.Enabled := True;
+        CHK_SetorFisico.Enabled := True;
+        TXT_Descricao.SetFocus;
+        CDS_Setor.Edit;
+  end;
+
+end;
+
+procedure TSistema_Setor.BTN_ExcluirClick(Sender: TObject);
+begin
+  Application.CreateForm(TSistema_AcessoAoSistema, Sistema_AcessoAoSistema);
+  VPN_FormularioID := Sistema_AcessoAoSistema.GetFormularioID('SISTEMA_SETOR');
+  VPN_EventoID := 55;
+  VPC_Usuario := FuncoesBomix.GetUsuarioAtivo;
+
+  If Sistema_AcessoAoSistema.ListarEventosdaTela(VPN_FormularioID,VPN_EventoID,VPC_Usuario) = 'Não' Then
+  begin
+     Application.MessageBox('Acesso negado para excluir o setor.' + #13 + 'Consulte o Administrador do sistema','Atenção',mb_iconwarning + mb_ok);
+  end
+  else
+  begin
+      inherited;
+      DBGrid.Enabled := False;
+      TXT_Descricao.Enabled := False;
+      CHK_DesativarRegistro.Enabled := False;
+  end;
+end;
+
+procedure TSistema_Setor.BTN_EsquerdaClick(Sender: TObject);
+begin
+  inherited;
+   DBGrid.SetFocus;
+   DS_Setor.DataSet.Next;
+end;
+
+procedure TSistema_Setor.BTN_DireitaClick(Sender: TObject);
+begin
+  inherited;
+   DBGrid.SetFocus;
+   DS_Setor.DataSet.Prior;
+end;
+
+procedure TSistema_Setor.BNT_ConfirmarClick(Sender: TObject);
+begin
+  // Validação
+  If TXT_Descricao.Text = '' then
+  begin
+     Application.MessageBox('Campo Obrigatório: Defina uma Descrição para o Setor!','Atenção',mb_iconwarning + mb_ok);
+     TXT_Descricao.Setfocus;
+     Exit;
+  end;
+
+  If CDS_Setor.State = dsInsert then
+  begin
+      InserirSetor(nil);
+  end;
+
+  If CDS_Setor.State = dsEdit then
+  begin
+     EditarSetor(nil);
+  end;
+
+  If CDS_Setor.State = dsBrowse then
+  begin
+     If GetVerificarSeTemRelacionamento(StrToInt(TXT_ID.Text)) = 'Sim' then
+     begin
+         Application.MessageBox('Não é possivel deletar este registro porque possui relacionamento!','Atenção',mb_iconwarning + mb_ok);
+         inherited;
+         DBGrid.Enabled := True;
+         TXT_Descricao.Enabled := False;
+         CHK_DesativarRegistro.Enabled := False;
+         CHK_SetorFisico.Enabled := False;
+         CDS_Setor.Cancel;
+         CDS_Setor.Close;
+         CDS_Setor.Open;
+         Exit;
+     end;
+         DeletarSetor(StrToInt(TXT_ID.Text));
+  end;
+
+  inherited;
+  DBGrid.Enabled := True;
+  TXT_Descricao.Enabled := False;
+  CHK_DesativarRegistro.Enabled := False;
+  CHK_SetorFisico.Enabled := False;  
+  AtualizarRegistrosDoGrid;
+
+end;
+
+procedure TSistema_Setor.FormShow(Sender: TObject);
+begin
+  inherited;
+  CDS_Setor.Open;
+end;
+
+procedure TSistema_Setor.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  DBGrid.Enabled := True;
+  TXT_Descricao.Enabled := False;
+  CHK_DesativarRegistro.Enabled := False;
+  CDS_Setor.Cancel;
+
+end;
+
+procedure TSistema_Setor.BTN_PesquisarClick(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TSistema_SetorBuscador, Sistema_SetorBuscador);
+  Sistema_SetorBuscador.ShowModal;
+
+end;
+
+
+
+end.

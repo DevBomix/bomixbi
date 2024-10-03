@@ -1,0 +1,26 @@
+inherited ProcessoInspecao_IncluirBuscarInspector: TProcessoInspecao_IncluirBuscarInspector
+  Caption = 'Consultar Inspector'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 184
+      Caption = 'Consultar Inspector'
+      ExplicitWidth = 184
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      
+        #9'Empresa, Usuario_ID, Matricula_FK, Funcionario, Cargo, Situacao' +
+        'Descr '
+      'from Sys_TB_Usuario (nolock)'
+      'Where Setor = '#39'ICQ'#39
+      'AND (Matricula_FK + Funcionario + Cargo) like '#39'%:Buscador%'#39
+      'AND SituacaoDescr = '#39'ATIVO'#39
+      'Order by Funcionario')
+  end
+end

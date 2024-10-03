@@ -1,0 +1,27 @@
+unit CadastroAcessorios_EntregaMaterias_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TCadastroAcessosorios_EntregaMateriais = class(TPadraoCadastro)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CadastroAcessosorios_EntregaMateriais: TCadastroAcessosorios_EntregaMateriais;
+
+implementation
+
+{$R *.dfm}
+
+end.

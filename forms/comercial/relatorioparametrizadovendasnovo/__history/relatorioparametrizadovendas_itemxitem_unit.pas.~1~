@@ -1,0 +1,142 @@
+unit RelatorioParametrizadoVendas_ItemXItem_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.Provider, Datasnap.DBClient,
+  Data.DB, Data.Win.ADODB, ppParameter, ppDesignLayer, ppCtrls, ppBands,
+  ppClass, ppStrtch, ppMemo, ppPrnabl, ppCache, ppProd, ppReport, ppDB, ppComm,
+  ppRelatv, ppDBPipe;
+
+type
+  TRelatorioParametrizadoVendas_ItemXItem = class(TForm)
+    ppDB: TppDBPipeline;
+    ppDBppField1: TppField;
+    ppDBppField2: TppField;
+    ppDBppField3: TppField;
+    ppDBppField4: TppField;
+    ppDBppField5: TppField;
+    ppDBppField6: TppField;
+    ppDBppField7: TppField;
+    ppDBppField8: TppField;
+    ppDBppField9: TppField;
+    ppDBppField10: TppField;
+    ppDBppField11: TppField;
+    ppDBppField12: TppField;
+    ppRelatorio: TppReport;
+    ppHeaderBand16: TppHeaderBand;
+    ppLine142: TppLine;
+    ppImage15: TppImage;
+    ppLabel278: TppLabel;
+    LBL_Periodo: TppLabel;
+    ppDetailBand16: TppDetailBand;
+    TXT_PesoGerenciaXGerencia: TppDBText;
+    ppLine143: TppLine;
+    TXT_ValorLiquidoGerenciaXGerencia: TppDBText;
+    TXT_GerenteGerenciaXGerencia: TppDBText;
+    TXT_QTDGerenciaXGerencia: TppDBText;
+    ppDBText113: TppDBText;
+    ppDBText155: TppDBText;
+    TXT_ValorBrutoGerenciaXGerencia: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppFooterBand16: TppFooterBand;
+    ppLine144: TppLine;
+    LBL_Filtros: TppMemo;
+    LBL_Data: TppLabel;
+    LBL_NumeroPagina: TppLabel;
+    LBL_Usuario: TppLabel;
+    ppSummaryBand16: TppSummaryBand;
+    ppShape61: TppShape;
+    ppLabel314: TppLabel;
+    ppLabel315: TppLabel;
+    ppLabel316: TppLabel;
+    ppLabel317: TppLabel;
+    ppLabel318: TppLabel;
+    ppLabel319: TppLabel;
+    ppDBText238: TppDBText;
+    ppDBText239: TppDBText;
+    ppDBText240: TppDBText;
+    ppDBText241: TppDBText;
+    ppDBText242: TppDBText;
+    ppLabel260: TppLabel;
+    ppDBText156: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDBText1: TppDBText;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppGroup30_GerenciaXGerencia: TppGroup;
+    ppGroupHeaderBand30: TppGroupHeaderBand;
+    Linha_GerenciaXGerencia00: TppShape;
+    LBL_PesoGerenciaXGerencia: TppLabel;
+    LBL_LiquidoGerenciaXGerencia: TppLabel;
+    LBL_BrutoGerenciaXGerencia: TppLabel;
+    LBL_GerenteGerenciaXGerencia: TppLabel;
+    LBL_QTDGerenciaXGerencia: TppLabel;
+    ppDBText192: TppDBText;
+    ppLabel253: TppLabel;
+    ppLabel259: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppGroupFooterBand30: TppGroupFooterBand;
+    ShapeTotalComissao: TppShape;
+    LBL_TotalComissao: TppLabel;
+    TXT_ValorBrutoTotalComissao: TppDBCalc;
+    TXT_ValorPCCTotal: TppDBCalc;
+    TXT_PesoTotalComissao: TppDBCalc;
+    TXT_QtdTotalComissao: TppDBCalc;
+    TXT_MediaComissao: TppDBCalc;
+    ppDBCalc86: TppDBCalc;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppDBCalc3: TppDBCalc;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList16: TppParameterList;
+    Query: TADOQuery;
+    QueryComissaoVendedor: TStringField;
+    QueryVendedor: TStringField;
+    QueryQuantidade: TIntegerField;
+    QueryValorUnitario: TFloatField;
+    QueryMediaKG: TFloatField;
+    QueryPeso: TFloatField;
+    QueryValorLiquido: TFloatField;
+    QueryValorLiquidoMP: TFloatField;
+    QueryValorPCC: TFloatField;
+    QueryValorPCCMP: TFloatField;
+    QueryValorBruto: TFloatField;
+    QueryValorBrutoMP: TFloatField;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    CDSComissaoVendedor: TStringField;
+    CDSVendedor: TStringField;
+    CDSQuantidade: TIntegerField;
+    CDSValorUnitario: TFloatField;
+    CDSMediaKG: TFloatField;
+    CDSPeso: TFloatField;
+    CDSValorLiquido: TFloatField;
+    CDSValorLiquidoMP: TFloatField;
+    CDSValorPCC: TFloatField;
+    CDSValorPCCMP: TFloatField;
+    CDSValorBruto: TFloatField;
+    CDSValorBrutoMP: TFloatField;
+    DSP: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendas_ItemXItem: TRelatorioParametrizadoVendas_ItemXItem;
+
+implementation
+
+{$R *.dfm}
+
+end.

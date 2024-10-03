@@ -1,0 +1,24 @@
+unit BI_RastreabilidadeInsumo_OP_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TBI_RastreabilidadeInsumo_Ops = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RastreabilidadeInsumo_Ops: TBI_RastreabilidadeInsumo_Ops;
+
+implementation
+
+{$R *.dfm}
+
+end.

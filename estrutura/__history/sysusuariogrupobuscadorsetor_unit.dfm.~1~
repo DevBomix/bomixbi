@@ -1,0 +1,148 @@
+inherited Sys_UsuarioGrupoBuscadorSetor: TSys_UsuarioGrupoBuscadorSetor
+  Caption = 'Consultar Setor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 146
+      Caption = 'Consultar Setor'
+      ExplicitWidth = 146
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel4: TPanel
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 609
+      Height = 280
+      OnDrawColumnCell = nil
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'ZF_SETOR'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ZF_DESC'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Setor'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 450
+          Visible = True
+        end>
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSZF_FILIAL: TStringField
+      FieldName = 'ZF_FILIAL'
+      Size = 6
+    end
+    object CDSZF_SETOR: TFloatField
+      FieldName = 'ZF_SETOR'
+    end
+    object CDSZF_DESC: TStringField
+      FieldName = 'ZF_DESC'
+      Size = 100
+    end
+    object CDSZF_BLOQUEI: TStringField
+      FieldName = 'ZF_BLOQUEI'
+      Size = 1
+    end
+    object CDSD_E_L_E_T_: TStringField
+      FieldName = 'D_E_L_E_T_'
+      Size = 1
+    end
+    object CDSR_E_C_N_O_: TIntegerField
+      FieldName = 'R_E_C_N_O_'
+    end
+    object CDSBuscador: TStringField
+      FieldName = 'Buscador'
+      ReadOnly = True
+      Size = 106
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select * '
+      'from ('
+      
+        #9'Select *, (CAST(ZF_SETOR as Varchar(6)) + ZF_DESC) as Buscador ' +
+        'from P11Oficial.dbo.SZF010 SZF (nolock)'
+      #9'Where SZF.D_E_L_E_T_ <> '#39'*'#39
+      ') TB '
+      'Where Buscador like '#39'%%'#39
+      'Order by ZF_DESC ')
+    object QueryZF_FILIAL: TStringField
+      FieldName = 'ZF_FILIAL'
+      Size = 6
+    end
+    object QueryZF_SETOR: TFloatField
+      FieldName = 'ZF_SETOR'
+    end
+    object QueryZF_DESC: TStringField
+      FieldName = 'ZF_DESC'
+      Size = 100
+    end
+    object QueryZF_BLOQUEI: TStringField
+      FieldName = 'ZF_BLOQUEI'
+      Size = 1
+    end
+    object QueryD_E_L_E_T_: TStringField
+      FieldName = 'D_E_L_E_T_'
+      Size = 1
+    end
+    object QueryR_E_C_N_O_: TIntegerField
+      FieldName = 'R_E_C_N_O_'
+    end
+    object QueryBuscador: TStringField
+      FieldName = 'Buscador'
+      ReadOnly = True
+      Size = 106
+    end
+  end
+end

@@ -1,0 +1,152 @@
+unit RelatorioParametrizadoVendas_ClienteXCliente_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppDB, ppParameter, ppDesignLayer,
+  ppCtrls, ppBands, ppClass, ppStrtch, ppMemo, ppPrnabl, ppCache, ppProd,
+  ppReport, Datasnap.Provider, Datasnap.DBClient, Data.DB, Data.Win.ADODB,
+  ppComm, ppRelatv, ppDBPipe;
+
+type
+  TRelatorioParametrizadoVendas_ClienteXCliente = class(TForm)
+    ppDB: TppDBPipeline;
+    Query: TADOQuery;
+    QueryComissaoVendedor: TStringField;
+    QueryNota: TStringField;
+    QueryEmissao: TDateTimeField;
+    QueryCliente: TStringField;
+    QueryUF: TStringField;
+    QueryQuantidade: TIntegerField;
+    QueryValorUnitario: TFloatField;
+    QueryMediaKG: TFloatField;
+    QueryMediaKGMP: TFloatField;
+    QueryPeso: TFloatField;
+    QueryValorLiquido: TFloatField;
+    QueryValorLiquidoMP: TFloatField;
+    QueryValorPCC: TFloatField;
+    QueryValorPCCMP: TFloatField;
+    QueryValorBruto: TFloatField;
+    QueryValorBrutoMP: TFloatField;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    CDSComissaoVendedor: TStringField;
+    CDSNota: TStringField;
+    CDSEmissao: TDateTimeField;
+    CDSCliente: TStringField;
+    CDSUF: TStringField;
+    CDSQuantidade: TIntegerField;
+    CDSValorUnitario: TFloatField;
+    CDSMediaKG: TFloatField;
+    CDSMediaKGMP: TFloatField;
+    CDSPeso: TFloatField;
+    CDSValorLiquido: TFloatField;
+    CDSValorLiquidoMP: TFloatField;
+    CDSValorPCC: TFloatField;
+    CDSValorPCCMP: TFloatField;
+    CDSValorBruto: TFloatField;
+    CDSValorBrutoMP: TFloatField;
+    DSP: TDataSetProvider;
+    ppRelatorio: TppReport;
+    ppHeaderBand16: TppHeaderBand;
+    ppLine142: TppLine;
+    ppImage15: TppImage;
+    ppLabel278: TppLabel;
+    LBL_Periodo: TppLabel;
+    ppDetailBand16: TppDetailBand;
+    TXT_PesoGerenciaXGerencia: TppDBText;
+    ppLine143: TppLine;
+    TXT_ValorLiquidoGerenciaXGerencia: TppDBText;
+    TXT_GerenteGerenciaXGerencia: TppDBText;
+    ppDBText113: TppDBText;
+    ppDBText155: TppDBText;
+    TXT_ValorBrutoGerenciaXGerencia: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppFooterBand16: TppFooterBand;
+    ppLine144: TppLine;
+    LBL_Filtros: TppMemo;
+    LBL_Data: TppLabel;
+    LBL_NumeroPagina: TppLabel;
+    LBL_Usuario: TppLabel;
+    ppSummaryBand16: TppSummaryBand;
+    ppShape61: TppShape;
+    ppLabel314: TppLabel;
+    ppLabel315: TppLabel;
+    ppLabel316: TppLabel;
+    ppLabel317: TppLabel;
+    ppLabel318: TppLabel;
+    ppLabel319: TppLabel;
+    ppDBText238: TppDBText;
+    ppDBText240: TppDBText;
+    ppDBText241: TppDBText;
+    ppDBText242: TppDBText;
+    ppLabel260: TppLabel;
+    ppDBText156: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDBText1: TppDBText;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppDBText7: TppDBText;
+    ppGroup30_GerenciaXGerencia: TppGroup;
+    ppGroupHeaderBand30: TppGroupHeaderBand;
+    Linha_GerenciaXGerencia00: TppShape;
+    LBL_PesoGerenciaXGerencia: TppLabel;
+    LBL_LiquidoGerenciaXGerencia: TppLabel;
+    LBL_BrutoGerenciaXGerencia: TppLabel;
+    LBL_GerenteGerenciaXGerencia: TppLabel;
+    ppDBText192: TppDBText;
+    ppLabel253: TppLabel;
+    ppLabel259: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel7: TppLabel;
+    ppGroupFooterBand30: TppGroupFooterBand;
+    ShapeTotalComissao: TppShape;
+    LBL_TotalComissao: TppLabel;
+    TXT_ValorBrutoTotalComissao: TppDBCalc;
+    TXT_ValorPCCTotalComissao: TppDBCalc;
+    TXT_PesoTotalComissao: TppDBCalc;
+    TXT_MediaComissao: TppDBCalc;
+    TXT_ValorLiquidoTotalComissao: TppDBCalc;
+    TXT_ValorPCCTotalComissaoMP: TppDBCalc;
+    TXT_ValorLiquidoTotalComissaoMP: TppDBCalc;
+    TXT_MediaComissaoMP: TppDBCalc;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppDBText10: TppDBText;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppShape1: TppShape;
+    ppDBCalc1: TppDBCalc;
+    TXT_ValorPCCTotalComissao1: TppDBCalc;
+    TXT_PesoTotalComissao1: TppDBCalc;
+    TXT_MediaComissao1: TppDBCalc;
+    ppDBCalc5: TppDBCalc;
+    TXT_ValorPCCTotalComissaoMP1: TppDBCalc;
+    ppDBCalc7: TppDBCalc;
+    TXT_MediaComissaoMP1: TppDBCalc;
+    ppDBText11: TppDBText;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList16: TppParameterList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendas_ClienteXCliente: TRelatorioParametrizadoVendas_ClienteXCliente;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,72 @@
+inherited PadraoCadastro1: TPadraoCadastro1
+  Caption = 'PadraoCadastro1'
+  ExplicitWidth = 918
+  ExplicitHeight = 587
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PNL_Top: TPanel
+    inherited PNL_Modo: TPanel
+      inherited LBL_Modo: TLabel
+        Width = 912
+        Height = 12
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    inherited PNL_Topo: TPanel
+      object Label7: TLabel
+        Left = 12
+        Top = 3
+        Width = 13
+        Height = 16
+        Caption = 'ID'
+        FocusControl = TXT_ID
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object TXT_ID: TDBEdit
+        Left = 13
+        Top = 19
+        Width = 75
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Usuario_ID'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    inherited PGC_Principal: TPageControl
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 341
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 495
+        ExplicitHeight = 341
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel4: TPanel
+      inherited Label3: TLabel
+        Width = 398
+        Height = 33
+      end
+    end
+  end
+end

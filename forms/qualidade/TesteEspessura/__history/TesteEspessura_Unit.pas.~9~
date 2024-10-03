@@ -1,0 +1,73 @@
+unit TesteEspessura_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobi_unit, Data.DB,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls;
+
+type
+  TTeste_Espessura = class(TPadraoBI)
+    BTN_Estrutura: TSpeedButton;
+    Image2: TImage;
+    Image3: TImage;
+    BNT_CertificadoDeQualidade: TSpeedButton;
+    Label5: TLabel;
+    Label4: TLabel;
+    procedure BTN_EstruturaClick(Sender: TObject);
+    procedure PesquisarExecute(Sender: TObject);
+    procedure BNT_CertificadoDeQualidadeClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura: TTeste_Espessura;
+
+implementation
+
+{$R *.dfm}
+
+uses Teste_Espessura_Configuracao_Unit, Teste_Espessura_NovoTeste_Unit;
+
+procedure TTeste_Espessura.BNT_CertificadoDeQualidadeClick(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TTeste_Espessura_NovoTeste, Teste_Espessura_NovoTeste);
+  Try
+    Teste_Espessura_NovoTeste.ShowModal;
+  Finally
+    Teste_Espessura_NovoTeste.Release;
+    Teste_Espessura_NovoTeste := nil;
+  End;
+
+
+end;
+
+procedure TTeste_Espessura.BTN_EstruturaClick(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TTeste_Espessura_Configuracao, Teste_Espessura_Configuracao);
+  Try
+    Teste_Espessura_Configuracao.ShowModal;
+  Finally
+    Teste_Espessura_Configuracao.Release;
+    Teste_Espessura_Configuracao := nil;
+  End;
+
+end;
+
+procedure TTeste_Espessura.PesquisarExecute(Sender: TObject);
+begin
+  inherited;
+
+  ///
+
+end;
+
+end.

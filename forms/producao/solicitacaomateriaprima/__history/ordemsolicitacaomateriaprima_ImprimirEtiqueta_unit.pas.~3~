@@ -1,0 +1,144 @@
+unit ordemsolicitacaomateriaprima_ImprimirEtiqueta_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, ppCtrls,
+  ppStrtch, ppMemo, ppDB, ppParameter, ppDesignLayer, ppPrnabl, ppClass,
+  ppCache, ppBands, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, ppDBBDE;
+
+type
+  TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta = class(TPadraoBuscador)
+    QueryEmpresa: TStringField;
+    QueryGrupo_FK: TStringField;
+    QueryProduto_FK: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryDataValidade: TDateTimeField;
+    QueryUnidade: TStringField;
+    CDSEmpresa: TStringField;
+    CDSGrupo_FK: TStringField;
+    CDSProduto_FK: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSDataValidade: TDateTimeField;
+    CDSUnidade: TStringField;
+    TXT_Buscador2: TEdit;
+    Label7: TLabel;
+    ppBDEPipeline2: TppBDEPipeline;
+    ppReportWMS: TppReport;
+    ppDetailBand3: TppDetailBand;
+    ppDBText19: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    DSP_Etiqueta: TDataSetProvider;
+    DS_Etiqueta: TDataSource;
+    Query_Etiqueta: TADOQuery;
+    Query_EtiquetaNumSeq: TStringField;
+    Query_EtiquetaEmpresa: TStringField;
+    Query_EtiquetaSetor: TStringField;
+    Query_EtiquetaTurno: TStringField;
+    Query_EtiquetaProduto_ID: TStringField;
+    Query_EtiquetaEmissao: TDateTimeField;
+    Query_EtiquetaDataIni: TDateTimeField;
+    Query_EtiquetaHoraIni: TStringField;
+    Query_EtiquetaDataFin: TDateTimeField;
+    Query_EtiquetaHoraFin: TStringField;
+    Query_EtiquetaOrdemProducao: TStringField;
+    Query_EtiquetaOPEtiqueta: TStringField;
+    Query_EtiquetaProduto: TStringField;
+    Query_EtiquetaLote: TStringField;
+    Query_EtiquetaQtdProduzida: TFloatField;
+    Query_EtiquetaSaldo: TFloatField;
+    Query_EtiquetaRecno: TIntegerField;
+    Query_EtiquetaNumCarrinho: TIntegerField;
+    Query_EtiquetaVia: TIntegerField;
+    CDS_Etiqueta: TClientDataSet;
+    CDS_EtiquetaNumSeq: TStringField;
+    CDS_EtiquetaEmpresa: TStringField;
+    CDS_EtiquetaSetor: TStringField;
+    CDS_EtiquetaTurno: TStringField;
+    CDS_EtiquetaProduto_ID: TStringField;
+    CDS_EtiquetaEmissao: TDateTimeField;
+    CDS_EtiquetaDataIni: TDateTimeField;
+    CDS_EtiquetaHoraIni: TStringField;
+    CDS_EtiquetaDataFin: TDateTimeField;
+    CDS_EtiquetaHoraFin: TStringField;
+    CDS_EtiquetaOrdemProducao: TStringField;
+    CDS_EtiquetaOPEtiqueta: TStringField;
+    CDS_EtiquetaProduto: TStringField;
+    CDS_EtiquetaLote: TStringField;
+    CDS_EtiquetaQtdProduzida: TFloatField;
+    CDS_EtiquetaSaldo: TFloatField;
+    CDS_EtiquetaRecno: TIntegerField;
+    CDS_EtiquetaNumCarrinho: TIntegerField;
+    CDS_EtiquetaVia: TIntegerField;
+    ppDBMemo22: TppDBMemo;
+    ppDBText1: TppDBText;
+    ppLabel1: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppDBText3: TppDBText;
+    ppShape1: TppShape;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta: TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta;
+
+implementation
+
+{$R *.dfm}
+
+procedure TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta.BTN_BuscarClick(
+  Sender: TObject);
+Var
+  VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Distinct Top 100 Item.Empresa, Item.Grupo_FK, ' + #13;
+  VLC_Select := VLC_Select + '	Item.Produto_FK, Produto.Produto, Item.Lote, Item.DataValidade, Item.Unidade ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Est_TB_EstoqueSolicitacaoMateriaPrimaItem] Item (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join BOMIXBI.dbo.Pcp_TB_Produto Produto (Nolock) ON Produto.Empresa = Item.Empresa ' + #13;
+  VLC_Select := VLC_Select + '													   AND Produto.Produto_ID = Item.Produto_FK ' + #13;
+  VLC_Select := VLC_Select + ' Where Item.Empresa = ' + '''' + '0101' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND DataValidade  is not null ' + #13;
+  VLC_Select := VLC_Select + ' AND (Item.Produto_FK + Produto.Produto + Item.Lote + Item.Unidade)  Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+
+  if TXT_Buscador2.Text <> '' then
+       VLC_Select := VLC_Select + ' AND (Item.Produto_FK + Produto.Produto + Item.Lote + Item.Unidade)  Like ' + '''' + '%' + TXT_Buscador2.Text + '%' + '''';
+
+  VLC_Select := VLC_Select + ' Order by Produto_FK ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

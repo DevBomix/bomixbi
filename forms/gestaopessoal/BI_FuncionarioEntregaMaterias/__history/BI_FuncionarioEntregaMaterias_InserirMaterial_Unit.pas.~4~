@@ -1,0 +1,54 @@
+unit BI_FuncionarioEntregaMaterias_InserirMaterial_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TBI_FuncionarioEntregaMaterias_InserirMaterial = class(TPadraoBuscador)
+    QueryAcessorio_Id: TIntegerField;
+    QueryDescricao: TStringField;
+    QueryPrazoDias: TIntegerField;
+    CDSAcessorio_Id: TIntegerField;
+    CDSDescricao: TStringField;
+    CDSPrazoDias: TIntegerField;
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_FuncionarioEntregaMaterias_InserirMaterial: TBI_FuncionarioEntregaMaterias_InserirMaterial;
+
+implementation
+
+{$R *.dfm}
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterial.BTN_BuscarClick(
+  Sender: TObject);
+  Var
+      VLC_Select : String;
+
+begin
+  inherited;
+      VLC_Select := VLC_Select + ' Select Acessorio_Id, Descricao, PrazoDias ' + #13;
+      VLC_Select := VLC_Select + ' from [dbo].[Pes_TB_Acessorio] (nolock) ' + #13;
+      VLC_Select := VLC_Select + ' Where Descricao like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+      VLC_Select := VLC_Select + ' AND Visibilidade = 0  ' + #13;
+      VLC_Select := VLC_Select + ' Order by Descricao  ' + #13;
+
+      CDS.Close;
+      Query.Close;
+      Query.SQL.Clear;
+      Query.SQL.Text := VLC_Select;
+      CDS.Open;
+
+end;
+
+end.

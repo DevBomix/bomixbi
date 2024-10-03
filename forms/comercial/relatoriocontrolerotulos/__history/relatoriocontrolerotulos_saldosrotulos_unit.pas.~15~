@@ -1,0 +1,180 @@
+unit RelatorioControleRotulos_SaldosRotulos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ppParameter, ppDesignLayer,
+  ppBands, ppClass, ppCtrls, ppPrnabl, ppCache, ppProd, ppReport, ppComm,
+  ppRelatv, ppDB, ppDBPipe, Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TRelatorio_ControleRotulos_SaldosRotulos = class(TForm)
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppDBPipeline1: TppDBPipeline;
+    ppRelatorio: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppImage4: TppImage;
+    ppLabel33: TppLabel;
+    ppLine29: TppLine;
+    ppShape1: TppShape;
+    ppLabel2: TppLabel;
+    ppLabel4: TppLabel;
+    ppDetailBand5: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppLine5: TppLine;
+    ppFooterBand5: TppFooterBand;
+    ppLine12: TppLine;
+    ppLBL_Data: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppLabel1: TppLabel;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppLabel6: TppLabel;
+    ppDBText6: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText10: TppDBText;
+    ppLabel9: TppLabel;
+    ppLabel10: TppLabel;
+    CDSEmpresa: TStringField;
+    CDSID: TStringField;
+    CDSRotulo: TStringField;
+    CDSLote: TStringField;
+    CDSDataValidade: TDateTimeField;
+    CDSStatus: TStringField;
+    CDSSaldoTotal: TFloatField;
+    CDSQtdPedido: TFloatField;
+    CDSSaldoReal: TFloatField;
+    CDSStatus_Comercial: TStringField;
+    CDSSaldoPorLote: TFloatField;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppDBText11: TppDBText;
+    ppLabel13: TppLabel;
+    QueryEmpresa: TStringField;
+    QueryID: TStringField;
+    QueryRotulo: TStringField;
+    QueryLote: TStringField;
+    QueryDataValidade: TDateTimeField;
+    QueryStatus: TStringField;
+    QuerySaldoTotal: TFloatField;
+    QueryQtdPedido: TFloatField;
+    QuerySaldoReal: TFloatField;
+    QueryStatus_Comercial: TStringField;
+    QuerySaldoPorLote: TFloatField;
+    QueryCompraNota: TStringField;
+    QueryCompraEmissao: TDateTimeField;
+    QueryCompraQuantidade: TFloatField;
+    QueryCompraUM: TStringField;
+    CDSCompraNota: TStringField;
+    CDSCompraEmissao: TDateTimeField;
+    CDSCompraQuantidade: TFloatField;
+    CDSCompraUM: TStringField;
+    ppLabel5: TppLabel;
+    ppDBText7: TppDBText;
+    ppDBText9: TppDBText;
+    ppLabel7: TppLabel;
+    ppDBText12: TppDBText;
+    ppLabel8: TppLabel;
+    ppLine1: TppLine;
+    QueryDataValidade_Comercial: TDateTimeField;
+    CDSDataValidade_Comercial: TDateTimeField;
+    ppLabel14: TppLabel;
+    ppDBText13: TppDBText;
+    ppDBText14: TppDBText;
+    ppLabel15: TppLabel;
+    QueryProdutoAcabado: TFloatField;
+    CDSProdutoAcabado: TFloatField;
+    ppDBText15: TppDBText;
+    ppLabel3: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel18: TppLabel;
+
+    function ImprimirRelatorio : Boolean;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ControleRotulos_SaldosRotulos: TRelatorio_ControleRotulos_SaldosRotulos;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, FuncaoRestricoesInformacoes_Unit,
+  RelatorioControleRotulos_Unit;
+
+function TRelatorio_ControleRotulos_SaldosRotulos.ImprimirRelatorio: Boolean;
+Var
+  VLC_Select, VLC_Orderby : String;
+
+begin
+  inherited;
+  VLC_Select := VLC_Select + ' Select' + #13;
+  VLC_Select := VLC_Select + '  		Empresa, ID, Rotulo, Lote, DataValidade, Status, SaldoTotal, QtdPedido, Sum(ProdutoAcabado) as ProdutoAcabado, Sum(ProdutoAcabado) + SaldoReal as SaldoReal, ' + #13;
+  VLC_Select := VLC_Select + '	  	Status_Comercial, DataValidade_Comercial, SaldoPorLote, CompraNota, CompraEmissao, CompraQuantidade, CompraUM ' + #13;
+  VLC_Select := VLC_Select + ' from ( ' + #13;
+
+  VLC_Select := VLC_Select + '             Select ' + #13;
+  VLC_Select := VLC_Select + '                   Distinct  ' + #13;
+  VLC_Select := VLC_Select + '                  		Empresa, ID, Rotulo, Lote, DataValidade, Status, SaldoTotal, QtdOrcamento + QtdPedido as QtdPedido, ProdutoAcabado, SaldoReal, ' + #13;
+  VLC_Select := VLC_Select + '                      Status_Comercial, DataValidade_Comercial, SaldoPorLote, CompraNota, CompraEmissao, CompraQuantidade, CompraUM ' + #13;
+  VLC_Select := VLC_Select + '             from BomixBI.dbo.Pcp_TB_ProdutoRotulo (nolock)  ' + #13;
+  VLC_Select := VLC_Select + '             Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  VLC_Select := VLC_Select + Relatorio_ControleRotulos.GetSQLWhere;
+
+  VLC_Select := VLC_Select + ' ) TB  ' + #13;
+  VLC_Select := VLC_Select + ' Group by Empresa, ID, Rotulo, Lote, DataValidade, Status, SaldoTotal, QtdPedido, SaldoReal,  ' + #13;
+  VLC_Select := VLC_Select + ' Status_Comercial, DataValidade_Comercial, SaldoPorLote, CompraNota, CompraEmissao, CompraQuantidade, CompraUM ' + #13;
+
+  VLC_Orderby := ' Order by ID desc ';
+
+  Relatorio_ControleRotulos.MemoSQL.Lines.Text := VLC_Select + ' ' +  VLC_Orderby;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select + ' ' +  VLC_Orderby;
+  CDS.Open;
+
+  ppImage4.Picture := Sys_FuncaoSistema.Img_LogoBomix.Picture;
+  ppLBL_Data.Caption :=  'Impresso por: ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption + ' // ' + 'Data Impressão: ' + DateTimeToStr(Date());
+
+   If CDS.RecordCount = 0 Then
+   begin
+      Result := False;
+   end
+   else
+   begin
+      Result := True;
+   end;
+
+end;
+
+end.

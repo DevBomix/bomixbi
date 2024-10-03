@@ -1,0 +1,24 @@
+unit OrdemProducaoImprimirEtiquetaApontSaldo_Quant_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TOrdemProducaoImprimirEtiquetaApontSaldo_Quant = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducaoImprimirEtiquetaApontSaldo_Quant: TOrdemProducaoImprimirEtiquetaApontSaldo_Quant;
+
+implementation
+
+{$R *.dfm}
+
+end.

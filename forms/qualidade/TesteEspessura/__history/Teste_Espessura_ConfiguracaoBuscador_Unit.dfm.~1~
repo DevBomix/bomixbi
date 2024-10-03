@@ -1,0 +1,10 @@
+inherited Teste_Espessura_ConfiguracaoBuscador: TTeste_Espessura_ConfiguracaoBuscador
+  Caption = 'Teste_Espessura_ConfiguracaoBuscador'
+  ClientHeight = 189
+  ExplicitHeight = 218
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Botoes: TPanel
+    Top = 150
+  end
+end

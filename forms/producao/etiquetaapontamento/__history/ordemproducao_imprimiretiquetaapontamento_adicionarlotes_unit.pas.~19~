@@ -1,0 +1,200 @@
+unit OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes = class(TForm)
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label6: TLabel;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Image4: TImage;
+    Image5: TImage;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    QueryID: TAutoIncField;
+    QueryOP: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryLote: TStringField;
+    QueryValidade: TDateTimeField;
+    QueryQuantidade: TFloatField;
+    QueryTipoProduto: TStringField;
+    QueryClassificacao: TStringField;
+    QueryArmazem: TStringField;
+    QuerySequencia: TStringField;
+    QueryIdentidade: TStringField;
+    QuerySetor: TStringField;
+    CDSID: TAutoIncField;
+    CDSOP: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSLote: TStringField;
+    CDSValidade: TDateTimeField;
+    CDSQuantidade: TFloatField;
+    CDSTipoProduto: TStringField;
+    CDSClassificacao: TStringField;
+    CDSArmazem: TStringField;
+    CDSSequencia: TStringField;
+    CDSIdentidade: TStringField;
+    CDSSetor: TStringField;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    TXT_Setor: TEdit;
+    TXT_OP: TEdit;
+    TXT_Armazem: TEdit;
+    TXT_Sequencia: TEdit;
+    TXT_Identidade: TEdit;
+    TXT_ProdutoID: TEdit;
+    TXT_Produto: TEdit;
+    TXT_TipoProduto: TEdit;
+    TXT_Classificacao: TEdit;
+
+    // Minhas Procedures e Fucntions
+    procedure InserirNovoRegistro(OP, Sequencia, Setor : String);
+    function GetLotes(Sequencia : String) : String;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes: TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes;
+
+implementation
+
+{$R *.dfm}
+
+uses ConexaoDados_Unit, OrdemProducaoImprimirEtiquetaApontSaldo_Unit;
+
+
+function TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.GetLotes(
+  Sequencia: String) : String;
+  Var
+     VLC_Select : String;
+begin
+
+  VLC_Select := VLC_Select + ' Select * from BomixBI.[dbo].Pcp_TB_ApontamentoConsumoPorCarrinho (nolock)' + #13;
+  VLC_Select := VLC_Select + ' Where Sequencia = ' + '''' + Sequencia + '''' + #13;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+  TXT_Setor.Text := CDSSetor.AsString;
+  TXT_OP.Text := CDSOP.AsString;
+  TXT_Armazem.Text := CDSArmazem.AsString;
+  TXT_Sequencia.Text := CDSSequencia.AsString;
+  TXT_Identidade.Text := CDSIdentidade.AsString;
+  TXT_ProdutoID.Text := CDSProduto_ID.AsString;
+  TXT_Produto.Text := CDSProduto.AsString;
+  TXT_TipoProduto.Text := CDSTipoProduto.AsString;
+  TXT_Classificacao.Text := CDSClassificacao.AsString;
+
+  if CDS.RecordCount > 0 then
+     Result := 'Sim'
+  else
+    Result := 'Não';
+
+end;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.InserirNovoRegistro(
+  OP, Sequencia, Setor: String);
+Var
+   VLC_Select : String;
+
+begin
+
+    VLC_Select := VLC_Select + '  Insert into BomixBI.[dbo].Pcp_TB_ApontamentoConsumoPorCarrinho (OP, Produto_ID, Produto, ' + #13;
+    VLC_Select := VLC_Select + '  Lote, Validade, Quantidade, TipoProduto, Classificacao, Armazem, Sequencia, Identidade, Setor) ' + #13;
+    VLC_Select := VLC_Select + '  ' + #13;
+    VLC_Select := VLC_Select + '     Select  ' + #13;
+    VLC_Select := VLC_Select + '       Rtrim(D3_OP) as OP, Rtrim(D3_COD) as Produto_ID, Produto, Rtrim(D5_LOTECTL) as Lote, ' + #13;
+    VLC_Select := VLC_Select + '       Convert(Datetime,D5_DTVALID,112) as Validade, D5_QUANT as Quantidade, Rtrim(TipoProduto) as TipoProduto, ' + #13;
+    VLC_Select := VLC_Select + '       Rtrim(Classificacao) as Classificacao, Rtrim(D3_LOCAL) as Armazem, Rtrim(D3.D3_NUMSEQ) as Sequencia, Rtrim(D3_IDENT) as Identidade ' + #13;
+    VLC_Select := VLC_Select + '       ,' + '''' + Setor + '''' + ' as Setor ' + #13;
+    VLC_Select := VLC_Select + '     FROM P12OFICIAL.dbo.SD3010 D3 (nolock) ' + #13;
+    VLC_Select := VLC_Select + '     Inner Join BomixBI.dbo.Pcp_TB_Produto B1 (nolock) ON Empresa = ' + '''' + '0101' + '''' + #13;
+    VLC_Select := VLC_Select + '                        AND B1.Produto_ID = D3_COD ' + #13;
+    VLC_Select := VLC_Select + '     Inner Join P12OFICIAL.dbo.SD5010 D5 (nolock) ON D5_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + '                           AND D5_PRODUTO = D3_COD  ' + #13;
+    VLC_Select := VLC_Select + '                           AND D5_NUMSEQ = D3_NUMSEQ ' + #13;
+    VLC_Select := VLC_Select + '     Where D3.D3_FILIAL = ' + '''' + '010101' + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3.D3_ESTORNO <> ' + '''' + 'S' + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3_OP = ' + '''' + OP + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3_NUMSEQ = ' + '''' + Sequencia + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3.D3_CF = ' + '''' + 'RE1' + '''' + #13;
+    VLC_Select := VLC_Select + '     AND Classificacao = ' + '''' + 'PF' + '''' + #13;
+    VLC_Select := VLC_Select + '     AND D3_NUMSEQ not in (Select Sequencia from BomixBI.[dbo].[Pcp_TB_ApontamentoConsumoPorCarrinho] (nolock))' + #13;
+    VLC_Select := VLC_Select + '     Order by D3_FILIAL, D3_OP, D3_IDENT, D3_CF, D3.R_E_C_N_O_' + #13;
+
+    With Sys_ModuloConexaoDados.ADOCommand1 do
+    begin
+        CommandText := VLC_Select;
+        Execute;
+    end;
+
+end;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.SpeedButton1Click(
+  Sender: TObject);
+begin
+
+  Application.CreateForm(TOrdemProducaoImprimirEtiquetaApontSaldo, OrdemProducaoImprimirEtiquetaApontSaldo);
+  try
+       OrdemProducaoImprimirEtiquetaApontSaldo.ShowModal;
+  finally
+        OrdemProducaoImprimirEtiquetaApontSaldo.Release;
+        OrdemProducaoImprimirEtiquetaApontSaldo := Nil;
+  end;
+
+end;
+
+procedure TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes.SpeedButton2Click(
+  Sender: TObject);
+  Var
+     VLC_Delete : String;
+begin
+
+   VLC_Delete := 'Delete from BomixBI.[dbo].Pcp_TB_ApontamentoConsumoPorCarrinho where ID = ' + CDSID.AsString;
+
+   With  Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Delete;
+       Execute;
+   end;
+
+   CDS.Close;
+   CDS.Open;
+
+end;
+
+end.

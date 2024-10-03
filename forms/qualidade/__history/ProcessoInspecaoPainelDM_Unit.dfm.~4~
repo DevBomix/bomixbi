@@ -1,0 +1,106 @@
+object ProcessoInspecao_PainelDM: TProcessoInspecao_PainelDM
+  OldCreateOrder = False
+  Height = 443
+  Width = 711
+  object CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP'
+    Left = 48
+    Top = 56
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object CDSArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDSInspetor_ID: TIntegerField
+      FieldName = 'Inspetor_ID'
+    end
+    object CDSFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 80
+    end
+    object CDSNV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  object Query: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    DataSource = DS
+    Parameters = <>
+    SQL.Strings = (
+      'Select '
+      
+        #9'Empresa, Area, Inspetor_ID, Funcionario, Count(Inspecao_ID) as ' +
+        'NV'
+      'from ('
+      ''
+      #9'Select '
+      
+        #9#9'Distinct Empresa, Area, Setor, Inspetor_ID, Funcionario, Inspe' +
+        'cao_ID'
+      #9'from ('
+      #9#9#9'Select '
+      #9#9#9#9'Ins.Empresa, Ins.Area, Ins.Setor, '
+      #9#9#9#9'Ins.Inspetor_ID, Funcionario, Cargo, '
+      
+        #9#9#9#9'Inspecao_ID, DataInspecao, Turno, Recurso, Processo, Ins.Pro' +
+        'duto_ID, Defeito_FK, Defeito '
+      #9#9#9'from BomixBI.[dbo].[Icq_TB_Inspecao] Ins (nolock)'
+      
+        #9#9#9'Inner Join BomixBI.[dbo].Sys_TB_Usuario Usr (nolock) ON Usr.U' +
+        'suario_ID = Ins.Inspetor_ID'
+      
+        #9#9#9'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Pro' +
+        'duto.Produto_ID = Ins.Produto_ID '
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Produto.Empresa = '#39'0101'#39
+      
+        #9#9#9'Inner Join BomixBI.[dbo].[Icq_TB_InspecaoDefeito] Def (nolock' +
+        ') ON Def.Inspecao_FK = Ins.Inspetor_ID'
+      
+        #9#9#9'Where DataInspecao between '#39'2018-09-01 00:00:00.000'#39' AND '#39'201' +
+        '8-09-28 00:00:00.000'#39
+      #9#9#9'AND Ins.Empresa = '#39'010101'#39
+      ''
+      #9') TB'
+      ''
+      ') TB'
+      'Group by Empresa, Area, Inspetor_ID, Funcionario')
+    Left = 84
+    Top = 56
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object QueryArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object QueryInspetor_ID: TIntegerField
+      FieldName = 'Inspetor_ID'
+    end
+    object QueryFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 80
+    end
+    object QueryNV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  object DS: TDataSource
+    DataSet = CDS
+    Left = 120
+    Top = 56
+  end
+  object DSP: TDataSetProvider
+    DataSet = Query
+    Left = 154
+    Top = 56
+  end
+end

@@ -1,0 +1,348 @@
+inherited BI_PCP_MateriaPrimaProgramadaInjecao: TBI_PCP_MateriaPrimaProgramadaInjecao
+  Caption = 'BI_PCP_MateriaPrimaProgramadaInjecao'
+  ClientHeight = 557
+  ClientWidth = 933
+  ExplicitWidth = 939
+  ExplicitHeight = 586
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 915
+    ExplicitWidth = 915
+    inherited LBL_Titulo: TLabel
+      Width = 367
+      Caption = 'Mat'#233'ria Prima Programada para Inje'#231#227'o'
+      ExplicitWidth = 367
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 919
+    Height = 452
+    inherited Panel_Filtro: TPanel
+      Width = 919
+      object Label1: TLabel [1]
+        Left = 658
+        Top = 8
+        Width = 59
+        Height = 22
+        Caption = 'Status'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited TXT_Buscador: TEdit
+        Width = 338
+        ExplicitWidth = 338
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 406
+        Top = 8
+        ExplicitLeft = 406
+        ExplicitTop = 8
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+      object CBX_Status: TComboBox
+        Left = 726
+        Top = 8
+        Width = 177
+        Height = 23
+        CharCase = ecUpperCase
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        TabStop = False
+        Text = 'AMBOS'
+        Items.Strings = (
+          'AMBOS'
+          'PENDENTE'
+          'OK')
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Left = 9
+      Top = 54
+      Width = 907
+      Height = 394
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Produto_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 85
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 373
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'UndMedida'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'UM'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 49
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Empenho'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 78
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Estoque'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 73
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Saldo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 75
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Status'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 75
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 518
+    Width = 933
+    inherited Panel3: TPanel
+      Left = 688
+      inherited BNT_Confirmar: TSpeedButton
+        Caption = '        Imprimir'
+      end
+      inherited BNT_Cancelar: TSpeedButton
+        Caption = '       Fechar'
+      end
+    end
+  end
+  inherited CDS: TClientDataSet
+    Active = True
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      ReadOnly = True
+      Size = 30
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object CDSUndMedida: TStringField
+      FieldName = 'UndMedida'
+      Size = 5
+    end
+    object CDSEmpenho: TFloatField
+      FieldName = 'Empenho'
+      ReadOnly = True
+    end
+    object CDSEstoque: TFloatField
+      FieldName = 'Estoque'
+      ReadOnly = True
+    end
+    object CDSSaldo: TFloatField
+      FieldName = 'Saldo'
+      ReadOnly = True
+    end
+    object CDSStatus: TStringField
+      FieldName = 'Status'
+      ReadOnly = True
+      Size = 8
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      #9'Empresa, Produto_ID, Produto, UndMedida, Empenho, Estoque, '
+      #9'(Estoque - Empenho) as Saldo, '
+      
+        #9'Case when (Estoque - Empenho) >= 0 then '#39'OK'#39' else '#39'PENDENTE'#39' en' +
+        'd Status '
+      'from ('
+      #9'Select '
+      #9#9'D4_FILIAL as Empresa, Rtrim(D4_COD) as Produto_ID, '
+      #9#9'Produto.Produto, Produto.UndMedida, Sum(D4_QUANT) as Empenho  '
+      #9'from BomixBI.dbo.Pcp_TB_OrdemProducao OP (nolock)'
+      
+        #9'Inner Join P12OFICIAL.dbo.SD4010 D4 (nolock) ON D4_FILIAL = '#39'01' +
+        '0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9'AND D4.D_E_L_E_T_ <> '#39'*'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9'AND D4_OP = OrdemProducao'
+      
+        #9'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Produ' +
+        'to.Empresa = '#39'0101'#39#9#9#9#9#9#9#9#9#9#9#9#9
+      #9#9#9#9#9#9#9#9#9#9#9#9'AND Produto.Produto_ID = D4_COD'
+      #9'where OP.Empresa = '#39'0101'#39
+      #9'AND Prioridade < 500'
+      #9'AND Area = '#39'INJECAO'#39
+      #9'AND Status <> '#39'FINALIZADA'#39
+      #9'Group by D4_FILIAL, D4_COD, Produto.Produto, Produto.UndMedida'
+      #9'Having Sum(D4_QUANT) > 0'
+      ') Empenho'
+      'Left Join ('
+      ''
+      #9#9#9'Select '
+      #9#9#9#9'B2_FILIAL, B2_COD, Sum(B2_QATU) as Estoque '
+      #9#9#9'from P12OFICIAL.dbo.SB2010 (nolock)'
+      #9#9#9'Where B2_LOCAL in ('#39'P1'#39','#39'P4'#39','#39'B1'#39')'
+      #9#9#9'AND B2_FILIAL = '#39'010101'#39
+      #9#9#9'AND D_E_L_E_T_ <> '#39'*'#39
+      #9#9#9'Group by B2_FILIAL, B2_COD'
+      ''
+      ') Estoque ON Estoque.B2_FILIAL = Empenho.Empresa '
+      #9#9' AND Estoque.B2_COD = Empenho.Produto_ID'
+      ''
+      'Order by Produto_ID')
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      ReadOnly = True
+      Size = 30
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object QueryUndMedida: TStringField
+      FieldName = 'UndMedida'
+      Size = 5
+    end
+    object QueryEmpenho: TFloatField
+      FieldName = 'Empenho'
+      ReadOnly = True
+    end
+    object QueryEstoque: TFloatField
+      FieldName = 'Estoque'
+      ReadOnly = True
+    end
+    object QuerySaldo: TFloatField
+      FieldName = 'Saldo'
+      ReadOnly = True
+    end
+    object QueryStatus: TStringField
+      FieldName = 'Status'
+      ReadOnly = True
+      Size = 8
+    end
+  end
+end

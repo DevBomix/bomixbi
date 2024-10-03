@@ -1,0 +1,56 @@
+unit BI_PedidoVendaLogDataPCP_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient,
+  Data.Win.ADODB, Datasnap.Provider, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TBI_PedidoVendaLogDataPCP = class(TForm)
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    PNL_Auxiliar: TPanel;
+    DBGrid: TDBGrid;
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    DSP_Log: TDataSetProvider;
+    DS_Log: TDataSource;
+    Query_Log: TADOQuery;
+    CDS_Log: TClientDataSet;
+    Query_LogPedidoVenda_FK: TStringField;
+    Query_LogTipo: TStringField;
+    Query_LogResponsavel: TStringField;
+    Query_LogData: TDateTimeField;
+    Query_LogModificacao: TStringField;
+    Query_LogEmpresa: TStringField;
+    CDS_LogPedidoVenda_FK: TStringField;
+    CDS_LogTipo: TStringField;
+    CDS_LogResponsavel: TStringField;
+    CDS_LogData: TDateTimeField;
+    CDS_LogModificacao: TStringField;
+    CDS_LogEmpresa: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaLogDataPCP: TBI_PedidoVendaLogDataPCP;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TBI_PedidoVendaLogDataPCP.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

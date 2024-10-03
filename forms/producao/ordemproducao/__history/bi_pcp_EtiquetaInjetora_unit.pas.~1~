@@ -1,0 +1,44 @@
+unit bi_pcp_EtiquetaInjetora_unit;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, ppParameter, ppDesignLayer, ppPrnabl, ppClass, ppCtrls,
+  ppCache, ppBands, ppProd, ppReport, ppDB, ppComm, ppRelatv, ppDBPipe, ppDBBDE;
+
+type
+  TDataModule1 = class(TDataModule)
+    ppBDEPipeline2: TppBDEPipeline;
+    ppBDEPipeline2ppField1: TppField;
+    ppBDEPipeline2ppField2: TppField;
+    ppImprimirIdentificacaoInjetora: TppReport;
+    ppDetailBand3: TppDetailBand;
+    ppDBText19: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    CDS_Recursos: TClientDataSet;
+    CDS_RecursosInjetora_FK: TStringField;
+    CDS_RecursosInjetora: TStringField;
+    Query_Recursos: TADOQuery;
+    Query_RecursosInjetora_FK: TStringField;
+    Query_RecursosInjetora: TStringField;
+    DS_Recursos: TDataSource;
+    DSP_Recursos: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,24 @@
+unit Relatorio_ApontamentoPaletizacaoAnalitico_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TRelatorio_ApontamentoPaletizacaoAnalitico = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoPaletizacaoAnalitico: TRelatorio_ApontamentoPaletizacaoAnalitico;
+
+implementation
+
+{$R *.dfm}
+
+end.

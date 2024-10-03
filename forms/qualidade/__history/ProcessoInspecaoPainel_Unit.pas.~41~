@@ -1,0 +1,447 @@
+unit ProcessoInspecaoPainel_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons,
+  Vcl.ComCtrls, Vcl.OleCtrls, SHDocVw,
+  Datasnap.Provider, Data.DB, Data.Win.ADODB, Datasnap.DBClient,
+  Vcl.Grids, Vcl.DBGrids, View.WebCharts, System.DateUtils, Math;
+
+type
+  TProcessoInspecao_Painel = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    BNT_Fechar: TSpeedButton;
+    IMG_Cancelar: TImage;
+    PageControl1: TPageControl;
+    Tab_Inspetores: TTabSheet;
+    WebBrowser1: TWebBrowser;
+    WebCharts1: TWebCharts;
+    PNL_Calendario: TPanel;
+    MonthCalendar1: TMonthCalendar;
+    Panel2: TPanel;
+    PNL_Filtros: TPanel;
+    PageControl2: TPageControl;
+    TabFiltros: TTabSheet;
+    Panel4: TPanel;
+    Shape1: TShape;
+    Label3: TLabel;
+    LBL_EncolherFiltro: TLabel;
+    BNT_EncolherFiltro: TSpeedButton;
+    PNL_Top: TPanel;
+    SHP_MenutencaoDados: TShape;
+    Image1: TImage;
+    BTN_AtivarCalendario: TSpeedButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    SpeedButton2: TSpeedButton;
+    PNL_Navegacao: TPanel;
+    DTP_DataInicial: TDateTimePicker;
+    DTP_DataFinal: TDateTimePicker;
+    CategoryPanelGroup1: TCategoryPanelGroup;
+    CategoryPanel2: TCategoryPanel;
+    Panel9: TPanel;
+    BitBtn7: TBitBtn;
+    PNL_Consultar_Injecao: TPanel;
+    SHP_Injecao: TShape;
+    BTN_Injecao: TBitBtn;
+    PNL_Consultar_Injecao4: TPanel;
+    SHP_Injecao4: TShape;
+    BitBtn2: TBitBtn;
+    PNL_Consultar_Personalizacao: TPanel;
+    SHP_Personalizacao: TShape;
+    BTN_Personalizacao: TBitBtn;
+    CategoryPanel1: TCategoryPanel;
+    Panel10: TPanel;
+    BitBtn1: TBitBtn;
+    PNL_Turno01: TPanel;
+    SHP_Turno01: TShape;
+    BTN_Turno01: TBitBtn;
+    PNL_Turno02: TPanel;
+    SHP_Turno02: TShape;
+    BTN_Turno02: TBitBtn;
+    PNL_Turno03: TPanel;
+    SHP_Turno03: TShape;
+    BTN_Turno03: TBitBtn;
+    PNL_Busca: TPanel;
+    Panel6: TPanel;
+    Shape2: TShape;
+    Label7: TLabel;
+    BTN_Buscar: TButton;
+    TXT_Buscador2: TEdit;
+    TXT_Buscador: TEdit;
+
+    // Minhas Procedures
+    procedure Web_Inspetores;
+
+    procedure BNT_EncolherFiltroClick(Sender: TObject);
+    procedure BTN_AtivarCalendarioClick(Sender: TObject);
+    procedure MonthCalendar1Click(Sender: TObject);
+    procedure BTN_InjecaoClick(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BTN_PersonalizacaoClick(Sender: TObject);
+    procedure BTN_Turno01Click(Sender: TObject);
+    procedure BTN_Turno02Click(Sender: TObject);
+    procedure BTN_Turno03Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_Painel: TProcessoInspecao_Painel;
+
+implementation
+
+{$R *.dfm}
+
+uses ProcessoInspecaoPainelDM_Unit, funcaosistema_unit;
+
+procedure TProcessoInspecao_Painel.BitBtn2Click(Sender: TObject);
+begin
+
+  SHP_Personalizacao.Brush.Color := clGray;
+
+  if SHP_Injecao4.Brush.Color = $00FF8000 then
+  begin
+     SHP_Injecao4.Brush.Color := clGray;
+
+     if (SHP_Injecao.Brush.Color = clGray) then
+          SHP_Injecao4.Brush.Color := $00FF8000;
+  end
+  else
+     SHP_Injecao4.Brush.Color := $00FF8000;
+
+
+end;
+
+procedure TProcessoInspecao_Painel.BNT_EncolherFiltroClick(Sender: TObject);
+begin
+
+    if LBL_EncolherFiltro.Caption = 'X' then
+    begin
+        PNL_Filtros.Width := 30;
+        LBL_EncolherFiltro.Caption := '< ';
+        LBL_EncolherFiltro.font.Color := cllime;
+        TabFiltros.Caption := 'Visualizar Filtros';
+    end
+    else
+    begin
+        PNL_Filtros.Width := 280;
+        LBL_EncolherFiltro.Caption := 'X';
+        LBL_EncolherFiltro.font.Color := clRed;
+        TabFiltros.Caption := '';
+    end;
+
+end;
+
+procedure TProcessoInspecao_Painel.BTN_AtivarCalendarioClick(Sender: TObject);
+begin
+
+  if PNL_Calendario.Visible = True then
+      PNL_Calendario.Visible := False
+  else
+      PNL_Calendario.Visible := True;
+
+end;
+
+procedure TProcessoInspecao_Painel.BTN_BuscarClick(Sender: TObject);
+begin
+
+  Web_Inspetores;
+
+end;
+
+procedure TProcessoInspecao_Painel.BTN_InjecaoClick(Sender: TObject);
+begin
+
+  SHP_Personalizacao.Brush.Color := clGray;
+
+  if SHP_Injecao.Brush.Color = $00FF8000 then
+  begin
+     SHP_Injecao.Brush.Color := clGray;
+
+     if (SHP_Injecao4.Brush.Color = clGray) then
+          SHP_Injecao.Brush.Color := $00FF8000;
+  end
+  else
+     SHP_Injecao.Brush.Color := $00FF8000;
+
+
+
+end;
+
+procedure TProcessoInspecao_Painel.BTN_PersonalizacaoClick(Sender: TObject);
+begin
+  SHP_Injecao.Brush.Color := clGray;
+  SHP_Injecao4.Brush.Color := clGray;
+
+  if SHP_Personalizacao.Brush.Color = $00FF8000 then
+  begin
+     SHP_Personalizacao.Brush.Color := clGray;
+     SHP_Injecao.Brush.Color := $00FF8000;
+     SHP_Injecao4.Brush.Color := $00FF8000;
+  end
+  else
+     SHP_Personalizacao.Brush.Color := $00FF8000;
+
+end;
+
+procedure TProcessoInspecao_Painel.BTN_Turno01Click(Sender: TObject);
+begin
+  if SHP_Turno01.Brush.Color = $00FF8000 then
+  begin
+     if (SHP_Turno02.Brush.Color = clGray) AND (SHP_Turno03.Brush.Color = clGray)
+     then
+          SHP_Turno01.Brush.Color := $00FF8000
+        else
+          SHP_Turno01.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if SHP_Turno01.Brush.Color = clGray then
+  begin
+     SHP_Turno01.Brush.Color := $00FF8000;
+     Exit;
+  end;
+end;
+
+procedure TProcessoInspecao_Painel.BTN_Turno02Click(Sender: TObject);
+begin
+  if SHP_Turno02.Brush.Color = $00FF8000 then
+  begin
+     if (SHP_Turno01.Brush.Color = clGray) AND (SHP_Turno03.Brush.Color = clGray)
+     then
+          SHP_Turno02.Brush.Color := $00FF8000
+        else
+          SHP_Turno02.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if SHP_Turno02.Brush.Color = clGray then
+  begin
+     SHP_Turno02.Brush.Color := $00FF8000;
+     Exit;
+  end;
+end;
+
+procedure TProcessoInspecao_Painel.BTN_Turno03Click(Sender: TObject);
+begin
+  if SHP_Turno03.Brush.Color = $00FF8000 then
+  begin
+     if (SHP_Turno02.Brush.Color = clGray) AND (SHP_Turno01.Brush.Color = clGray)
+     then
+          SHP_Turno03.Brush.Color := $00FF8000
+        else
+          SHP_Turno03.Brush.Color := clGray;
+     Exit;
+  end;
+
+  if SHP_Turno03.Brush.Color = clGray then
+  begin
+     SHP_Turno03.Brush.Color := $00FF8000;
+     Exit;
+  end;
+end;
+
+procedure TProcessoInspecao_Painel.FormShow(Sender: TObject);
+begin
+
+  inherited;
+  DTP_DataInicial.Date := StartOfTheMonth(Date);
+  DTP_DataFinal.Date := Date;
+  MonthCalendar1.Date := Date;
+  MonthCalendar1.EndDate := Date;
+  BTN_BuscarClick(nil);
+
+end;
+
+procedure TProcessoInspecao_Painel.MonthCalendar1Click(Sender: TObject);
+begin
+
+  DTP_DataInicial.DateTime := MonthCalendar1.Date;
+  DTP_DataFinal.DateTime := MonthCalendar1.EndDate;
+
+end;
+
+procedure TProcessoInspecao_Painel.Web_Inspetores;
+Var
+   VLN_NumeroItensSelecionados, VLN_TurnoRealizado : Integer;
+   VLN_Turno01Qtd, VLN_Turno02Qtd,  VLN_Turno03Qtd, VLN_TurnoTotalQtd : Integer;
+   VLN_Turno01QtdApont, VLN_Turno02QtdApont, VLN_Turno03QtdApont, VLN_TurnoTotalQtdApont : Integer;
+   VLN_Turno01Perc, VLN_Turno02Perc,  VLN_Turno03Perc, VLN_TurnoTotalMedia : Double;
+begin
+
+  // Conexões;
+  ProcessoInspecao_PainelDM.Inspetores_Grafico01;
+  ProcessoInspecao_PainelDM.Inspetores_KPI01;
+
+  VLN_Turno01Qtd := 0;
+  VLN_Turno02Qtd := 0;
+  VLN_Turno03Qtd := 0;
+  VLN_TurnoTotalQtd := 0;
+
+  ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.First;
+  for VLN_NumeroItensSelecionados := 0 to ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.RecordCount-1 do
+
+  begin
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('Turno').AsString = 'TURNO 01' then
+          VLN_Turno01Qtd := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('NV').AsInteger;
+
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('Turno').AsString = 'TURNO 02' then
+          VLN_Turno02Qtd := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('NV').AsInteger;
+
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('Turno').AsString = 'TURNO 03' then
+          VLN_Turno03Qtd := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.FieldByName('NV').AsInteger;
+
+      ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Inspecoes.DataSet.Next;
+  end;
+
+  VLN_TurnoTotalQtd := VLN_Turno01Qtd + VLN_Turno02Qtd + VLN_Turno03Qtd;
+  VLN_Turno01Perc := RoundTo(((VLN_Turno01Qtd * 100)/VLN_TurnoTotalQtd),-2);
+  VLN_Turno02Perc := RoundTo(((VLN_Turno02Qtd * 100)/VLN_TurnoTotalQtd),-2);
+  VLN_Turno03Perc := RoundTo(((VLN_Turno03Qtd * 100)/VLN_TurnoTotalQtd),-2);
+
+  VLN_TurnoTotalMedia := 0;
+  VLN_TurnoRealizado := 0;
+
+  if VLN_Turno01Qtd > 0 then
+  begin
+      VLN_TurnoTotalMedia := VLN_TurnoTotalMedia + VLN_Turno01Qtd;
+      VLN_TurnoRealizado := VLN_TurnoRealizado + 1;
+  end;
+
+  if VLN_Turno02Qtd > 0 then
+  begin
+      VLN_TurnoTotalMedia := VLN_TurnoTotalMedia + VLN_Turno02Qtd;
+      VLN_TurnoRealizado := VLN_TurnoRealizado + 1;
+  end;
+
+  if VLN_Turno03Qtd > 0 then
+  begin
+      VLN_TurnoTotalMedia := VLN_TurnoTotalMedia + VLN_Turno03Qtd;
+      VLN_TurnoRealizado := VLN_TurnoRealizado + 1;
+  end;
+
+  VLN_TurnoTotalMedia := RoundTo(VLN_TurnoTotalMedia/VLN_TurnoRealizado,-0);
+
+  VLN_Turno01QtdApont := 0;
+  VLN_Turno02QtdApont := 0;
+  VLN_Turno03QtdApont := 0;
+  VLN_TurnoTotalQtdApont := 0;
+
+  ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.First;
+  for VLN_NumeroItensSelecionados := 0 to ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.RecordCount-1 do
+
+  begin
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('Turno').AsString = 'TURNO 01' then
+          VLN_Turno01QtdApont := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('NV').AsInteger * 2;
+
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('Turno').AsString = 'TURNO 02' then
+          VLN_Turno02QtdApont := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('NV').AsInteger * 2;
+
+      if ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('Turno').AsString = 'TURNO 03' then
+          VLN_Turno03QtdApont := ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.FieldByName('NV').AsInteger * 2;
+
+      ProcessoInspecao_PainelDM.DS_Inspetores_KPI01_Apontamentos.DataSet.Next;
+  end;
+
+  VLN_TurnoTotalQtdApont := VLN_Turno01QtdApont + VLN_Turno02QtdApont + VLN_Turno03QtdApont;
+
+  PageControl1.ActivePageIndex := 0;
+  WebCharts1
+    .AddResource('<link href="css/blue.css" rel="stylesheet">')
+    .AddResource('<link href="css/custom.min.css" rel="stylesheet">')
+    .NewProject
+      .Jumpline
+
+      .Rows
+          .Title
+              .Configuracoes
+                .H4('Quantidade de Inspeções por Turnos')
+              .&End
+          .&End
+      .&End
+
+      .Jumpline
+
+      .Rows
+
+          ._Div
+              .ColSpan(3)
+              .Add('<span class="count_top">' +
+                   '  <i class="fas fa-user"></i> Turno 01' +
+                   '</span>' +
+                   '<div class="count" style="font-size:  40px;">' + IntToStr(VLN_Turno01Qtd) + ' / ' + IntToStr(VLN_Turno01QtdApont) + '</div>' +
+                   '<span class="count_bottom"> ' +
+                   '  <i class="green"><i class=""></i>' + FloatToStr(VLN_Turno01Perc) + '% </i> do total ' +
+                   '</span> ')
+          .&End
+          ._Div
+              .ColSpan(3)
+              .Add('<span class="count_top">' +
+                   '  <i class="fas fa-user"></i> Turno 02 ' +
+                   '</span>' +
+                   '<div class="count" style="font-size:  40px;">' + IntToStr(VLN_Turno02Qtd) + ' / ' + IntToStr(VLN_Turno02QtdApont) + '</div>' +
+                   '<span class="count_bottom"> ' +
+                   '  <i class="green"><i class=""></i>' + FloatToStr(VLN_Turno02Perc) + '% </i> do total ' +
+                   '</span> ')
+          .&End
+          ._Div
+              .ColSpan(3)
+              .Add('<span class="count_top">' +
+                   '  <i class="fas fa-user"></i> Turno 03 ' +
+                   '</span>' +
+                   '<div class="count" style="font-size:  40px;">' + IntToStr(VLN_Turno03Qtd) + ' / ' + IntToStr(VLN_Turno03QtdApont) + '</div>' +
+                   '<span class="count_bottom"> ' +
+                   '  <i class="green"><i class=""></i>' + FloatToStr(VLN_Turno03Perc) + '% </i> do total ' +
+                   '</span> ')
+          .&End
+          ._Div
+              .ColSpan(3)
+              .Add('<span class="count_top">' +
+                   '  <i class="fa fa-user"></i> Total Turno ' +
+                   '</span>' +
+                   '<div class="count" style="font-size:  40px;">' + IntToStr(VLN_TurnoTotalQtd) + ' / ' + IntToStr(VLN_TurnoTotalQtdApont) + '</div>' +
+                   '<span class="count_bottom"> ' +
+                   ' média de <i class="green"><i class=""></i>' + FloatToStr(VLN_TurnoTotalMedia) + '</i> inspeções feitas' +
+                   '</span> ')
+          .&End
+
+      .&End
+
+      .Jumpline
+
+      .Rows
+          .Title
+              .Configuracoes
+                .H4('Analises dos Inspetores')
+              .&End
+          .&End
+      .&End
+
+      .Charts
+          .BarHorizontal
+              .Attributes
+                .Name('QtdInspecoes')
+                .Heigth(100)
+                .DataSet
+                      .DataSet(ProcessoInspecao_PainelDM.CDS_Inspetores01)
+                      .BackgroundColor('70,130,180')
+                      .BorderColor('25,25,112')
+                 .&End
+              .&End
+          .&End
+      .&End
+
+    .WebBrowser(WebBrowser1)
+    .Generated;
+
+end;
+
+end.

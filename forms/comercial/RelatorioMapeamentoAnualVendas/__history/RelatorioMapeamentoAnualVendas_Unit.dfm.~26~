@@ -1,0 +1,791 @@
+inherited RelatorioMapaAnualVendas: TRelatorioMapaAnualVendas
+  Caption = 'Mapeamento Anual de Vendas'
+  ClientHeight = 343
+  ClientWidth = 675
+  OnShow = FormShow
+  ExplicitWidth = 681
+  ExplicitHeight = 372
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 662
+    ExplicitWidth = 662
+    inherited LBL_Titulo: TLabel
+      Width = 279
+      Caption = 'Mapeamento Anual de Vendas'
+      ExplicitWidth = 279
+    end
+  end
+  inherited Panel_Padrao: TPanel
+    Top = 106
+    Width = 662
+    ExplicitTop = 106
+    ExplicitWidth = 662
+    inherited CBX_Operador: TComboBox
+      Enabled = False
+      Text = 'Igual'
+    end
+    inherited Panel_Caption: TPanel
+      Caption = '  Ano'
+      inherited PNL_Sinal: TPanel
+        Enabled = False
+      end
+    end
+    inherited CBX_Igual: TComboBox
+      Left = 334
+      Visible = True
+      Items.Strings = (
+        '2013'
+        '2014'
+        '2015'
+        '2016'
+        '2017'
+        '2018'
+        '2019'
+        '2020')
+      ExplicitLeft = 334
+    end
+  end
+  inherited MemoSQL: TMemo
+    Left = 688
+    Width = 280
+    Height = 284
+    ExplicitLeft = 688
+    ExplicitWidth = 280
+    ExplicitHeight = 284
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 304
+    Width = 675
+    ExplicitTop = 304
+    ExplicitWidth = 675
+    inherited Panel_Navegador: TPanel
+      Left = 430
+      ExplicitLeft = 430
+    end
+  end
+  object Panel16: TPanel [4]
+    Left = 7
+    Top = 266
+    Width = 662
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 4
+    object TXT_Valor2_Gerencia: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorGerencia: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Igual'
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Gerencia: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel17: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Ger'#234'ncia'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalGerencia: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+      end
+    end
+    object CBX_Igual_Gerencia: TComboBox
+      Left = 334
+      Top = 4
+      Width = 321
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Text = 'TODAS'
+    end
+  end
+  object Panel30: TPanel [5]
+    Left = 7
+    Top = 138
+    Width = 662
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 5
+    object TXT_Valor2_Cliente: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorCliente: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorClienteChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Cliente: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel31: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Cliente'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalCliente: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalClienteClick
+      end
+    end
+    object CBX_Igual_Cliente: TComboBox
+      Left = 661
+      Top = 4
+      Width = 42
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+      Items.Strings = (
+        'AC'
+        'AL'
+        'AP'
+        'AM'
+        'BA'
+        'CE'
+        'DF'
+        'ES'
+        'GO'
+        'MA'
+        'MT'
+        'MS'
+        'MG'
+        'PA'
+        'PB'
+        'PR'
+        'PE'
+        'PI'
+        'RJ'
+        'RN'
+        'RS'
+        'RO'
+        'RR'
+        'SC'
+        'SP'
+        'SP'
+        'TO')
+    end
+  end
+  object Panel9: TPanel [6]
+    Left = 7
+    Top = 170
+    Width = 662
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 6
+    object TXT_Valor2_UF: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorUF: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Igual'
+      OnChange = CBX_OperadorUFChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_UF: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel10: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Cliente - UF'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalUF: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalUFClick
+      end
+    end
+    object CBX_Igual_UF: TComboBox
+      Left = 334
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Items.Strings = (
+        'AC'
+        'AL'
+        'AP'
+        'AM'
+        'BA'
+        'CE'
+        'DF'
+        'ES'
+        'GO'
+        'MA'
+        'MT'
+        'MS'
+        'MG'
+        'PA'
+        'PB'
+        'PR'
+        'PE'
+        'PI'
+        'RJ'
+        'RN'
+        'RS'
+        'RO'
+        'RR'
+        'SC'
+        'SP'
+        'SP'
+        'TO')
+    end
+  end
+  object Panel19: TPanel [7]
+    Left = 7
+    Top = 202
+    Width = 662
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 7
+    object TXT_Valor2_Mercado: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorMercado: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorMercadoChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Mercado: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel20: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Mercado'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalMercado: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalMercadoClick
+      end
+    end
+    object CBX_Igual_Cidade: TComboBox
+      Left = 661
+      Top = 3
+      Width = 123
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Text = 'TODOS'
+      Visible = False
+    end
+  end
+  object Panel15: TPanel [8]
+    Left = 7
+    Top = 234
+    Width = 662
+    Height = 32
+    BevelOuter = bvNone
+    Color = 16053492
+    ParentBackground = False
+    TabOrder = 8
+    object TXT_Valor2_Vendedor: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorVendedor: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Vendedor: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel18: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = '  Vendedor'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalVendedor: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+      end
+    end
+    object CBX_Igual_Vendedor: TComboBox
+      Left = 334
+      Top = 4
+      Width = 321
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Text = 'TODOS'
+      Items.Strings = (
+        'AC'
+        'AL'
+        'AP'
+        'AM'
+        'BA'
+        'CE'
+        'DF'
+        'ES'
+        'GO'
+        'MA'
+        'MT'
+        'MS'
+        'MG'
+        'PA'
+        'PB'
+        'PR'
+        'PE'
+        'PI'
+        'RJ'
+        'RN'
+        'RS'
+        'RO'
+        'RR'
+        'SC'
+        'SP'
+        'SP'
+        'TO')
+    end
+  end
+  object Panel1: TPanel [9]
+    Left = 7
+    Top = 53
+    Width = 662
+    Height = 53
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 9
+    object Shape1: TShape
+      Left = 4
+      Top = 5
+      Width = 650
+      Height = 43
+      Pen.Width = 2
+    end
+    object Edit25: TEdit
+      Left = 12
+      Top = 14
+      Width = 170
+      Height = 24
+      TabStop = False
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      Text = ' Tipo Relat'#243'rio'
+    end
+    object CBX_Tipo: TComboBox
+      Left = 200
+      Top = 14
+      Width = 449
+      Height = 24
+      CharCase = ecUpperCase
+      Color = 3618815
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      Text = 'POR GERENTE X CLIENTE'
+      Items.Strings = (
+        'POR VENDEDOR X CLIENTE'#11
+        'POR GERENTE X CLIENTE')
+    end
+  end
+  inherited ACL_Atalhos: TActionList
+    inherited Desenvolvimento: TAction
+      OnExecute = DesenvolvimentoExecute
+    end
+  end
+end

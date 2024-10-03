@@ -1,0 +1,24 @@
+unit Relatorio_ApontamentoProducao_QuantidadeCicloMolde_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TRelatorio_ApontamentoProducao_QuantidadeCicloMolde = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoProducao_QuantidadeCicloMolde: TRelatorio_ApontamentoProducao_QuantidadeCicloMolde;
+
+implementation
+
+{$R *.dfm}
+
+end.

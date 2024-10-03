@@ -1,0 +1,718 @@
+unit Relatorio_ApontamentoProducaoMiguelAnalitico_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppStrtch, ppMemo, ppBands, ppClass,
+  Data.DB, Datasnap.DBClient, Data.Win.ADODB, Datasnap.Provider, ppDB, ppDBPipe,
+  ppParameter, ppDesignLayer, ppCtrls, ppPrnabl, ppCache, ppComm, ppRelatv,
+  ppProd, ppReport, ppVar, System.StrUtils;
+
+type
+  TRelatorio_ApontamentoProducao_MiguelAnalitico = class(TForm)
+    ppOEE: TppReport;
+    ppHeaderBand2: TppHeaderBand;
+    ppLine7: TppLine;
+    ppImage2: TppImage;
+    ppLabel30: TppLabel;
+    ppLabel29: TppLabel;
+    ppDetailBand4: TppDetailBand;
+    ppDBText43: TppDBText;
+    ppFooterBand2: TppFooterBand;
+    ppLabel40: TppLabel;
+    ppLine9: TppLine;
+    ppSummaryBand4: TppSummaryBand;
+    ppPageStyle2: TppPageStyle;
+    ppDBText46: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppDesignLayer4: TppDesignLayer;
+    ppParameterList2: TppParameterList;
+    Pipeline: TppDBPipeline;
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    CDS: TClientDataSet;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    TXT_Perda: TppDBText;
+    ppMemo1: TppMemo;
+    ppMemo2: TppMemo;
+    ppMemo8: TppMemo;
+    ppDBMemo1: TppDBMemo;
+    ppMemo9: TppMemo;
+    ppDBText8: TppDBText;
+    ppMemo10: TppMemo;
+    ppDBText9: TppDBText;
+    ppMemo11: TppMemo;
+    ppDBText10: TppDBText;
+    ppMemo12: TppMemo;
+    TXT_ProducaoTeorica: TppDBText;
+    ppMemo13: TppMemo;
+    TXT_ProducaoReal: TppDBText;
+    ppMemo14: TppMemo;
+    TXT_Eficiencia_PorTurno: TppDBText;
+    ppMemo15: TppMemo;
+    TXT_Produtividade_PorTurno: TppDBText;
+    ppMemo17: TppMemo;
+    ppDBMemo2: TppDBMemo;
+    ppLabel1: TppLabel;
+    ppDBText17: TppDBText;
+    ppShape5: TppShape;
+    ppMemo5: TppMemo;
+    ppDBMemo3: TppDBMemo;
+    ppMemo18: TppMemo;
+    ppMemo19: TppMemo;
+    ppDBText5: TppDBText;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    ppLine1: TppLine;
+    SHP_Performace: TppShape;
+    SHP_Disponibilidade: TppShape;
+    ppLabel2: TppLabel;
+    ppShape6: TppShape;
+    ppLabel3: TppLabel;
+    LBL_Disponibilidade: TppLabel;
+    ppShape7: TppShape;
+    ppShape8: TppShape;
+    ppShape9: TppShape;
+    ppShape10: TppShape;
+    ppLabel5: TppLabel;
+    LBL_Performace: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppLine2: TppLine;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLabel13: TppLabel;
+    ppLabel14: TppLabel;
+    ppDBText1: TppDBText;
+    ppMemo6: TppMemo;
+    SHP_Ciclo: TppShape;
+    ppAnalise: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppLine3: TppLine;
+    ppImage1: TppImage;
+    ppLabel15: TppLabel;
+    ppLabel16: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppDBText4: TppDBText;
+    TXT_PerdaA: TppDBText;
+    TXT_PerdaKGPerc: TppDBText;
+    ppDBMemo4: TppDBMemo;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText14: TppDBText;
+    ppDBMemo5: TppDBMemo;
+    ppDBMemo6: TppDBMemo;
+    ppDBText16: TppDBText;
+    ppDBText18: TppDBText;
+    SHP_PerdaA: TppShape;
+    ppDBText19: TppDBText;
+    ppDBText20: TppDBText;
+    SHP_ProdutividadeA: TppShape;
+    SHP_EficienciaA: TppShape;
+    TXT_CapacidadeInstalada: TppDBText;
+    TXT_CapacidadeRealA: TppDBText;
+    TXT_QtdProduzidaA: TppDBText;
+    SHP_ProducaoA: TppShape;
+    ppDBText25: TppDBText;
+    SHP_CicloA: TppShape;
+    ppFooterBand1: TppFooterBand;
+    ppLabel17: TppLabel;
+    ppLine4: TppLine;
+    ppShape18: TppShape;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppLabel20: TppLabel;
+    ppLabel21: TppLabel;
+    ppLabel22: TppLabel;
+    ppLabel23: TppLabel;
+    ppShape19: TppShape;
+    ppShape20: TppShape;
+    ppShape21: TppShape;
+    ppShape22: TppShape;
+    ppLabel24: TppLabel;
+    ppLabel25: TppLabel;
+    ppShape23: TppShape;
+    ppLabel26: TppLabel;
+    ppShape24: TppShape;
+    ppShape25: TppShape;
+    ppShape26: TppShape;
+    ppShape27: TppShape;
+    ppLine5: TppLine;
+    ppLabel27: TppLabel;
+    ppLabel28: TppLabel;
+    ppLabel31: TppLabel;
+    ppLabel32: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle1: TppPageStyle;
+    ppGroup4: TppGroup;
+    ppGroupHeaderBand4: TppGroupHeaderBand;
+    ppGroupFooterBand4: TppGroupFooterBand;
+    ppGroup5: TppGroup;
+    ppGroupHeaderBand5: TppGroupHeaderBand;
+    ppShape28: TppShape;
+    ppMemo7: TppMemo;
+    ppMemo20: TppMemo;
+    ppMemo21: TppMemo;
+    ppMemo22: TppMemo;
+    ppDBText26: TppDBText;
+    ppMemo23: TppMemo;
+    ppMemo24: TppMemo;
+    ppMemo25: TppMemo;
+    ppMemo26: TppMemo;
+    ppMemo27: TppMemo;
+    ppMemo28: TppMemo;
+    ppLabel33: TppLabel;
+    ppDBText27: TppDBText;
+    ppMemo29: TppMemo;
+    ppMemo30: TppMemo;
+    ppMemo31: TppMemo;
+    ppMemo32: TppMemo;
+    ppMemo33: TppMemo;
+    ppMemo34: TppMemo;
+    ppMemo35: TppMemo;
+    ppMemo36: TppMemo;
+    ppGroupFooterBand5: TppGroupFooterBand;
+    ppGroup6: TppGroup;
+    ppGroupHeaderBand6: TppGroupHeaderBand;
+    ppLine6: TppLine;
+    ppGroupFooterBand6: TppGroupFooterBand;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppDesignLayer2: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    ppMemo3: TppMemo;
+    ppMemo4: TppMemo;
+    ppMemo16: TppMemo;
+    ppDBText2: TppDBText;
+    SHP_Qualidade: TppShape;
+    ppDBText15: TppDBText;
+    SHP_OEE: TppShape;
+    ppDBText28: TppDBText;
+    LBL_OEE: TppLabel;
+    LBL_Qualidade: TppLabel;
+    ppShape11: TppShape;
+    ppShape12: TppShape;
+    ppShape13: TppShape;
+    ppShape14: TppShape;
+    QueryArea: TStringField;
+    QuerySetor: TStringField;
+    QueryDataTurno: TDateTimeField;
+    QueryTurno: TStringField;
+    QueryTurnoDescricao: TStringField;
+    QueryRecurso_ID: TStringField;
+    QueryRecurso: TStringField;
+    QueryCavidade: TIntegerField;
+    QueryItem: TStringField;
+    QueryProducaoTeorica: TFloatField;
+    QueryProducaoReal: TIntegerField;
+    QueryPerda: TIntegerField;
+    QueryCausa_Perda: TStringField;
+    QueryCicloPadrao: TFloatField;
+    QueryCicloReal: TFloatField;
+    QuerySemafaro_Ciclo: TStringField;
+    QueryInicio: TStringField;
+    QueryTermino: TStringField;
+    QueryTempoProduzindo: TFloatField;
+    QueryDisponibilidadeOEE: TFloatField;
+    QuerySemafaro_Disponibilidade: TStringField;
+    QueryPerformace: TFloatField;
+    QuerySemafaro_Performace: TStringField;
+    QueryIndicadorQualidade: TFloatField;
+    QuerySemafaro_IndicadorQualidade: TStringField;
+    QueryOEE: TFloatField;
+    QuerySemafaro_OEE: TStringField;
+    QueryTempoParadaMin: TFloatField;
+    QueryCausa_Improdutividade: TStringField;
+    CDSArea: TStringField;
+    CDSSetor: TStringField;
+    CDSDataTurno: TDateTimeField;
+    CDSTurno: TStringField;
+    CDSTurnoDescricao: TStringField;
+    CDSRecurso_ID: TStringField;
+    CDSRecurso: TStringField;
+    CDSCavidade: TIntegerField;
+    CDSItem: TStringField;
+    CDSProducaoTeorica: TFloatField;
+    CDSProducaoReal: TIntegerField;
+    CDSPerda: TIntegerField;
+    CDSCausa_Perda: TStringField;
+    CDSCicloPadrao: TFloatField;
+    CDSCicloReal: TFloatField;
+    CDSSemafaro_Ciclo: TStringField;
+    CDSInicio: TStringField;
+    CDSTermino: TStringField;
+    CDSTempoProduzindo: TFloatField;
+    CDSDisponibilidadeOEE: TFloatField;
+    CDSSemafaro_Disponibilidade: TStringField;
+    CDSPerformace: TFloatField;
+    CDSSemafaro_Performace: TStringField;
+    CDSIndicadorQualidade: TFloatField;
+    CDSSemafaro_IndicadorQualidade: TStringField;
+    CDSOEE: TFloatField;
+    CDSSemafaro_OEE: TStringField;
+    CDSTempoParadaMin: TFloatField;
+    CDSCausa_Improdutividade: TStringField;
+    QueryPerdaKGPerc: TFloatField;
+    QueryCapacidadeReal: TFloatField;
+    QueryCapacidadeInstalada: TFloatField;
+    QueryProdutividade: TFloatField;
+    QueryEficienciaNominal: TFloatField;
+    QuerySemafaro_Produtividade: TStringField;
+    QuerySemafaro_EficienciaNominal: TStringField;
+    QuerySemafaro_IndicadorPerdaKG: TStringField;
+    CDSPerdaKGPerc: TFloatField;
+    CDSCapacidadeReal: TFloatField;
+    CDSCapacidadeInstalada: TFloatField;
+    CDSProdutividade: TFloatField;
+    CDSEficienciaNominal: TFloatField;
+    CDSSemafaro_Produtividade: TStringField;
+    CDSSemafaro_EficienciaNominal: TStringField;
+    CDSSemafaro_IndicadorPerdaKG: TStringField;
+    QueryTempoProducao: TFloatField;
+    CDSTempoProducao: TFloatField;
+    QueryTipo: TStringField;
+    CDSTipo: TStringField;
+    QueryIndicadorProducao: TFloatField;
+    QuerySemafaro_Producao: TStringField;
+    CDSIndicadorProducao: TFloatField;
+    CDSSemafaro_Producao: TStringField;
+
+    // Minhas Functions e Procedures
+    function Get_Select : String;
+    function Get_OrderbY : String;
+    function Get_Where : String;
+    procedure Relatorio_ApontamentoAnalisePerdaEficienciaProdutividade;
+    procedure Relatorio_OEE;
+    procedure SHP_CicloPrint(Sender: TObject);
+    procedure SHP_DisponibilidadePrint(Sender: TObject);
+    procedure SHP_PerformacePrint(Sender: TObject);
+    procedure SHP_QualidadePrint(Sender: TObject);
+    procedure SHP_OEEPrint(Sender: TObject);
+    procedure SHP_CicloAPrint(Sender: TObject);
+    procedure SHP_PerdaAPrint(Sender: TObject);
+    procedure SHP_EficienciaAPrint(Sender: TObject);
+    procedure SHP_ProdutividadeAPrint(Sender: TObject);
+    procedure SHP_ProducaoAPrint(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+  end;
+
+var
+  Relatorio_ApontamentoProducao_MiguelAnalitico: TRelatorio_ApontamentoProducao_MiguelAnalitico;
+  VPI_Soma: Integer;
+
+implementation
+
+{$R *.dfm}
+
+uses RelatorioAprontamentoProducao_Unit, FuncaoSistema_Unit,
+  PadraoBuscadorFiltro_Unit;
+
+function TRelatorio_ApontamentoProducao_MiguelAnalitico.Get_Where: String;
+Var
+   VLC_Where : String;
+begin
+
+  // Todo -cFuturo -oBRITO: Reativar Areas no Relatorio de Sr Miguel
+  if Relatorio_ApontamentoProducao.CBX_AreaProdutiva.Text <> 'TODOS' then
+  begin
+       VLC_Where := VLC_Where + ' AND rtrim(Apont.Area) = ' + '''' + Relatorio_ApontamentoProducao.CBX_AreaProdutiva.Text + '''' + #13;
+  end
+  else
+  begin
+      VLC_Where := VLC_Where + ' AND rtrim(Apont.Area) = ' + '''' + 'INJECAO' + '''' + #13;
+      // VLC_Where := VLC_Where + ' AND rtrim(Area) in ' + Sys_FuncaoSistema.PNL_PermissaoAreasProdutivas.Caption + #13;
+  end;
+
+  // Todo -cFuturo -oBRITO: Reativar Areas no Relatorio de Sr Miguel
+  if Relatorio_ApontamentoProducao.CBX_Setor.Text <> 'TODOS' then
+  begin
+       VLC_Where := VLC_Where + ' AND rtrim(Apont.Setor) = ' + '''' + Relatorio_ApontamentoProducao.CBX_Setor.Text + '''' + #13;
+  end
+  else
+  begin
+      VLC_Where := VLC_Where + ' AND rtrim(Apont.Setor) in (' + '''' + 'INJECAO' + '''' + ',' + '''' + 'INJECAO 04' + '''' + ')' + #13;
+      // VLC_Where := VLC_Where + ' AND rtrim(Setor) in ' + Sys_FuncaoSistema.TXT_PermissaoSetoresProducoes.Caption + #13;
+  end;
+
+  // Turno
+  if Relatorio_ApontamentoProducao.CBX_Igual_Turno.Text <> 'AMBOS' then
+  begin
+       VLC_Where := VLC_Where + ' AND Apont.TurnoDescricao = ' + '''' + Relatorio_ApontamentoProducao.CBX_Igual_Turno.Text + '''' + #13;
+  end;
+
+  // Recurso
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_OperadorInjetoraID,Relatorio_ApontamentoProducao.PNL_SinalInjetoraID,Relatorio_ApontamentoProducao.TXT_Valor1_InjetoraID,Relatorio_ApontamentoProducao.TXT_Valor2_InjetoraID,'Apont.Recurso','Caracter') <> '' then
+       VLC_Where := VLC_Where + 'AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_OperadorInjetoraID,Relatorio_ApontamentoProducao.PNL_SinalInjetoraID,Relatorio_ApontamentoProducao.TXT_Valor1_InjetoraID,Relatorio_ApontamentoProducao.TXT_Valor2_InjetoraID,'Apont.Recurso','Caracter');
+
+  // Grupo
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_OperadorGrupoProduto,Relatorio_ApontamentoProducao.PNL_SinalGrupoProduto,Relatorio_ApontamentoProducao.TXT_Valor1_GrupoProduto,Relatorio_ApontamentoProducao.TXT_Valor2_GrupoProduto,'Apont.Grupo','Caracter') <> '' then
+       VLC_Where := VLC_Where + 'AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_Operador,Relatorio_ApontamentoProducao.PNL_SinalGrupoProduto,Relatorio_ApontamentoProducao.TXT_Valor1_GrupoProduto,Relatorio_ApontamentoProducao.TXT_Valor2_GrupoProduto,'Apont.Grupo','Caracter');
+
+  // Tipo de Produto
+  if Relatorio_ApontamentoProducao.CBX_TipoProduto.Text <> 'AMBOS' then
+       VLC_Where := VLC_Where + ' AND rtrim(Apont.TipoProduto) = ' + '''' + Relatorio_ApontamentoProducao.CBX_TipoProduto.Text + '''' + #13;
+
+  // Item
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_OperadorItem,Relatorio_ApontamentoProducao.PNL_SinalItem,Relatorio_ApontamentoProducao.TXT_Valor1_Item,Relatorio_ApontamentoProducao.TXT_Valor2_Item,'Apont.Item','Caracter') <> '' then
+       VLC_Where := VLC_Where + 'AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_ApontamentoProducao.CBX_OperadorItem,Relatorio_ApontamentoProducao.PNL_SinalItem,Relatorio_ApontamentoProducao.TXT_Valor1_Item,Relatorio_ApontamentoProducao.TXT_Valor2_Item,'Apont.Item','Caracter');
+
+  Result := VLC_Where;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_PerdaAPrint(
+  Sender: TObject);
+begin
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_PerdaA.Visible := True;
+
+      if CDSSemafaro_IndicadorPerdaKG.AsString = 'VERDE' then
+          SHP_PerdaA.Brush.Color := clGreen
+      else
+          SHP_PerdaA.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_PerdaA.Visible := False;
+  end;
+end;
+
+function TRelatorio_ApontamentoProducao_MiguelAnalitico.Get_OrderbY: String;
+Var
+  VLC_OrderBY : String;
+
+begin
+
+  VLC_OrderBY := ' Order by Apont.Setor, Apont.Recurso_ID desc, Apont.Turno, Apont.DataIni, Apont.HoraIni  ' + #13;
+  Result := VLC_OrderBY;
+
+end;
+
+function TRelatorio_ApontamentoProducao_MiguelAnalitico.Get_Select: String;
+Var
+  VLC_Select : String;
+
+begin
+
+     VLC_Select := VLC_Select + ' Select ' + #13;
+     VLC_Select := VLC_Select + ' ' + #13;
+
+     VLC_Select := VLC_Select + ' 	 	Apont.Tipo, Apont.Area, Apont.Setor, Apont.DataTurno, Turno, TurnoDescricao, Apont.Recurso_ID, Apont.Recurso, ' + #13;
+     VLC_Select := VLC_Select + ' 		Cavidade, PerdaKGPerc, Item, CapacidadeReal, CapacidadeInstalada, ProducaoTeorica, ' + #13;
+     VLC_Select := VLC_Select + ' 		QtdProduzida as ProducaoReal, Perda, Causa_Perda, CicloPadrao, CicloReal, Semafaro_Ciclo, ' + #13;
+     VLC_Select := VLC_Select + ' 		HoraIni as Inicio, HoraFin as Termino, TempoProducao, TempoProduzindo, DisponibilidadeOEE,' + #13;
+     VLC_Select := VLC_Select + ' 		Semafaro_Disponibilidade, Performace, Semafaro_Performace, IndicadorQualidade, Semafaro_IndicadorQualidade,' + #13;
+     VLC_Select := VLC_Select + ' 		OEE, Produtividade, EficienciaNominal, Semafaro_OEE, TempoParadaMin, Causa_Improdutividade,' + #13;
+     VLC_Select := VLC_Select + ' 		IndicadorProducao, Semafaro_Producao, Semafaro_Produtividade, Semafaro_EficienciaNominal, Semafaro_IndicadorPerdaKG,' + #13;
+     VLC_Select := VLC_Select + ' 		Dia_CapacidadeInstalada, Dia_CapacidadeReal, Dia_ProducaoReal,' + #13;
+     VLC_Select := VLC_Select + ' 		Dia_Perda, Dia_PesoPerda, Dia_PesoProducao, Dia_PerdaKGPerc,' + #13;
+     VLC_Select := VLC_Select + ' 		Dia_EficienciaNominal, Dia_Produtividade, Dia_TempoParada' + #13;
+
+     VLC_Select := VLC_Select + '' + #13;
+     VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_OEE_Injecao Apont (nolock)' + #13;
+     VLC_Select := VLC_Select + ' Inner Join BomixBI.dbo.Pcp_TB_OEE_Injecao_TotalDia TotalDia (nolock) ON TotalDia.Tipo = Apont.Tipo  ' + #13;
+     VLC_Select := VLC_Select + '                                   																	AND TotalDia.Area = Apont.Area  ' + #13;
+     VLC_Select := VLC_Select + ' 																	                                  AND TotalDia.Setor = Apont.Setor ' + #13;
+     VLC_Select := VLC_Select + ' 																	                                  AND TotalDia.DataTurno = Apont.DataTurno ' + #13;
+     VLC_Select := VLC_Select + ' 																	                                  AND TotalDia.Recurso_ID = Apont.Recurso_ID ' + #13;
+
+     VLC_Select := VLC_Select + ' Where Apont.DataTurno = ' + ' CONVERT(Datetime,Convert(Varchar(10),' + '''' + DateTimeToStr(Relatorio_ApontamentoProducao.DT_DataEmissao1.Date) + '''' +  ',103),103)';
+
+     Result := VLC_Select;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.Relatorio_ApontamentoAnalisePerdaEficienciaProdutividade;
+Var
+  VLC_Select, VLC_OrderBY : String;
+
+begin
+
+     VLC_Select := Get_Select + #13;
+     VLC_OrderBY := Get_OrderbY;
+
+     Relatorio_ApontamentoProducao.MemoSQL.Lines.Text := VLC_Select + ' ' + Get_Where + ' ' + VLC_OrderBY;
+
+     CDS.Close;
+     Query.Close;
+     Query.SQL.Clear;
+     Query.SQL.Text := VLC_Select + ' ' + Get_Where + ' ' + VLC_OrderBY;
+     CDS.Open;
+
+    if Relatorio_ApontamentoProducao.CBX_Tipo.Text = 'ANÁLISE DE OEE (OVERALL EQUIPMENT EFFECTIVENESS)' then
+    begin
+          If CDS.RecordCount > 0 Then
+          begin
+             ppLabel29.Caption :=  ' Data de Emissão Igual ' + ' ' + DateToStr(Relatorio_ApontamentoProducao.DT_DataEmissao1.Date);
+             ppLabel40.Caption := 'Data Impressão: ' + DateTimeToStr(Date()) + ' - ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+             ppOEE.PrintReport;
+          end
+          else
+          begin
+              Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+              Exit;
+          end;
+    end;
+
+    if Relatorio_ApontamentoProducao.CBX_Tipo.Text = 'ANÁLISE DE PERDAS, EFICIÊNCIA E PRODUTIVIDADE' then
+    begin
+          If CDS.RecordCount > 0 Then
+          begin
+             ppLabel16.Caption :=  ' Data de Emissão Igual ' + ' ' + DateToStr(Relatorio_ApontamentoProducao.DT_DataEmissao1.Date);
+             ppLabel17.Caption := 'Data Impressão: ' + DateTimeToStr(Date()) + ' - ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+             ppAnalise.PrintReport;
+          end
+          else
+          begin
+              Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+              Exit;
+          end;
+    end;
+
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.Relatorio_OEE;
+Var
+  VLC_Select, VLC_OrderBY : String;
+
+begin
+
+     VLC_Select := Get_Select + #13;
+     VLC_OrderBY := Get_OrderbY;
+
+     Relatorio_ApontamentoProducao.MemoSQL.Lines.Text := VLC_Select + ' ' + Get_Where + ' ' + VLC_OrderBY;
+
+     CDS.Close;
+     Query.Close;
+     Query.SQL.Clear;
+     Query.SQL.Text := VLC_Select + ' ' + Get_Where + ' ' + VLC_OrderBY;
+     CDS.Open;
+
+    If CDS.RecordCount > 0 Then
+    begin
+       ppLabel29.Caption :=  ' Data de Emissão Igual ' + ' ' + DateToStr(Relatorio_ApontamentoProducao.DT_DataEmissao1.Date);
+       ppLabel40.Caption := 'Data Impressão: ' + DateTimeToStr(Date()) + ' - ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption;
+       ppOEE.PrintReport;
+    end
+    else
+    begin
+        Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_CicloPrint(
+  Sender: TObject);
+begin
+
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_Ciclo.Visible := True;
+      TXT_ProducaoTeorica.Visible := True;
+      TXT_ProducaoReal.Visible := True;
+      TXT_Perda.Visible := True;
+
+      if CDSSemafaro_Ciclo.AsString = 'VERDE' then
+          SHP_Ciclo.Brush.Color := clGreen
+      else
+          SHP_Ciclo.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_Ciclo.Visible := False;
+      //TXT_ProducaoTeorica.Visible := False;
+      //TXT_ProducaoReal.Visible := False;
+      //TXT_Perda.Visible := False;
+  end;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_CicloAPrint(
+  Sender: TObject);
+begin
+
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_CicloA.Visible := True;
+      TXT_PerdaKGPerc.Visible := True;
+      TXT_PerdaA.Visible := True;
+      TXT_QtdProduzidaA.Visible := True;
+      TXT_CapacidadeRealA.Visible := True;
+      TXT_CapacidadeInstalada.Visible := True;
+
+      if CDSSemafaro_Ciclo.AsString = 'VERDE' then
+          SHP_CicloA.Brush.Color := clGreen
+      else
+          SHP_CicloA.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_CicloA.Visible := False;
+      TXT_PerdaKGPerc.Visible := False;
+      TXT_PerdaA.Visible := False;
+      TXT_QtdProduzidaA.Visible := False;
+      TXT_CapacidadeRealA.Visible := False;
+      TXT_CapacidadeInstalada.Visible := False;
+  end;
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_DisponibilidadePrint(
+  Sender: TObject);
+begin
+
+ if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_Disponibilidade.Visible := True;
+
+      if CDSSemafaro_Disponibilidade.AsString = 'VERDE' then
+          SHP_Disponibilidade.Brush.Color := clGreen
+      else
+          SHP_Disponibilidade.Brush.Color := clRed;
+
+  end
+  else
+  begin
+      SHP_Disponibilidade.Visible := False;
+  end;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_EficienciaAPrint(
+  Sender: TObject);
+begin
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_EficienciaA.Visible := True;
+
+      if CDSSemafaro_EficienciaNominal.AsString = 'VERDE' then
+          SHP_EficienciaA.Brush.Color := clGreen
+      else
+          SHP_EficienciaA.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_EficienciaA.Visible := False;
+  end;
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_OEEPrint(
+  Sender: TObject);
+begin
+
+ if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_OEE.Visible := True;
+
+      if CDSSemafaro_OEE.AsString = 'VERDE' then
+          SHP_OEE.Brush.Color := clGreen
+      else
+          SHP_OEE.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_OEE.Visible := False;
+  end;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_PerformacePrint(
+  Sender: TObject);
+begin
+
+ if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_Performace.Visible := True;
+
+      if CDSSemafaro_Performace.AsString = 'VERDE' then
+          SHP_Performace.Brush.Color := clGreen
+      else
+          SHP_Performace.Brush.Color := clRed;
+
+  end
+  else
+  begin
+      SHP_Performace.Visible := False;
+  end;
+
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_ProducaoAPrint(
+  Sender: TObject);
+begin
+
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_ProducaoA.Visible := True;
+
+      if CDSSemafaro_Producao.AsString = 'VERDE' then
+          SHP_ProducaoA.Brush.Color := clGreen;
+
+      if CDSSemafaro_Producao.AsString = 'VERMELHO' then
+          SHP_ProducaoA.Brush.Color := clRed;
+
+      if CDSSemafaro_Producao.AsString = 'AMARELO' then
+          SHP_ProducaoA.Brush.Color := clYellow;
+
+  end
+  else
+  begin
+      SHP_ProducaoA.Visible := False;
+  end;
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_ProdutividadeAPrint(
+  Sender: TObject);
+begin
+  if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_ProdutividadeA.Visible := True;
+
+      if CDSSemafaro_Produtividade.AsString = 'VERDE' then
+          SHP_ProdutividadeA.Brush.Color := clGreen
+      else
+          SHP_ProdutividadeA.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_ProdutividadeA.Visible := False;
+  end;
+end;
+
+procedure TRelatorio_ApontamentoProducao_MiguelAnalitico.SHP_QualidadePrint(
+  Sender: TObject);
+begin
+
+ if CDSTipo.AsString <> 'SEM PRODUÇÃO' then
+  begin
+      SHP_Qualidade.Visible := True;
+
+      if CDSSemafaro_IndicadorQualidade.AsString = 'VERDE' then
+          SHP_Qualidade.Brush.Color := clGreen
+      else
+          SHP_Qualidade.Brush.Color := clRed;
+  end
+  else
+  begin
+      SHP_Qualidade.Visible := False;
+  end;
+
+end;
+
+end.

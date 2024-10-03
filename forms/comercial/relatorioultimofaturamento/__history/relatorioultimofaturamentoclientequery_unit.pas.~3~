@@ -1,0 +1,153 @@
+unit RelatorioUltimoFaturamentoClienteQuery_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, Data.DB,
+  Data.Win.ADODB, Datasnap.Provider, ppDB, ppDBPipe, ppParameter, ppDesignLayer,
+  ppBands, ppClass, ppCtrls, ppPrnabl, ppCache, ppComm, ppRelatv, ppProd,
+  ppReport;
+
+type
+  TRelatorioUltimoFaturamentoCliente_Query = class(TForm)
+    ppRelatorio: TppReport;
+    ppHeaderBand5: TppHeaderBand;
+    ppImage4: TppImage;
+    ppLabel33: TppLabel;
+    ppLine29: TppLine;
+    ppShape1: TppShape;
+    ppLabel2: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel8: TppLabel;
+    ppDetailBand5: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppLine5: TppLine;
+    ppDBText1: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText10: TppDBText;
+    ppFooterBand5: TppFooterBand;
+    ppLine12: TppLine;
+    ppLBL_Data: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle5: TppPageStyle;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers5: TppDesignLayers;
+    ppDesignLayer9: TppDesignLayer;
+    ppDesignLayer10: TppDesignLayer;
+    ppParameterList5: TppParameterList;
+    ppDBPipeline1: TppDBPipeline;
+    ppDBPipeline1ppField1: TppField;
+    ppDBPipeline1ppField2: TppField;
+    ppDBPipeline1ppField3: TppField;
+    ppDBPipeline1ppField4: TppField;
+    ppDBPipeline1ppField5: TppField;
+    ppDBPipeline1ppField6: TppField;
+    ppDBPipeline1ppField7: TppField;
+    ppDBPipeline1ppField8: TppField;
+    ppDBPipeline1ppField9: TppField;
+    ppDBPipeline1ppField10: TppField;
+    ppDBPipeline1ppField11: TppField;
+    ppDBPipeline1ppField12: TppField;
+    DSP: TDataSetProvider;
+    DS: TDataSource;
+    Query: TADOQuery;
+    QueryRecno: TIntegerField;
+    QueryEmpresa: TStringField;
+    QueryCliente_ID: TStringField;
+    QueryLoja: TStringField;
+    QueryRazaoSocial: TStringField;
+    QueryGerente: TStringField;
+    QueryCidade: TStringField;
+    QueryUF: TStringField;
+    QueryUltimaCompra_Recno: TIntegerField;
+    QueryUltimaCompraNota: TStringField;
+    QueryUltimaCompraEmissao: TDateTimeField;
+    QueryQtdDias: TIntegerField;
+    CDS: TClientDataSet;
+    CDSRecno: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSCliente_ID: TStringField;
+    CDSLoja: TStringField;
+    CDSRazaoSocial: TStringField;
+    CDSGerente: TStringField;
+    CDSCidade: TStringField;
+    CDSUF: TStringField;
+    CDSUltimaCompra_Recno: TIntegerField;
+    CDSUltimaCompraNota: TStringField;
+    CDSUltimaCompraEmissao: TDateTimeField;
+    CDSQtdDias: TIntegerField;
+    function ImprimirRelatorio : Boolean;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioUltimoFaturamentoCliente_Query: TRelatorioUltimoFaturamentoCliente_Query;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, FuncaoRestricoesInformacoes_Unit,
+  RelatorioUltimoFaturamentoCliente_Unit;
+
+function TRelatorioUltimoFaturamentoCliente_Query.ImprimirRelatorio: Boolean;
+Var
+   VLC_Select, VLC_OrderBy : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select  ' + #13;
+  VLC_Select := VLC_Select + '   Recno, Empresa, Cliente_ID, Loja, RazaoSocial, Gerente, Cidade, UF,  ' + #13;
+  VLC_Select := VLC_Select + '   UltimaCompra_Recno, UltimaCompraNota, UltimaCompraEmissao, ' + #13;
+  VLC_Select := VLC_Select + '   DATEDIFF(Day,UltimaCompraEmissao,GetDate()) as QtdDias ' + #13;
+  VLC_Select := VLC_Select + ' From BomixBI.dbo.Fat_TB_Cliente (nolock)  ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Status = ' + '''' + 'ATIVO' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND UltimaCompra_Recno is not null  ' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  If RelatorioUltimoFaturamentoCliente.CBX_OrdenarPor.Text = 'TEMPO DA ÚLTIMA COMPRA - CRESCENTE' then VLC_OrderBy := ' Order by UltimaCompraEmissao ' + #13;
+  If RelatorioUltimoFaturamentoCliente.CBX_OrdenarPor.Text = 'TEMPO DA ÚLTIMA COMPRA - DESCRESCENTE' then VLC_OrderBy := ' Order by UltimaCompraEmissao Desc ' + #13;
+  If RelatorioUltimoFaturamentoCliente.CBX_OrdenarPor.Text = 'CLIENTE' then   VLC_OrderBy := ' Order by RazaoSocial ' + #13;
+  If RelatorioUltimoFaturamentoCliente.CBX_OrdenarPor.Text = 'GERÊNCIA' then   VLC_OrderBy := ' Order by Gerente ' + #13;
+
+  RelatorioUltimoFaturamentoCliente.MemoSQL.Lines.Text := VLC_Select + ' ' + RelatorioUltimoFaturamentoCliente.GetSQLWhere + ' ' + VLC_Orderby;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select + ' ' + RelatorioUltimoFaturamentoCliente.GetSQLWhere + ' ' + VLC_Orderby;
+  CDS.Open;
+
+  ppLBL_Data.Caption :=  'Impresso por: ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption + ' // ' + 'Data Impressão: ' + DateTimeToStr(Date());
+
+   If CDS.RecordCount = 0 Then
+   begin
+      Result := False;
+   end
+   else
+   begin
+      Result := True;
+   end;
+
+end;
+
+end.

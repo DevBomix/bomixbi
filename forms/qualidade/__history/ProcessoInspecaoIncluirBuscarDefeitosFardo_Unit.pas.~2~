@@ -1,0 +1,62 @@
+unit ProcessoInspecaoIncluirBuscarDefeitosFardo_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TProcessoInspecao_IncluirBuscarDefeitosFardo = class(TPadraoBuscador)
+    QueryDefeito_ID: TAutoIncField;
+    QueryDefeito: TStringField;
+    QueryTipo: TStringField;
+    QueryArea: TStringField;
+    CDSDefeito_ID: TAutoIncField;
+    CDSDefeito: TStringField;
+    CDSTipo: TStringField;
+    CDSArea: TStringField;
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_IncluirBuscarDefeitosFardo: TProcessoInspecao_IncluirBuscarDefeitosFardo;
+
+implementation
+
+{$R *.dfm}
+
+procedure TProcessoInspecao_IncluirBuscarDefeitosFardo.BTN_BuscarClick(
+  Sender: TObject);
+Var
+  VLC_Select : String;
+
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	* ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.[dbo].Icq_TB_InspecaoTabelaDefeito (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Where Area = ' + '''' + 'PERSONALIZACAO' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Tipo = ' + '''' + 'DEFEITO - LINHA DE PRODUTO' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Defeito_ID <> 114 ' + #13;
+  VLC_Select := VLC_Select + ' AND Defeito Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Defeito' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

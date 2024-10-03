@@ -1,0 +1,112 @@
+unit BI_PCP_DataAjustada1diaDataPCP_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.Provider, Data.DB,
+  Data.Win.ADODB, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids, System.Actions,
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TBI_PCP_DataAjustada1diaDataPCP = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    Memo1: TMemo;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    DBGrid1: TDBGrid;
+    QueryArea: TStringField;
+    QuerySetor: TStringField;
+    QueryInjetora: TStringField;
+    QueryOrdemProducao: TStringField;
+    QueryEmissao: TStringField;
+    QueryCliente_ID: TStringField;
+    QueryCliente: TStringField;
+    QueryDataPCP: TStringField;
+    QueryDataAjustadaFim: TStringField;
+    QueryDiferenca: TIntegerField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryQuantidade: TIntegerField;
+    CDSArea: TStringField;
+    CDSSetor: TStringField;
+    CDSInjetora: TStringField;
+    CDSOrdemProducao: TStringField;
+    CDSEmissao: TStringField;
+    CDSCliente_ID: TStringField;
+    CDSCliente: TStringField;
+    CDSDataPCP: TStringField;
+    CDSDataAjustadaFim: TStringField;
+    CDSDiferenca: TIntegerField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSQuantidade: TIntegerField;
+    QuerySaldo: TIntegerField;
+    CDSSaldo: TIntegerField;
+    procedure BTN_BuscarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PCP_DataAjustada1diaDataPCP: TBI_PCP_DataAjustada1diaDataPCP;
+
+implementation
+
+{$R *.dfm}
+
+uses bi_pcp_unit;
+
+procedure TBI_PCP_DataAjustada1diaDataPCP.BTN_BuscarClick(Sender: TObject);
+Var
+  VLC_Select : String;
+
+begin
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Area, Setor, Injetora, OrdemProducao, Convert(Varchar(10),Emissao,103) as Emissao, ' + #13;
+  VLC_Select := VLC_Select + ' 	Cliente_ID + Loja as Cliente_ID, Cliente, ' + #13;
+  VLC_Select := VLC_Select + ' 	Convert(Varchar(10),DataPCP,103) as DataPCP, Convert(Varchar(10),DataAjustadaFim,103) as DataAjustadaFim, ' + #13;
+  VLC_Select := VLC_Select + ' 	DateDiff(Day,DataAjustadaFim,DataPCP) as Diferenca, Produto_ID, Produto, Quantidade, Saldo ' + #13;
+  VLC_Select := VLC_Select + ' from ( ' + #13;
+
+  VLC_Select := VLC_Select + BI_PCP.Memo1.Lines.Text;
+
+  VLC_Select := VLC_Select + '  ) TB ' + #13;
+  VLC_Select := VLC_Select + ' Where (Injetora + OrdemProducao + Cliente_ID + Cliente + Produto_ID + Produto) like  ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + '  Order by Area, Setor, Injetora_FK, DateDiff(Day,DataAjustadaFim,DataPCP) desc ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

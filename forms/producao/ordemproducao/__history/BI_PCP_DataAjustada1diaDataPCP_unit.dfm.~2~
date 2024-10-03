@@ -1,0 +1,40 @@
+object BI_PCP_DataAjustada1diaDataPCP: TBI_PCP_DataAjustada1diaDataPCP
+  Left = 0
+  Top = 0
+  Caption = 'BI_PCP_DataAjustada1diaDataPCP'
+  ClientHeight = 472
+  ClientWidth = 665
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP'
+    Left = 48
+    Top = 40
+  end
+  object Query: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    DataSource = DS
+    Parameters = <>
+    Left = 84
+    Top = 40
+  end
+  object DS: TDataSource
+    DataSet = CDS
+    Left = 116
+    Top = 40
+  end
+  object DSP: TDataSetProvider
+    DataSet = Query
+    Left = 152
+    Top = 40
+  end
+end

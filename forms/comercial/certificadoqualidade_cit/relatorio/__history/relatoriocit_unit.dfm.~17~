@@ -1,0 +1,4200 @@
+inherited RelatorioCIT: TRelatorioCIT
+  Caption = 'Relat'#243'rio de CIT - Conhecimento Interno de Transporte'
+  ClientHeight = 357
+  ClientWidth = 685
+  OnShow = FormShow
+  ExplicitWidth = 691
+  ExplicitHeight = 386
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 506
+      Caption = 'Relat'#243'rio de CIT - Conhecimento Interno de Transporte'
+      ExplicitWidth = 506
+    end
+  end
+  inherited Panel_Padrao: TPanel
+    inherited CBX_Operador: TComboBox
+      OnChange = CBX_OperadorChange
+    end
+    inherited Panel_Caption: TPanel
+      Caption = '  CIT'
+      inherited PNL_Sinal: TPanel
+        OnClick = PNL_SinalClick
+      end
+    end
+  end
+  object Panel7: TPanel [3]
+    Left = 7
+    Top = 121
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 3
+    object TXT_Valor2_Motorista: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorMotorista: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorMotoristaChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Motorista: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel8: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Motorista'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalMotorista: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalMotoristaClick
+      end
+    end
+    object CBX_Igual_Motorista: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+    end
+  end
+  object Panel10: TPanel [4]
+    Left = 7
+    Top = 185
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 4
+    object TXT_Valor2_Cliente: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorCliente: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorClienteChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Cliente: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel11: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Cliente'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalCliente: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalClienteClick
+      end
+    end
+    object CBX_Igual_Cliente: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+    end
+  end
+  object Panel13: TPanel [5]
+    Left = 7
+    Top = 153
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 5
+    object TXT_Valor2_Cliente_ID: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorCliente_ID: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorCliente_IDChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Cliente_ID: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel14: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Cliente ID'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalCliente_ID: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalCliente_IDClick
+      end
+    end
+    object CBX_Igual_Cliente_ID: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+    end
+  end
+  object Panel16: TPanel [6]
+    Left = 7
+    Top = 217
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 6
+    object TXT_Valor2_Gerencia: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorGerencia: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Igual'
+      OnChange = CBX_OperadorGerenciaChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Gerencia: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel17: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Ger'#234'ncia'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalGerencia: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalGerenciaClick
+      end
+    end
+    object CBX_Igual_Gerencia: TComboBox
+      Left = 333
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Text = 'TODAS'
+    end
+  end
+  object Panel4: TPanel [7]
+    Left = 7
+    Top = 89
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 7
+    object CBX_OperadorDataSaida: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Entre'
+      OnChange = CBX_OperadorDataSaidaChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object Panel5: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Data de Sa'#237'da'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 1
+      object PNL_SinalDataSaida: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+      end
+    end
+    object CBX_Igual_DataSaida: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      TabStop = False
+      Visible = False
+    end
+    object TXT_Valor1_DataSaida: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Text = ''
+    end
+    object TXT_Valor2_DataSaida: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      Text = ''
+    end
+    object DT_DataSaida1: TDateTimePicker
+      Left = 335
+      Top = 4
+      Width = 158
+      Height = 24
+      Date = 41335.000000000000000000
+      Time = 0.424179409732460000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16744448
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+    end
+    object DT_DataSaida2: TDateTimePicker
+      Left = 497
+      Top = 4
+      Width = 158
+      Height = 24
+      Date = 41335.000000000000000000
+      Time = 0.424179409732460000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16744448
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+    end
+  end
+  object Panel6: TPanel [8]
+    Left = 7
+    Top = 249
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 8
+    object TXT_Valor2_Transportadora: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorTransportadora: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorGerenciaChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_Transportadora: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel9: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Transportadora'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalTransportadora: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalGerenciaClick
+      end
+    end
+    object CBX_Igual_Transportadora: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+    end
+  end
+  object Panel12: TPanel [9]
+    Left = 7
+    Top = 281
+    Width = 672
+    Height = 32
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 9
+    object TXT_Valor2_NotaFiscal: TMaskEdit
+      Left = 495
+      Top = 4
+      Width = 160
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = ''
+    end
+    object CBX_OperadorNotaFiscal: TComboBox
+      Left = 197
+      Top = 4
+      Width = 134
+      Height = 23
+      Color = clWhite
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      TabStop = False
+      Text = 'Cont'#233'm'
+      OnChange = CBX_OperadorGerenciaChange
+      Items.Strings = (
+        'Iniciado por'
+        'Igual'
+        'Terminado por'
+        'Cont'#233'm'
+        'Est'#225' contido'
+        'Maior'
+        'Menor'
+        'Maior ou Igual'
+        'Menor ou Igual'
+        'Entre')
+    end
+    object TXT_Valor1_NotaFiscal: TMaskEdit
+      Left = 334
+      Top = 4
+      Width = 159
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = ''
+    end
+    object Panel15: TPanel
+      Left = 7
+      Top = 4
+      Width = 188
+      Height = 23
+      Alignment = taLeftJustify
+      Caption = ' Nota Fiscal'
+      Color = 10907648
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      object PNL_SinalNotaFiscal: TPanel
+        Left = 174
+        Top = 1
+        Width = 13
+        Height = 21
+        Cursor = crHandPoint
+        Align = alRight
+        BevelOuter = bvNone
+        Color = clAqua
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = PNL_SinalGerenciaClick
+      end
+    end
+    object CBX_Igual_NotaFiscal: TComboBox
+      Left = 660
+      Top = 4
+      Width = 322
+      Height = 23
+      CharCase = ecUpperCase
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      TabStop = False
+      Visible = False
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 318
+    Width = 685
+    TabOrder = 10
+    ExplicitTop = 318
+    ExplicitWidth = 685
+    inherited Panel_Navegador: TPanel
+      Left = 440
+      ExplicitLeft = 440
+    end
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 403
+    Top = 315
+    inherited Desenvolvimento: TAction
+      OnExecute = DesenvolvimentoExecute
+    end
+  end
+  object DSP_CIT: TDataSetProvider
+    DataSet = Query_CIT
+    UpdateMode = upWhereChanged
+    Left = 365
+    Top = 315
+  end
+  object CDS_CIT: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'OrdemEntrega'
+        Attributes = [faReadonly]
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'Cliente_ID'
+        Attributes = [faReadonly]
+        DataType = ftString
+        Size = 6
+      end
+      item
+        Name = 'Cliente'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'CidadeUF'
+        Attributes = [faReadonly]
+        DataType = ftString
+        Size = 65
+      end
+      item
+        Name = 'NF'
+        DataType = ftString
+        Size = 9
+      end
+      item
+        Name = 'Cit_ID'
+        DataType = ftString
+        Size = 8
+      end
+      item
+        Name = 'Data'
+        Attributes = [faReadonly]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'DataPrevChegada'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'Quantidade'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+      end
+      item
+        Name = 'NumLacre1'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NumLacre2'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NumLacre3'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Motorista'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Endereco'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'MotoristaBairro'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Cidade'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'UF'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'MotoristaCelular'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'MotoristaTelefone'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'MotoristaNextel'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'Transportadora'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Placa'
+        DataType = ftString
+        Size = 8
+      end
+      item
+        Name = 'Gerente'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Vendedor_FK'
+        DataType = ftString
+        Size = 6
+      end
+      item
+        Name = 'Vendedor'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Z5_Empresa'
+        Attributes = [faReadonly]
+        DataType = ftString
+        Size = 4
+      end
+      item
+        Name = 'Z5_Recno'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SetorMercado'
+        DataType = ftString
+        Size = 55
+      end>
+    IndexDefs = <>
+    Params = <>
+    ProviderName = 'DSP_CIT'
+    StoreDefs = True
+    Left = 334
+    Top = 315
+    object CDS_CITOrdemEntrega: TStringField
+      FieldName = 'OrdemEntrega'
+      ReadOnly = True
+      Size = 2
+    end
+    object CDS_CITCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      Size = 6
+    end
+    object CDS_CITCliente: TStringField
+      FieldName = 'Cliente'
+      ReadOnly = True
+      Size = 100
+    end
+    object CDS_CITCidadeUF: TStringField
+      FieldName = 'CidadeUF'
+      ReadOnly = True
+      Size = 105
+    end
+    object CDS_CITNF: TStringField
+      FieldName = 'NF'
+      Size = 9
+    end
+    object CDS_CITCit_ID: TStringField
+      FieldName = 'Cit_ID'
+      Size = 8
+    end
+    object CDS_CITData: TDateTimeField
+      FieldName = 'Data'
+      ReadOnly = True
+    end
+    object CDS_CITDataPrevChegada: TDateTimeField
+      FieldName = 'DataPrevChegada'
+      ReadOnly = True
+    end
+    object CDS_CITNumLacre1: TStringField
+      FieldName = 'NumLacre1'
+    end
+    object CDS_CITNumLacre2: TStringField
+      FieldName = 'NumLacre2'
+    end
+    object CDS_CITNumLacre3: TStringField
+      FieldName = 'NumLacre3'
+    end
+    object CDS_CITMotorista: TStringField
+      FieldName = 'Motorista'
+      Size = 40
+    end
+    object CDS_CITEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 100
+    end
+    object CDS_CITMotoristaBairro: TStringField
+      FieldName = 'MotoristaBairro'
+      Size = 60
+    end
+    object CDS_CITCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 60
+    end
+    object CDS_CITUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object CDS_CITMotoristaCelular: TStringField
+      FieldName = 'MotoristaCelular'
+      Size = 15
+    end
+    object CDS_CITMotoristaTelefone: TStringField
+      FieldName = 'MotoristaTelefone'
+      Size = 15
+    end
+    object CDS_CITMotoristaNextel: TStringField
+      FieldName = 'MotoristaNextel'
+      Size = 15
+    end
+    object CDS_CITTransportadora: TStringField
+      FieldName = 'Transportadora'
+      Size = 40
+    end
+    object CDS_CITPlaca: TStringField
+      FieldName = 'Placa'
+      ReadOnly = True
+      Size = 8
+    end
+    object CDS_CITGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+    object CDS_CITVendedor_FK: TStringField
+      FieldName = 'Vendedor_FK'
+      Size = 6
+    end
+    object CDS_CITVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object CDS_CITQuantidade: TFloatField
+      FieldName = 'Quantidade'
+      ReadOnly = True
+    end
+    object CDS_CITZ5_Empresa: TStringField
+      FieldName = 'Z5_Empresa'
+      ReadOnly = True
+      Size = 4
+    end
+    object CDS_CITZ5_Recno: TIntegerField
+      FieldName = 'Z5_Recno'
+    end
+    object CDS_CITSetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 55
+    end
+  end
+  object DS_CIT: TDataSource
+    DataSet = CDS_CIT
+    Left = 303
+    Top = 315
+  end
+  object Query_CIT: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      ' Select Distinct Top 300 '
+      '  '
+      ' '#9'  CASE '
+      
+        ' '#9'      WHEN Len(Itens_CIT.Sequencia) = 1 THEN '#39'0'#39' + CAST(Itens_' +
+        'CIT.Sequencia AS varchar(1)) '
+      '        ELSE CAST(Itens_CIT.Sequencia AS varchar(2)) '
+      '    END AS OrdemEntrega,  '
+      ' '#9'  Rtrim(F2_CLIENTE) as Cliente_ID, A1_NOME as Cliente,  '
+      ' '#9'  RTRIM(A1_MUN) + '#39' - '#39' + RTRIM(A1_EST) AS CidadeUF, '
+      ' '#9'  Nota.F2_DOC AS NF, Itens_CIT.Cit_FK AS Cit_ID,   '
+      ' '#9'  Convert(Datetime,F2_EMISSAO,112) AS Data,   '
+      ' '#9'  Itens_CIT.DataPrevista AS DataPrevChegada, '
+      '     '
+      ' '#9'  (   '
+      ' '#9#9#9'SELECT   '
+      ' '#9#9#9#9'SUM(D2_QUANT) AS Quantidade '
+      ' '#9#9#9'FROM P12OFICIAL.dbo.SD2010 (nolock) Item  '
+      ' '#9#9#9'Where Item.D_E_L_E_T_ <> '#39'*'#39
+      ' '#9#9#9'AND Item.D2_FILIAL = F2_FILIAL '
+      '  '#9#9#9'AND Item.D2_DOC = F2_DOC '
+      '  '#9#9#9'AND (D2_COD like '#39'B%'#39' OR D2_COD like '#39'T%'#39') '
+      ' '#9'   ) AS Quantidade,  '
+      '    '
+      
+        ' '#9'   CIT.Lacre1 AS NumLacre1, CIT.Lacre2 AS NumLacre2, CIT.Lacre' +
+        '3 AS NumLacre3,'
+      
+        ' '#9'   Motorista.DA4_NOME as Motorista, Motorista.DA4_END AS Ender' +
+        'eco,'
+      
+        ' '#9'   DA4_BAIRRO AS MotoristaBairro, DA4_MUN AS Cidade, Itens_CIT' +
+        '.SetorMercado,'
+      
+        '     DA4_EST AS UF, DA4_TEL AS MotoristaCelular, DA4_TEL2 AS Mot' +
+        'oristaTelefone, DA4_NEXTEL AS MotoristaNextel, '
+      
+        #9'   Transportadora.A4_NOME as Transportadora, Veiculo.DA3_PLACA ' +
+        'as Placa, '
+      
+        #9'   Vendedor.Gerente, Vendedor.Vendedor_ID as Vendedor_FK, Vende' +
+        'dor.Vendedor, '
+      #9'   '#39'0101'#39' AS Z5_Empresa, Nota.R_E_C_N_O_ AS Z5_Recno '
+      ' '
+      ' from P12OFICIAL.dbo.SF2010 Nota (nolock) '
+      
+        ' Inner Join P12OFICIAL.dbo.SA1010 Cliente (nolock) ON Cliente.D_' +
+        'E_L_E_T_ <> '#39'*'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9' AND A1_FILIAL = '#39'0101'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9' AND F2_CLIENTE = A1_COD '
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9' AND F2_LOJA = A1_LOJA '
+      
+        ' INNER JOIN BomixBI.dbo.Fat_TB_VendedorGerente AS Vendedor WITH ' +
+        '(nolock) ON Vendedor.Vendedor_ID = Nota.F2_VEND1 '
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Vendedor.Empresa = '#39'0101'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Vendedor.Vendedor_ID <> '#39'000040'#39
+      
+        ' LEFT Join P12OFICIAL.dbo.SA4010 (nolock) AS Transportadora ON T' +
+        'ransportadora.D_E_L_E_T_ <> '#39'*'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Transportadora.A4_FILIAL = '#39'0101'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Transportadora.A4_COD = Nota.F2_TRANSP '
+      
+        ' LEFT Join P12OFICIAL.dbo.DA3010 (nolock) Veiculo ON Veiculo.D_E' +
+        '_L_E_T_ <> '#39'*'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9'AND DA3_FILIAL = '#39'010101'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9'AND Veiculo.DA3_COD = Nota.F2_VEICUL1 '
+      
+        ' LEFT OUTER JOIN P12OFICIAL.dbo.DA4010 (nolock) Motorista ON Mot' +
+        'orista.D_E_L_E_T_ <> '#39'*'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9'AND DA4_FILIAL = DA3_FILIAL '
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9'AND Motorista.DA4_COD = Veiculo.DA3_MOTORI '
+      
+        ' Inner JOIN BomixBI.dbo.[Fat_TB_NotaFiscalVendaCIT_Itens] (noloc' +
+        'k) Itens_CIT ON Itens_CIT.Empresa = '#39'0101'#39
+      ' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Itens_CIT.Nota_FK = F2_DOC '
+      
+        ' Inner Join BomixBI.dbo.Fat_TB_NotaFiscalVendaCIT_Capa CIT (nolo' +
+        'ck) ON CIT.Empresa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'   AND CIT.Cit_ID = Itens_CIT.Cit_FK  '
+      '  '
+      ' Where Nota.D_E_L_E_T_ <> '#39'*'#39
+      ' AND Nota.F2_FILIAL = '#39'010101'#39
+      ' AND Nota.F2_TIPO = '#39'N'#39
+      ' AND Veiculo.DA3_COD is not null '
+      
+        ' AND 1=1  AND Convert(Datetime,F2_EMISSAO,112) Between '#39'2020-02-' +
+        '03 00:00:00'#39' AND '#39'2020-02-10 23:59:00'#39
+      '   Order by Data desc, OrdemEntrega ')
+    Left = 274
+    Top = 315
+    object Query_CITOrdemEntrega: TStringField
+      FieldName = 'OrdemEntrega'
+      ReadOnly = True
+      Size = 2
+    end
+    object Query_CITCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      ReadOnly = True
+      Size = 6
+    end
+    object Query_CITCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 40
+    end
+    object Query_CITCidadeUF: TStringField
+      FieldName = 'CidadeUF'
+      ReadOnly = True
+      Size = 65
+    end
+    object Query_CITNF: TStringField
+      FieldName = 'NF'
+      Size = 9
+    end
+    object Query_CITCit_ID: TStringField
+      FieldName = 'Cit_ID'
+      Size = 8
+    end
+    object Query_CITData: TDateTimeField
+      FieldName = 'Data'
+      ReadOnly = True
+    end
+    object Query_CITDataPrevChegada: TDateTimeField
+      FieldName = 'DataPrevChegada'
+    end
+    object Query_CITQuantidade: TFloatField
+      FieldName = 'Quantidade'
+      ReadOnly = True
+    end
+    object Query_CITNumLacre1: TStringField
+      FieldName = 'NumLacre1'
+    end
+    object Query_CITNumLacre2: TStringField
+      FieldName = 'NumLacre2'
+    end
+    object Query_CITNumLacre3: TStringField
+      FieldName = 'NumLacre3'
+    end
+    object Query_CITMotorista: TStringField
+      FieldName = 'Motorista'
+      Size = 40
+    end
+    object Query_CITEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 100
+    end
+    object Query_CITMotoristaBairro: TStringField
+      FieldName = 'MotoristaBairro'
+      Size = 60
+    end
+    object Query_CITCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 60
+    end
+    object Query_CITUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object Query_CITMotoristaCelular: TStringField
+      FieldName = 'MotoristaCelular'
+      Size = 15
+    end
+    object Query_CITMotoristaTelefone: TStringField
+      FieldName = 'MotoristaTelefone'
+      Size = 15
+    end
+    object Query_CITMotoristaNextel: TStringField
+      FieldName = 'MotoristaNextel'
+      Size = 15
+    end
+    object Query_CITTransportadora: TStringField
+      FieldName = 'Transportadora'
+      Size = 40
+    end
+    object Query_CITPlaca: TStringField
+      FieldName = 'Placa'
+      Size = 8
+    end
+    object Query_CITGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+    object Query_CITVendedor_FK: TStringField
+      FieldName = 'Vendedor_FK'
+      Size = 6
+    end
+    object Query_CITVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object Query_CITZ5_Empresa: TStringField
+      FieldName = 'Z5_Empresa'
+      ReadOnly = True
+      Size = 4
+    end
+    object Query_CITZ5_Recno: TIntegerField
+      FieldName = 'Z5_Recno'
+    end
+    object Query_CITSetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 55
+    end
+  end
+  object ppCIT: TppReport
+    AutoStop = False
+    DataPipeline = ppDBPipeline1
+    OnStartPage = ppCITStartPage
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zs100Percent
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 243
+    Top = 315
+    Version = '19.03'
+    mmColumnWidth = 98651
+    DataPipelineName = 'ppDBPipeline1'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 28046
+      mmPrintPosition = 0
+      object ppIMG_Logo: TppImage
+        DesignLayer = ppDesignLayer1
+        UserName = 'ppIMG_Logo'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
+        MaintainAspectRatio = False
+        Stretch = True
+        Border.mmPadding = 0
+        Picture.Data = {
+          07544269746D6170969F0000424D969F0000000000003600000028000000C800
+          0000440000000100180000000000609F0000C40E0000C40E0000000000000000
+          0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B781834720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B832B45DAC1C8FFFFFF
+          FFFFFFFFFFFFFFFFFF7261E57666E56957E46957E46957E46957E46957E46957
+          E46957E47666E67666E67666E67666E67665E67665E67565E67565E67564E674
+          64E57464E57464E57464E57463E57463E57463E57463E57363E57363E57363E5
+          6957E46957E46957E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B7A1C37FFFFFFFFFFFFFFFFFFFFFF
+          FFC9C3F46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B92455BFFFFFFFFFFFFFFFFFFFFFFFF8576E869
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BC69DA9FFFFFFFFFFFFFFFFFFF9F7FD6957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E4FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BFDFDFDFFFFFFFFFFFFFFFFFFAA9FEF6957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B87324BFFFF
+          FFFFFFFFFFFFFFFFFFFF7766E66957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB27C8CFFFFFFFFFFFFFF
+          FFFFDDD9F86957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BEEE2E6FFFFFFFFFFFFFFFFFF9184EB
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E4FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B7F243FFFFFFFFFFFFFFFFFFFFFFFFF705FE56957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BA26073FFFFFFFFFFFFFFFFFFBBB4F26957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BDB
+          C2C9FFFFFFFFFFFFFFFFFF7E6EE76957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B7A1C37FFFFFFFFFFFF
+          FFFFFFEEECFB6957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E4FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B93475DFFFFFFFFFFFFFFFFFF9F94
+          ED6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BC7A0ABFFFFFFFFFFFFFFFFFF7665E66957E469
+          57E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957E4
+          6957E46957E46957E46957E46957E46957E46957E46957E46957E46957E46957
+          E46957E46957E46957E46957E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6D5D9
+          E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5
+          D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6
+          D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9
+          E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5
+          D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6
+          D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9
+          E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5
+          D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6
+          D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9
+          E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5
+          D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6
+          D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9
+          E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5
+          D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D9E6D5D97A1D38720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          88344CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFC196A2720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB47F8EFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF0E6E9FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B7E253FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BE1CCD2F3EBEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC69EAA720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB78493
+          C69EAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4EDEF720E2BFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BC69EAA720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BA15F72FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BD4B6BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFD5B8C0904259720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B94495FDDC6
+          CDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72
+          0E2BA15E72720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFB07888720E2B720E2BFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFF
+          FFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BFCFBFBA6687A720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BD5B7C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFD0AEB8720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B93465CD1B1BBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD5B8C0720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BAE7586FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BFBF9FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF91445B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BE7D7DCFFFFFF904259720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFD
+          FDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BE5D3D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFF2EAEC720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B9A5368FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFC298A4720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B91435AEFE3E6FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB37E8D720E2B
+          720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFF7F2F4720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFEDE0E4720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB27C8BFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B93465CFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          904259EEE2E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFBF9FA720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BDAC0C8FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF9F5F6FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFF
+          FFFFCDABB5720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BE4D1D7FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BB98795FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B7C1F3AFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2EAEC720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BCBA7B1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFBF919E720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFF
+          FFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFAE7485
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B954A60FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BE7D6DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFDBC2CA720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B904259FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFD2B3BC720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BF3ECEEFFFFFFFFFFFFFFFFFFFFFFFFF6F0F272
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BF7F2F4FFFFFFFFFFFFFFFFFF94495F720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BC297A3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B94485EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFBF8F9720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BBC8D9AFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFECDEE2720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BDCC3CAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFAF7686720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BF9F5F6FFFFFFFFFFFFFFFFFF720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BDEC7CEFFFFFFFFFFFFFFFFFFF3EBED720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          F2E9EBFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BBB8B99FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BF6EFF1FFFFFFFFFFFFFFFFFFFFFFFFBE8F9D720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BDAC0
+          C8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          FCFAFAFFFFFFFFFFFFEBDEE2720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BE7D7DCFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BFFFFFFFFFFFFFDFCFC720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFFD6B9C1720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BA15E72FFFFFFFFFF
+          FFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BE8D8DDFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BB68392FFFFFFFFFFFFFFFFFFFDFDFD91445B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BAF7686E0CBD1FFFFFFFF
+          FFFFFFFFFFFFFFFF720E2B91445B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BA15F73FFFFFFFFFF
+          FFA66779720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BFCFAFAFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFB58190720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2BD2B2BBFFFFFFFFFFFF720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B94495FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7D6DB720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFC
+          FAFAFFFFFFFFFFFFD3B4BD720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BA96D7EFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2BF8F3F5EADBDF720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFF
+          FFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF995065720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2BFDFCFCFFFFFF720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BBC8E
+          9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BD0AFB9FFFFFFFFFFFF
+          BC8E9B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BC7A0ACFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BF0E6E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F4F5720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BA36174FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BEADBDFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BA56678FFFFFFFBF8F9F4EDEFD9BEC672
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BA6687AFFFFFFFFFFFF995065720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BEBDDE1FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BD5
+          B7C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDC6CD720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B914359720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B954B60FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B92455BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B9C576BFFFFFFFFFFFF904259720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B94
+          495FFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBD8E9C720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B88344D720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BBE909EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1E7EA720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BF2E9EBFFFFFFFFFFFFFFFFFFFFFFFFD2B2BB720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BCBA7B1FFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF9F5B6E720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BEBDEE2FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BD8BDC5FFFF
+          FFFFFFFFFFFFFFFFFFFFE4D1D7720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BA15F72F0E6E9FFFFFFFFFFFFFCFBFBE5
+          D2D8A05E71720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B94495FFFFFFFFFFFFFFFFFFFFFFF
+          FF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2BFDFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFDFCFC720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B964D62FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2BBA8A98FFFFFFFFFFFFFFFFFFFF
+          FFFFF2E9EB720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFF720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BC093A0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB07989
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BDDC5CCFFFFFFFFFFFFFFFFFF720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BE8D8DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5D3D8
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BC093A0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAC0
+          C8720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B9F5B6EFFFFFFFFFFFFFFFFFFFFFFFF8A3750720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2BFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF5EEF0
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA66779720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BA86B7CFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BCBA7B1FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC59DA8720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          ECDFE3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAF6F7720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BA86B7DA96C7DA6687A904259720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BF9F5F6FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B94495FFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91445B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          F9F5F6FFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA66779720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B984E64FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B9A5368FFFFFFFFFFFF
+          91435A720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B9E596DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFE3CFD5720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BD1B0BAFFFFFFFFFF
+          FFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF904259720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BC196A3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BC7A0ACFFFFFFFFFFFF964D62720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B9E5A6EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BA76A7CFFFFFFFFFFFFFFFFFFFCFBFB72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BF8F3F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFECDEE2720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BEEE2E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFE5D3D8720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFA7697B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B94485EFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB47F
+          8F720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BFEFEFEFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BDFC9CF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFCDAAB4720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B995065FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BEEE2E6FFFFFFFF
+          FFFFFFFFFFFFFFFFCFADB6720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BF4EDEFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1CCD2720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BDDC6CDFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF8F3F5FFFFFFFF
+          FFFFFFFFFFFFFFFFFCFBFB720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BC297A3FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAD738472
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BC399A5FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B8F3F56AB7081E6D4D9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          DCC4CB720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BE8D8DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFF4EDEF720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BCFADB6FFFF
+          FFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2BEFE4E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          AA6E7FFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BBC8E9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFDFCFC720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2BB58090FFFFFFFFFFFFFFFFFFFF
+          FFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEADCE0720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B94
+          485EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFF0E5E8720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B91445BC9A2
+          ADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F5B6E720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B91435A
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF91435A720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BA15E72FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          F1E7EAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFBC8E9B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BAC7283FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BDDC5CCFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFC7A0AC720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE6D4D9FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF904259720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B954B60FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BD6B9C1FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF94
+          495F720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BCCA8B2FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BA86B7CFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFF2EAEC720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B91435AFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFEEE2E6720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BB98795FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8D8DD720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BEBDEE2FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF3EBED91
+          445B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BA66779FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA05E
+          71720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BA15E72FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFD4B6BF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFDFCFCFFFFFFFFFFFFFF
+          FFFFFFFFFFEDE0E4720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFBA8997720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B904259FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFF8F4F5720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BD9BEC6FFFFFFFEFEFEBD8F9C
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BD4B6BFFFFFFFFFFFFFFFFFFFFFFFFFD5B7C0720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BC095A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAC72
+          83720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2BFCFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFF93465C720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BA46477FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BBB8C99FFFFFFFFFFFFFFFFFFD7BBC3720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BA1
+          5F73FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF904259720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BA05D70CBA6B1EADCE0FCFBFBF8F3F5D9BEC68B3951720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE8D9DDFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5D2D8720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BC49A
+          A6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BA05D70FFFFFFFFFFFFFFFFFFFAF7F8720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF7F2F4FFFFFF
+          FFFFFFFFFFFFFFFFFFC399A5720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B91445BFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3ECEE720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2BCCA9B3FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB68392720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE4D0D6FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4D0D6720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFF91435A720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BD6B9C1FFFFFFFFFFFFFFFFFFFFFF
+          FFFDFCFC91445B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B984F64FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BAF7787FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFF91445B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFCFAFAFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFEFEFE720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BEBDEE2FFFFFFFFFFFF
+          C9A2AE720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2BC094A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBC1C972
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BAF7787FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2CE
+          D4720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B9D586CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B954B61A86B7CA05D709A5368720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BA05E71FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB58090720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2BD0AFB9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAF7F8720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF8F4F5FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF8F4
+          F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB47E8E720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BBB8B99FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B974E63FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF995166720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF6F0F2FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BF0E6E9FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE0CBD1FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFF904259720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BDBC1C9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEE2E6720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B91445BFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFCFBFB720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BA46376FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFD8BDC5720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BE6D5DAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2BC399A5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFE0CAD0720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B9E596D720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF7F1F3
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B93475DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFF0E5E8720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BDCC4CBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFEFEFE720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BDBC2CAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BA6687AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB17A8A720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2BF6F0F27C1F3A720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B974E63FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B9C576BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          E4D0D6720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B9A5267
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          91435A720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          FBF9FAD9BEC6720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BB27D8CFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB47F8FFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BE0CAD0FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1CCD2720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE7D8DCA15F73720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF2E9EBFFFFFFFF
+          FFFFFFFFFFFFFFFFDCC4CB720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B9B5469FFFFFFFFFFFFA362
+          75720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2BD2B3BCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F2F4720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2BE8D8DDFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEE2E6720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B954B60FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BDDC5CCFFFFFFE6D5DA720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2BD7BBC3FFFFFFFFFFFFFFFFFFFFFFFF
+          AE7586720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BAE7485FFFFFFFFFFFFF1E8EB720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BF0E6E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BAA6E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F4F5720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BA1
+          5F73FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BA36275FFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B90
+          4259720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFEFEFE720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2BC49AA6FFFFFFFFFFFFFFFFFFBC8E9B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B9245
+          5BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BE5
+          D2D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA6E80720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BA05E71FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFE8D9DD720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BF0E5E8FFFFFF
+          FFFFFFFFFFFFFFFFFFF8F4F5720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2BFFFFFFFFFFFFFFFFFFDAC0C8720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BDABFC7
+          FFFFFFFFFFFFFFFFFFFFFFFF904259720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BAA6E80FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFD1B0BA954A60720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B9C566AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B9F5C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFB78594720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFEFEFEFF
+          FFFFFFFFFFAB7081720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2BEEE2E6FFFFFFFFFFFFFFFF
+          FFFFFFFFD7BCC4720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BCAA4AFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2BA36275F3ECEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFAF7F8B07888720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BA86B
+          7CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BFAF7F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5
+          9CA8720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2BEADBDFFFFFFFFFFFFF720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2BFDFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2BE9DADEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BC59CA8E7D6DBFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFE8D8DDBE909E9B5569720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2BB17B8BE8D8DDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BB27C8BFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91435A720E2B
+          720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72
+          0E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B
+          720E2B720E2B720E2B720E2BFFFFFFFFFFFF720E2B720E2B720E2B720E2B720E
+          2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2B720E2BFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF904259904259904259
+          9042599042599042599042599042599042599042599042599042599042599042
+          59904259FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFEDE1E5C79FAB720E2B720E2B720E2B720E2B720E2B720E2B720E2B72
+          0E2BD7BCC4FCFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFEFEFEFEFEFEFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF}
+        mmHeight = 11906
+        mmLeft = 3175
+        mmTop = 2381
+        mmWidth = 35983
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLBL_TituloRelatorio: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'ppLBL_TituloRelatorio'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        Caption = 'CIT - Conhecimento Interno de Transporte'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 20
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 8202
+        mmLeft = 3175
+        mmTop = 16404
+        mmWidth = 153194
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Border.mmPadding = 0
+        Pen.Width = 3
+        Weight = 2.250000000000000000
+        mmHeight = 2646
+        mmLeft = 2646
+        mmTop = 25135
+        mmWidth = 192088
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLBL_Periodo: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'LBL_Periodo'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        Caption = 'LBL_Periodo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4191
+        mmLeft = 173228
+        mmTop = 1058
+        mmWidth = 21886
+        BandType = 0
+        LayerName = Foreground
+      end
+    end
+    object ppColumnHeaderBand1: TppColumnHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 6615
+      mmPrintPosition = 0
+      object ppLine125: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line13'
+        Border.Color = clSilver
+        Border.Style = psDot
+        Border.mmPadding = 0
+        Pen.Color = clSilver
+        Pen.Style = psDot
+        Weight = 0.750000000000000000
+        mmHeight = 2381
+        mmLeft = 5027
+        mmTop = 4763
+        mmWidth = 188913
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText11: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText11'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'OrdemEntrega'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 5027
+        mmTop = 1588
+        mmWidth = 7673
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText12: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText12'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'Cliente'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 13758
+        mmTop = 1588
+        mmWidth = 59018
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText13: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText13'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'CidadeUF'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 104250
+        mmTop = 1323
+        mmWidth = 38627
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText14: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText14'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'NF'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 146050
+        mmTop = 1323
+        mmWidth = 14023
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText15: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText15'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'Quantidade'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 161132
+        mmTop = 1323
+        mmWidth = 12435
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText20: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText20'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'DataPrevChegada'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 174890
+        mmTop = 1323
+        mmWidth = 17463
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText21: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText21'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        DataField = 'SetorMercado'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 3175
+        mmLeft = 78073
+        mmTop = 1588
+        mmWidth = 20353
+        BandType = 4
+        LayerName = Foreground
+      end
+    end
+    object ppColumnFooterBand1: TppColumnFooterBand
+      AlignToBottom = True
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppFooterBand1: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 18521
+      mmPrintPosition = 0
+      object ppLBL_NumeroPagina: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'ppLBL_NumeroPagina'
+        HyperlinkEnabled = False
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'ppLBL_NumeroPagina'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 143934
+        mmTop = 11906
+        mmWidth = 51329
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppLBL_Usuario: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'LBL_Usuario'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        Caption = 'ppLBL_Usuario'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4191
+        mmLeft = 169323
+        mmTop = 7144
+        mmWidth = 26204
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppLBL_Data: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'ppLBL_Data'
+        HyperlinkEnabled = False
+        Border.mmPadding = 0
+        Caption = 'ppLBL_Data'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4191
+        mmLeft = 174520
+        mmTop = 2381
+        mmWidth = 20743
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppLine144: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line144'
+        Border.mmPadding = 0
+        Pen.Width = 3
+        Weight = 2.250000000000000000
+        mmHeight = 2646
+        mmLeft = 2381
+        mmTop = 265
+        mmWidth = 192088
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppMemoFiltro: TppMemo
+        DesignLayer = ppDesignLayer1
+        UserName = 'ppMemoFiltro'
+        Border.mmPadding = 0
+        Caption = 'ppMemoFiltro'
+        CharWrap = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 7
+        Font.Style = [fsBold]
+        RemoveEmptyLines = False
+        Transparent = True
+        mmHeight = 15875
+        mmLeft = 5027
+        mmTop = 2381
+        mmWidth = 135996
+        BandType = 8
+        LayerName = Foreground
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+        mmLeading = 0
+      end
+    end
+    object ppPageStyle1: TppPageStyle
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      EndPage = 0
+      SinglePage = 0
+      StartPage = 0
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppGroup1: TppGroup
+      BreakName = 'Cit_ID'
+      DataPipeline = ppDBPipeline1
+      GroupFileSettings.NewFile = False
+      GroupFileSettings.EmailFile = False
+      KeepTogether = True
+      OutlineSettings.CreateNode = True
+      StartOnOddPage = False
+      UserName = 'Group1'
+      mmNewColumnThreshold = 0
+      mmNewPageThreshold = 0
+      DataPipelineName = 'ppDBPipeline1'
+      NewFile = False
+      object ppGroupHeaderBand1: TppGroupHeaderBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        mmBottomOffset = 0
+        mmHeight = 56621
+        mmPrintPosition = 0
+        object ppShape3: TppShape
+          DesignLayer = ppDesignLayer1
+          UserName = 'Shape3'
+          Brush.Color = 15461355
+          mmHeight = 7673
+          mmLeft = 3175
+          mmTop = 794
+          mmWidth = 190500
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppShape2: TppShape
+          DesignLayer = ppDesignLayer1
+          UserName = 'Shape2'
+          mmHeight = 5821
+          mmLeft = 3969
+          mmTop = 50800
+          mmWidth = 190500
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppShape1: TppShape
+          DesignLayer = ppDesignLayer1
+          UserName = 'Shape1'
+          mmHeight = 27781
+          mmLeft = 3969
+          mmTop = 16140
+          mmWidth = 190500
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel3: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label3'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Transportadora: '
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 5292
+          mmTop = 37042
+          mmWidth = 29898
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText1: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText1'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Transportadora'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 37042
+          mmTop = 37306
+          mmWidth = 69850
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel4: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label4'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'ROTEIRO DE ENTREGAS'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 11
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 4233
+          mmTop = 44979
+          mmWidth = 57150
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel5: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label5'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'DADOS DO MOTORISTA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 11
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 3969
+          mmTop = 10848
+          mmWidth = 52388
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText7: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText8'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Cit_ID'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 14
+          Font.Style = []
+          TextAlignment = taCentered
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 5821
+          mmLeft = 45244
+          mmTop = 1588
+          mmWidth = 25929
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel2: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label2'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'N'#250'mero da CIT:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 14
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 5821
+          mmLeft = 4498
+          mmTop = 1588
+          mmWidth = 39952
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel6: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label6'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Motorista:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 5821
+          mmTop = 18521
+          mmWidth = 20373
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText2: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText2'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Motorista'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 27252
+          mmTop = 18785
+          mmWidth = 106363
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel7: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label7'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Placa do Ve'#237'culo:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 127794
+          mmTop = 36513
+          mmWidth = 32808
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText3: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText3'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Placa'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 162190
+          mmTop = 36513
+          mmWidth = 29633
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText4: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText4'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Cidade'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 121179
+          mmTop = 25135
+          mmWidth = 51858
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel8: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label8'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Cidade:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 105834
+          mmTop = 24871
+          mmWidth = 14817
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel9: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label9'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Endere'#231'o:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 6085
+          mmTop = 24871
+          mmWidth = 20373
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText5: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText5'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Endereco'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 26988
+          mmTop = 25135
+          mmWidth = 78052
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel10: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label10'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'UF:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 174890
+          mmTop = 25135
+          mmWidth = 7673
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText6: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText6'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'UF'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          TextAlignment = taCentered
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3598
+          mmLeft = 182563
+          mmTop = 25400
+          mmWidth = 8996
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel11: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label11'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Bairro:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 6085
+          mmTop = 30956
+          mmWidth = 20902
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText8: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText7'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'MotoristaBairro'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3704
+          mmLeft = 27252
+          mmTop = 31221
+          mmWidth = 44450
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel12: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label12'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Celular'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 73290
+          mmTop = 30956
+          mmWidth = 14817
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText9: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText9'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'MotoristaCelular'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3704
+          mmLeft = 88636
+          mmTop = 31221
+          mmWidth = 24606
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel14: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label14'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Ord.'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          TextAlignment = taCentered
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 4763
+          mmTop = 51858
+          mmWidth = 8731
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine4: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line4'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5292
+          mmLeft = 10583
+          mmTop = 51064
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel16: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label16'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Cliente'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 15346
+          mmTop = 51858
+          mmWidth = 18785
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine5: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line5'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5556
+          mmLeft = 99223
+          mmTop = 50800
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel17: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label17'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Cidade - UF'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 104250
+          mmTop = 51858
+          mmWidth = 25133
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel18: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label18'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'NF'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 149490
+          mmTop = 51858
+          mmWidth = 6615
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel19: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label19'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'QTD'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 163248
+          mmTop = 51858
+          mmWidth = 8996
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine6: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line6'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5556
+          mmLeft = 157427
+          mmTop = 50800
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine7: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line7'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5556
+          mmLeft = 141023
+          mmTop = 51065
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine3: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line3'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5556
+          mmLeft = 171450
+          mmTop = 51065
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel22: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label22'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Data Prev.'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 175155
+          mmTop = 51858
+          mmWidth = 20373
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel15: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label15'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Mercado'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4191
+          mmLeft = 81515
+          mmTop = 51858
+          mmWidth = 18785
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine8: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line8'
+          Border.mmPadding = 0
+          Position = lpRight
+          Weight = 0.750000000000000000
+          mmHeight = 5556
+          mmLeft = 73043
+          mmTop = 50800
+          mmWidth = 3175
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel23: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label23'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Data de Sa'#237'da:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 14
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 5821
+          mmLeft = 125413
+          mmTop = 1852
+          mmWidth = 35454
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText22: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText22'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Data'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 14
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 5715
+          mmLeft = 161396
+          mmTop = 1852
+          mmWidth = 30956
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText10: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText10'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'MotoristaTelefone'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3704
+          mmLeft = 129646
+          mmTop = 30956
+          mmWidth = 23283
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel1: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label1'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Telefone'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4233
+          mmLeft = 113506
+          mmTop = 30692
+          mmWidth = 14817
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText16: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText101'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'MotoristaNextel'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3704
+          mmLeft = 170392
+          mmTop = 30956
+          mmWidth = 21167
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel13: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label13'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Nextel'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4233
+          mmLeft = 155046
+          mmTop = 30692
+          mmWidth = 14817
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+      end
+      object ppGroupFooterBand1: TppGroupFooterBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        PrintHeight = phDynamic
+        HideWhenOneDetail = False
+        mmBottomOffset = 0
+        mmHeight = 18521
+        mmPrintPosition = 0
+        object ppShape4: TppShape
+          DesignLayer = ppDesignLayer1
+          UserName = 'Shape4'
+          mmHeight = 5822
+          mmLeft = 4233
+          mmTop = 794
+          mmWidth = 190500
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel21: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label201'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = '                      /                      /'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 11
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 40481
+          mmTop = 1588
+          mmWidth = 88900
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel20: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label20'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'N'#250'mero do Lacre:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4233
+          mmLeft = 5556
+          mmTop = 1588
+          mmWidth = 34396
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText17: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText17'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'NumLacre1'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          TextAlignment = taCentered
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 4233
+          mmLeft = 41540
+          mmTop = 1588
+          mmWidth = 21167
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText18: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText18'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'NumLacre2'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          TextAlignment = taCentered
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 4233
+          mmLeft = 65617
+          mmTop = 1323
+          mmWidth = 21167
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText19: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText19'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'NumLacre3'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          TextAlignment = taCentered
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3969
+          mmLeft = 90223
+          mmTop = 1323
+          mmWidth = 21167
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLine2: TppLine
+          DesignLayer = ppDesignLayer1
+          UserName = 'Line2'
+          Border.mmPadding = 0
+          Pen.Width = 3
+          Weight = 2.250000000000000000
+          mmHeight = 2646
+          mmLeft = 2646
+          mmTop = 9790
+          mmWidth = 192088
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+        end
+      end
+    end
+    object ppGroup2: TppGroup
+      BreakName = 'NFiscalVenda_ID'
+      DataPipeline = ppDBPipeline1
+      GroupFileSettings.NewFile = False
+      GroupFileSettings.EmailFile = False
+      KeepTogether = True
+      OutlineSettings.CreateNode = True
+      StartOnOddPage = False
+      UserName = 'Group2'
+      mmNewColumnThreshold = 0
+      mmNewPageThreshold = 0
+      DataPipelineName = 'ppDBPipeline1'
+      NewFile = False
+      object ppGroupHeaderBand2: TppGroupHeaderBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        mmBottomOffset = 0
+        mmHeight = 0
+        mmPrintPosition = 0
+      end
+      object ppGroupFooterBand2: TppGroupFooterBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        HideWhenOneDetail = False
+        mmBottomOffset = 0
+        mmHeight = 0
+        mmPrintPosition = 0
+      end
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer2: TppDesignLayer
+        UserName = 'PageLayer1'
+        LayerType = ltPage
+        Index = 0
+      end
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 1
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
+  object ppDBPipeline1: TppDBPipeline
+    DataSource = DS_CIT
+    CloseDataSource = True
+    UserName = 'DBPipeline1'
+    Left = 210
+    Top = 315
+  end
+end

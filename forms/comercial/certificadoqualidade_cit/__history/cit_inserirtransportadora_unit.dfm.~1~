@@ -1,0 +1,14 @@
+inherited CIT_Inserir_Transportadora: TCIT_Inserir_Transportadora
+  Caption = 'CIT_Inserir_Transportadora'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 146
+      Caption = 'Transportadora'
+      ExplicitWidth = 146
+    end
+  end
+end

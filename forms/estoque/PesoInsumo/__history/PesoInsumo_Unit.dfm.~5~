@@ -1,0 +1,301 @@
+inherited PesoInsumo: TPesoInsumo
+  Caption = 'PesoInsumo'
+  ClientHeight = 622
+  ClientWidth = 872
+  ExplicitWidth = 878
+  ExplicitHeight = 651
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 856
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 858
+    Height = 517
+    inherited Panel_Filtro: TPanel
+      Width = 858
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 846
+      Height = 459
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TipoInsumo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 104
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Insumo_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 71
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Insumo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 384
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'UM'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Peso'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PesoBruto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Bruto'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NV'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 40
+          Visible = True
+        end>
+    end
+    inherited Memo1: TMemo
+      Left = 63
+      Top = 152
+      ExplicitLeft = 63
+      ExplicitTop = 152
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 583
+    Width = 872
+    inherited Panel3: TPanel
+      Left = 627
+    end
+  end
+  inherited CDS: TClientDataSet
+    Left = 416
+    Top = 145
+    object CDSRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object CDSTipoInsumo: TStringField
+      FieldName = 'TipoInsumo'
+      Size = 60
+    end
+    object CDSInsumo_ID: TStringField
+      FieldName = 'Insumo_ID'
+      Size = 30
+    end
+    object CDSInsumo: TStringField
+      FieldName = 'Insumo'
+      Size = 150
+    end
+    object CDSUM: TStringField
+      FieldName = 'UM'
+      Size = 6
+    end
+    object CDSPeso: TFloatField
+      FieldName = 'Peso'
+    end
+    object CDSPesoBruto: TFloatField
+      FieldName = 'PesoBruto'
+    end
+    object CDSNV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      ''
+      'Select '
+      
+        #9'Recno, Empresa, TipoInsumo, Insumo_ID, Insumo, UM, Peso, PesoBr' +
+        'uto, COUNT(G1Recno) as NV '
+      'from ('
+      #9#9'SELECT '
+      #9#9#9'MP.R_E_C_N_O_ as Recno, MP.B1_FILIAL as Empresa, '#9#9
+      
+        #9#9#9'Rtrim(MP.B1_BRTPPR) as TipoInsumo, Rtrim(G1_COMP) as Insumo_I' +
+        'D, Rtrim(MP.B1_DESC) as Insumo, '
+      
+        #9#9#9'Rtrim(MP.B1_UM) as UM, MP.B1_PESO as Peso, MP.B1_PESBRU as Pe' +
+        'soBruto, G1.R_E_C_N_O_ as G1Recno'
+      #9#9#9' '
+      #9#9'FROM P12OFICIAL.dbo.SG1010 G1 WITH (nolock) '
+      
+        #9#9'Inner Join P12OFICIAL.dbo.SB1010 Produto (nolock) ON Produto.B' +
+        '1_FILIAL = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9' AND Produto.D_E_L_E_T_ <> '#39'*'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9' AND Produto.B1_COD = G1.G1_COD'
+      
+        #9#9'INNER JOIN P12OFICIAL.dbo.SB1010 MP WITH (nolock) ON MP.B1_FIL' +
+        'IAL = '#39'0101'#39' '
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9' AND MP.D_E_L_E_T_ <> '#39'*'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9' AND MP.B1_COD = G1.G1_COMP            '
+      #9#9'WHERE  G1.D_E_L_E_T_ <> '#39'*'#39
+      #9#9'AND MP.B1_BRTPPR not in ('#39'BALDE'#39')'
+      #9#9'AND G1.G1_FILIAL = '#39'010101'#39
+      #9#9'AND MP.B1_MSBLQL <> 1'
+      
+        #9#9'AND (Rtrim(MP.B1_BRTPPR)  +  Rtrim(G1_COMP) + Rtrim(MP.B1_DESC' +
+        ')) like '#39'%%'#39
+      ') TB'
+      
+        'Group by Recno, Empresa, TipoInsumo, Insumo_ID, Insumo, UM, Peso' +
+        ', PesoBruto'
+      'Order by TipoInsumo, Insumo')
+    Left = 308
+    Top = 144
+    object QueryRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 6
+    end
+    object QueryTipoInsumo: TStringField
+      FieldName = 'TipoInsumo'
+      Size = 60
+    end
+    object QueryInsumo_ID: TStringField
+      FieldName = 'Insumo_ID'
+      Size = 30
+    end
+    object QueryInsumo: TStringField
+      FieldName = 'Insumo'
+      Size = 150
+    end
+    object QueryUM: TStringField
+      FieldName = 'UM'
+      Size = 6
+    end
+    object QueryPeso: TFloatField
+      FieldName = 'Peso'
+    end
+    object QueryPesoBruto: TFloatField
+      FieldName = 'PesoBruto'
+    end
+    object QueryNV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  inherited DS: TDataSource
+    Left = 480
+    Top = 152
+  end
+  inherited DSP: TDataSetProvider
+    Left = 362
+    Top = 144
+  end
+end

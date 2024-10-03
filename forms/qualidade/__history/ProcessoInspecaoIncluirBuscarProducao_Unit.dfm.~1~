@@ -1,0 +1,155 @@
+inherited ProcessoInspecao_IncluirBuscarProducao: TProcessoInspecao_IncluirBuscarProducao
+  BorderStyle = bsSingle
+  Caption = 'Consultar Produ'#231#227'o'
+  ClientHeight = 611
+  ClientWidth = 873
+  WindowState = wsMaximized
+  ExplicitWidth = 879
+  ExplicitHeight = 640
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 858
+    ExplicitWidth = 858
+    inherited LBL_Titulo: TLabel
+      Width = 187
+      Caption = 'Consultar Produ'#231#227'o'
+      ExplicitWidth = 187
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 859
+    Height = 506
+    inherited Panel_Filtro: TPanel
+      Width = 859
+    end
+    inherited DBGrid: TDBGrid
+      Width = 847
+      Height = 448
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 572
+    Width = 873
+    inherited Panel3: TPanel
+      Left = 628
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDSSetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object CDSLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object CDSArte_ID: TStringField
+      FieldName = 'Arte_ID'
+      Size = 10
+    end
+    object CDSArte: TStringField
+      FieldName = 'Arte'
+      Size = 100
+    end
+    object CDSDataTurno: TDateTimeField
+      FieldName = 'DataTurno'
+      ReadOnly = True
+    end
+    object CDSOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 14
+    end
+    object CDSRecurso: TStringField
+      FieldName = 'Recurso'
+      Size = 6
+    end
+    object CDSTurno: TStringField
+      FieldName = 'Turno'
+      Size = 15
+    end
+  end
+  inherited Query: TADOQuery
+    Active = True
+    SQL.Strings = (
+      ''
+      'Select '
+      #9
+      #9'H6_FSAREA as Area, H6_FSSETOR as Setor,'
+      
+        #9'H6_PRODUTO as Produto_ID, Produto.Produto, H6_LOTECTL as Lote, ' +
+        'Arte_ID, Arte, '#9
+      
+        #9'Convert(Datetime,H6_FSDTTU,112) as DataTurno, H6_OP as OrdemPro' +
+        'ducao, '
+      #9'H6_RECURSO as Recurso, H6_FSTURNO as Turno'
+      #9' '
+      'from P12OFICIAL.dbo.SH6010 H6 (nolock)'
+      
+        'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (Nolock) ON Produt' +
+        'o.Empresa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Produto.Produto_ID = H6_PRODUTO'
+      'where H6_FILIAL = '#39'010101'#39
+      'AND H6.D_E_L_E_T_ <> '#39'*'#39
+      'AND H6_TIPO = '#39'P'#39
+      'AND H6_FSAREA in ('#39'INJECAO'#39','#39'PERSONALIZACAO'#39')'
+      'AND Convert(Datetime,H6_FSDTTU,112) = '#39'2018-09-14 00:00:00.000'#39
+      'Order by H6_FSAREA, H6_FSSETOR, H6_PRODUTO, H6_FSTURNO')
+    object QueryArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object QuerySetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      Size = 120
+    end
+    object QueryLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object QueryArte_ID: TStringField
+      FieldName = 'Arte_ID'
+      Size = 10
+    end
+    object QueryArte: TStringField
+      FieldName = 'Arte'
+      Size = 100
+    end
+    object QueryDataTurno: TDateTimeField
+      FieldName = 'DataTurno'
+      ReadOnly = True
+    end
+    object QueryOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 14
+    end
+    object QueryRecurso: TStringField
+      FieldName = 'Recurso'
+      Size = 6
+    end
+    object QueryTurno: TStringField
+      FieldName = 'Turno'
+      Size = 15
+    end
+  end
+end

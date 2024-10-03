@@ -1,0 +1,450 @@
+inherited OrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS: TOrdemProducao_ImprimirEtiquetaApontamento_GerarConsultaWMS
+  Caption = 'Solicitar Perda WMS'
+  ClientHeight = 558
+  ClientWidth = 885
+  ExplicitWidth = 891
+  ExplicitHeight = 587
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 863
+    ExplicitWidth = 863
+    inherited LBL_Titulo: TLabel
+      Width = 188
+      Caption = 'Solicitar Perda WMS'
+      ExplicitWidth = 188
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 871
+    Height = 284
+    ExplicitWidth = 871
+    ExplicitHeight = 284
+    DesignSize = (
+      871
+      284)
+    inherited Panel_Filtro: TPanel
+      Width = 871
+      ExplicitWidth = 871
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Left = 9
+      Top = 54
+      Width = 859
+      Height = 226
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'OrdemProducao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'OP'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 81
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Emissao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 76
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cliente'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 311
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Recurso'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 77
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Quantidade'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Qtd'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produzida'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Prod.'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Saldo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end>
+    end
+    inherited Memo1: TMemo
+      Left = 489
+      Top = 112
+      ExplicitLeft = 489
+      ExplicitTop = 112
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 519
+    Width = 885
+    ExplicitTop = 519
+    ExplicitWidth = 885
+    inherited Panel3: TPanel
+      Left = 640
+      ExplicitLeft = 640
+      inherited BNT_Cancelar: TSpeedButton
+        Caption = '       Fechar'
+      end
+    end
+  end
+  object Panel1: TPanel [3]
+    Left = 8
+    Top = 350
+    Width = 872
+    Height = 163
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 3
+    object DBText1: TDBText
+      Left = 16
+      Top = 10
+      Width = 110
+      Height = 32
+      AutoSize = True
+      DataField = 'Perda_ID'
+      DataSource = DS
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -27
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBText2: TDBText
+      Left = 16
+      Top = 48
+      Width = 527
+      Height = 100
+      DataField = 'Perda'
+      DataSource = DS
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      WordWrap = True
+    end
+    object PNL_Prioridade: TPanel
+      Left = 565
+      Top = 1
+      Width = 306
+      Height = 161
+      Align = alRight
+      BorderStyle = bsSingle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object Panel11: TPanel
+        Left = 1
+        Top = 136
+        Width = 300
+        Height = 20
+        Align = alBottom
+        TabOrder = 0
+      end
+      object Panel2: TPanel
+        Left = 1
+        Top = 1
+        Width = 300
+        Height = 32
+        Align = alTop
+        Caption = 'Quantidade a Socilitar'
+        TabOrder = 1
+      end
+      object TXT_Quantidade: TMaskEdit
+        Left = 35
+        Top = 65
+        Width = 235
+        Height = 42
+        Alignment = taCenter
+        EditMask = '9999999999;0;_'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -29
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        MaxLength = 10
+        ParentFont = False
+        TabOrder = 2
+        Text = ''
+      end
+    end
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 297
+    Top = 159
+  end
+  inherited CDS: TClientDataSet
+    Left = 344
+    Top = 160
+    object CDSRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 15
+    end
+    object CDSSetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object CDSArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDSOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object CDSStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object CDSCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object CDSEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object CDSRecurso: TStringField
+      FieldName = 'Recurso'
+      Size = 30
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object CDSQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object CDSProduzida: TIntegerField
+      FieldName = 'Produzida'
+    end
+    object CDSSaldo: TIntegerField
+      FieldName = 'Saldo'
+    end
+    object CDSPerda_ID: TStringField
+      FieldName = 'Perda_ID'
+      Size = 10
+    end
+    object CDSPerda: TStringField
+      FieldName = 'Perda'
+      Size = 150
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      #9'OP.Recno, OP.Empresa, Setor, Area, OrdemProducao, Status, '
+      #9'OP.Cliente,'
+      #9'Emissao, Injetora as Recurso,'
+      #9'OP.Produto_ID, OP.Produto, '
+      
+        #9'Quantidade, Produzida, Saldo, Produto.Liso_ID as Perda_ID, Liso' +
+        '.Produto as Perda'
+      'from BomixBI.dbo.Pcp_TB_OrdemProducao OP (nolock)'
+      
+        'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Produt' +
+        'o.Empresa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Produto.Produto_ID = OP.Produto_ID'
+      
+        'Inner Join BomixBI.dbo.Pcp_TB_Produto Liso (nolock) ON Liso.Empr' +
+        'esa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9'       AND Produto.Liso_ID = Liso.Produto_ID'
+      ''
+      'Where Area = '#39'PERSONALIZACAO'#39
+      'AND OP.Empresa = '#39'0101'#39
+      'AND Prioridade < 500'
+      'AND Status not in ('#39'FINALIZADA'#39','#39'SUSPENSA'#39')'
+      'AND Produzida > 0'
+      'Order by OP.Recno desc')
+    Left = 380
+    Top = 160
+    object QueryRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 15
+    end
+    object QuerySetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object QueryArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object QueryOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object QueryStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object QueryCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object QueryEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object QueryRecurso: TStringField
+      FieldName = 'Recurso'
+      Size = 30
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object QueryQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object QueryProduzida: TIntegerField
+      FieldName = 'Produzida'
+    end
+    object QuerySaldo: TIntegerField
+      FieldName = 'Saldo'
+    end
+    object QueryPerda_ID: TStringField
+      FieldName = 'Perda_ID'
+      Size = 10
+    end
+    object QueryPerda: TStringField
+      FieldName = 'Perda'
+      Size = 150
+    end
+  end
+  inherited DS: TDataSource
+    Left = 416
+    Top = 160
+  end
+  inherited DSP: TDataSetProvider
+    Left = 450
+    Top = 160
+  end
+end

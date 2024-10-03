@@ -1,0 +1,183 @@
+unit SetorBuscador_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ActnList, StdCtrls, Mask, ExtCtrls, Buttons, System.Actions;
+
+type
+  TSistema_SetorBuscador = class(TForm)
+    IMG_Cancelar: TImage;
+    IMG_Confirmar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    PNL_Filtros: TPanel;
+    Bevel1: TBevel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    TXT_Valor2_Visibilidade: TMaskEdit;
+    TXT_Valor1_Visibilidade: TMaskEdit;
+    TXT_Valor2_Nome: TMaskEdit;
+    Edit1: TEdit;
+    PNL_Nome: TPanel;
+    CBX_Operador_Nome: TComboBox;
+    TXT_Valor1_Nome: TMaskEdit;
+    Edit8: TEdit;
+    PNL_Visibilidade: TPanel;
+    CBX_Operador_Visibilidade: TComboBox;
+    CBX_Valor1_Visibilidade: TComboBox;
+    ActionList1: TActionList;
+    ACL_Confirmar: TAction;
+    ACL_Esc: TAction;
+    Edit2: TEdit;
+    PNL_Fisico: TPanel;
+    CBX_Operador_Fisico: TComboBox;
+    CBX_Valor1_Fisico: TComboBox;
+    TXT_Valor1_Fisico: TMaskEdit;
+    TXT_Valor2_Fisico: TMaskEdit;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure CBX_Valor1_VisibilidadeChange(Sender: TObject);
+    procedure PNL_NomeClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CBX_Operador_NomeChange(Sender: TObject);
+    procedure CBX_Valor1_FisicoChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sistema_SetorBuscador: TSistema_SetorBuscador;
+  TamanhoPadrao : Integer;
+  VPC_QuerySelect : String;
+  VPC_QueryOrder : String;
+
+implementation
+
+uses FuncoesBomix_Unit, Setor_Unit;
+
+{$R *.dfm}
+
+procedure TSistema_SetorBuscador.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TSistema_SetorBuscador.CBX_Valor1_VisibilidadeChange(
+  Sender: TObject);
+begin
+  If (CBX_Valor1_Visibilidade.Text = 'ATIVADOS') then
+    TXT_Valor1_Visibilidade.Text := '0'
+  else
+  If (CBX_Valor1_Visibilidade.Text = 'DESATIVADOS') then
+    TXT_Valor1_Visibilidade.Text := '1'
+  else
+  If (CBX_Valor1_Visibilidade.Text = 'AMBOS') then
+    TXT_Valor1_Visibilidade.Text := '';
+end;
+
+procedure TSistema_SetorBuscador.PNL_NomeClick(Sender: TObject);
+begin
+    FuncoesBomix.DefinirPolaridade(PNL_Nome);
+end;
+
+procedure TSistema_SetorBuscador.BNT_ConfirmarClick(Sender: TObject);
+var
+  VPC_QueryWhere : String;
+  VLN_PosicaoValidacao : Integer; 
+begin
+
+  VPC_QuerySelect := 'Select SYS_Setor.*' + #13;
+  VPC_QuerySelect := VPC_QuerySelect + ' 	from SYS_Setor (nolock)' + #13;
+
+  VPC_QueryWhere := '';
+  VLN_PosicaoValidacao := 0;
+  VPC_QueryOrder := ' Order By SYS_Setor.Descricao';
+
+  If FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Nome,PNL_Nome,TXT_Valor1_Nome,TXT_Valor2_Nome,'SYS_Setor.Descricao','Caracter') <> '' then
+     begin
+        VLN_PosicaoValidacao := VLN_PosicaoValidacao + 1;
+        If VLN_PosicaoValidacao = 1 then
+           begin
+               VPC_QueryWhere := '';
+               VPC_QueryWhere := 'Where ' +  FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Nome,PNL_Nome,TXT_Valor1_Nome,TXT_Valor2_Nome,'SYS_Setor.Descricao','Caracter');
+           end;
+     end;
+
+  If FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Visibilidade,PNL_Visibilidade,TXT_Valor1_Visibilidade,TXT_Valor2_Visibilidade,'SYS_Setor.flgVisibilidade','Numero') <> '' then
+     begin
+        VLN_PosicaoValidacao := VLN_PosicaoValidacao + 1;
+        If VLN_PosicaoValidacao = 1 then
+           begin
+              VPC_QueryWhere := '';
+              VPC_QueryWhere := 'where ' + FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Visibilidade,PNL_Visibilidade,TXT_Valor1_Visibilidade,TXT_Valor2_Visibilidade,'SYS_Setor.flgVisibilidade','Numero');
+           end
+           else
+           begin
+              VPC_QueryWhere := VPC_QueryWhere + ' AND ' + FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Visibilidade,PNL_Visibilidade,TXT_Valor1_Visibilidade,TXT_Valor2_Visibilidade,'SYS_Setor.flgVisibilidade','Numero');
+           end;
+     end;
+
+  If FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Fisico,PNL_Fisico,TXT_Valor1_Fisico,TXT_Valor2_Fisico,'SYS_Setor.flgSetorFisico','Numero') <> '' then
+     begin
+        VLN_PosicaoValidacao := VLN_PosicaoValidacao + 1;
+        If VLN_PosicaoValidacao = 1 then
+           begin
+              VPC_QueryWhere := '';
+              VPC_QueryWhere := 'where ' + FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Fisico,PNL_Fisico,TXT_Valor1_Fisico,TXT_Valor2_Fisico,'SYS_Setor.flgSetorFisico','Numero');
+           end
+           else
+           begin
+              VPC_QueryWhere := VPC_QueryWhere + ' AND ' + FuncoesBomix.RetornarWhereFiltro(CBX_Operador_Fisico,PNL_Fisico,TXT_Valor1_Fisico,TXT_Valor2_Fisico,'SYS_Setor.flgSetorFisico','Numero');
+           end;
+     end;
+
+    With Sistema_Setor Do
+    begin
+        CDS_Setor.Close;
+        Query_Setor.SQL.Clear;
+        Query_Setor.SQL.Text := (VPC_QuerySelect + ' ' + VPC_QueryWhere + ' ' + VPC_QueryOrder);
+        CDS_Setor.Active := True;
+    end;
+
+    If  Sistema_Setor.CDS_Setor.RecordCount = 0 then
+    begin
+        Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+        Exit;
+    end
+    else
+    begin
+        Close;
+    end;
+
+
+end;
+
+procedure TSistema_SetorBuscador.FormCreate(Sender: TObject);
+begin
+  TamanhoPadrao := 160;
+  TXT_Valor1_Nome.Width := (TamanhoPadrao * 2) + 1;
+
+end;
+
+procedure TSistema_SetorBuscador.CBX_Operador_NomeChange(Sender: TObject);
+begin
+   FuncoesBomix.OrganizarCampos(CBX_Operador_Nome, TXT_Valor1_Nome, TXT_Valor2_Nome, 160,'');
+end;
+
+procedure TSistema_SetorBuscador.CBX_Valor1_FisicoChange(Sender: TObject);
+begin
+  If (CBX_Valor1_Fisico.Text = 'NÃO') then
+    TXT_Valor1_Fisico.Text := '0'
+  else
+  If (CBX_Valor1_Fisico.Text = 'SIM') then
+    TXT_Valor1_Fisico.Text := '1'
+  else
+  If (CBX_Valor1_Fisico.Text = 'AMBOS') then
+    TXT_Valor1_Fisico.Text := '';
+end;
+
+end.

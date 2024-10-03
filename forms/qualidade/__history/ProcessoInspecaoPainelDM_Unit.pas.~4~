@@ -1,0 +1,36 @@
+unit ProcessoInspecaoPainelDM_Unit;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Datasnap.Provider, Data.Win.ADODB,
+  Datasnap.DBClient;
+
+type
+  TProcessoInspecao_PainelDM = class(TDataModule)
+    CDS_Inspetores01: TClientDataSet;
+    Query_Inspetores01: TADOQuery;
+    DS_Inspetores01: TDataSource;
+    DSP_Inspetores01: TDataSetProvider;
+    Query_Inspetores01Label: TStringField;
+    Query_Inspetores01Value: TIntegerField;
+    CDS_Inspetores01Label: TStringField;
+    CDS_Inspetores01Value: TIntegerField;
+    Query_Inspetores01RGB: TStringField;
+    CDS_Inspetores01RGB: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_PainelDM: TProcessoInspecao_PainelDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

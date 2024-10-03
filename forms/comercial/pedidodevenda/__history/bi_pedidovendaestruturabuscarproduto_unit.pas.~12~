@@ -1,0 +1,138 @@
+unit BI_PedidoVendaEstruturaBuscarProduto_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscador_Unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TBI_PedidoVendaEstrutura_BuscarProduto = class(TPadraoBuscador)
+    QueryGrupo: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryArte_ID: TStringField;
+    QueryArte: TStringField;
+    QueryPersonalizacao: TStringField;
+    QueryStatusArte: TStringField;
+    QueryBloqueado: TStringField;
+    CDSGrupo: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSArte_ID: TStringField;
+    CDSArte: TStringField;
+    CDSPersonalizacao: TStringField;
+    CDSStatusArte: TStringField;
+    CDSBloqueado: TStringField;
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer); // Evento do Mouse
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+    procedure ShowHintForCell(TextoCelula: String; X, Y: Integer);
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaEstrutura_BuscarProduto: TBI_PedidoVendaEstrutura_BuscarProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVendaEstrutura_Unit, FuncaoSistema_Unit, ConexaoDados_Unit;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BNT_ConfirmarClick(Sender: TObject);
+begin
+  inherited;
+  BI_PedidoVendaEstrutura.TXT_ProdutoID.Text := CDSProduto_ID.AsString;
+  BI_PedidoVendaEstrutura.BTN_BuscarClick(nil);
+  Close;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.BTN_BuscarClick(Sender: TObject);
+var
+  VLC_Select: String;
+begin
+  VLC_Select := ' Select Distinct Grupo, Produto_ID, Produto, Arte_ID, Arte, Personalizacao, StatusArte, Bloqueado ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.Pcp_TB_Produto (nolock) Produto ' + #13;
+  VLC_Select := VLC_Select + ' Where Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption, 1, 4) + '''' + #13;
+  VLC_Select := VLC_Select + ' AND EstaNaEstrutura = ' + '''' + 'Sim' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND (Grupo + Produto_ID + Produto + Arte_ID + Arte + Personalizacao + StatusArte) Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Grupo' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.DBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  Coluna, Linha: Integer;
+begin
+  DBGrid.MouseCoord(X, Y); // Obtém a coordenada do mouse
+  Coluna := DBGrid.MouseCoord(X, Y).X;
+  Linha := DBGrid.MouseCoord(X, Y).Y - 1; // Ajusta para ignorar o cabeçalho
+
+  if (Coluna >= 0) and (Linha >= 0) then
+  begin
+    // Obtem o texto da célula
+    ShowHintForCell(DBGrid.Columns[Coluna].Field.AsString, X, Y);
+  end
+  else
+  begin
+    Application.CancelHint;
+  end;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.DBGrid1DrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  TextoCelula: String;
+  DisplayTextWidth: Integer;
+begin
+  TextoCelula := Column.Field.AsString;
+  DisplayTextWidth := DBGrid.Canvas.TextWidth(TextoCelula);
+
+  // Desenha a célula normalmente
+  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  // Verifica se o texto está truncado
+  if DisplayTextWidth > (Rect.Right - Rect.Left) then
+  begin
+    DBGrid.Hint := TextoCelula; // Se truncado, define o Hint
+  end
+  else
+  begin
+    DBGrid.Hint := ''; // Limpa o Hint se não estiver truncado
+  end;
+end;
+
+procedure TBI_PedidoVendaEstrutura_BuscarProduto.ShowHintForCell(TextoCelula: String; X, Y: Integer);
+begin
+  if DBGrid.Hint <> '' then
+  begin
+    Application.ActivateHint(DBGrid.ClientToScreen(Point(X, Y)));
+  end
+  else
+  begin
+    Application.CancelHint; // Cancela o Hint se não houver texto truncado
+  end;
+end;
+
+end.

@@ -1,0 +1,116 @@
+unit ProcessoInspecaoIncluirBuscarDefeitos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscador_unit, Datasnap.Provider,
+  Data.DB, Data.Win.ADODB, Datasnap.DBClient, System.Actions, Vcl.ActnList,
+  Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TProcessoInspecao_IncluirBuscarDefeitos = class(TPadraoBuscador)
+    QueryDefeito_ID: TAutoIncField;
+    QueryDefeito: TStringField;
+    QueryTipo: TStringField;
+    QueryArea: TStringField;
+    CDSDefeito_ID: TAutoIncField;
+    CDSDefeito: TStringField;
+    CDSTipo: TStringField;
+    CDSArea: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BTN_BuscarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProcessoInspecao_IncluirBuscarDefeitos: TProcessoInspecao_IncluirBuscarDefeitos;
+
+implementation
+
+{$R *.dfm}
+
+uses ProcessoInspecaoIncluir_Unit;
+
+procedure TProcessoInspecao_IncluirBuscarDefeitos.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TProcessoInspecao_IncluirBuscarDefeitos.BNT_ConfirmarClick(
+  Sender: TObject);
+begin
+  inherited;
+
+  // Cavidade 01 ****************************************************************************
+  if ProcessoInspecao_Incluir.SH_Cavidade01.Brush.Color = clMaroon then
+  begin
+     ProcessoInspecao_Incluir.TXT_Cavidade1Codigo.Text := CDSDefeito_ID.AsString;
+     ProcessoInspecao_Incluir.TXT_Cavidade1Descricao.Text := CDSDefeito.AsString;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade1.Checked := False;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade1.Enabled := True;
+  end;
+
+  // Cavidade 02 ****************************************************************************
+  if ProcessoInspecao_Incluir.SH_Cavidade02.Brush.Color = clMaroon then
+  begin
+     ProcessoInspecao_Incluir.TXT_Cavidade2Codigo.Text := CDSDefeito_ID.AsString;
+     ProcessoInspecao_Incluir.TXT_Cavidade2Descricao.Text := CDSDefeito.AsString;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade2.Enabled := True;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade2.Checked := False;
+  end;
+
+  // Cavidade 03 ****************************************************************************
+  if ProcessoInspecao_Incluir.SH_Cavidade03.Brush.Color = clMaroon then
+  begin
+     ProcessoInspecao_Incluir.TXT_Cavidade3Codigo.Text := CDSDefeito_ID.AsString;
+     ProcessoInspecao_Incluir.TXT_Cavidade3Descricao.Text := CDSDefeito.AsString;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade3.Enabled := True;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade3.Checked := False;
+  end;
+
+  // Cavidade 04 ****************************************************************************
+  if ProcessoInspecao_Incluir.SH_Cavidade04.Brush.Color = clMaroon then
+  begin
+     ProcessoInspecao_Incluir.TXT_Cavidade4Codigo.Text := CDSDefeito_ID.AsString;
+     ProcessoInspecao_Incluir.TXT_Cavidade4Descricao.Text := CDSDefeito.AsString;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade4.Enabled := True;
+     ProcessoInspecao_Incluir.CHK_SemDefeitoCavidade4.Checked := False;
+  end;
+
+  Close;
+
+end;
+
+procedure TProcessoInspecao_IncluirBuscarDefeitos.BTN_BuscarClick(
+  Sender: TObject);
+  Var
+     VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	*  ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.[dbo].[Icq_TB_InspecaoTabelaDefeito] (nolock)  ' + #13;
+  VLC_Select := VLC_Select + ' Where Area = ' + '''' + 'INJECAO' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Defeito_ID <> 59 ' + #13;
+  VLC_Select := VLC_Select + ' AND Defeito Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''';
+  VLC_Select := VLC_Select + ' Order by Defeito ' + #13;
+
+  Memo1.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+end;
+
+end.

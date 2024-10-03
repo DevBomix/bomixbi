@@ -1,0 +1,37 @@
+unit FuncaoGrafica_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TFuncaoGrafica = class(TForm)
+    GroupBox4: TGroupBox;
+    IMG_LOCK: TImage;
+    IMG_FREE: TImage;
+    IMG_PrevisaoSem: TImage;
+    IMG_PrevisaoCom: TImage;
+    IMG_AcessoPermitido: TImage;
+    IMG_AcessoNegado: TImage;
+    IMG_Habilitado: TImage;
+    IMG_Desabilitado: TImage;
+    IMG_Subtrair: TImage;
+    IMG_Soma: TImage;
+    IMG_NaoAltera: TImage;
+    IMG_Nulo: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FuncaoGrafica: TFuncaoGrafica;
+
+implementation
+
+{$R *.dfm}
+
+end.

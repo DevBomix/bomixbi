@@ -1,0 +1,173 @@
+unit BI_PedidoVendaCarregamentoCriarCarga_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.Buttons,
+  Vcl.ExtCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TBI_PedidoVendaCarregamentoCriar = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    TXT_Tamanho: TMaskEdit;
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Label1: TLabel;
+    TXT_CargaManual: TMaskEdit;
+    SHP_Caminhao: TShape;
+    BTN_TipoCarga: TBitBtn;
+
+    // Minhas Functions e Procedures
+    procedure DefinirCarga(PLC_TamanhoCaminhao : String);
+
+
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_PedidoVendaCarregamentoCriar: TBI_PedidoVendaCarregamentoCriar;
+
+implementation
+
+{$R *.dfm}
+
+uses BI_PedidoVendaCarregamento_Unit, conexaodados_unit, funcaosistema_unit;
+
+
+
+procedure TBI_PedidoVendaCarregamentoCriar.DefinirCarga(
+  PLC_TamanhoCaminhao: String);
+Var
+
+   VLN_Posicao : Integer;
+   VLC_TipoCarga : String;
+   VLC_Insert : String;
+
+begin
+
+   VLC_TipoCarga := BTN_TipoCarga.Caption;
+
+
+   if TXT_CargaManual.Text = '' then
+       VLN_Posicao := -1
+    else
+       VLN_Posicao := StrToInt(TXT_CargaManual.Text);
+
+
+   VLC_Insert := 'Exec BomixBI.[dbo].[Fat_SP_AtualizarBase_PedidoVenda_Carregamento_CargaCriar] ' + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(BI_PedidoVendaCarregamento.DT_DataCarragamento.Date),1) + '''' + ',' + '''' + VLC_TipoCarga + ''''+ ',' + PLC_TamanhoCaminhao + ',' + IntToStr(VLN_Posicao);
+
+   BI_PedidoVendaCarregamento.Memo.Lines.Text := VLC_Insert;
+
+   With Sys_ModuloConexaoDados.ADOCommand1 do
+   begin
+       CommandText := VLC_Insert;
+       Execute;
+   end;
+
+  BI_PedidoVendaCarregamento.ListarCargas(BI_PedidoVendaCarregamento.CBX_Carga);
+
+ {
+  VLN_Posicao := BI_PedidoVendaCarregamento.CBX_Carga.GetCount - 1;
+
+  if VLN_Posicao = -1 then
+  begin
+     VLC_Carga := 'CARGA 01' + ' / ' + PLC_TamanhoCaminhao;
+  end
+  else
+  begin
+
+
+
+      if TXT_CargaManual.Text = '' then
+      begin
+            VLN_UltimoNumeroDaCarga := StrToInt(Copy(BI_PedidoVendaCarregamento.CBX_Carga.Items[VLN_Posicao],7,2));
+      end
+      else
+      begin
+           VLN_UltimoNumeroDaCarga := StrToInt(TXT_CargaManual.Text);
+      end;
+
+
+      VLN_Posicao := VLN_UltimoNumeroDaCarga;
+
+      if VLN_Posicao <= 9 then
+          VLC_Carga := 'CARGA ' + '0' + IntToStr(VLN_Posicao) + ' / ' + PLC_TamanhoCaminhao
+      else
+          VLC_Carga := 'CARGA ' + IntToStr(VLN_Posicao) + ' / ' + PLC_TamanhoCaminhao;
+
+       VLL_Existe := False;
+       For VLN_Contador := 0 To VLN_Posicao do
+       begin
+           If Copy(BI_PedidoVendaCarregamento.CBX_Carga.Items[VLN_Contador],7,2) = Copy(VLC_Carga,7,2) then
+              VLL_Existe := True;
+       end;
+
+       if VLL_Existe = True then
+       begin
+            if VLN_Posicao + 1 <= 9 then
+                VLC_Carga := 'CARGA ' + '0' + IntToStr(VLN_Posicao + 1) + ' / ' + PLC_TamanhoCaminhao
+            else
+                VLC_Carga := 'CARGA ' + IntToStr(VLN_Posicao + 1) + ' / ' + PLC_TamanhoCaminhao;
+        end;
+
+  end;
+
+  BI_PedidoVendaCarregamento.CBX_Carga.Items.Append(VLC_Carga);
+
+  }
+
+
+  Close;
+
+end;
+
+procedure TBI_PedidoVendaCarregamentoCriar.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TBI_PedidoVendaCarregamentoCriar.Button1Click(Sender: TObject);
+begin
+   DefinirCarga('18');
+end;
+
+procedure TBI_PedidoVendaCarregamentoCriar.Button2Click(Sender: TObject);
+begin
+   DefinirCarga('22');
+end;
+
+
+procedure TBI_PedidoVendaCarregamentoCriar.Button3Click(Sender: TObject);
+begin
+
+    If TXT_Tamanho.Text = '' then
+    begin
+        Application.MessageBox('Defina o tamanho da Carga','Atenção',mb_iconwarning + mb_ok);
+        TXT_Tamanho.Setfocus;
+        Exit;
+    end;
+
+
+    if StrToInt(TXT_Tamanho.Text) <= 9 then
+        TXT_Tamanho.Text := '0' + IntToStr(StrToInt(TXT_Tamanho.Text));
+
+    DefinirCarga(TXT_Tamanho.Text);
+
+end;
+
+end.

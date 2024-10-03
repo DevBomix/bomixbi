@@ -1,0 +1,10 @@
+inherited PadraoBuscadorFiltro1: TPadraoBuscadorFiltro1
+  Caption = 'PadraoBuscadorFiltro1'
+  ClientHeight = 298
+  ExplicitHeight = 327
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Botoes: TPanel
+    Top = 259
+  end
+end

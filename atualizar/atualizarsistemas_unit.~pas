@@ -1,0 +1,119 @@
+unit AtualizarSistemas_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, DBClient, ADODB, ExtCtrls, ComCtrls, StdCtrls;
+
+type
+  TAtualizar_Form = class(TForm)
+    ADOConnection1: TADOConnection;
+    Timer1: TTimer;
+    Panel8: TPanel;
+    LBL_ProcessandoStatus: TLabel;
+    Animate1: TAnimate;
+    Shape1: TShape;
+    CDS_XMLAtualizar1: TClientDataSet;
+    CDS_XMLAtualizar1Sistema: TStringField;
+    CDS_XMLAtualizar1Executavel: TStringField;
+    CDS_XMLAtualizar1Database: TStringField;
+    CDS_XMLAtualizar1Usuario: TStringField;
+    CDS_XMLAtualizar1Versao: TStringField;
+    CDS_XMLAtualizar1Data: TStringField;
+    ExecutarSQL: TADOCommand;
+    CDS_XMLAtualizar1StringConexao2: TStringField;
+    CDS_XMLAtualizar1PathSistema2: TStringField;
+    CDS_XMLAtualizar1PathServidor2: TStringField;
+    CDS_XMLAtualizar1PathXML2: TStringField;
+    CDS_XMLAtualizar1Computador2: TStringField;
+    CDS_XMLAtualizar: TClientDataSet;
+    CDS_XMLAtualizarSistema: TStringField;
+    CDS_XMLAtualizarExecutavel: TStringField;
+    CDS_XMLAtualizarStringConexao: TStringField;
+    CDS_XMLAtualizarDatabase: TStringField;
+    CDS_XMLAtualizarUsuario: TStringField;
+    CDS_XMLAtualizarVersao: TStringField;
+    CDS_XMLAtualizarPathSistema: TStringField;
+    CDS_XMLAtualizarPathServidor: TStringField;
+    CDS_XMLAtualizarPathXML: TStringField;
+    CDS_XMLAtualizarData: TStringField;
+    CDS_XMLAtualizarComputador: TStringField;
+    procedure Timer1Timer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Atualizar_Form: TAtualizar_Form;
+  VLC_Usuario, VLC_Sistema, VLC_PathSistema : String;
+  VLC_PathServidor, VLC_DataAtualizacao : String;
+  VLC_StringConexao, VLC_DataBase : String;
+  VLC_PathXML, VLC_Executavel, VLC_Versao : String;
+  VLC_NovoSistema, VLC_NomedoComputador : String;
+
+implementation
+
+{$R *.dfm}
+
+procedure TAtualizar_Form.Timer1Timer(Sender: TObject);
+Var
+  VLC_Update : String;
+
+begin
+
+   // Pegar informações do XML Atualizar que fica na pasta do sistema
+   With CDS_XMLAtualizar do
+   begin
+       Close;
+       LoadFromFile(ExtractFilePath(Application.ExeName) + 'Atualizar.xml');
+       Open;
+       VLC_Sistema          := (FieldByName('Sistema').AsString);
+       VLC_Executavel       := (FieldByName('Executavel').AsString);
+       VLC_Usuario          := (FieldByName('Usuario').AsString);
+       VLC_StringConexao    := (FieldByName('StringConexao').AsString);
+       VLC_DataBase         := (FieldByName('DataBase').AsString);
+       VLC_PathSistema      := (FieldByName('PathSistema').AsString);
+       VLC_PathServidor     := (FieldByName('PathServidor').AsString);
+       VLC_PathXML          := (FieldByName('PathXML').AsString);
+       VLC_Versao           := (FieldByName('Versao').AsString);
+       VLC_DataAtualizacao  := (FieldByName('Data').AsString);
+       VLC_NomedoComputador := (FieldByName('Computador').AsString);
+   end;
+
+   // Abrir Banco de Dados
+   With ADOConnection1 Do
+   begin
+       Close;
+       ConnectionString  := VLC_StringConexao;
+       DefaultDatabase   := VLC_DataBase;
+       Open;
+   end;
+
+   // Arquivo com a nova versão para ser copiada para a maquina a ser atualizada
+   VLC_NovoSistema := VLC_PathServidor + VLC_Executavel + '.exe';
+   CopyFile(PChar(VLC_NovoSistema), Pchar(VLC_PathSistema), False);
+
+   WinExec(PChar(VLC_PathSistema),SW_HIDE);
+
+   VLC_Update := ' Update dbo.Sys_SistemaBomixAtualizacoes ';
+   VLC_Update := VLC_Update + ' Set Versao = ' + '''' + VLC_Versao + '''' + ',';
+   VLC_Update := VLC_Update + ' Usuario = ' + '''' + VLC_Usuario + '''' + ',';
+   VLC_Update := VLC_Update + ' DataAtualizacao = ' + '''' + VLC_DataAtualizacao + '''' + ',';
+   VLC_Update := VLC_Update + ' Tipo = ' + '''' + 'ATUALIZAÇÃO' + '''';
+   VLC_Update := VLC_Update + ' Where Computador = ' + '''' + VLC_NomedoComputador + '''';
+   VLC_Update := VLC_Update + ' AND Sistema = ' + '''' + VLC_Sistema + '''';
+   
+   With ExecutarSQL do
+   begin
+      CommandText := VLC_Update;
+      Execute;
+   end;
+
+   Timer1.Enabled := False;
+   Atualizar_Form.Close;
+end;
+
+end.

@@ -1,0 +1,121 @@
+unit relatorioparametrizadovendas_gerenciaxsegmento_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.Provider, Datasnap.DBClient,
+  Data.DB, Data.Win.ADODB, ppParameter, ppDesignLayer, ppCtrls, ppBands,
+  ppClass, ppStrtch, ppMemo, ppPrnabl, ppCache, ppProd, ppReport, ppDB, ppComm,
+  ppRelatv, ppDBPipe;
+
+type
+  TRelatorioParametrizadoVendas_GerenciaXSegmento = class(TForm)
+    ppDBGerenciaXGerencia: TppDBPipeline;
+    ppDBGerenciaXGerenciappField1: TppField;
+    ppDBGerenciaXGerenciappField2: TppField;
+    ppDBGerenciaXGerenciappField3: TppField;
+    ppDBGerenciaXGerenciappField4: TppField;
+    ppDBGerenciaXGerenciappField5: TppField;
+    ppDBGerenciaXGerenciappField6: TppField;
+    ppDBGerenciaXGerenciappField7: TppField;
+    ppDBGerenciaXGerenciappField8: TppField;
+    ppDBGerenciaXGerenciappField9: TppField;
+    ppGerenciaXGerencia: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppLine1: TppLine;
+    ppImage1: TppImage;
+    ppLabel7: TppLabel;
+    ppLBL_PeriodoGerenciaXGerencia: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    TXT_ComissaoGerenciaXGerencia: TppDBText;
+    ppDBText8: TppDBText;
+    ppLine2: TppLine;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText14: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppLine3: TppLine;
+    ppMemoGerenciaXGerencia: TppMemo;
+    ppLBL_DataGerenciaXGerencia: TppLabel;
+    ppLBL_NumeroPaginaGerenciaXGerencia: TppLabel;
+    LBL_UsuarioGerenciaXGerencia: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppShape1: TppShape;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLabel13: TppLabel;
+    ppDBText15: TppDBText;
+    ppDBText239: TppDBText;
+    ppDBText16: TppDBText;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
+    ppLabel14: TppLabel;
+    ppDBText19: TppDBText;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppShape2: TppShape;
+    LBL_ComissaoGerenciaXGerencia: TppLabel;
+    ppLabel15: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel325: TppLabel;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppDBText20: TppDBText;
+    ppLabel20: TppLabel;
+    ppLabel21: TppLabel;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppShape3: TppShape;
+    ppLabel22: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppDBCalc3: TppDBCalc;
+    ppDBCalc4: TppDBCalc;
+    ppDBCalc86: TppDBCalc;
+    ppDBCalc5: TppDBCalc;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    Query_GerenciaXGerencia: TADOQuery;
+    Query_GerenciaXGerenciaComissaoVendedor: TStringField;
+    Query_GerenciaXGerenciaGerente: TStringField;
+    Query_GerenciaXGerenciaQuantidade: TIntegerField;
+    Query_GerenciaXGerenciaValorUnitario: TFloatField;
+    Query_GerenciaXGerenciaMediaKG: TFloatField;
+    Query_GerenciaXGerenciaPeso: TFloatField;
+    Query_GerenciaXGerenciaValorLiquido: TFloatField;
+    Query_GerenciaXGerenciaValorBruto: TFloatField;
+    Query_GerenciaXGerenciaValorPCC: TFloatField;
+    DS_GerenciaXGerencia: TDataSource;
+    CDS_GerenciaXGerencia: TClientDataSet;
+    CDS_GerenciaXGerenciaComissaoVendedor: TStringField;
+    CDS_GerenciaXGerenciaGerente: TStringField;
+    CDS_GerenciaXGerenciaQuantidade: TIntegerField;
+    CDS_GerenciaXGerenciaValorUnitario: TFloatField;
+    CDS_GerenciaXGerenciaMediaKG: TFloatField;
+    CDS_GerenciaXGerenciaPeso: TFloatField;
+    CDS_GerenciaXGerenciaValorLiquido: TFloatField;
+    CDS_GerenciaXGerenciaValorBruto: TFloatField;
+    CDS_GerenciaXGerenciaValorPCC: TFloatField;
+    DSP_GerenciaXGerencia: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendas_GerenciaXSegmento: TRelatorioParametrizadoVendas_GerenciaXSegmento;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,1566 @@
+unit RelatorioTonelagemDiaria_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit,
+  System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Vcl.ComCtrls, ppDB, ppDBPipe, ppParameter, ppDesignLayer,
+  ppModule, raCodMod, ppCtrls, ppBands, ppClass, ppPrnabl, ppCache, ppComm,
+  ppRelatv, ppProd, ppReport, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient;
+
+type
+  TRelatorio_TonelagemDiaria = class(TPadraoBuscadorFiltro)
+    Panel4: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_TipoRelatorio: TComboBox;
+    Panel7: TPanel;
+    CBX_OperadorDataEmissao: TComboBox;
+    CBX_Igual_DataEmissao: TComboBox;
+    TXT_Valor1_DataEmissao: TMaskEdit;
+    TXT_Valor2_DataEmissao: TMaskEdit;
+    DT_Valor1_Periodo: TDateTimePicker;
+    DT_Valor2_Periodo: TDateTimePicker;
+    PNL_Mensal: TPanel;
+    Bevel2: TBevel;
+    CBX_Periodo: TComboBox;
+    CBX_Ano: TComboBox;
+    CBX_Mes: TComboBox;
+    Panel16: TPanel;
+    TXT_Valor2_Gerencia: TMaskEdit;
+    CBX_OperadorGerencia: TComboBox;
+    TXT_Valor1_Gerencia: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalGerencia: TPanel;
+    CBX_Igual_Gerencia: TComboBox;
+    Panel1: TPanel;
+    TXT_Valor2_Vendedor: TMaskEdit;
+    CBX_OperadorVendedor: TComboBox;
+    TXT_Valor1_Vendedor: TMaskEdit;
+    Panel2: TPanel;
+    PNL_SinalVendedor: TPanel;
+    CBX_Igual_Vendedor: TComboBox;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppReportDiario: TppReport;
+    ppParameterList16: TppParameterList;
+    ppDB: TppDBPipeline;
+    CDSData: TDateTimeField;
+    CDSDia: TStringField;
+    CDSDiaDaSemana: TStringField;
+    CDSAnoBomix: TStringField;
+    CDSMesNomeBomix: TStringField;
+    CDSGerente: TStringField;
+    CDSVendedor_FK: TStringField;
+    CDSVendedor: TStringField;
+    CDSPesoAFaturar: TFloatField;
+    CDSPesoFaturado: TFloatField;
+    CDSPesoTotalDia: TFloatField;
+    ppDBPipeline1: TppDBPipeline;
+    ppReport1: TppReport;
+    ppParameterList1: TppParameterList;
+    CDS_DiarioGerencia: TClientDataSet;
+    Query_DiarioGerencia: TADOQuery;
+    DS_DiarioGerencia: TDataSource;
+    DSP_DiarioGerencia: TDataSetProvider;
+    QueryData: TDateTimeField;
+    QueryDia: TStringField;
+    QueryDiaDaSemana: TStringField;
+    QueryAnoBomix: TStringField;
+    QueryMesNomeBomix: TStringField;
+    QueryGerente: TStringField;
+    QueryVendedor_FK: TStringField;
+    QueryVendedor: TStringField;
+    QueryPesoAFaturar: TFloatField;
+    QueryPesoFaturado: TFloatField;
+    QueryPesoTotalDia: TFloatField;
+    ppHeaderBand1: TppHeaderBand;
+    ppLine1: TppLine;
+    ppImage1: TppImage;
+    ppLabel4: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppDBText14: TppDBText;
+    ppDBCalc3: TppDBCalc;
+    ppDBText15: TppDBText;
+    ppDBText16: TppDBText;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
+    ppShape4: TppShape;
+    ppFooterBand1: TppFooterBand;
+    ppLine2: TppLine;
+    ppLabel5: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppGroup5: TppGroup;
+    ppGroupHeaderBand5: TppGroupHeaderBand;
+    ppGroupFooterBand5: TppGroupFooterBand;
+    ppGroup6: TppGroup;
+    ppGroupHeaderBand6: TppGroupHeaderBand;
+    ppShape5: TppShape;
+    ppDBText21: TppDBText;
+    ppGroupFooterBand6: TppGroupFooterBand;
+    ppGroup7: TppGroup;
+    ppGroupHeaderBand7: TppGroupHeaderBand;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppGroupFooterBand7: TppGroupFooterBand;
+    ppGroup8: TppGroup;
+    ppGroupHeaderBand8: TppGroupHeaderBand;
+    ppShape6: TppShape;
+    ppDBText24: TppDBText;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
+    ppDBText25: TppDBText;
+    ppGroupFooterBand8: TppGroupFooterBand;
+    ppShape7: TppShape;
+    ppDBCalc4: TppDBCalc;
+    ppLabel10: TppLabel;
+    ppDBCalc5: TppDBCalc;
+    ppDBCalc6: TppDBCalc;
+    ppDBText26: TppDBText;
+    ppDBText27: TppDBText;
+    raCodeModule2: TraCodeModule;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    CBX_TipoData: TComboBox;
+    DSP_DiarioGeral: TDataSetProvider;
+    DS_DiarioGeral: TDataSource;
+    Query_DiarioGeral: TADOQuery;
+    CDS_DiarioGeral: TClientDataSet;
+    ppReportDiarioGeral: TppReport;
+    ppParameterList2: TppParameterList;
+    ppDBPipeline2: TppDBPipeline;
+    QueryPesoOrcamento: TFloatField;
+    QueryPesoNaoDatado: TFloatField;
+    CDSPesoOrcamento: TFloatField;
+    CDSPesoNaoDatado: TFloatField;
+    ppHeaderBand16: TppHeaderBand;
+    ppLine142: TppLine;
+    ppImage15: TppImage;
+    ppLabel278: TppLabel;
+    ppDetailBand16: TppDetailBand;
+    TXT_GerenteGerenciaXGerencia: TppDBText;
+    ppDBCalc7: TppDBCalc;
+    ppDBText2: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppShape2: TppShape;
+    ppDBText33: TppDBText;
+    ppDBText40: TppDBText;
+    ppFooterBand16: TppFooterBand;
+    ppLine144: TppLine;
+    LBL_Status: TppLabel;
+    ppSummaryBand16: TppSummaryBand;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppGroup4: TppGroup;
+    ppGroupHeaderBand4: TppGroupHeaderBand;
+    Linha_GerenciaXGerencia00: TppShape;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText7: TppDBText;
+    ppGroupFooterBand4: TppGroupFooterBand;
+    ppGroup2: TppGroup;
+    ppGroupHeaderBand2: TppGroupHeaderBand;
+    ppDBText9: TppDBText;
+    ppDBText11: TppDBText;
+    ppGroupFooterBand2: TppGroupFooterBand;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppShape1: TppShape;
+    ppDBText8: TppDBText;
+    ppLabel3: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel13: TppLabel;
+    ppLabel21: TppLabel;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    ppShape3: TppShape;
+    TXT_PesoTotalComissao1: TppDBCalc;
+    ppLabel15: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBCalc14: TppDBCalc;
+    ppDBCalc15: TppDBCalc;
+    raCodeModule1: TraCodeModule;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppDBText41: TppDBText;
+    ppDBText42: TppDBText;
+    ppLabel6: TppLabel;
+    ppLabel22: TppLabel;
+    ppDBCalc16: TppDBCalc;
+    ppDBCalc17: TppDBCalc;
+    ppDBText43: TppDBText;
+    ppDBCalc18: TppDBCalc;
+    ppLabel23: TppLabel;
+    QueryPesoArteBloqueada: TFloatField;
+    CDSPesoArteBloqueada: TFloatField;
+    ppHeaderBand2: TppHeaderBand;
+    ppLine3: TppLine;
+    ppImage2: TppImage;
+    ppLabel11: TppLabel;
+    ppShape11: TppShape;
+    ppDetailBand2: TppDetailBand;
+    ppDBText19: TppDBText;
+    ppDBCalc8: TppDBCalc;
+    ppDBText20: TppDBText;
+    ppDBText28: TppDBText;
+    ppDBText29: TppDBText;
+    ppDBText30: TppDBText;
+    ppShape8: TppShape;
+    ppDBText31: TppDBText;
+    ppDBText32: TppDBText;
+    ppDBText44: TppDBText;
+    ppFooterBand2: TppFooterBand;
+    ppLine4: TppLine;
+    ppLabel12: TppLabel;
+    ppSummaryBand2: TppSummaryBand;
+    ppGroup11: TppGroup;
+    ppGroupHeaderBand11: TppGroupHeaderBand;
+    ppDBText34: TppDBText;
+    ppDBText35: TppDBText;
+    ppGroupFooterBand11: TppGroupFooterBand;
+    ppGroup12: TppGroup;
+    ppGroupHeaderBand12: TppGroupHeaderBand;
+    ppShape10: TppShape;
+    ppDBText36: TppDBText;
+    ppLabel14: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppDBText37: TppDBText;
+    ppLabel19: TppLabel;
+    ppLabel20: TppLabel;
+    ppGroupFooterBand12: TppGroupFooterBand;
+    ppDBCalc9: TppDBCalc;
+    ppLabel18: TppLabel;
+    ppDBCalc10: TppDBCalc;
+    ppDBCalc11: TppDBCalc;
+    ppDBText38: TppDBText;
+    ppDBText39: TppDBText;
+    ppDBCalc12: TppDBCalc;
+    ppDBCalc13: TppDBCalc;
+    ppDBCalc19: TppDBCalc;
+    raCodeModule3: TraCodeModule;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppLabel24: TppLabel;
+    ppDBCalc20: TppDBCalc;
+    ppLabel25: TppLabel;
+    ppDBText45: TppDBText;
+    QueryEmpresa: TStringField;
+    CDSEmpresa: TStringField;
+    Query_DiarioGerenciaEmpresa: TStringField;
+    Query_DiarioGerenciaData: TDateTimeField;
+    Query_DiarioGerenciaDia: TStringField;
+    Query_DiarioGerenciaDiaDaSemana: TStringField;
+    Query_DiarioGerenciaAnoBomix: TStringField;
+    Query_DiarioGerenciaMesNomeBomix: TStringField;
+    Query_DiarioGerenciaPesoOrcamento: TFloatField;
+    Query_DiarioGerenciaPesoArteBloqueada: TFloatField;
+    Query_DiarioGerenciaPesoNaoDatado: TFloatField;
+    Query_DiarioGerenciaPesoAFaturar: TFloatField;
+    Query_DiarioGerenciaPesoFaturado: TFloatField;
+    Query_DiarioGerenciaPesoTotalDia: TFloatField;
+    CDS_DiarioGerenciaEmpresa: TStringField;
+    CDS_DiarioGerenciaData: TDateTimeField;
+    CDS_DiarioGerenciaDia: TStringField;
+    CDS_DiarioGerenciaDiaDaSemana: TStringField;
+    CDS_DiarioGerenciaAnoBomix: TStringField;
+    CDS_DiarioGerenciaMesNomeBomix: TStringField;
+    CDS_DiarioGerenciaPesoOrcamento: TFloatField;
+    CDS_DiarioGerenciaPesoArteBloqueada: TFloatField;
+    CDS_DiarioGerenciaPesoNaoDatado: TFloatField;
+    CDS_DiarioGerenciaPesoAFaturar: TFloatField;
+    CDS_DiarioGerenciaPesoFaturado: TFloatField;
+    CDS_DiarioGerenciaPesoTotalDia: TFloatField;
+    Query_DiarioGeralEmpresa: TStringField;
+    Query_DiarioGeralData: TDateTimeField;
+    Query_DiarioGeralDia: TStringField;
+    Query_DiarioGeralDiaDaSemana: TStringField;
+    Query_DiarioGeralAnoBomix: TStringField;
+    Query_DiarioGeralMesNomeBomix: TStringField;
+    Query_DiarioGeralPesoOrcamento: TFloatField;
+    Query_DiarioGeralPesoArteBloqueada: TFloatField;
+    Query_DiarioGeralPesoNaoDatado: TFloatField;
+    Query_DiarioGeralPesoAFaturar: TFloatField;
+    Query_DiarioGeralPesoFaturado: TFloatField;
+    Query_DiarioGeralPesoTotalDia: TFloatField;
+    CDS_DiarioGeralEmpresa: TStringField;
+    CDS_DiarioGeralData: TDateTimeField;
+    CDS_DiarioGeralDia: TStringField;
+    CDS_DiarioGeralDiaDaSemana: TStringField;
+    CDS_DiarioGeralAnoBomix: TStringField;
+    CDS_DiarioGeralMesNomeBomix: TStringField;
+    CDS_DiarioGeralPesoOrcamento: TFloatField;
+    CDS_DiarioGeralPesoArteBloqueada: TFloatField;
+    CDS_DiarioGeralPesoNaoDatado: TFloatField;
+    CDS_DiarioGeralPesoAFaturar: TFloatField;
+    CDS_DiarioGeralPesoFaturado: TFloatField;
+    CDS_DiarioGeralPesoTotalDia: TFloatField;
+    Query_DiarioGerenciaGerente: TStringField;
+    CDS_DiarioGerenciaGerente: TStringField;
+
+    // Minhas Functions e Procedures
+    procedure AplicarPeriodoMensal_2020;
+    procedure AplicarPeriodoMensal_Apartir2021;
+    procedure AplicarPeriodoMensal;
+    procedure AplicarPeriodoBimestral_2020;
+    procedure AplicarPeriodoBimestral_Apartir2021;
+    procedure AplicarPeriodoBimestral;
+    procedure AplicarPeriodoTrimestral_2020;
+    procedure AplicarPeriodoTrimestral_Apartir2021;
+    procedure AplicarPeriodoTrimestral;
+    procedure AplicarPeriodoSemestral_2020;
+    procedure AplicarPeriodoSemestral_Apartir2021;
+    procedure AplicarPeriodoSemestral;
+    procedure AplicarPeriodoAnual_2020;
+    procedure AplicarPeriodoAnual_Apartir2021;
+    procedure AplicarPeriodoAnual;
+
+    procedure AplicarPeriodo;
+
+
+    procedure ListarGerencia;
+    procedure ListarVendedor;
+    procedure RelatorioTonelagemPorVendedor;
+    procedure RelatorioTonelagemGeral;
+    procedure RelatorioTonelagemPorGerencia;
+
+
+
+    procedure PNL_SinalVendedorClick(Sender: TObject);
+    procedure PNL_SinalGerenciaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure CBX_PeriodoChange(Sender: TObject);
+    procedure CBX_MesChange(Sender: TObject);
+    procedure CBX_AnoChange(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure MemoSQLDblClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_TonelagemDiaria: TRelatorio_TonelagemDiaria;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, FuncaoRestricoesInformacoes_Unit, ConexaoDados_Unit;
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoMensal_2020;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+  If CBX_Mes.Text = '01. JANEIRO' then
+    begin
+        VLN_Mes := 1;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/12/' + IntToStr((VLN_Ano - 1)));
+        DT_Valor2_Periodo.Date := StrToDate('25/01/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. FEVEREIRO' then
+    begin
+        VLN_Mes := 2;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. MARÇO' then
+    begin
+        VLN_Mes := 3;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. ABRIL' then
+    begin
+        VLN_Mes := 4;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '05. MAIO' then
+    begin
+        VLN_Mes := 5;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '06. JUNHO' then
+    begin
+        VLN_Mes := 6;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '07. JULHO' then
+    begin
+        VLN_Mes := 7;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '08. AGOSTO' then
+    begin
+        VLN_Mes := 8;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '09. SETEMBRO' then
+    begin
+        VLN_Mes := 9;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '10. OUTUBRO' then
+    begin
+        VLN_Mes := 10;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '11. NOVEMBRO' then
+    begin
+        VLN_Mes := 11;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '12. DEZEMBRO' then
+    begin
+        VLN_Mes := 12;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        if VLN_Ano = 2020 then
+        begin
+
+           DT_Valor1_Periodo.Date := StrToDate('26/11/2020');
+           DT_Valor2_Periodo.Date := StrToDate('31/12/2020');
+
+        end
+        else
+        begin
+
+            DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-1)) + '/' + IntToStr((VLN_Ano)));
+            DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+
+        end;
+
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoMensal_Apartir2021;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+// MENSAL     **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JANEIRO' then
+    begin
+        VLN_Mes := 1;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/01/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/01/' +  IntToStr(VLN_Ano));
+
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. FEVEREIRO' then
+    begin
+        VLN_Mes := 2;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/02/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('29/02/' +  IntToStr(VLN_Ano));
+
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. MARÇO' then
+    begin
+        VLN_Mes := 3;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/03/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/03/' +  IntToStr(VLN_Ano));
+
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. ABRIL' then
+    begin
+        VLN_Mes := 3;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/04/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/04/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '05. MAIO' then
+    begin
+        VLN_Mes := 5;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/05/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/05/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '06. JUNHO' then
+    begin
+        VLN_Mes := 6;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/06/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/06/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '07. JULHO' then
+    begin
+        VLN_Mes := 7;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/07/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/07/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '08. AGOSTO' then
+    begin
+        VLN_Mes := 8;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/08/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/08/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '09. SETEMBRO' then
+    begin
+        VLN_Mes := 09;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/09/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/09/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '10. OUTUBRO' then
+    begin
+        VLN_Mes := 10;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/10/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/10/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '11. NOVEMBRO' then
+    begin
+        VLN_Mes := 11;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/11/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/11/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '12. DEZEMBRO' then
+    begin
+        VLN_Mes := 12;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/12/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/12/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+end;
+
+
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoMensal;
+begin
+
+    if StrToInt(CBX_Ano.Text) <= 2020 then
+    begin
+        AplicarPeriodoMensal_2020;
+    end
+    else
+    begin
+        AplicarPeriodoMensal_Apartir2021
+    end;
+
+end;
+
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoSemestral_2020;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+// SEMESTRAL  **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - JUN' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/12/' + IntToStr((VLN_Ano - 1)));
+        DT_Valor2_Periodo.Date := StrToDate('25/06/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. JUL - DEZ' then
+    begin
+        VLN_Mes := 12;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-6)) + '/' + IntToStr((VLN_Ano)));
+
+        if VLN_Ano = 2020 then
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('31/12/2020');
+        end
+        else
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        end;
+
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoSemestral_Apartir2021;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+// SEMESTRAL  **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - JUN' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/01/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/06/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. JUL - DEZ' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/07/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/12/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoSemestral;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+
+begin
+
+    if StrToInt(CBX_Ano.Text) <= 2020 then
+    begin
+        AplicarPeriodoSemestral_2020;
+    end
+    else
+    begin
+        AplicarPeriodoSemestral_Apartir2021
+    end;
+
+end;
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoTrimestral_2020;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+// TRIMESTRAL **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - MAR' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/12/' + IntToStr((VLN_Ano - 1)));
+        DT_Valor2_Periodo.Date := StrToDate('25/03/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. ABR - JUN' then
+    begin
+        VLN_Mes := 6;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-3)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. JUL - SET' then
+    begin
+        VLN_Mes := 9;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-3)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. OUT - DEZ' then
+    begin
+        VLN_Mes := 12;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-3)) + '/' + IntToStr((VLN_Ano)));
+
+        if VLN_Ano = 2020 then
+        begin
+           DT_Valor2_Periodo.Date := StrToDate('31/12/2020');
+        end
+        else
+        begin
+           DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        end;
+
+        Exit;
+    end;
+
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoTrimestral_Apartir2021;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+// TRIMESTRAL **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - MAR' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/01/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/03/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. ABR - JUN' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/04/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/06/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. JUL - SET' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/07/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/09/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. OUT - DEZ' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/10/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/12/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoTrimestral;
+begin
+
+    if StrToInt(CBX_Ano.Text) <= 2020 then
+    begin
+        AplicarPeriodoTrimestral_2020;
+    end
+    else
+    begin
+        AplicarPeriodoTrimestral_Apartir2021
+    end;
+end;
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoAnual_2020;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+    // ANUAL      **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - DEZ' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/12/' + IntToStr((VLN_Ano - 1)));
+
+       if VLN_Ano = 2020 then
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('31/12/2020');
+        end
+        else
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('25/12/' + IntToStr((VLN_Ano)));
+        end;
+
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoAnual_Apartir2021;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+    // ANUAL      **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - DEZ' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/01/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/12/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoAnual;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+begin
+
+    if StrToInt(CBX_Ano.Text) <= 2020 then
+    begin
+        AplicarPeriodoAnual_2020;
+    end
+    else
+    begin
+        AplicarPeriodoAnual_Apartir2021
+    end;
+
+end;
+
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoBimestral_2020;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+
+begin
+
+// BIMESTRAL  **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - FEV' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/12/' + IntToStr((VLN_Ano - 1)));
+        DT_Valor2_Periodo.Date := StrToDate('25/02/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. MAR - ABR' then
+    begin
+        VLN_Mes := 4;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-2)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. MAI - JUN' then
+    begin
+        VLN_Mes := 6;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-2)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. JUL - AGO' then
+    begin
+        VLN_Mes := 8;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-2)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '05. SET - OUT' then
+    begin
+        VLN_Mes := 10;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-2)) + '/' + IntToStr((VLN_Ano)));
+        DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '06. NOV - DEZ' then
+    begin
+        VLN_Mes := 12;
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',(VLN_Mes-2)) + '/' + IntToStr((VLN_Ano)));
+
+        if VLN_Ano = 2020 then
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('31/12/2020');
+        end
+        else
+        begin
+            DT_Valor2_Periodo.Date := StrToDate('25/' + FormatFloat('00',(VLN_Mes)) + '/' + IntToStr((VLN_Ano)));
+        end;
+
+        Exit;
+    end;
+
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoBimestral_Apartir2021;
+Var
+   VLN_Mes: Integer;
+   VLN_Ano: Integer;
+
+begin
+
+// BIMESTRAL  **********************************************************************************************************************
+    If CBX_Mes.Text = '01. JAN - FEV' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/01/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('28/02/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '02. MAR - ABR' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/03/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/04/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '03. MAI - JUN' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/05/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('30/06/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '04. JUL - AGO' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/07/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/08/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '05. SET - OUT' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/09/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/10/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+    If CBX_Mes.Text = '06. NOV - DEZ' then
+    begin
+        VLN_Ano := StrToInt(CBX_Ano.Text);
+
+        DT_Valor1_Periodo.Date := StrToDate('01/11/'  + IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('31/12/' +  IntToStr(VLN_Ano));
+        Exit;
+    end;
+
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodoBimestral;
+begin
+
+    if StrToInt(CBX_Ano.Text) <= 2020 then
+    begin
+        AplicarPeriodoBimestral_2020;
+    end
+    else
+    begin
+        AplicarPeriodoBimestral_Apartir2021
+    end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.AplicarPeriodo;
+
+begin
+  AplicarPeriodoMensal;
+  AplicarPeriodoBimestral;
+  AplicarPeriodoTrimestral;
+  AplicarPeriodoSemestral;
+  AplicarPeriodoAnual;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.RelatorioTonelagemGeral;
+Var
+  VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + '   Select  ' + #13;
+  VLC_Select := VLC_Select + '       Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, ' + #13;
+  VLC_Select := VLC_Select + '       Sum(PesoOrcamento) as PesoOrcamento, Sum(PesoArteBloqueada) as PesoArteBloqueada, Sum(PesoNaoDatado) as PesoNaoDatado, ' + #13;
+  VLC_Select := VLC_Select + '       SUM(PesoAFaturar) as PesoAFaturar, SUM(PesoFaturado) as PesoFaturado, ' + #13;
+  VLC_Select := VLC_Select + '       SUM(PesoTotalDia) as PesoTotalDia ' + #13;
+  VLC_Select := VLC_Select + '   from ( ' + #13;
+
+  VLC_Select := VLC_Select + '               Select ' + #13;
+  VLC_Select := VLC_Select + '                    Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor,' + #13;
+  VLC_Select := VLC_Select + '                    Sum(PesoOrcamento) as PesoOrcamento, Sum(PesoArteBloqueada) as PesoArteBloqueada, Sum(PesoNaoDatado) as PesoNaoDatado,' + #13;
+  VLC_Select := VLC_Select + '                    SUM(PesoAFaturar) as PesoAFaturar, SUM(PesoFaturado) as PesoFaturado, ' + #13;
+  VLC_Select := VLC_Select + '                    SUM(PesoTotalDia) as PesoTotalDia ' + #13;
+  VLC_Select := VLC_Select + '                from BomixBI.[dbo].[Fat_TB_TonelagemDiaria] (nolock) Tonelagem  ' + #13;
+  VLC_Select := VLC_Select + '                Where Data Between ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor1_Periodo.Date),1) + '''' + ' AND ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor2_Periodo.Date),2) + '''' + #13;
+  VLC_Select := VLC_Select + '                AND Empresa = ' + '''' + (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  if CBX_Igual_Gerencia.Text <> 'TODAS' then
+  begin
+        VLC_Select := VLC_Select + '                AND Gerente = ' + '''' + CBX_Igual_Gerencia.Text + '''' + #13;
+  end;
+
+  if CBX_Igual_Vendedor.Text <> 'TODOS' then
+  begin
+        VLC_Select := VLC_Select + '                AND Vendedor = ' + '''' + CBX_Igual_Vendedor.Text + '''' + #13;
+  end;
+
+  VLC_Select := VLC_Select + '                Group by Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor' + #13;
+
+  VLC_Select := VLC_Select + '   ) TB' + #13;
+  VLC_Select := VLC_Select + '   Group by Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix ' + #13;
+  VLC_Select := VLC_Select + '   Order by MesNomeBomix, Data desc' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_DiarioGeral.Close;
+  Query_DiarioGeral.Close;
+  Query_DiarioGeral.SQL.Clear;
+  Query_DiarioGeral.SQL.Text := VLC_Select;
+  CDS_DiarioGeral.Open;
+
+  If CDS_DiarioGeral.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+      ppLabel12.Caption :=  'Data de Saída Entre ' + ' ' + DateToStr(DT_Valor1_Periodo.Date) + ' a ' + DateToStr(DT_Valor2_Periodo.Date);
+      ppLabel12.Caption := ppLabel12.Caption + ' // ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption + ' -  Data Impressão: ' + DateTimeToStr(Date());;
+      ppReportDiarioGeral.PrintReport;
+  end;
+end;
+
+procedure TRelatorio_TonelagemDiaria.RelatorioTonelagemPorGerencia;
+Var
+  VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + '   Select  ' + #13;
+  VLC_Select := VLC_Select + '       Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, ' + #13;
+  VLC_Select := VLC_Select + '       Sum(PesoOrcamento) as PesoOrcamento, Sum(PesoArteBloqueada) as PesoArteBloqueada, Sum(PesoNaoDatado) as PesoNaoDatado, ' + #13;
+  VLC_Select := VLC_Select + '       SUM(PesoAFaturar) as PesoAFaturar, SUM(PesoFaturado) as PesoFaturado, ' + #13;
+  VLC_Select := VLC_Select + '       SUM(PesoTotalDia) as PesoTotalDia ' + #13;
+  VLC_Select := VLC_Select + '   from ( ' + #13;
+
+  VLC_Select := VLC_Select + '               Select ' + #13;
+  VLC_Select := VLC_Select + '                    Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor,' + #13;
+  VLC_Select := VLC_Select + '                    Sum(PesoOrcamento) as PesoOrcamento, Sum(PesoArteBloqueada) as PesoArteBloqueada, Sum(PesoNaoDatado) as PesoNaoDatado, ' + #13;
+  VLC_Select := VLC_Select + '                    SUM(PesoAFaturar) as PesoAFaturar, SUM(PesoFaturado) as PesoFaturado, ' + #13;
+  VLC_Select := VLC_Select + '                    SUM(PesoTotalDia) as PesoTotalDia ' + #13;
+  VLC_Select := VLC_Select + '                from BomixBI.[dbo].[Fat_TB_TonelagemDiaria] (nolock) Tonelagem  ' + #13;
+  VLC_Select := VLC_Select + '                Where Data Between ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor1_Periodo.Date),1) + '''' + ' AND ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor2_Periodo.Date),2) + '''' + #13;
+  VLC_Select := VLC_Select + '                AND Empresa = ' + '''' + (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  if CBX_Igual_Gerencia.Text <> 'TODAS' then
+  begin
+        VLC_Select := VLC_Select + '                AND Gerente = ' + '''' + CBX_Igual_Gerencia.Text + '''' + #13;
+  end;
+
+  if CBX_Igual_Vendedor.Text <> 'TODOS' then
+  begin
+        VLC_Select := VLC_Select + '                AND Vendedor = ' + '''' + CBX_Igual_Vendedor.Text + '''' + #13;
+  end;
+
+  VLC_Select := VLC_Select + '                Group by Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor' + #13;
+
+  VLC_Select := VLC_Select + '   ) TB' + #13;
+  VLC_Select := VLC_Select + '   Group by Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente' + #13;
+  VLC_Select := VLC_Select + '   Order by Empresa, Gerente, MesNomeBomix, Data desc' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS_DiarioGerencia.Close;
+  Query_DiarioGerencia.Close;
+  Query_DiarioGerencia.SQL.Clear;
+  Query_DiarioGerencia.SQL.Text := VLC_Select;
+  CDS_DiarioGerencia.Open;
+
+  If CDS_DiarioGerencia.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+      ppLabel5.Caption :=  'Data de Saída Entre ' + ' ' + DateToStr(DT_Valor1_Periodo.Date) + ' a ' + DateToStr(DT_Valor2_Periodo.Date);
+      ppLabel5.Caption := ppLabel5.Caption + ' // ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption + ' -  Data Impressão: ' + DateTimeToStr(Date());;
+      ppReport1.PrintReport;
+  end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.RelatorioTonelagemPorVendedor;
+Var
+  VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + '   Select ' + #13;
+  VLC_Select := VLC_Select + '    Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor,' + #13;
+  VLC_Select := VLC_Select + '    Sum(PesoOrcamento) as PesoOrcamento, Sum(PesoArteBloqueada) as PesoArteBloqueada, Sum(PesoNaoDatado) as PesoNaoDatado, ' + #13;
+  VLC_Select := VLC_Select + '    SUM(PesoAFaturar) as PesoAFaturar, SUM(PesoFaturado) as PesoFaturado, ' + #13;
+  VLC_Select := VLC_Select + '    SUM(PesoTotalDia) as PesoTotalDia ' + #13;
+  VLC_Select := VLC_Select + '  from BomixBI.[dbo].[Fat_TB_TonelagemDiaria] (nolock) Tonelagem  ' + #13;
+  VLC_Select := VLC_Select + '	Where Data Between ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor1_Periodo.Date),1) + '''' + ' AND ';
+  VLC_Select := VLC_Select + '''' + Sys_FuncaoSistema.TransformarDataFormatoSQLServer(DateTimeToStr(DT_Valor2_Periodo.Date),2) + '''' + #13;
+  VLC_Select := VLC_Select + '  AND Empresa = ' + '''' + (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption) + '''' + #13;
+
+  if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+  begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_FK');
+  end;
+
+  if CBX_Igual_Gerencia.Text <> 'TODAS' then
+  begin
+        VLC_Select := VLC_Select + 'AND Gerente = ' + '''' + CBX_Igual_Gerencia.Text + '''' + #13;
+  end;
+
+  if CBX_Igual_Vendedor.Text <> 'TODOS' then
+  begin
+        VLC_Select := VLC_Select + 'AND Vendedor = ' + '''' + CBX_Igual_Vendedor.Text + '''' + #13;
+  end;
+
+  VLC_Select := VLC_Select + '  Group by Empresa, Data, Dia, DiaDaSemana, AnoBomix, MesNomeBomix, Gerente, Vendedor_FK, Vendedor' + #13;
+  VLC_Select := VLC_Select + '  Order by Gerente, Vendedor, MesNomeBomix, Data desc' + #13;
+
+  MemoSQL.Lines.Text := VLC_Select;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select;
+  CDS.Open;
+
+  If CDS.RecordCount = 0 Then
+  begin
+      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+      Exit;
+  end
+  else
+  begin
+      LBL_Status.Caption :=  'Data de Saída Entre ' + ' ' + DateToStr(DT_Valor1_Periodo.Date) + ' a ' + DateToStr(DT_Valor2_Periodo.Date);
+      LBL_Status.Caption := LBL_Status.Caption + ' // ' + Sys_FuncaoSistema.PNL_UsuarioAtivo.Caption + ' -  Data Impressão: ' + DateTimeToStr(Date());;
+      ppReportDiario.PrintReport;
+  end;
+
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TRelatorio_TonelagemDiaria.BNT_ConfirmarClick(Sender: TObject);
+begin
+
+ if CBX_TipoRelatorio.Text = 'TONELAGEM DIÁRIA - GERAL' then
+  begin
+      RelatorioTonelagemGeral;
+  end;
+
+  if CBX_TipoRelatorio.Text = 'TONELAGEM DIÁRIA - VENDEDOR' then
+  begin
+      RelatorioTonelagemPorVendedor;
+  end;
+
+  if CBX_TipoRelatorio.Text = 'TONELAGEM DIÁRIA - GERÊNCIA' then
+  begin
+      RelatorioTonelagemPorGerencia;
+  end;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.CBX_AnoChange(Sender: TObject);
+begin
+  inherited;
+  AplicarPeriodo;
+end;
+
+procedure TRelatorio_TonelagemDiaria.CBX_MesChange(Sender: TObject);
+begin
+  inherited;
+  AplicarPeriodo;
+end;
+
+procedure TRelatorio_TonelagemDiaria.CBX_PeriodoChange(Sender: TObject);
+Var
+   VLN_Mes: Integer;
+
+begin
+
+  VLN_Mes := StrToInt(FormatDateTime('mm',date));
+
+  If CBX_Periodo.Text = 'MENSAL' then
+  begin
+     CBX_Mes.Items.Clear;
+     CBX_Mes.Items.Add('01. JANEIRO');
+     CBX_Mes.Items.Add('02. FEVEREIRO');
+     CBX_Mes.Items.Add('03. MARÇO');
+     CBX_Mes.Items.Add('04. ABRIL');
+     CBX_Mes.Items.Add('05. MAIO');
+     CBX_Mes.Items.Add('06. JUNHO');
+     CBX_Mes.Items.Add('07. JULHO');
+     CBX_Mes.Items.Add('08. AGOSTO');
+     CBX_Mes.Items.Add('09. SETEMBRO');
+     CBX_Mes.Items.Add('10. OUTUBRO');
+     CBX_Mes.Items.Add('11. NOVEMBRO');
+     CBX_Mes.Items.Add('12. DEZEMBRO');
+
+     If VLN_Mes = 1  then CBX_Mes.Text := ('01. JANEIRO');
+     If VLN_Mes = 2  then CBX_Mes.Text := ('02. FEVEREIRO');
+     If VLN_Mes = 3  then CBX_Mes.Text := ('03. MARÇO');
+     If VLN_Mes = 4  then CBX_Mes.Text := ('04. ABRIL');
+     If VLN_Mes = 5  then CBX_Mes.Text := ('05. MAIO');
+     If VLN_Mes = 6  then CBX_Mes.Text := ('06. JUNHO');
+     If VLN_Mes = 7  then CBX_Mes.Text := ('07. JULHO');
+     If VLN_Mes = 8  then CBX_Mes.Text := ('08. AGOSTO');
+     If VLN_Mes = 9  then CBX_Mes.Text := ('09. SETEMBRO');
+     If VLN_Mes = 10 then CBX_Mes.Text := ('10. OUTUBRO');
+     If VLN_Mes = 11 then CBX_Mes.Text := ('11. NOVEMBRO');
+     If VLN_Mes = 12 then CBX_Mes.Text := ('12. DEZEMBRO');
+
+     AplicarPeriodo;
+     Exit;
+  end;
+
+  If CBX_Periodo.Text = 'BIMESTRAL' then
+  begin
+     CBX_Mes.Items.Clear;
+     CBX_Mes.Items.Add('01. JAN - FEV');
+     CBX_Mes.Items.Add('02. MAR - ABR');
+     CBX_Mes.Items.Add('03. MAI - JUN');
+     CBX_Mes.Items.Add('04. JUL - AGO');
+     CBX_Mes.Items.Add('05. SET - OUT');
+     CBX_Mes.Items.Add('06. NOV - DEZ');
+
+     If (VLN_Mes = 1)  OR (VLN_Mes = 2)   then CBX_Mes.Text := ('01. JAN - FEV');
+     If (VLN_Mes = 3)  OR (VLN_Mes = 4)   then CBX_Mes.Text := ('02. MAR - ABR');
+     If (VLN_Mes = 5)  OR (VLN_Mes = 6)   then CBX_Mes.Text := ('03. MAI - JUN');
+     If (VLN_Mes = 7)  OR (VLN_Mes = 8)   then CBX_Mes.Text := ('04. JUL - AGO');
+     If (VLN_Mes = 9)  OR (VLN_Mes = 10)  then CBX_Mes.Text := ('05. SET - OUT');
+     If (VLN_Mes = 11) OR (VLN_Mes = 12)  then CBX_Mes.Text := ('06. NOV - DEZ');
+
+     AplicarPeriodo;
+     Exit;
+  end;
+
+  If CBX_Periodo.Text = 'TRIMESTRAL' then
+  begin
+     CBX_Mes.Items.Clear;
+     CBX_Mes.Items.Add('01. JAN - MAR');
+     CBX_Mes.Items.Add('02. ABR - JUN');
+     CBX_Mes.Items.Add('03. JUL - SET');
+     CBX_Mes.Items.Add('04. OUT - DEZ');
+
+     If (VLN_Mes = 1)   OR (VLN_Mes = 2)  OR (VLN_Mes = 3)    then CBX_Mes.Text := ('01. JAN - MAR');
+     If (VLN_Mes = 4)   OR (VLN_Mes = 5)  OR (VLN_Mes = 6)    then CBX_Mes.Text := ('02. ABR - JUN');
+     If (VLN_Mes = 7)   OR (VLN_Mes = 8)  OR (VLN_Mes = 9)    then CBX_Mes.Text := ('03. JUL - SET');
+     If (VLN_Mes = 10)  OR (VLN_Mes = 11) OR (VLN_Mes = 12)   then CBX_Mes.Text := ('04. OUT - DEZ');
+
+     AplicarPeriodo;
+     Exit;
+  end;
+
+  If CBX_Periodo.Text = 'SEMESTRAL' then
+  begin
+     CBX_Mes.Items.Clear;
+     CBX_Mes.Items.Add('01. JAN - JUN');
+     CBX_Mes.Items.Add('02. JUL - DEZ');
+
+     If (VLN_Mes = 1)   OR (VLN_Mes = 2)  OR (VLN_Mes = 3)
+     OR (VLN_Mes = 4)   OR (VLN_Mes = 5)  OR (VLN_Mes = 6)    then CBX_Mes.Text := ('01. JAN - JUN');
+     If (VLN_Mes = 7)   OR (VLN_Mes = 8)  OR (VLN_Mes = 9)
+     OR (VLN_Mes = 10)  OR (VLN_Mes = 11) OR (VLN_Mes = 12)   then CBX_Mes.Text := ('02. JUL - DEZ');
+
+     AplicarPeriodo;
+     Exit;
+  end;
+
+  If CBX_Periodo.Text = 'ANUAL' then
+  begin
+     CBX_Mes.Items.Clear;
+     CBX_Mes.Items.Add('01. JAN - DEZ');
+     CBX_Mes.Text := ('01. JAN - DEZ');
+
+     AplicarPeriodo;
+     Exit;
+  end;
+end;
+
+procedure TRelatorio_TonelagemDiaria.DesenvolvimentoExecute(Sender: TObject);
+begin
+  inherited;
+  Relatorio_TonelagemDiaria.Width := 1300;
+end;
+
+procedure TRelatorio_TonelagemDiaria.FormShow(Sender: TObject);
+Var
+   VLN_Mes, TamanhoPadrao: Integer;
+
+begin
+
+  TamanhoPadrao := 160;
+  TXT_Valor1.Width := (TamanhoPadrao * 2) + 1;
+  TXT_Valor1_Gerencia.Width := (TamanhoPadrao * 2) + 1;
+
+  //Configuração Inicial das Datas
+  DT_Valor2_Periodo.Date := Date;
+  VLN_Mes := StrToInt(FormatDateTime('mm',date)) - 1;
+
+  If VLN_Mes = 0 then
+  begin
+      VLN_Mes := 12;
+      DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',VLN_Mes) + '/' + IntToStr(StrToInt(FormatDateTime('yyyy',Date)) - 1));
+  end
+  else
+  begin
+      DT_Valor1_Periodo.Date := StrToDate('26/' + FormatFloat('00',VLN_Mes) + '/' + FormatDateTime('yyyy',Date));
+  end;
+
+  CBX_Ano.Text := FormatDateTime('yyyy',Date);
+  CBX_PeriodoChange(nil);
+  ListarGerencia;
+  ListarVendedor;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.ListarGerencia;
+var
+  VLC_Select : String;
+  Query : TADOQuery;
+  VLN_Contador : Integer;
+
+begin
+
+   VLC_Select := VLC_Select + ' Select Distinct Gerente ' + #13;
+   VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_VendedorGerente Vendedor (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Vendedor.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+   begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_ID');
+   end;
+
+   VLC_Select := VLC_Select + ' Order by Gerente  ' + #13;
+
+   Query := TADOQuery.Create(self);
+   With Query do
+   begin
+        Close;
+        Connection := Sys_ModuloConexaoDados.ADOConnection1;
+        SQL.Clear;
+        SQL.Text := VLC_Select;
+        Open;
+   end;
+
+   CBX_Igual_Gerencia.Items.Clear;
+   Query.First;
+   for VLN_Contador := 0 to Query.RecordCount -1 do
+   begin
+      CBX_Igual_Gerencia.Items.Add(Query.FieldByName('Gerente').AsString);
+      Query.Next;
+   end;
+   CBX_Igual_Gerencia.Items.Add('TODAS');
+   Query.Free;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.ListarVendedor;
+var
+  VLC_Select : String;
+  Query : TADOQuery;
+  VLN_Contador : Integer;
+  I: Integer;
+
+begin
+
+   VLC_Select := VLC_Select + ' Select Distinct Vendedor ' + #13;
+   VLC_Select := VLC_Select + ' from BomixBI.dbo.Fat_TB_VendedorGerente Vendedor (nolock) ' + #13;
+   VLC_Select := VLC_Select + ' Where Vendedor.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+
+   if Sys_FuncaoSistema.TXT_RestricaoComercial.Caption = 'Sim' then
+   begin
+       VLC_Select := VLC_Select + Sys_FuncaoRestricoesInformacoes.GetRestricaoComercial('Vendedor_ID');
+   end;
+
+   VLC_Select := VLC_Select + ' Order by Vendedor ' + #13;
+
+   Query := TADOQuery.Create(self);
+   With Query do
+   begin
+        Close;
+        Connection := Sys_ModuloConexaoDados.ADOConnection1;
+        SQL.Clear;
+        SQL.Text := VLC_Select;
+        Open;
+   end;
+
+   CBX_Igual_Vendedor.Items.Clear;
+   Query.First;
+   for VLN_Contador := 0 to Query.RecordCount -1 do
+   begin
+      CBX_Igual_Vendedor.Items.Add(Query.FieldByName('Vendedor').AsString);
+      Query.Next;
+   end;
+   CBX_Igual_Vendedor.Items.Add('TODOS');
+   Query.Free;
+
+end;
+
+procedure TRelatorio_TonelagemDiaria.MemoSQLDblClick(Sender: TObject);
+begin
+  inherited;
+  Relatorio_TonelagemDiaria.Width := 692;
+end;
+
+procedure TRelatorio_TonelagemDiaria.PNL_SinalGerenciaClick(Sender: TObject);
+begin
+  inherited;
+ PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalGerencia);
+end;
+
+procedure TRelatorio_TonelagemDiaria.PNL_SinalVendedorClick(Sender: TObject);
+begin
+  inherited;
+ PadraoBuscadorFiltro.DefinirPolaridade(PNL_SinalVendedor);
+end;
+
+
+
+end.

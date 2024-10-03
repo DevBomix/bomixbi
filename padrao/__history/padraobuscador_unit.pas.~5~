@@ -1,0 +1,82 @@
+unit PadraoBuscador_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ExtCtrls, Datasnap.Provider, Data.DB, Data.Win.ADODB,
+  Datasnap.DBClient, System.Actions, Vcl.ActnList;
+
+type
+  TPadraoBuscador = class(TForm)
+    Panel1: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel4: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Cancelar: TAction;
+    DBGrid: TDBGrid;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    Memo1: TMemo;
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure Memo1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PadraoBuscador: TPadraoBuscador;
+
+implementation
+
+{$R *.dfm}
+
+procedure TPadraoBuscador.BNT_CancelarClick(Sender: TObject);
+begin
+  //
+end;
+
+procedure TPadraoBuscador.BNT_ConfirmarClick(Sender: TObject);
+begin
+  //
+end;
+
+procedure TPadraoBuscador.DesenvolvimentoExecute(Sender: TObject);
+begin
+  Memo1.Visible := True;
+end;
+
+procedure TPadraoBuscador.FormShow(Sender: TObject);
+begin
+  try CDS.Open; except end;
+end;
+
+procedure TPadraoBuscador.Memo1DblClick(Sender: TObject);
+begin
+  Memo1.Visible := False;
+end;
+
+end.

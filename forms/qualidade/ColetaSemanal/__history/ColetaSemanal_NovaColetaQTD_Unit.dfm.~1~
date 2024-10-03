@@ -1,0 +1,16 @@
+object ColetaSemanal_NovaColetaQtd: TColetaSemanal_NovaColetaQtd
+  Left = 0
+  Top = 0
+  Caption = 'ColetaSemanal_NovaColetaQtd'
+  ClientHeight = 364
+  ClientWidth = 402
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,387 @@
+inherited OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta: TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta
+  Caption = 'OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta'
+  ClientHeight = 542
+  ClientWidth = 960
+  ExplicitWidth = 966
+  ExplicitHeight = 571
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 944
+    ExplicitWidth = 944
+    inherited LBL_Titulo: TLabel
+      Width = 176
+      Caption = 'Consultar Insumos'
+      ExplicitWidth = 176
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 946
+    Height = 437
+    ExplicitWidth = 946
+    ExplicitHeight = 437
+    inherited Panel_Filtro: TPanel
+      Width = 946
+      ExplicitWidth = 946
+      object Label7: TLabel [1]
+        Left = 290
+        Top = 10
+        Width = 11
+        Height = 22
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited TXT_Buscador: TEdit
+        Width = 219
+        ExplicitWidth = 219
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 534
+        ExplicitLeft = 534
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+      object TXT_Buscador2: TEdit
+        Left = 311
+        Top = 9
+        Width = 219
+        Height = 26
+        AutoSize = False
+        CharCase = ecUpperCase
+        TabOrder = 2
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 934
+      Height = 379
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Tipo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 82
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produto_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 74
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 435
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Lote'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 82
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Armazem'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DataValidade'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Validade'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 83
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'UndMedida'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'UN'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 35
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 503
+    Width = 960
+    ExplicitTop = 503
+    ExplicitWidth = 960
+    inherited Panel3: TPanel
+      Left = 715
+      ExplicitLeft = 715
+      inherited BNT_Confirmar: TSpeedButton
+        Left = 129
+        Top = 1
+        Caption = '        Imprimir'
+        ExplicitLeft = 129
+        ExplicitTop = 1
+      end
+      inherited BNT_Cancelar: TSpeedButton
+        Caption = '       Fechar'
+      end
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      ReadOnly = True
+      Size = 6
+    end
+    object CDSArmazem: TStringField
+      FieldName = 'Armazem'
+      ReadOnly = True
+      Size = 2
+    end
+    object CDSItem_FK: TStringField
+      FieldName = 'Item_FK'
+      ReadOnly = True
+      Size = 50
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      ReadOnly = True
+      Size = 30
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      ReadOnly = True
+      Size = 150
+    end
+    object CDSLote: TStringField
+      FieldName = 'Lote'
+      ReadOnly = True
+      Size = 10
+    end
+    object CDSDataValidade: TDateTimeField
+      FieldName = 'DataValidade'
+      ReadOnly = True
+    end
+    object CDSEstoque: TFloatField
+      FieldName = 'Estoque'
+      ReadOnly = True
+    end
+    object CDSUndMedida: TStringField
+      FieldName = 'UndMedida'
+      ReadOnly = True
+      Size = 6
+    end
+    object CDSTemLote: TStringField
+      FieldName = 'TemLote'
+      ReadOnly = True
+      Size = 3
+    end
+    object CDSTipo: TStringField
+      FieldName = 'Tipo'
+      ReadOnly = True
+      Size = 60
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      '   Select top 100   '
+      
+        '         Rtrim(B1_FILIAL) as Empresa, Rtrim(B8_LOCAL) as Armazem' +
+        ',  '
+      
+        '   '#9'  B1_BRTPPR as Tipo, Rtrim(B1_BRGRP) as Item_FK, B1_COD as P' +
+        'roduto_ID, Rtrim(B1_DESC) as Produto,  '
+      
+        '   '#9'  B8.B8_LOTECTL as Lote, Convert(Datetime,B8_DTVALID,103) as' +
+        ' DataValidade,   '
+      
+        '   '#9'  B8_SALDO as Estoque, Rtrim(B1_UM) as UndMedida, '#39'Sim'#39' as T' +
+        'emLote '
+      '      from P12OFICIAL.dbo.SB8010 B8 (nolock)  '
+      
+        '      Inner Join P12OFICIAL.dbo.SB1010 Produto (Nolock) ON B1_FI' +
+        'LIAL = '#39'0201'#39
+      '  '#9#9#9#9#9#9#9#9#9#9#9#9#9'   AND B1_COD = B8_PRODUTO '
+      '   Where B8.D_E_L_E_T_ <> '#39'*'#39
+      '   AND B8_FILIAL = '#39'020101'#39
+      
+        ' AND (B1_COD + Rtrim(B1_DESC))  Like '#39'%%'#39'   AND B8_LOCAL in ('#39'M1' +
+        #39', '#39'P1'#39', '#39'AG'#39') '
+      '   AND B1_RASTRO = '#39'L'#39
+      '   AND B8_SALDO > 0  '
+      '     '
+      '   UNION ALL  '
+      '     '
+      '   Select   '
+      '    '
+      
+        '        Rtrim(B1_FILIAL) as Empresa, Rtrim(B2_LOCAL) as Armazem,' +
+        '  '
+      
+        '     '#9' B1_BRTPPR as Tipo, Rtrim(B1_BRGRP) as Item_FK, B1_COD as ' +
+        'Produto_ID, Rtrim(B1_DESC) as Produto,   '
+      '     '#9'  '#39#39' as Lote, NULL as DataValidade,  '
+      
+        '     '#9'  B2_QATU as Estoque, Rtrim(B1_UM) as UndMedida, '#39'N'#227'o'#39' as ' +
+        'TemLote '
+      '   from P12OFICIAL.dbo.SB2010 B8 (nolock)  '
+      
+        '   Inner Join P12OFICIAL.dbo.SB1010 Produto (Nolock) ON B1_FILIA' +
+        'L = '#39'0201'#39
+      '                                    AND B1_COD = B2_COD  '
+      '   Where B8.D_E_L_E_T_  <> '#39'*'#39
+      '   AND B2_FILIAL = '#39'020101'#39
+      
+        ' AND (B1_COD + Rtrim(B1_DESC))  Like '#39'%%'#39'   AND B2_LOCAL in ('#39'M1' +
+        #39', '#39'P1'#39', '#39'AG'#39') '
+      '   AND B2_QATU > 0 '
+      '   AND B1_RASTRO <> '#39'L'#39
+      '   Order by B1_COD, Convert(Datetime,B8_DTVALID,103) asc ')
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      ReadOnly = True
+      Size = 6
+    end
+    object QueryArmazem: TStringField
+      FieldName = 'Armazem'
+      ReadOnly = True
+      Size = 2
+    end
+    object QueryItem_FK: TStringField
+      FieldName = 'Item_FK'
+      ReadOnly = True
+      Size = 50
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      ReadOnly = True
+      Size = 30
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      ReadOnly = True
+      Size = 150
+    end
+    object QueryLote: TStringField
+      FieldName = 'Lote'
+      ReadOnly = True
+      Size = 10
+    end
+    object QueryDataValidade: TDateTimeField
+      FieldName = 'DataValidade'
+      ReadOnly = True
+    end
+    object QueryEstoque: TFloatField
+      FieldName = 'Estoque'
+      ReadOnly = True
+    end
+    object QueryUndMedida: TStringField
+      FieldName = 'UndMedida'
+      ReadOnly = True
+      Size = 6
+    end
+    object QueryTemLote: TStringField
+      FieldName = 'TemLote'
+      ReadOnly = True
+      Size = 3
+    end
+    object QueryTipo: TStringField
+      FieldName = 'Tipo'
+      ReadOnly = True
+      Size = 60
+    end
+  end
+end

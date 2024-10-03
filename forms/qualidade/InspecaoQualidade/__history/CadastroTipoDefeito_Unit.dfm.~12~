@@ -1,0 +1,489 @@
+inherited InspecaoQualidade_CadastroTipoDefeito: TInspecaoQualidade_CadastroTipoDefeito
+  Caption = ''
+  ClientHeight = 681
+  ClientWidth = 974
+  OnActivate = nil
+  OnResize = nil
+  OnShow = nil
+  ExplicitWidth = 980
+  ExplicitHeight = 710
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Splitter1: TSplitter
+    Left = 0
+    Top = 272
+    Width = 974
+    Height = 11
+    Cursor = crVSplit
+    Align = alBottom
+    ExplicitLeft = 994
+    ExplicitTop = 58
+    ExplicitWidth = 160
+    ExplicitHeight = 11
+  end
+  inherited PNL_Top: TPanel
+    Width = 974
+    ExplicitWidth = 974
+    inherited PNL_Navegacao: TPanel
+      Left = 880
+      Width = 94
+      ExplicitLeft = 880
+      ExplicitWidth = 94
+      inherited PNL_Controles: TPanel
+        Width = 86
+        ExplicitLeft = 120
+        ExplicitWidth = 86
+        inherited BTN_Pesquisar: TSpeedButton
+          OnClick = nil
+        end
+      end
+    end
+    inherited PNL_Modo: TPanel
+      Width = 974
+      ExplicitWidth = 974
+      inherited SHP_Modo: TShape
+        Width = 974
+        ExplicitWidth = 974
+      end
+      inherited LBL_Modo: TLabel
+        Width = 974
+        Height = 12
+      end
+    end
+    inherited PNL_TopControles: TPanel
+      Width = 880
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 790
+      inherited BNT_Desistir: TSpeedButton
+        Top = 2
+        ExplicitTop = 2
+      end
+    end
+  end
+  inherited PNL_Conteudo: TPanel
+    Width = 974
+    Height = 214
+    ExplicitWidth = 974
+    ExplicitHeight = 214
+    inherited PNL_Topo: TPanel
+      Width = 974
+      Height = 481
+      ExplicitWidth = 974
+      ExplicitHeight = 481
+      object Label5: TLabel
+        Left = 13
+        Top = 48
+        Width = 45
+        Height = 16
+        Caption = 'Defeito'
+        FocusControl = TXT_Defeito
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 13
+        Top = 96
+        Width = 28
+        Height = 16
+        Caption = 'Tipo'
+        FocusControl = TXT_Tipo
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 476
+        Top = 96
+        Width = 30
+        Height = 16
+        Caption = #193'rea'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 12
+        Top = 3
+        Width = 13
+        Height = 16
+        Caption = 'ID'
+        FocusControl = TXT_ID
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object TXT_Defeito: TDBEdit
+        Left = 13
+        Top = 65
+        Width = 636
+        Height = 23
+        CharCase = ecUpperCase
+        DataField = 'Defeito'
+        DataSource = DS
+        Enabled = False
+        TabOrder = 0
+      end
+      object TXT_Tipo: TDBEdit
+        Left = 13
+        Top = 113
+        Width = 260
+        Height = 23
+        CharCase = ecUpperCase
+        DataField = 'Tipo'
+        DataSource = DS
+        Enabled = False
+        TabOrder = 1
+      end
+      object CHK_Bloquear: TCheckBox
+        Left = 487
+        Top = 162
+        Width = 162
+        Height = 17
+        Caption = 'Bloquear Registro'
+        Enabled = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object TXT_ID: TDBEdit
+        Left = 13
+        Top = 19
+        Width = 75
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'Defeito_ID'
+        DataSource = DS
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object CBX_Area: TComboBox
+        Left = 476
+        Top = 113
+        Width = 173
+        Height = 23
+        CharCase = ecUpperCase
+        Enabled = False
+        TabOrder = 4
+        Text = 'PERSONALIZACAO'
+        Items.Strings = (
+          'INJECAO'
+          'PERSONALIZACAO')
+      end
+    end
+    inherited PGC_Principal: TPageControl
+      Top = 481
+      Width = 974
+      Height = 77
+      Visible = False
+      ExplicitTop = 481
+      ExplicitWidth = 974
+      ExplicitHeight = 77
+      inherited TabSheet1: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 966
+        ExplicitHeight = 46
+      end
+      inherited TabSheet_Desenvolvimento: TTabSheet
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 966
+        ExplicitHeight = 46
+        inherited Panel2: TPanel
+          Height = 46
+          ExplicitHeight = 46
+          inherited Memo_Filtro: TMemo
+            Height = 0
+            ExplicitHeight = 0
+          end
+        end
+        inherited Panel3: TPanel
+          Height = 46
+          ExplicitHeight = 46
+          inherited Memo_Query: TMemo
+            Height = 0
+            Lines.Strings = (
+              'Memo_Qu'
+              'ery')
+            ExplicitHeight = 0
+          end
+        end
+      end
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Left = 0
+    Top = 283
+    Width = 974
+    Height = 398
+    Align = alBottom
+    ExplicitLeft = 0
+    ExplicitTop = 283
+    ExplicitWidth = 974
+    ExplicitHeight = 398
+    inherited Panel1: TPanel
+      Top = 359
+      Width = 974
+      ExplicitTop = 359
+      ExplicitWidth = 974
+      inherited IMG_Abrir: TImage
+        Visible = False
+      end
+      inherited IMG_Fechar: TImage
+        Left = 57
+        Top = -2
+        ExplicitLeft = 57
+        ExplicitTop = -2
+      end
+      inherited BTN_Abrir: TSpeedButton
+        Left = 94
+        Visible = False
+        ExplicitLeft = 94
+      end
+    end
+    inherited Panel4: TPanel
+      Width = 974
+      ExplicitWidth = 974
+      inherited Label3: TLabel
+        Width = 974
+        Height = 33
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 974
+      Height = 310
+      OnDblClick = nil
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Defeito_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 46
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Defeito'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 332
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Tipo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 277
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Bloqueado'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 81
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Area'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = #193'rea'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 105
+          Visible = True
+        end>
+    end
+    inherited PNL_Listagem1: TPanel
+      Width = 974
+      ExplicitWidth = 974
+    end
+    inherited PNL_Listagem2: TPanel
+      Top = 351
+      Width = 974
+      ExplicitTop = 351
+      ExplicitWidth = 974
+    end
+    object Memo1: TMemo
+      Left = 544
+      Top = 144
+      Width = 366
+      Height = 185
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 5
+      Visible = False
+      OnDblClick = Memo1DblClick
+    end
+  end
+  inherited Query: TADOQuery
+    CursorType = ctStatic
+    SQL.Strings = (
+      ''
+      'SELECT '
+      #9'* '
+      'FROM [BOMIXBI].[dbo].[Icq_TB_InspecaoTabelaDefeito]'
+      'Where Tipo = '#39'DEFEITO - CAVIDADE'#39
+      'Order by Area, Defeito')
+    Left = 196
+    Top = 216
+    object QueryDefeito_ID: TAutoIncField
+      FieldName = 'Defeito_ID'
+      ReadOnly = True
+    end
+    object QueryDefeito: TStringField
+      FieldName = 'Defeito'
+      Size = 50
+    end
+    object QueryTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 30
+    end
+    object QueryArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object QueryBloqueado: TStringField
+      FieldName = 'Bloqueado'
+      Size = 3
+    end
+    object QueryResponsavel: TStringField
+      FieldName = 'Responsavel'
+      Size = 80
+    end
+  end
+  inherited CDS: TClientDataSet
+    Left = 160
+    Top = 216
+    object CDSDefeito_ID: TAutoIncField
+      FieldName = 'Defeito_ID'
+      ReadOnly = True
+    end
+    object CDSDefeito: TStringField
+      FieldName = 'Defeito'
+      Size = 50
+    end
+    object CDSTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 30
+    end
+    object CDSArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDSBloqueado: TStringField
+      FieldName = 'Bloqueado'
+      Size = 3
+    end
+    object CDSResponsavel: TStringField
+      FieldName = 'Responsavel'
+      Size = 80
+    end
+  end
+  inherited DS: TDataSource
+    Left = 232
+    Top = 216
+  end
+  inherited DSP: TDataSetProvider
+    Left = 266
+    Top = 216
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 113
+    Top = 215
+  end
+end

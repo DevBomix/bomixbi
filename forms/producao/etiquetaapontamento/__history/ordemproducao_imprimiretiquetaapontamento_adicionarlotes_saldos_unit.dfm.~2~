@@ -1,0 +1,112 @@
+inherited OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos: TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos
+  Caption = 'Consultar Lote'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 137
+      Caption = 'Consultar Lote'
+      ExplicitWidth = 137
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel_Filtro: TPanel
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Lote'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 112
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Validade'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 76
+          Visible = True
+        end>
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object CDSValidade: TDateTimeField
+      FieldName = 'Validade'
+      ReadOnly = True
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      
+        #9'B8_LOTECTL as Lote, Convert(Datetime,B8_DTVALID,112) as Validad' +
+        'e '
+      'from P12OFICIAL.dbo.SB8010'
+      'Where B8_PRODUTO = '#39'B18H00281'#39
+      'AND B8_LOCAL = '#39'E2'#39
+      'AND B8_LOTECTL like '#39'%%'#39
+      'AND D_E_L_E_T_ <> '#39'*'#39
+      'Order by Convert(Datetime,B8_DTVALID,112)'
+      '')
+    object QueryLote: TStringField
+      FieldName = 'Lote'
+      Size = 10
+    end
+    object QueryValidade: TDateTimeField
+      FieldName = 'Validade'
+      ReadOnly = True
+    end
+  end
+end

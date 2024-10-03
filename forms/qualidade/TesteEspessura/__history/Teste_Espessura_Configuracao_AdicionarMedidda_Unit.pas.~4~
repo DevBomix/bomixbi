@@ -1,0 +1,52 @@
+unit Teste_Espessura_Configuracao_AdicionarMedidda_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TTeste_Espessura_Configuracao_AdicionarMedidda = class(TForm)
+    Panel_Titulo: TPanel;
+    LBL_Titulo: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Image2: TImage;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Label7: TLabel;
+    CBX_Ponto: TComboBox;
+    TXT_Quantidade: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit1: TEdit;
+    TXT_Maximo: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Edit3: TEdit;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Teste_Espessura_Configuracao_AdicionarMedidda: TTeste_Espessura_Configuracao_AdicionarMedidda;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTeste_Espessura_Configuracao_AdicionarMedidda.BNT_CancelarClick(
+  Sender: TObject);
+begin
+  Close;
+end;
+
+end.

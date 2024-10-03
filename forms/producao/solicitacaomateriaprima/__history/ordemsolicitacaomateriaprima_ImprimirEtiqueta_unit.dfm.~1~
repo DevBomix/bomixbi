@@ -1,0 +1,23 @@
+inherited OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta: TOrdemSolicitacao_MateriaPrima_ImprimirEtiqueta
+  Caption = 'OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 176
+      Caption = 'Consultar Insumos'
+      ExplicitWidth = 176
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel_Filtro: TPanel
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+  end
+end

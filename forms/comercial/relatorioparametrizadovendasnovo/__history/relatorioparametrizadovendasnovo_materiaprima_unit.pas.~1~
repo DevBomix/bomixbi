@@ -1,0 +1,24 @@
+unit RelatorioParametrizadoVendasNOVO_MateriaPrima_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TRelatorioParametrizadoVendasNOVO_FiltroMateriaPrima = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendasNOVO_FiltroMateriaPrima: TRelatorioParametrizadoVendasNOVO_FiltroMateriaPrima;
+
+implementation
+
+{$R *.dfm}
+
+end.

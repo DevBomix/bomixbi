@@ -1,0 +1,92 @@
+unit BI_FuncionarioEntregaMaterias_MateriasAgrupadoPorMes_Unit;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Datasnap.Provider, Data.Win.ADODB,
+  Datasnap.DBClient, ppParameter, ppDesignLayer, ppBands, ppClass, ppCtrls,
+  Vcl.Graphics, ppPrnabl, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDB,
+  ppDBPipe;
+
+type
+  TDataModule1 = class(TDataModule)
+    ppDBPipeline_EntregaMaterial: TppDBPipeline;
+    ppMateriasAgrupadpPorMes: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppIMG_Logo: TppImage;
+    ppLBL_TituloRelatorio: TppLabel;
+    ppShape4: TppShape;
+    ppLabel20: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLine3: TppLine;
+    ppDBText2: TppDBText;
+    ppLabel11: TppLabel;
+    ppDBText7: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppLabel12: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppLine125: TppLine;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText20: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppLine9: TppLine;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
+    ppLabel29: TppLabel;
+    ppLabel10: TppLabel;
+    ppLine2: TppLine;
+    ppLine1: TppLine;
+    ppSummaryBand1: TppSummaryBand;
+    ppPageStyle1: TppPageStyle;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    QueryAcessorio_FK: TIntegerField;
+    QueryAcessorio: TStringField;
+    QueryAno: TIntegerField;
+    QueryMes: TStringField;
+    QueryQuantidade: TIntegerField;
+    CDSAcessorio_FK: TIntegerField;
+    CDSAcessorio: TStringField;
+    CDSAno: TIntegerField;
+    CDSMes: TStringField;
+    CDSQuantidade: TIntegerField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

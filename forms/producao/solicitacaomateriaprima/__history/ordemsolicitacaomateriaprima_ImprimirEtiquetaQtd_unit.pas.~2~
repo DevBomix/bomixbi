@@ -1,0 +1,39 @@
+unit ordemsolicitacaomateriaprima_ImprimirEtiquetaQtd_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  Tordemsolicitacaomateriaprima_ImprimirEtiquetaQtd = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    TXT_Quantidade: TEdit;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ordemsolicitacaomateriaprima_ImprimirEtiquetaQtd: Tordemsolicitacaomateriaprima_ImprimirEtiquetaQtd;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tordemsolicitacaomateriaprima_ImprimirEtiquetaQtd.BNT_CancelarClick(Sender: TObject);
+begin
+Close;
+end;
+
+end.

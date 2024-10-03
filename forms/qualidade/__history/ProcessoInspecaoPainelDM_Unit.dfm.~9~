@@ -1,0 +1,191 @@
+object ProcessoInspecao_PainelDM: TProcessoInspecao_PainelDM
+  OldCreateOrder = False
+  Height = 443
+  Width = 711
+  object CDS_Inspetores01: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_Inspetores01'
+    Left = 103
+    Top = 17
+    object CDS_Inspetores01Label: TStringField
+      FieldName = 'Label'
+      ReadOnly = True
+      Size = 133
+    end
+    object CDS_Inspetores01Value: TIntegerField
+      FieldName = 'Value'
+      ReadOnly = True
+    end
+    object CDS_Inspetores01RGB: TStringField
+      FieldName = 'RGB'
+      ReadOnly = True
+      Size = 11
+    end
+  end
+  object Query_Inspetores01: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    DataSource = DS_Inspetores01
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      'Select '
+      
+        #9'Funcionario + '#39' ('#39' + Area + '#39')'#39' as Label, Count(Inspecao_ID) as' +
+        ' Value, '#39'227,223,235'#39' as RGB'
+      'from ('
+      ''
+      #9'Select '
+      
+        #9#9'Distinct Empresa, Area, Setor, Inspetor_ID, Funcionario, Inspe' +
+        'cao_ID'
+      #9'from ('
+      #9#9#9'Select '
+      
+        #9#9#9#9'Ins.Empresa, Ins.Area, Ins.Setor, Ins.Inspetor_ID, Funcionar' +
+        'io, Cargo, '
+      
+        #9#9#9#9'Inspecao_ID, DataInspecao, Turno, Recurso, Processo, Defeito' +
+        '_FK, Defeito,'
+      
+        #9#9#9#9'Ins.Produto_ID, Produto.Produto, Produto.Grupo, Item, TipoPr' +
+        'oduto '
+      #9#9#9'from BomixBI.[dbo].[Icq_TB_Inspecao] Ins (nolock)'
+      
+        #9#9#9'Inner Join BomixBI.[dbo].Sys_TB_Usuario Usr (nolock) ON Usr.U' +
+        'suario_ID = Ins.Inspetor_ID'
+      
+        #9#9#9'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Pro' +
+        'duto.Produto_ID = Ins.Produto_ID '
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Produto.Empresa = '#39'0101'#39
+      
+        #9#9#9'Inner Join BomixBI.[dbo].[Icq_TB_InspecaoDefeito] Def (nolock' +
+        ') ON Def.Inspecao_FK = Ins.Inspetor_ID'
+      #9#9#9'Where Ins.Empresa = '#39'010101'#39
+      
+        #9#9#9'AND DataInspecao between '#39'2018-09-01 00:00:00.000'#39' AND '#39'2018-' +
+        '09-28 00:00:00.000'#39#9#9#9
+      #9') TB'
+      ''
+      ') TB'
+      'Group by Empresa, Area, Funcionario'
+      'Order by Count(Inspecao_ID) desc')
+    Left = 100
+    Top = 64
+    object Query_Inspetores01Label: TStringField
+      FieldName = 'Label'
+      ReadOnly = True
+      Size = 133
+    end
+    object Query_Inspetores01Value: TIntegerField
+      FieldName = 'Value'
+      ReadOnly = True
+    end
+    object Query_Inspetores01RGB: TStringField
+      FieldName = 'RGB'
+      ReadOnly = True
+      Size = 11
+    end
+  end
+  object DS_Inspetores01: TDataSource
+    DataSet = CDS_Inspetores01
+    Left = 64
+    Top = 64
+  end
+  object DSP_Inspetores01: TDataSetProvider
+    DataSet = Query_Inspetores01
+    Left = 138
+    Top = 64
+  end
+  object CDS_Inspetores02: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_Inspetores02'
+    Left = 279
+    Top = 25
+    object CDS_Inspetores02Area: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDS_Inspetores02Turno: TStringField
+      FieldName = 'Turno'
+      Size = 15
+    end
+    object CDS_Inspetores02NV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  object DS_Inspetores02: TDataSource
+    DataSet = CDS_Inspetores02
+    Left = 240
+    Top = 72
+  end
+  object Query_Inspetores02: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    DataSource = DS_Inspetores02
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      #9'Select '
+      #9#9'Area, Turno, Count(Inspecao_ID) as NV'
+      #9'from ('
+      ''
+      #9#9'Select '
+      
+        #9#9#9'Distinct Empresa, Area, Setor, Inspetor_ID, Funcionario, Insp' +
+        'ecao_ID, Turno'
+      #9#9'from ('
+      #9#9#9#9'Select '
+      
+        #9#9#9#9#9'Ins.Empresa, Ins.Area, Ins.Setor, Ins.Inspetor_ID, Funciona' +
+        'rio, Cargo, '
+      
+        #9#9#9#9#9'Inspecao_ID, DataInspecao, Turno, Recurso, Processo, Defeit' +
+        'o_FK, Defeito,'
+      
+        #9#9#9#9#9'Ins.Produto_ID, Produto.Produto, Produto.Grupo, Item, TipoP' +
+        'roduto '
+      #9#9#9#9'from BomixBI.[dbo].[Icq_TB_Inspecao] Ins (nolock)'
+      
+        #9#9#9#9'Inner Join BomixBI.[dbo].Sys_TB_Usuario Usr (nolock) ON Usr.' +
+        'Usuario_ID = Ins.Inspetor_ID'
+      
+        #9#9#9#9'Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (nolock) ON Pr' +
+        'oduto.Produto_ID = Ins.Produto_ID '
+      #9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Produto.Empresa = '#39'0101'#39
+      
+        #9#9#9#9'Inner Join BomixBI.[dbo].[Icq_TB_InspecaoDefeito] Def (noloc' +
+        'k) ON Def.Inspecao_FK = Ins.Inspetor_ID'
+      #9#9#9#9'Where Ins.Empresa = '#39'010101'#39
+      
+        #9#9#9#9'AND DataInspecao between '#39'2018-09-01 00:00:00.000'#39' AND '#39'2018' +
+        '-09-28 00:00:00.000'#39#9#9#9
+      #9#9') TB'
+      ''
+      #9') TB'
+      #9'Group by Empresa, Area, Turno'
+      #9'Order by Count(Inspecao_ID) desc')
+    Left = 276
+    Top = 72
+    object Query_Inspetores02Area: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object Query_Inspetores02Turno: TStringField
+      FieldName = 'Turno'
+      Size = 15
+    end
+    object Query_Inspetores02NV: TIntegerField
+      FieldName = 'NV'
+      ReadOnly = True
+    end
+  end
+  object DSP_Inspetores02: TDataSetProvider
+    DataSet = Query_Inspetores02
+    Left = 314
+    Top = 72
+  end
+end

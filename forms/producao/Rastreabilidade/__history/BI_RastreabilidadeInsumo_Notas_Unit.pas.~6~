@@ -1,0 +1,89 @@
+unit BI_RastreabilidadeInsumo_Notas_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.Provider, Data.Win.ADODB,
+  Datasnap.DBClient, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TBI_RastreabilidadeInsumo_Notas = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Panel1: TPanel;
+    Image38: TImage;
+    LBL_Titulo: TLabel;
+    CDS_Nota: TClientDataSet;
+    Query_Nota: TADOQuery;
+    DSP_Nota: TDataSetProvider;
+    DS_Nota: TDataSource;
+    Panel2: TPanel;
+    DBGrid2: TDBGrid;
+    TXT_ID: TDBEdit;
+    Label7: TLabel;
+    TXT_Login: TDBEdit;
+    Label6: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    CDS_Itens: TClientDataSet;
+    DS_Itens: TDataSource;
+    DSP_Itens: TDataSetProvider;
+    Query_Itens: TADOQuery;
+    DBEdit4: TDBEdit;
+    Label1: TLabel;
+    Query_ItensGrupo: TStringField;
+    Query_ItensProduto_ID: TStringField;
+    Query_ItensProduto: TStringField;
+    Query_ItensLote: TStringField;
+    Query_ItensDataValidade: TDateTimeField;
+    Query_ItensQuantidade: TIntegerField;
+    Query_ItensConsumo: TFloatField;
+    Query_ItensUM: TStringField;
+    CDS_ItensGrupo: TStringField;
+    CDS_ItensProduto_ID: TStringField;
+    CDS_ItensProduto: TStringField;
+    CDS_ItensLote: TStringField;
+    CDS_ItensDataValidade: TDateTimeField;
+    CDS_ItensQuantidade: TIntegerField;
+    CDS_ItensConsumo: TFloatField;
+    CDS_ItensUM: TStringField;
+    Query_NotaNota: TStringField;
+    Query_NotaEmissao: TDateTimeField;
+    Query_NotaCliente_ID: TStringField;
+    Query_NotaCliente: TStringField;
+    Query_NotaCidade: TStringField;
+    Query_NotaUF: TStringField;
+    Query_NotaGerente: TStringField;
+    CDS_NotaNota: TStringField;
+    CDS_NotaEmissao: TDateTimeField;
+    CDS_NotaCliente_ID: TStringField;
+    CDS_NotaCliente: TStringField;
+    CDS_NotaCidade: TStringField;
+    CDS_NotaUF: TStringField;
+    CDS_NotaGerente: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RastreabilidadeInsumo_Notas: TBI_RastreabilidadeInsumo_Notas;
+
+implementation
+
+{$R *.dfm}
+
+procedure TBI_RastreabilidadeInsumo_Notas.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

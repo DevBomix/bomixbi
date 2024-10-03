@@ -1,0 +1,40 @@
+inherited Sys_UsuarioBuscadorFornecedor: TSys_UsuarioBuscadorFornecedor
+  Caption = 'Sys_UsuarioBuscadorFornecedor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 205
+      Caption = 'Consultar Fornecedor'
+      ExplicitWidth = 205
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    inherited Panel_Filtro: TPanel
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      
+        #9'R_E_C_N_O_ as Recno, A2_FILIAL as Empresa, Rtrim(A2_COD) as For' +
+        'necedor_FK, Rtrim(A2_LOJA) as Loja, Rtrim(A2_NOME) as RazaoSocia' +
+        'l, '
+      
+        #9'Rtrim(A2_NREDUZ) as NomeFantasia, Rtrim(A2_MUN) as Cidade, Rtri' +
+        'm(A2_EST) as UF, '
+      #9'Case when A2_MSBLQL = 1 then '#39'Sim'#39' else '#39'N'#227'o'#39' end as Bloqueado '
+      'from P12OFICIAL.dbo.SA2010 A2 (nolock) '
+      'Where 1=1'
+      'AND A2_FILIAL = '#39'0101'#39
+      
+        'AND (Rtrim(A2_COD) + Rtrim(A2_NOME) + Rtrim(A2_NREDUZ) + Rtrim(A' +
+        '2_MUN)) like '#39'%%'#39
+      'Order by A2.R_E_C_N_O_ desc')
+  end
+end

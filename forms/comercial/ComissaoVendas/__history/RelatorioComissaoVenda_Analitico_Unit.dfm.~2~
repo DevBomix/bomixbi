@@ -1,0 +1,224 @@
+object RelatorioComissaoVenda_Analitico: TRelatorioComissaoVenda_Analitico
+  Left = 0
+  Top = 0
+  Caption = 'RelatorioComissaoVenda_Analitico'
+  ClientHeight = 299
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP'
+    Left = 328
+    Top = 198
+    object CDSNumTitulo: TStringField
+      FieldName = 'NumTitulo'
+      Size = 9
+    end
+    object CDSParcela: TStringField
+      FieldName = 'Parcela'
+      Size = 2
+    end
+    object CDSDataComissao: TDateTimeField
+      FieldName = 'DataComissao'
+      ReadOnly = True
+    end
+    object CDSCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      Size = 6
+    end
+    object CDSLoja: TStringField
+      FieldName = 'Loja'
+      Size = 2
+    end
+    object CDSRazaoSocial: TStringField
+      FieldName = 'RazaoSocial'
+      Size = 40
+    end
+    object CDSNomeFantasia: TStringField
+      FieldName = 'NomeFantasia'
+    end
+    object CDSPedido: TStringField
+      FieldName = 'Pedido'
+      Size = 6
+    end
+    object CDSValorTitulo: TFloatField
+      FieldName = 'ValorTitulo'
+    end
+    object CDSValorBase: TFloatField
+      FieldName = 'ValorBase'
+    end
+    object CDSPerc: TFloatField
+      FieldName = 'Perc'
+    end
+    object CDSComissao: TFloatField
+      FieldName = 'Comissao'
+    end
+    object CDSDeducaoRotulo: TFloatField
+      FieldName = 'DeducaoRotulo'
+    end
+    object CDSComissaoReal: TFloatField
+      FieldName = 'ComissaoReal'
+      ReadOnly = True
+    end
+    object CDSVendedor_ID: TStringField
+      FieldName = 'Vendedor_ID'
+      Size = 6
+    end
+    object CDSVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object CDSGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+    object CDSComissaoVendedor: TFloatField
+      FieldName = 'ComissaoVendedor'
+    end
+    object CDSDeducaoRotulo_1: TFloatField
+      FieldName = 'DeducaoRotulo_1'
+    end
+    object CDSDeducaoRotulo_B1418: TFloatField
+      FieldName = 'DeducaoRotulo_B1418'
+    end
+  end
+  object Query: TADOQuery
+    Connection = Sys_ModuloConexaoDados.ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    DataSource = DS
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      'Select '#9
+      #9'E3_NUM as NumTitulo, E3_PARCELA as Parcela, '
+      #9'CONVERT(Datetime,E3_EMISSAO,112) as DataComissao, '
+      
+        #9'Cliente_ID, Loja, RazaoSocial, NomeFantasia, E3_PEDIDO as Pedid' +
+        'o,'#9
+      #9'E1_VALOR as ValorTitulo, E3_BASE as ValorBase,'
+      
+        #9'E3_PORC as Perc, E3_COMIS as Comissao, E3_FSDEDRT as DeducaoRot' +
+        'ulo, '
+      
+        #9'Case when E3_FSCMREA > 0 then E3_FSCMREA else E3_COMIS end as C' +
+        'omissaoReal,'
+      #9'Vendedor.Vendedor_ID, Vendedor.Vendedor, Vendedor.Gerente, '
+      
+        #9'Vendedor.ComissaoVendedor, Vendedor.DeducaoRotulo, Vendedor.Ded' +
+        'ucaoRotulo_B1418'
+      #9
+      'from P12OFICIAL.dbo.SE3010 E3 (nolock)'
+      
+        'Inner Join BOMIXBI.dbo.Fat_TB_Cliente Cliente (nolock) On Client' +
+        'e.Empresa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Cliente.Cliente_ID = E3_CODCLI'
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Cliente.Loja = E3_LOJA'
+      
+        'Inner Join BOMIXBI.dbo.Fat_TB_VendedorGerente Vendedor (nolock) ' +
+        'On Vendedor.Empresa = '#39'0101'#39
+      #9#9#9#9#9#9#9#9#9#9#9#9#9'  AND Vendedor.Vendedor_ID = E3_VEND'#9
+      
+        'Inner Join P12OFICIAL.dbo.SE1010 E1 (nolock) ON E1.E1_FILIAL = '#39 +
+        '010101'#39' '#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9#9
+      #9#9#9#9#9#9#9#9#9#9#9'AND E1.D_E_L_E_T_ <> '#39'*'#39
+      #9#9#9#9#9#9#9#9#9#9#9'AND E1_NUM = E3_NUM'
+      #9#9#9#9#9#9#9#9#9#9#9'AND E1_PARCELA = E3_PARCELA'#9#9#9#9#9#9#9#9#9#9#9#9#9'  '
+      
+        'Where CONVERT(Datetime,E3_EMISSAO,112) Between '#39'2020-04-25 00:00' +
+        ':00.000'#39' AND '#39'2020-05-26 00:00:00.000'#39
+      'Order by E3_VEND, CONVERT(Datetime,E3_EMISSAO,112) desc')
+    Left = 364
+    Top = 198
+    object QueryNumTitulo: TStringField
+      FieldName = 'NumTitulo'
+      Size = 9
+    end
+    object QueryParcela: TStringField
+      FieldName = 'Parcela'
+      Size = 2
+    end
+    object QueryDataComissao: TDateTimeField
+      FieldName = 'DataComissao'
+      ReadOnly = True
+    end
+    object QueryCliente_ID: TStringField
+      FieldName = 'Cliente_ID'
+      Size = 6
+    end
+    object QueryLoja: TStringField
+      FieldName = 'Loja'
+      Size = 2
+    end
+    object QueryRazaoSocial: TStringField
+      FieldName = 'RazaoSocial'
+      Size = 40
+    end
+    object QueryNomeFantasia: TStringField
+      FieldName = 'NomeFantasia'
+    end
+    object QueryPedido: TStringField
+      FieldName = 'Pedido'
+      Size = 6
+    end
+    object QueryValorTitulo: TFloatField
+      FieldName = 'ValorTitulo'
+    end
+    object QueryValorBase: TFloatField
+      FieldName = 'ValorBase'
+    end
+    object QueryPerc: TFloatField
+      FieldName = 'Perc'
+    end
+    object QueryComissao: TFloatField
+      FieldName = 'Comissao'
+    end
+    object QueryDeducaoRotulo: TFloatField
+      FieldName = 'DeducaoRotulo'
+    end
+    object QueryComissaoReal: TFloatField
+      FieldName = 'ComissaoReal'
+      ReadOnly = True
+    end
+    object QueryVendedor_ID: TStringField
+      FieldName = 'Vendedor_ID'
+      Size = 6
+    end
+    object QueryVendedor: TStringField
+      FieldName = 'Vendedor'
+      Size = 40
+    end
+    object QueryGerente: TStringField
+      FieldName = 'Gerente'
+      Size = 40
+    end
+    object QueryComissaoVendedor: TFloatField
+      FieldName = 'ComissaoVendedor'
+    end
+    object QueryDeducaoRotulo_1: TFloatField
+      FieldName = 'DeducaoRotulo_1'
+    end
+    object QueryDeducaoRotulo_B1418: TFloatField
+      FieldName = 'DeducaoRotulo_B1418'
+    end
+  end
+  object DS: TDataSource
+    DataSet = CDS
+    Left = 400
+    Top = 198
+  end
+  object DSP: TDataSetProvider
+    DataSet = Query
+    Left = 434
+    Top = 198
+  end
+end

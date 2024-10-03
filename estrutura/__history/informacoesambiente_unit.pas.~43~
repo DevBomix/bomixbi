@@ -1,0 +1,349 @@
+unit InformacoesAmbiente_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Winsock, Registry, Vcl.StdCtrls,
+  Vcl.ComCtrls, ActiveX, ComObj;
+
+type
+  TSys_InformacoesAmbiente = class(TForm)
+    Grp_NomeComputador: TGroupBox;
+    TXT_NomeComputador: TEdit;
+    GroupBox1: TGroupBox;
+    TXT_IP: TEdit;
+    GroupBox2: TGroupBox;
+    TXT_Processador: TEdit;
+    GroupBox3: TGroupBox;
+    TXT_SistemaOperacional: TEdit;
+    GroupBox4: TGroupBox;
+    TXT_MemoriaTotal: TEdit;
+    GroupBox5: TGroupBox;
+    TXT_Mac: TEdit;
+    GroupBox6: TGroupBox;
+    TXT_HD: TEdit;
+    TXT_WindowsBits: TEdit;
+    ListView1: TListView;
+    GroupBox7: TGroupBox;
+    TXT_UsuarioRede: TEdit;
+
+    Function GetIPAddress:String;
+    Function GetMacAddress:String;
+    function GetComputadorNome: String;
+    function GetUsuarioDaRede: String;
+    function GetComputadorNomeDoProcessador : String;
+    function GetNomeExecutavel: String;
+    function GetComputadorSistemaOperacional : String;
+    Function GetComputadorMemoriaRAM : String;
+    function GetIsWindows64bits: Boolean;
+    procedure FormCreate(Sender: TObject);
+    procedure ListarSoftwaresDaMaquina;
+    function GetDriveSpace( const aDrive: string): Int64;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Sys_InformacoesAmbiente: TSys_InformacoesAmbiente;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSys_InformacoesAmbiente.FormCreate(Sender: TObject);
+begin
+    TXT_NomeComputador.Text := GetComputadorNome;
+    TXT_IP.Text := GetIPAddress;
+    TXT_Mac.Text := GetMacAddress;
+    TXT_Processador.Text := GetComputadorNomeDoProcessador;
+    TXT_SistemaOperacional.Text := GetComputadorSistemaOperacional;
+    TXT_MemoriaTotal.Text := GetComputadorMemoriaRAM;
+    TXT_HD.Text := IntToStr(GetDriveSpace('C:'));
+
+    //GetComputadorTamanhoHD;
+
+    if GetIsWindows64bits = true then
+         TXT_WindowsBits.Text := '64 Bits'
+    else
+         TXT_WindowsBits.Text := '32 Bits';
+
+    ListarSoftwaresDaMaquina;
+
+end;
+
+
+function TSys_InformacoesAmbiente.GetDriveSpace( const aDrive: string ): Int64;
+const
+  wbemFlagForwardOnly = $00000020;
+var
+
+  FSWbemLocator : OLEVariant;
+  FWMIService   : OLEVariant;
+  FWbemObjectSet: OLEVariant;
+  FWbemObject   : OLEVariant;
+  oEnum         : IEnumvariant;
+  iValue        : LongWord;
+
+begin;
+  FSWbemLocator := CreateOleObject('WbemScripting.SWbemLocator');
+  FWMIService   := FSWbemLocator.ConnectServer('localhost', 'root\CIMV2', '', '');
+  FWbemObjectSet:= FWMIService.ExecQuery(Format('SELECT Size FROM Win32_LogicalDisk Where DeviceID="%s"',[aDrive]),'WQL',wbemFlagForwardOnly);
+  oEnum         := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
+  if oEnum.Next(1, FWbemObject, iValue) = 0 then
+  begin
+    Result:= Round(((FWbemObject.Size/1024)/1024)/1024);
+    //Int64(FWbemObject.Size);
+
+    FWbemObject:=Unassigned;
+  end;
+end;
+
+
+function TSys_InformacoesAmbiente.GetIsWindows64bits: Boolean;
+  type
+    TIsWow64Process = function(AHandle:THandle; var AIsWow64: BOOL): BOOL; stdcall;
+  var
+    vKernel32Handle: DWORD;
+    vIsWow64Process: TIsWow64Process;
+    vIsWow64: BOOL;
+begin
+
+  Result := False;
+
+  vKernel32Handle := LoadLibrary('kernel32.dll');
+  if (vKernel32Handle = 0) then Exit;
+
+  try
+
+  @vIsWow64Process := GetProcAddress(vKernel32Handle, 'IsWow64Process');
+  if not Assigned(vIsWow64Process) then Exit;
+
+  vIsWow64 := False;
+  if (vIsWow64Process(GetCurrentProcess, vIsWow64)) then
+    Result := vIsWow64;
+
+  finally
+    FreeLibrary(vKernel32Handle);
+  end;
+
+end;
+
+Function TSys_InformacoesAmbiente.GetComputadorMemoriaRAM : String;
+Var
+      MS_Ex : MemoryStatusEx;
+begin
+
+ FillChar (MS_Ex, SizeOf(MemoryStatusEx), #0);
+ MS_Ex.dwLength := SizeOf(MemoryStatusEx);
+ GlobalMemoryStatusEx (MS_Ex);
+ Result := FloatToStr(Round(((MS_Ex.ullTotalPhys / 1024)/ 1024)/ 1024)) + ' GB';
+
+end;
+
+function TSys_InformacoesAmbiente.GetMacAddress: string;
+var
+Lib: Cardinal;
+Func: function(GUID: PGUID): Longint; stdcall;
+GUID1, GUID2: TGUID;
+
+begin
+Result := '';
+Lib := LoadLibrary('rpcrt4.dll');
+if Lib <> 0 then
+begin
+  @Func := GetProcAddress(Lib, 'UuidCreateSequential');
+  if Assigned(Func) then
+  begin
+    if (Func(@GUID1) = 0) and
+       (Func(@GUID2) = 0) and
+       (GUID1.D4[2] = GUID2.D4[2]) and
+       (GUID1.D4[3] = GUID2.D4[3]) and
+       (GUID1.D4[4] = GUID2.D4[4]) and
+       (GUID1.D4[5] = GUID2.D4[5]) and
+       (GUID1.D4[6] = GUID2.D4[6]) and
+       (GUID1.D4[7] = GUID2.D4[7]) then
+    begin
+      Result :=
+        IntToHex(GUID1.D4[2], 2) + '-' +
+        IntToHex(GUID1.D4[3], 2) + '-' +
+        IntToHex(GUID1.D4[4], 2) + '-' +
+        IntToHex(GUID1.D4[5], 2) + '-' +
+        IntToHex(GUID1.D4[6], 2) + '-' +
+        IntToHex(GUID1.D4[7], 2);
+    end;
+  end;
+end;
+end;
+
+function TSys_InformacoesAmbiente.GetNomeExecutavel: String;
+Var
+  VLN_ContrarLetras: Integer;
+begin
+  VLN_ContrarLetras := Length(ExtractFileName(Application.ExeName));
+  Result := Copy(ExtractFileName(Application.ExeName),1,VLN_ContrarLetras-4);
+end;
+
+function TSys_InformacoesAmbiente.GetComputadorSistemaOperacional : String;
+var
+  Registro: TRegistry;
+begin
+
+  Registro := TRegistry.Create;
+  try
+      With Registro do
+      begin
+          RootKey := HKEY_LOCAL_MACHINE;
+          OpenKey('SOFTWARE\Microsoft\Windows NT\CurrentVersion', True);
+          Result := ReadString('ProductName');
+      end;
+  finally
+      Registro.Free;
+  end;
+
+end;
+
+function TSys_InformacoesAmbiente.GetComputadorNomeDoProcessador : String;
+var
+  Registro: TRegistry;
+begin
+
+  Registro := TRegistry.Create;
+  try
+      With Registro do
+      begin
+          RootKey := HKEY_LOCAL_MACHINE;
+          OpenKey('HARDWARE\DESCRIPTION\System\CentralProcessor\0', True);
+          Result := ReadString('ProcessorNameString');
+      end;
+  finally
+      Registro.Free;
+  end;
+
+end;
+
+function TSys_InformacoesAmbiente.GetUsuarioDaRede: String;
+ var
+  UserName: String;
+  UserNameLen: DWord;
+begin
+  UserNameLen := 255;
+  SetLength (UserName, UserNameLen);
+  if GetUserName (PChar(UserName), UserNameLen) Then
+     Result := Copy (UserName,1,UserNameLen - 1)
+  else
+     Result := 'Desconhecido';
+end;
+
+procedure TSys_InformacoesAmbiente.ListarSoftwaresDaMaquina;
+const
+  UNINST_PATH = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+
+var
+    Registro: TRegistry;
+	  Chaves: TStringList; xListItem: TlistItem; I: Integer;
+    xNomeSoftware : string;
+    //xCaminhoRemover : string;
+
+begin
+    ListView1.ViewStyle := vsReport;
+    ListView1.Columns.add;
+//    ListView1.Columns.add;
+    ListView1.Columns[0].caption := 'Nome do Programa';
+//    ListView1.Columns[1].caption := 'Caminho pra Remover';
+    ListView1.Columns[0].Width := 600;
+//    ListView1.Columns[1].Width := 300;
+    Registro := TRegistry.Create;
+
+    with Registro do
+    try
+        with ListView1.Items do
+           try
+                BeginUpdate;
+                Clear;
+                RootKey := HKEY_LOCAL_MACHINE;
+
+                if OpenKeyReadOnly(UNINST_PATH) then
+                begin
+                    Chaves := TStringList.Create;
+
+                    try
+                        GetKeyNames(Chaves);
+                        CloseKey;
+
+                        for I := 0 to Chaves.Count - 1 do
+
+                           if OpenKeyReadOnly(Format('%s\%s', [UNINST_PATH, Chaves[I]])) then
+                                try
+                                    xNomeSoftware := ReadString('DisplayName');
+                                    //xCaminhoRemover := ReadString('UninstallString');
+
+                                    if xNomeSoftware <> '' then
+                                    begin
+                                        xListItem := Add;
+                                        xListItem.Caption := xNomeSoftware;
+                                        //xListItem.subitems.Add(xCaminhoRemover);
+                                     end;
+
+                                finally
+                                    CloseKey;
+                                end;
+
+                    finally
+                        Chaves.Free;
+                    end;
+                end;
+           finally
+
+           ListView1.AlphaSort;
+           EndUpdate;
+    end;
+    finally
+        CloseKey;
+        Free;
+    end;
+end;
+
+function TSys_InformacoesAmbiente.GetComputadorNome: String;
+ var
+  buffer: Array[0..255] of char;
+  size: DWord;
+
+begin
+
+  size := 256;
+  if GetComputerName (buffer,size) then
+   Result := Buffer
+  else
+   Result := '';
+
+end;
+
+Function TSys_InformacoesAmbiente.GetIPAddress:String;
+type
+  pu_long = ^u_long;
+var
+
+  varTWSAData : TWSAData;
+  varPHostEnt : PHostEnt;
+  varTInAddr : TInAddr;
+  namebuf : Array[0..255] of AnsiChar;
+
+begin
+
+  If WSAStartup($101,varTWSAData) <> 0 Then
+  Result := 'No. IP Address'
+  Else Begin
+    gethostname(namebuf,sizeof(namebuf));
+    varPHostEnt := gethostbyname(namebuf);
+    varTInAddr.S_addr := u_long(pu_long(varPHostEnt^.h_addr_list^)^);
+    Result := inet_ntoa(varTInAddr);
+  End;
+  WSACleanup;
+
+end;
+
+end.

@@ -1,0 +1,52 @@
+unit BI_FuncionarioEntregaMaterias_InserirMaterialQtd_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, System.Actions,
+  Vcl.ActnList, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TBI_FuncionarioEntregaMaterias_InserirMaterialQtd = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    TXT_Quantidade: TEdit;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ActionList1: TActionList;
+    Cancelar: TAction;
+    Confirmar: TAction;
+    DT_DataEntrega: TDateTimePicker;
+    Label3: TLabel;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_FuncionarioEntregaMaterias_InserirMaterialQtd: TBI_FuncionarioEntregaMaterias_InserirMaterialQtd;
+
+implementation
+
+{$R *.dfm}
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterialQtd.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TBI_FuncionarioEntregaMaterias_InserirMaterialQtd.BNT_ConfirmarClick(
+  Sender: TObject);
+begin
+   Close;
+end;
+
+end.

@@ -1,0 +1,207 @@
+inherited BI_FuncionarioEntregaMaterias_InserirMaterial: TBI_FuncionarioEntregaMaterias_InserirMaterial
+  Caption = 'Inserir Material'
+  ClientHeight = 533
+  ClientWidth = 860
+  ExplicitWidth = 866
+  ExplicitHeight = 562
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 844
+    ExplicitWidth = 844
+    inherited LBL_Titulo: TLabel
+      Width = 139
+      Caption = 'Inserir Material'
+      ExplicitWidth = 139
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 846
+    Height = 428
+    ExplicitWidth = 846
+    ExplicitHeight = 428
+    inherited Panel_Filtro: TPanel
+      Width = 846
+      Height = 52
+      ExplicitWidth = 846
+      ExplicitHeight = 52
+      inherited Label5: TLabel
+        Top = 15
+        ExplicitTop = 15
+      end
+      object Label7: TLabel [1]
+        Left = 322
+        Top = 16
+        Width = 11
+        Height = 22
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited TXT_Buscador: TEdit
+        Top = 14
+        Width = 250
+        Font.Charset = ANSI_CHARSET
+        Font.Height = -12
+        Font.Name = 'Arial'
+        ParentFont = False
+        ExplicitTop = 14
+        ExplicitWidth = 250
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 591
+        Top = 13
+        ExplicitLeft = 591
+        ExplicitTop = 13
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+      object TXT_Buscador2: TEdit
+        Left = 339
+        Top = 14
+        Width = 246
+        Height = 23
+        CharCase = ecUpperCase
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Top = 58
+      Width = 834
+      Height = 367
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taLeftJustify
+          Expanded = False
+          FieldName = 'Acessorio_Id'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 41
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Descricao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Material'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 545
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PrazoDias'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Prazo Dias'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 90
+          Visible = True
+        end>
+    end
+    inherited Memo1: TMemo
+      Left = 47
+      Top = 240
+      ExplicitLeft = 47
+      ExplicitTop = 240
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 494
+    Width = 860
+    ExplicitTop = 494
+    ExplicitWidth = 860
+    inherited Panel3: TPanel
+      Left = 615
+      ExplicitLeft = 615
+      inherited BNT_Cancelar: TSpeedButton
+        Caption = '       Fechar'
+      end
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSAcessorio_Id: TIntegerField
+      FieldName = 'Acessorio_Id'
+    end
+    object CDSDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 150
+    end
+    object CDSPrazoDias: TIntegerField
+      FieldName = 'PrazoDias'
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      ' Select Acessorio_Id, Descricao, PrazoDias '
+      ' from [dbo].[Pes_TB_Acessorio] (nolock) '
+      ' Where 1=1'
+      ' AND Descricao like '#39'%TAM XG%'#39
+      ' AND Visibilidade = 0  '
+      ' Order by Descricao  ')
+    object QueryAcessorio_Id: TIntegerField
+      FieldName = 'Acessorio_Id'
+    end
+    object QueryDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 150
+    end
+    object QueryPrazoDias: TIntegerField
+      FieldName = 'PrazoDias'
+    end
+  end
+end

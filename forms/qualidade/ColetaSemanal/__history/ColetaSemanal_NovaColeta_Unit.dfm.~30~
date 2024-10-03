@@ -1,0 +1,773 @@
+inherited ColetaSemanal_NovaColeta: TColetaSemanal_NovaColeta
+  Caption = 'Coleta Semanal'
+  ClientHeight = 664
+  ClientWidth = 1111
+  ExplicitWidth = 1117
+  ExplicitHeight = 693
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 1095
+    ExplicitLeft = 8
+    ExplicitTop = 8
+    ExplicitWidth = 1095
+    inherited LBL_Titulo: TLabel
+      Width = 144
+      Caption = 'Coleta Semanal'
+      ExplicitWidth = 144
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 1097
+    Height = 559
+    ExplicitWidth = 1097
+    ExplicitHeight = 559
+    inherited Panel_Filtro: TPanel
+      Width = 1097
+      Height = 217
+      ExplicitWidth = 1097
+      ExplicitHeight = 217
+      inherited Label5: TLabel
+        Left = 346
+        Top = 240
+        Visible = False
+        ExplicitLeft = 346
+        ExplicitTop = 240
+      end
+      object Label2: TLabel [1]
+        Left = 11
+        Top = 8
+        Width = 166
+        Height = 29
+        Caption = 'Data da Coleta'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label4: TLabel [2]
+        Left = 11
+        Top = 89
+        Width = 54
+        Height = 29
+        Caption = 'Hora'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label3: TLabel [3]
+        Left = 397
+        Top = 8
+        Width = 71
+        Height = 29
+        Caption = 'Molde'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label7: TLabel [4]
+        Left = 236
+        Top = 89
+        Width = 106
+        Height = 29
+        Caption = 'Cavidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label1: TLabel [5]
+        Left = 6
+        Top = 180
+        Width = 229
+        Height = 29
+        Caption = 'Ordem de Produ'#231#227'o'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label6: TLabel [6]
+        Left = 236
+        Top = 8
+        Width = 95
+        Height = 29
+        Caption = 'Recurso'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 12615680
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited TXT_Buscador: TEdit
+        Left = 400
+        Top = 239
+        Width = 197
+        Height = 25
+        Visible = False
+        ExplicitLeft = 400
+        ExplicitTop = 239
+        ExplicitWidth = 197
+        ExplicitHeight = 25
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 603
+        Top = 237
+        Height = 27
+        Visible = False
+        ExplicitLeft = 603
+        ExplicitTop = 237
+        ExplicitHeight = 27
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+      object DTP_DataColeta: TDateTimePicker
+        Left = 11
+        Top = 40
+        Width = 180
+        Height = 37
+        Date = 41335.000000000000000000
+        Time = 0.424179409732460000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object TXT_HoraColeta: TMaskEdit
+        Left = 11
+        Top = 120
+        Width = 138
+        Height = 37
+        CharCase = ecUpperCase
+        EditMask = '!90:00;1;_'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        MaxLength = 5
+        ParentFont = False
+        TabOrder = 3
+        Text = '  :  '
+      end
+      object CBX_Cavidade: TComboBox
+        Left = 236
+        Top = 120
+        Width = 210
+        Height = 37
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Text = 'CBX_Cavidade'
+      end
+      object TXT_MoldeID: TEdit
+        Left = 397
+        Top = 40
+        Width = 155
+        Height = 37
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 5
+        Text = 'TXT_MoldeID'
+      end
+      object TXT_Molde: TEdit
+        Left = 558
+        Top = 40
+        Width = 488
+        Height = 37
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 6
+        Text = 'TXT_Molde'
+      end
+      object TXT_Recurso: TEdit
+        Left = 236
+        Top = 40
+        Width = 155
+        Height = 37
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 7
+        Text = 'TXT_Recurso'
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Left = 6
+      Top = 223
+      Width = 1085
+      Height = 332
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'OrdemProducao'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'OP'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 81
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DataAjustadaIni'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Data Inicio'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 81
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'HoraAjustadaIni'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Hora'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 42
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Produto_ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'ID'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 72
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Produto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 384
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SetorMercado'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Mercado'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cliente'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 242
+          Visible = True
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = False
+        end>
+    end
+    inherited Memo1: TMemo
+      Left = 718
+      Top = 302
+      Width = 339
+      Height = 227
+      ExplicitLeft = 718
+      ExplicitTop = 302
+      ExplicitWidth = 339
+      ExplicitHeight = 227
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 625
+    Width = 1111
+    ExplicitTop = 625
+    ExplicitWidth = 1111
+    inherited Panel3: TPanel
+      Left = 866
+      ExplicitLeft = 866
+      inherited BNT_Cancelar: TSpeedButton
+        Left = 9
+        Top = 1
+        Caption = '      Fechar'
+        ExplicitLeft = 9
+        ExplicitTop = 1
+      end
+    end
+  end
+  inherited ACL_Atalhos: TActionList
+    Left = 265
+    Top = 231
+  end
+  inherited CDS: TClientDataSet
+    Left = 312
+    Top = 232
+    object CDSRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object CDSArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object CDSSetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object CDSOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object CDSCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object CDSSetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 60
+    end
+    object CDSStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object CDSEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object CDSItem: TStringField
+      FieldName = 'Item'
+      ReadOnly = True
+      Size = 4
+    end
+    object CDSProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object CDSProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object CDSDataAjustadaIni: TDateTimeField
+      FieldName = 'DataAjustadaIni'
+    end
+    object CDSLote: TStringField
+      FieldName = 'Lote'
+      ReadOnly = True
+      Size = 10
+    end
+    object CDSHoraAjustadaIni: TStringField
+      FieldName = 'HoraAjustadaIni'
+      Size = 5
+    end
+    object CDSPrioridade: TIntegerField
+      FieldName = 'Prioridade'
+    end
+    object CDSInjetora_FK: TStringField
+      FieldName = 'Injetora_FK'
+      Size = 6
+    end
+    object CDSCicloPadrao: TFloatField
+      FieldName = 'CicloPadrao'
+    end
+    object CDSMolde_ID: TStringField
+      FieldName = 'Molde_ID'
+      Size = 15
+    end
+    object CDSMolde: TStringField
+      FieldName = 'Molde'
+      Size = 50
+    end
+    object CDSResina1_ID: TStringField
+      FieldName = 'Resina1_ID'
+      Size = 15
+    end
+    object CDSResina1Perc: TFloatField
+      FieldName = 'Resina1Perc'
+    end
+    object CDSResina1: TStringField
+      FieldName = 'Resina1'
+      Size = 150
+    end
+    object CDSResina2_ID: TStringField
+      FieldName = 'Resina2_ID'
+      Size = 15
+    end
+    object CDSResina2: TStringField
+      FieldName = 'Resina2'
+      Size = 150
+    end
+    object CDSResina2Perc: TFloatField
+      FieldName = 'Resina2Perc'
+    end
+    object CDSMaster_ID: TStringField
+      FieldName = 'Master_ID'
+      Size = 15
+    end
+    object CDSMaster: TStringField
+      FieldName = 'Master'
+      Size = 150
+    end
+    object CDSMasterPerc: TFloatField
+      FieldName = 'MasterPerc'
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select '
+      ''
+      
+        '    Recno, Area, Setor, OrdemProducao, Cliente, SetorMercado, St' +
+        'atus, Emissao,'
+      
+        ' '#9'SUBSTRING(Produto_ID,1,4) as Item, Produto_ID, Produto, DataAj' +
+        'ustadaIni, HoraAjustadaIni, Prioridade, '
+      ' '#9'CASE  '
+      
+        ' '#9#9#9'WHEN DATEPART(WEEK, DataAjustadaIni) <= 9 THEN '#39'0'#39' + CAST(DA' +
+        'TEPART(WEEK, DataAjustadaIni) AS varchar(1))  '
+      
+        ' '#9'ELSE CAST(DATEPART(WEEK, DataAjustadaIni) AS varchar(2)) END +' +
+        ' SUBSTRING(Produto_ID,1,4) + CAST(YEAR(DataAjustadaIni) AS varch' +
+        'ar(4)) AS Lote,'#9
+      
+        #9'Injetora_FK, CicloPadrao, Molde_ID, Molde, Resina1_ID, Resina1,' +
+        ' Resina1Perc, Resina2_ID, Resina2, Resina2Perc, Master_ID, Maste' +
+        'r, MasterPerc'
+      ''
+      'from BOMIXBI.dbo.Pcp_TB_OrdemProducao (nolock) '
+      
+        'Where DataAjustadaIni >= CONVERT(Datetime,Convert(Varchar(10),'#39'0' +
+        '2/03/2020'#39',103),103)'
+      
+        'AND DataAjustadaIni <= CONVERT(Datetime,Convert(Varchar(10),'#39'08/' +
+        '03/2020'#39',103),103)'
+      
+        'AND Setor + OrdemProducao + Cliente + SetorMercado + Injetora_FK' +
+        ' + Produto_ID + Produto like '#39'%%'#39
+      'AND Injetora_FK = '#39'550-12'#39
+      'AND SUBSTRING(Produto_ID,1,4) = '#39'B15B'#39
+      'Order by DataAjustadaIni, HoraAjustadaIni, Prioridade')
+    Left = 348
+    Top = 232
+    object QueryRecno: TIntegerField
+      FieldName = 'Recno'
+    end
+    object QueryArea: TStringField
+      FieldName = 'Area'
+      Size = 50
+    end
+    object QuerySetor: TStringField
+      FieldName = 'Setor'
+      Size = 50
+    end
+    object QueryOrdemProducao: TStringField
+      FieldName = 'OrdemProducao'
+      Size = 11
+    end
+    object QueryCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object QuerySetorMercado: TStringField
+      FieldName = 'SetorMercado'
+      Size = 60
+    end
+    object QueryStatus: TStringField
+      FieldName = 'Status'
+      Size = 12
+    end
+    object QueryEmissao: TDateTimeField
+      FieldName = 'Emissao'
+    end
+    object QueryItem: TStringField
+      FieldName = 'Item'
+      ReadOnly = True
+      Size = 4
+    end
+    object QueryProduto_ID: TStringField
+      FieldName = 'Produto_ID'
+      Size = 30
+    end
+    object QueryProduto: TStringField
+      FieldName = 'Produto'
+      Size = 150
+    end
+    object QueryDataAjustadaIni: TDateTimeField
+      FieldName = 'DataAjustadaIni'
+    end
+    object QueryLote: TStringField
+      FieldName = 'Lote'
+      ReadOnly = True
+      Size = 10
+    end
+    object QueryHoraAjustadaIni: TStringField
+      FieldName = 'HoraAjustadaIni'
+      Size = 5
+    end
+    object QueryPrioridade: TIntegerField
+      FieldName = 'Prioridade'
+    end
+    object QueryInjetora_FK: TStringField
+      FieldName = 'Injetora_FK'
+      Size = 6
+    end
+    object QueryCicloPadrao: TFloatField
+      FieldName = 'CicloPadrao'
+    end
+    object QueryMolde_ID: TStringField
+      FieldName = 'Molde_ID'
+      Size = 15
+    end
+    object QueryMolde: TStringField
+      FieldName = 'Molde'
+      Size = 50
+    end
+    object QueryResina1_ID: TStringField
+      FieldName = 'Resina1_ID'
+      Size = 15
+    end
+    object QueryResina1Perc: TFloatField
+      FieldName = 'Resina1Perc'
+    end
+    object QueryResina1: TStringField
+      FieldName = 'Resina1'
+      Size = 150
+    end
+    object QueryResina2_ID: TStringField
+      FieldName = 'Resina2_ID'
+      Size = 15
+    end
+    object QueryResina2: TStringField
+      FieldName = 'Resina2'
+      Size = 150
+    end
+    object QueryResina2Perc: TFloatField
+      FieldName = 'Resina2Perc'
+    end
+    object QueryMaster_ID: TStringField
+      FieldName = 'Master_ID'
+      Size = 15
+    end
+    object QueryMaster: TStringField
+      FieldName = 'Master'
+      Size = 150
+    end
+    object QueryMasterPerc: TFloatField
+      FieldName = 'MasterPerc'
+    end
+  end
+  inherited DS: TDataSource
+    Left = 384
+    Top = 240
+  end
+  inherited DSP: TDataSetProvider
+    Left = 418
+    Top = 232
+  end
+end

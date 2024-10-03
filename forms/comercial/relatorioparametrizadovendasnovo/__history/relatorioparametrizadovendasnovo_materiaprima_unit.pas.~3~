@@ -1,0 +1,40 @@
+unit RelatorioParametrizadoVendasNOVO_MateriaPrima_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TRelatorioParametrizadoVendasNOVO_MateriaPrima = class(TForm)
+    Panel1: TPanel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
+    CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
+    CheckBox10: TCheckBox;
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    Label1: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelatorioParametrizadoVendasNOVO_MateriaPrima: TRelatorioParametrizadoVendasNOVO_MateriaPrima;
+
+implementation
+
+{$R *.dfm}
+
+end.

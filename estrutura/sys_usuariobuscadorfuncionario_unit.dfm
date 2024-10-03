@@ -1,0 +1,289 @@
+inherited Sys_UsuarioBuscadorFuncionario: TSys_UsuarioBuscadorFuncionario
+  Caption = 'Consultar Funcion'#225'rio'
+  ClientHeight = 657
+  ClientWidth = 1364
+  ExplicitWidth = 1370
+  ExplicitHeight = 686
+  DesignSize = (
+    1364
+    657)
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    Width = 1348
+    ExplicitWidth = 1348
+    inherited LBL_Titulo: TLabel
+      Width = 208
+      Caption = 'Consultar Funcion'#225'rio'
+      ExplicitWidth = 208
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 1350
+    Height = 552
+    ExplicitWidth = 1350
+    ExplicitHeight = 552
+    DesignSize = (
+      1350
+      552)
+    inherited Panel_Filtro: TPanel
+      Width = 1350
+      ExplicitWidth = 1350
+      object Label7: TLabel [1]
+        Left = 407
+        Top = 10
+        Width = 11
+        Height = 22
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited TXT_Buscador: TEdit
+        Width = 338
+        ExplicitWidth = 338
+      end
+      inherited PNL_Buscar: TPanel
+        Left = 768
+        Top = 8
+        ExplicitLeft = 768
+        ExplicitTop = 8
+        inherited BTN_Buscar: TSpeedButton
+          Left = 0
+          OnClick = BTN_BuscarClick
+          ExplicitLeft = 0
+        end
+      end
+      object TXT_Buscador2: TEdit
+        Left = 424
+        Top = 9
+        Width = 338
+        Height = 26
+        AutoSize = False
+        CharCase = ecUpperCase
+        TabOrder = 2
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Top = 55
+      Width = 1332
+      Height = 490
+      Font.Color = clBlack
+      Font.Height = -11
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Columns = <
+        item
+          Expanded = False
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Matricula'
+          Title.Alignment = taCenter
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 78
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Funcionario'
+          Title.Caption = 'Nome'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 378
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cargo'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 328
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TipoFuncao'
+          Title.Caption = 'Tipo Fun'#231#227'o'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 134
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Empresa'
+          Title.Alignment = taCenter
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 133
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SituacaoDesc'
+          Title.Alignment = taCenter
+          Title.Caption = 'Situa'#231#227'o'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 99
+          Visible = True
+        end>
+    end
+    inherited Memo1: TMemo
+      Width = 506
+      Height = 313
+      ExplicitWidth = 506
+      ExplicitHeight = 313
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 618
+    Width = 1364
+    ExplicitTop = 618
+    ExplicitWidth = 1364
+    inherited Panel3: TPanel
+      Left = 1119
+      ExplicitLeft = 1119
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSEmpresa_ID: TStringField
+      FieldName = 'Empresa_ID'
+      Size = 4
+    end
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 100
+    end
+    object CDSIDTotvs: TStringField
+      FieldName = 'IDTotvs'
+      Size = 6
+    end
+    object CDSMatricula: TStringField
+      FieldName = 'Matricula'
+      Size = 6
+    end
+    object CDSFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 70
+    end
+    object CDSCargo: TStringField
+      FieldName = 'Cargo'
+      ReadOnly = True
+      Size = 68
+    end
+    object CDSTipoFuncao: TStringField
+      FieldName = 'TipoFuncao'
+      Size = 200
+    end
+    object CDSSituacao: TStringField
+      FieldName = 'Situacao'
+      Size = 1
+    end
+    object CDSSituacaoDesc: TStringField
+      FieldName = 'SituacaoDesc'
+      Size = 9
+    end
+    object CDSCentroCusto_FK: TStringField
+      FieldName = 'CentroCusto_FK'
+      Size = 9
+    end
+    object CDSCentroCusto: TStringField
+      FieldName = 'CentroCusto'
+      Size = 60
+    end
+  end
+  inherited Query: TADOQuery
+    SQL.Strings = (
+      'Select top 20'
+      #9'Empresa_ID, Empresa, IDTotvs, Matricula, Funcionario, '
+      
+        'Funcao + '#39' - '#39' + Departamento as Cargo, TipoFuncao, Situacao, Si' +
+        'tuacaoDesc,'
+      'CentroCusto_FK, CentroCusto  '
+      'from BomixBI.dbo.Pes_TB_Funcionario (nolock)'
+      'Where Situacao = 7'
+      'Order by Apelido'
+      '')
+    object QueryEmpresa_ID: TStringField
+      FieldName = 'Empresa_ID'
+      Size = 4
+    end
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 100
+    end
+    object QueryIDTotvs: TStringField
+      FieldName = 'IDTotvs'
+      Size = 6
+    end
+    object QueryMatricula: TStringField
+      FieldName = 'Matricula'
+      Size = 6
+    end
+    object QueryFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 70
+    end
+    object QueryCargo: TStringField
+      FieldName = 'Cargo'
+      ReadOnly = True
+      Size = 68
+    end
+    object QueryTipoFuncao: TStringField
+      FieldName = 'TipoFuncao'
+      Size = 200
+    end
+    object QuerySituacao: TStringField
+      FieldName = 'Situacao'
+      Size = 1
+    end
+    object QuerySituacaoDesc: TStringField
+      FieldName = 'SituacaoDesc'
+      Size = 9
+    end
+    object QueryCentroCusto_FK: TStringField
+      FieldName = 'CentroCusto_FK'
+      Size = 9
+    end
+    object QueryCentroCusto: TStringField
+      FieldName = 'CentroCusto'
+      Size = 60
+    end
+  end
+end

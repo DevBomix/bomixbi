@@ -1,0 +1,61 @@
+unit PcpAdministracaoMasterResina_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  dxGDIPlusClasses, Vcl.Buttons;
+
+type
+  TPcpAdministracaoMasterResina = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Cancelar: TImage;
+    BNT_Cancelar: TSpeedButton;
+    Panel1: TPanel;
+    Image1: TImage;
+    Panel2: TPanel;
+    Image2: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Shape1: TShape;
+    Shape2: TShape;
+    BTN_Resina: TSpeedButton;
+    BNT_Master: TSpeedButton;
+    procedure BTN_ResinaClick(Sender: TObject);
+    procedure BNT_CancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PcpAdministracaoMasterResina: TPcpAdministracaoMasterResina;
+
+implementation
+
+{$R *.dfm}
+
+uses PcpAdministracaoResina_unit;
+
+procedure TPcpAdministracaoMasterResina.BNT_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TPcpAdministracaoMasterResina.BTN_ResinaClick(Sender: TObject);
+begin
+
+  Application.CreateForm(TPcpAdministracaoMasterResina_Resina, PcpAdministracaoMasterResina_Resina);
+  try
+    PcpAdministracaoMasterResina_Resina.ShowModal;
+  finally
+    PcpAdministracaoMasterResina_Resina.Release;
+    PcpAdministracaoMasterResina_Resina := Nil;
+  end;
+
+end;
+
+end.

@@ -1,0 +1,136 @@
+unit CertificadoDeQualidade_NotaSopro_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls,
+  Datasnap.Provider, Data.Win.ADODB, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TCIT_CertificadoDeQualidade_SOPRO = class(TForm)
+    Panel_Titulo: TPanel;
+    Image6: TImage;
+    LBL_Titulo: TLabel;
+    LBL_Nota: TLabel;
+    PNL_Auxiliar: TPanel;
+    Panel_Filtro: TPanel;
+    Label5: TLabel;
+    TXT_Buscador: TEdit;
+    PNL_Buscar: TPanel;
+    IMG_Buscar: TImage;
+    BTN_Buscar: TSpeedButton;
+    Memo1: TMemo;
+    DBGrid: TDBGrid;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    ACL_Atalhos: TActionList;
+    Desenvolvimento: TAction;
+    Confirmar: TAction;
+    Cancelar: TAction;
+    CDS: TClientDataSet;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSTipoProduto: TStringField;
+    CDSItem_ID: TStringField;
+    Query: TADOQuery;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryTipoProduto: TStringField;
+    QueryItem_ID: TStringField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    Panel5: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    DBGrid1: TDBGrid;
+    PNL_AdicionarRemoverLote: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    BTN_IncluirRestricao: TSpeedButton;
+    BTN_ExcluirRestricao: TSpeedButton;
+    Panel7: TPanel;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    DBGrid2: TDBGrid;
+    Memo2: TMemo;
+    Memo3: TMemo;
+    CDS_EspecificacaoTecnica: TClientDataSet;
+    CDS_EspecificacaoTecnicaNota_FK: TStringField;
+    CDS_EspecificacaoTecnicaProduto_FK: TStringField;
+    CDS_EspecificacaoTecnicaTipoEspecificacao: TStringField;
+    CDS_EspecificacaoTecnicaID: TStringField;
+    CDS_EspecificacaoTecnicaItem: TStringField;
+    CDS_EspecificacaoTecnicaGrupo: TStringField;
+    CDS_EspecificacaoTecnicaTipo: TStringField;
+    CDS_EspecificacaoTecnicaTamanho: TStringField;
+    CDS_EspecificacaoTecnicaFormato: TStringField;
+    CDS_EspecificacaoTecnicaOrdem: TStringField;
+    CDS_EspecificacaoTecnicaMedida: TStringField;
+    CDS_EspecificacaoTecnicaEspecificacao: TStringField;
+    CDS_EspecificacaoTecnicaVariacao: TStringField;
+    CDS_EspecificacaoTecnicaMinino: TStringField;
+    CDS_EspecificacaoTecnicaMaximo: TStringField;
+    CDS_EspecificacaoTecnicaEP_Empresa: TStringField;
+    Query_EspecificacaoTecnica: TADOQuery;
+    Query_EspecificacaoTecnicaNota_FK: TStringField;
+    Query_EspecificacaoTecnicaProduto_FK: TStringField;
+    Query_EspecificacaoTecnicaTipoEspecificacao: TStringField;
+    Query_EspecificacaoTecnicaID: TStringField;
+    Query_EspecificacaoTecnicaItem: TStringField;
+    Query_EspecificacaoTecnicaGrupo: TStringField;
+    Query_EspecificacaoTecnicaTipo: TStringField;
+    Query_EspecificacaoTecnicaTamanho: TStringField;
+    Query_EspecificacaoTecnicaFormato: TStringField;
+    Query_EspecificacaoTecnicaOrdem: TStringField;
+    Query_EspecificacaoTecnicaMedida: TStringField;
+    Query_EspecificacaoTecnicaEspecificacao: TStringField;
+    Query_EspecificacaoTecnicaVariacao: TStringField;
+    Query_EspecificacaoTecnicaMinino: TStringField;
+    Query_EspecificacaoTecnicaMaximo: TStringField;
+    Query_EspecificacaoTecnicaEP_Empresa: TStringField;
+    DS_EspecificacaoTecnica: TDataSource;
+    DSP_EspecificacaoTecnica: TDataSetProvider;
+    Query_Lotes: TADOQuery;
+    Query_LotesNota_FK: TStringField;
+    Query_LotesProduto_FK: TStringField;
+    Query_LotesLote: TStringField;
+    Query_LotesDataEtiqueta: TDateTimeField;
+    Query_LotesValidade: TStringField;
+    Query_LotesTipo: TStringField;
+    Query_LotesCT_Empresa: TStringField;
+    Query_LotesDataValidade: TDateTimeField;
+    Query_LotesQuantidade: TIntegerField;
+    Query_LotesItem: TStringField;
+    DS_Lotes: TDataSource;
+    CDS_Lotes: TClientDataSet;
+    CDS_LotesNota_FK: TStringField;
+    CDS_LotesProduto_FK: TStringField;
+    CDS_LotesLote: TStringField;
+    CDS_LotesDataEtiqueta: TDateTimeField;
+    CDS_LotesValidade: TStringField;
+    CDS_LotesTipo: TStringField;
+    CDS_LotesCT_Empresa: TStringField;
+    CDS_LotesDataValidade: TDateTimeField;
+    CDS_LotesQuantidade: TIntegerField;
+    CDS_LotesItem: TStringField;
+    DSP_Lotes: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CIT_CertificadoDeQualidade_SOPRO: TCIT_CertificadoDeQualidade_SOPRO;
+
+implementation
+
+{$R *.dfm}
+
+end.

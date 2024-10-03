@@ -1,0 +1,7 @@
+inherited OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos: TOrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos
+  Caption = 'OrdemProducao_ImprimirEtiquetaApontamento_AdicionarLotes_Saldos'
+  ExplicitWidth = 654
+  ExplicitHeight = 486
+  PixelsPerInch = 96
+  TextHeight = 13
+end

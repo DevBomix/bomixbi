@@ -1,0 +1,29 @@
+unit ConexaoDados_Unit;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DBXMSSQL, Data.DB, Data.SqlExpr, midaslib,
+  Data.Win.ADODB;
+
+type
+  Tz = class(TDataModule)
+    ADOConnection1: TADOConnection;
+    ADOCommand1: TADOCommand;
+    ADOStoredProc1: TADOStoredProc;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  z: Tz;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

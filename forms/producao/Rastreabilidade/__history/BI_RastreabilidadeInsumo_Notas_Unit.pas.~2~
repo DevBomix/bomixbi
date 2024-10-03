@@ -1,0 +1,32 @@
+unit BI_RastreabilidadeInsumo_Notas_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TBI_RastreabilidadeInsumo_Notas = class(TForm)
+    Panel_Botoes: TPanel;
+    Panel_Navegador: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    Panel_Titulo: TPanel;
+    Image8: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  BI_RastreabilidadeInsumo_Notas: TBI_RastreabilidadeInsumo_Notas;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,176 @@
+inherited ProcessoInspecao_IncluirBuscarInspector: TProcessoInspecao_IncluirBuscarInspector
+  Caption = 'Consultar Inspector'
+  ClientHeight = 565
+  ClientWidth = 834
+  ExplicitWidth = 840
+  ExplicitHeight = 594
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel_Titulo: TPanel
+    inherited LBL_Titulo: TLabel
+      Width = 184
+      Caption = 'Consultar Inspector'
+      ExplicitWidth = 184
+    end
+  end
+  inherited PNL_Auxiliar: TPanel
+    Width = 820
+    Height = 460
+    inherited Panel_Filtro: TPanel
+      Width = 820
+      inherited PNL_Buscar: TPanel
+        inherited BTN_Buscar: TSpeedButton
+          OnClick = BTN_BuscarClick
+        end
+      end
+    end
+    inherited DBGrid: TDBGrid
+      Width = 808
+      Height = 402
+      Columns = <
+        item
+          Expanded = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 24
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Matricula_FK'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Matricula'
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 73
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Funcionario'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Color = 16744448
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 325
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Cargo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 331
+          Visible = True
+        end>
+    end
+  end
+  inherited Panel_Botoes: TPanel
+    Top = 526
+    Width = 834
+    inherited Panel3: TPanel
+      Left = 589
+    end
+  end
+  inherited CDS: TClientDataSet
+    object CDSEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object CDSUsuario_ID: TIntegerField
+      FieldName = 'Usuario_ID'
+    end
+    object CDSMatricula_FK: TStringField
+      FieldName = 'Matricula_FK'
+      Size = 6
+    end
+    object CDSFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 80
+    end
+    object CDSCargo: TStringField
+      FieldName = 'Cargo'
+      Size = 70
+    end
+    object CDSSituacaoDescr: TStringField
+      FieldName = 'SituacaoDescr'
+      Size = 15
+    end
+  end
+  inherited Query: TADOQuery
+    Parameters = <
+      item
+        Name = 'Buscador'
+        Attributes = [paNullable]
+        DataType = ftString
+        Precision = 156
+        Size = 156
+        Value = Null
+      end>
+    SQL.Strings = (
+      'Select '
+      
+        #9'Empresa, Usuario_ID, Matricula_FK, Funcionario, Cargo, Situacao' +
+        'Descr '
+      'from Sys_TB_Usuario (nolock)'
+      'Where Setor = '#39'ICQ'#39
+      'AND (Matricula_FK + Funcionario + Cargo) like :Buscador'
+      'AND SituacaoDescr = '#39'ATIVO'#39
+      'Order by Funcionario')
+    object QueryEmpresa: TStringField
+      FieldName = 'Empresa'
+      Size = 4
+    end
+    object QueryUsuario_ID: TIntegerField
+      FieldName = 'Usuario_ID'
+    end
+    object QueryMatricula_FK: TStringField
+      FieldName = 'Matricula_FK'
+      Size = 6
+    end
+    object QueryFuncionario: TStringField
+      FieldName = 'Funcionario'
+      Size = 80
+    end
+    object QueryCargo: TStringField
+      FieldName = 'Cargo'
+      Size = 70
+    end
+    object QuerySituacaoDescr: TStringField
+      FieldName = 'SituacaoDescr'
+      Size = 15
+    end
+  end
+end

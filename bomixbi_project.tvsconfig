@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<TgConfig Version="3" SubLevelDisabled="False">
+  <Option Name="namespaceFolder.BI_PCP_DataAjustada1diaDataPCP_unit" Type="System.String" Value="BI_PCP_DataAjustada1diaDataPCP_unit" Category="General" IsBrowsable="False" />
+</TgConfig>

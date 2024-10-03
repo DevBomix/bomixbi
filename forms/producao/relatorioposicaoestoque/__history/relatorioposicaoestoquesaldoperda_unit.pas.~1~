@@ -1,0 +1,80 @@
+unit relatorioposicaoestoquesaldoperda_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppParameter, ppDesignLayer, ppModule,
+  raCodMod, ppBands, ppCtrls, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
+  Datasnap.Provider, Data.DB, Data.Win.ADODB, Datasnap.DBClient, ppComm,
+  ppRelatv, ppDB, ppDBPipe;
+
+type
+  TRelatorio_PosicaoEstoque_SaldoPerda = class(TForm)
+    ppDB: TppDBPipeline;
+    CDS: TClientDataSet;
+    CDSEmpresa: TStringField;
+    CDSArmazem_FK: TStringField;
+    CDSArmazem: TStringField;
+    CDSItem_FK: TStringField;
+    CDSItem: TStringField;
+    CDSProduto_ID: TStringField;
+    CDSProduto: TStringField;
+    CDSBloqueado: TStringField;
+    CDSSaldo: TFloatField;
+    CDSUndMedida: TStringField;
+    Query: TADOQuery;
+    QueryEmpresa: TStringField;
+    QueryArmazem_FK: TStringField;
+    QueryArmazem: TStringField;
+    QueryItem_FK: TStringField;
+    QueryItem: TStringField;
+    QueryProduto_ID: TStringField;
+    QueryProduto: TStringField;
+    QueryBloqueado: TStringField;
+    QuerySaldo: TFloatField;
+    QueryUndMedida: TStringField;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppRelatorio: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppLine3: TppLine;
+    ppImage1: TppImage;
+    ppLabel9: TppLabel;
+    ppShape2: TppShape;
+    ppLabel10: TppLabel;
+    ppLabel13: TppLabel;
+    ppLabel14: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel20: TppLabel;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppDBText2: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText21: TppDBText;
+    ppDBText14: TppDBText;
+    ppDBText15: TppDBText;
+    ppDBText17: TppDBText;
+    ppDBText1: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppLine5: TppLine;
+    ppSummaryBand1: TppSummaryBand;
+    raCodeModule2: TraCodeModule;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_PosicaoEstoque_SaldoPerda: TRelatorio_PosicaoEstoque_SaldoPerda;
+
+implementation
+
+{$R *.dfm}
+
+end.

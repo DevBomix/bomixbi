@@ -1,0 +1,117 @@
+unit ordemsolicitacaomateriaprima_ImprimirEtiquetaQtd_unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  ppDB, ppParameter, ppDesignLayer, ppCtrls, ppStrtch, ppMemo, ppPrnabl,
+  ppClass, ppCache, ppBands, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe,
+  ppDBBDE, Datasnap.DBClient, Data.DB, Data.Win.ADODB, Datasnap.Provider;
+
+type
+  TOrdemsolicitacaomateriaprima_ImprimirEtiquetaQtd = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Panel_Botoes: TPanel;
+    Panel3: TPanel;
+    IMG_Confirmar: TImage;
+    IMG_Cancelar: TImage;
+    BNT_Confirmar: TSpeedButton;
+    BNT_Cancelar: TSpeedButton;
+    TXT_Quantidade: TEdit;
+    ppBDEPipeline2: TppBDEPipeline;
+    ppReport: TppReport;
+    ppDetailBand3: TppDetailBand;
+    ppShape1: TppShape;
+    ppDBText19: TppDBText;
+    ppDBMemo22: TppDBMemo;
+    ppDBText1: TppDBText;
+    pLBL_Quantidade: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppDBText3: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    DSP_Etiqueta: TDataSetProvider;
+    DS_Etiqueta: TDataSource;
+    Query_Etiqueta: TADOQuery;
+    CDS_Etiqueta: TClientDataSet;
+    Query_EtiquetaEmpresa: TStringField;
+    Query_EtiquetaGrupo_FK: TStringField;
+    Query_EtiquetaProduto_FK: TStringField;
+    Query_EtiquetaProduto: TStringField;
+    Query_EtiquetaLote: TStringField;
+    Query_EtiquetaDataValidade: TDateTimeField;
+    Query_EtiquetaUnidade: TStringField;
+    CDS_EtiquetaEmpresa: TStringField;
+    CDS_EtiquetaGrupo_FK: TStringField;
+    CDS_EtiquetaProduto_FK: TStringField;
+    CDS_EtiquetaProduto: TStringField;
+    CDS_EtiquetaLote: TStringField;
+    CDS_EtiquetaDataValidade: TDateTimeField;
+    CDS_EtiquetaUnidade: TStringField;
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Ordemsolicitacaomateriaprima_ImprimirEtiquetaQtd: TOrdemsolicitacaomateriaprima_ImprimirEtiquetaQtd;
+
+implementation
+
+{$R *.dfm}
+
+uses ordemsolicitacaomateriaprima_ImprimirEtiqueta_unit;
+
+procedure TOrdemsolicitacaomateriaprima_ImprimirEtiquetaQtd.BNT_CancelarClick(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TOrdemsolicitacaomateriaprima_ImprimirEtiquetaQtd.BNT_ConfirmarClick(
+  Sender: TObject);
+
+Var
+   VLC_Select : String;
+begin
+
+
+  If TXT_Quantidade.Text = '' then
+  begin
+      Application.MessageBox('Campo Obrigatório: Defina a quantidade!','Atenção',mb_iconwarning + mb_ok);
+      TXT_Quantidade.SetFocus;
+      Exit;
+  end;
+
+   pLBL_Quantidade.Caption := TXT_Quantidade.Text;
+
+  VLC_Select := ' Select ' + #13;
+  VLC_Select := VLC_Select + ' 	Top 1 Item.Empresa, Item.Grupo_FK, ' + #13;
+  VLC_Select := VLC_Select + '	Item.Produto_FK, Produto.Produto, Item.Lote, Item.DataValidade, Item.Unidade ' + #13;
+  VLC_Select := VLC_Select + ' from BomixBI.dbo.[Est_TB_EstoqueSolicitacaoMateriaPrimaItem] Item (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' Inner Join BOMIXBI.dbo.Pcp_TB_Produto Produto (Nolock) ON Produto.Empresa = Item.Empresa ' + #13;
+  VLC_Select := VLC_Select + '													   AND Produto.Produto_ID = Item.Produto_FK ' + #13;
+  VLC_Select := VLC_Select + ' Where Item.Empresa = ' + '''' + '0101' + '''' + #13;
+  VLC_Select := VLC_Select + ' AND DataValidade  is not null ' + #13;
+  VLC_Select := VLC_Select + ' AND Item.Produto_FK = ' + '''' + OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta.CDSProduto_FK.AsString + '''' + #13;
+  VLC_Select := VLC_Select + ' AND Item.Lote = ' + '''' + OrdemSolicitacao_MateriaPrima_ImprimirEtiqueta.CDSLote.AsString + '''' + #13;
+
+  CDS_Etiqueta.Close;
+  Query_Etiqueta.Close;
+  Query_Etiqueta.SQL.Clear;
+  Query_Etiqueta.SQL.Text := VLC_Select;
+  CDS_Etiqueta.Open;
+  ppReport.PrintReport;
+  Close;
+
+end;
+
+end.

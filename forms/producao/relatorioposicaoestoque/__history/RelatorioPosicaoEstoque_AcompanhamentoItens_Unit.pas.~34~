@@ -1,0 +1,255 @@
+unit RelatorioPosicaoEstoque_AcompanhamentoItens_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ppDesignLayer, ppModule, raCodMod,
+  ppBands, ppCtrls, ppClass, ppPrnabl, ppCache, Data.DB, Datasnap.Provider,
+  Data.Win.ADODB, Datasnap.DBClient, ppParameter, ppProd, ppReport, ppComm,
+  ppRelatv, ppDB, ppDBPipe;
+
+type
+  TRelatorio_PosicaoEstoque_AcompanhamentoItens = class(TForm)
+    ppDB: TppDBPipeline;
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    ppRelatorio: TppReport;
+    ppParameterList1: TppParameterList;
+    ppHeaderBand1: TppHeaderBand;
+    ppImage1: TppImage;
+    ppLabel9: TppLabel;
+    ppDetailBand1: TppDetailBand;
+    ppDBText12: TppDBText;
+    ppLine4: TppLine;
+    ppDBText16: TppDBText;
+    ppDBText19: TppDBText;
+    ppDBText20: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppLine5: TppLine;
+    ppSummaryBand1: TppSummaryBand;
+    ppGroup3: TppGroup;
+    ppGroupHeaderBand3: TppGroupHeaderBand;
+    ppDBText18: TppDBText;
+    ppLine1: TppLine;
+    ppGroupFooterBand3: TppGroupFooterBand;
+    ppGroup4: TppGroup;
+    ppGroupHeaderBand4: TppGroupHeaderBand;
+    ppShape2: TppShape;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppDBText2: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText17: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppGroupFooterBand4: TppGroupFooterBand;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
+    ppLabel2: TppLabel;
+    ppLabel5: TppLabel;
+    ppDBText4: TppDBText;
+    raCodeModule2: TraCodeModule;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    QueryRecno: TIntegerField;
+    QueryEmpresa: TStringField;
+    QueryArmazem_FK: TStringField;
+    QueryArmazem: TStringField;
+    QueryItem_FK: TStringField;
+    QueryItem: TStringField;
+    QueryProduto_FK: TStringField;
+    QueryProduto: TStringField;
+    QueryBloqueado: TStringField;
+    QueryLote: TStringField;
+    QuerySaldoB2: TFloatField;
+    QuerySaldoB8: TFloatField;
+    QuerySaldoTotalB8: TFloatField;
+    QueryUndMedida: TStringField;
+    QueryPeriodoProdutivo: TStringField;
+    QueryDataEstoque: TDateTimeField;
+    QueryDataValidade: TDateTimeField;
+    QueryStatusValidade: TStringField;
+    QueryDiasEmEstoque: TIntegerField;
+    QueryDiferenca: TFloatField;
+    QueryDesbalanceado: TStringField;
+    CDSRecno: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSArmazem_FK: TStringField;
+    CDSArmazem: TStringField;
+    CDSItem_FK: TStringField;
+    CDSItem: TStringField;
+    CDSProduto_FK: TStringField;
+    CDSProduto: TStringField;
+    CDSBloqueado: TStringField;
+    CDSLote: TStringField;
+    CDSSaldoB2: TFloatField;
+    CDSSaldoB8: TFloatField;
+    CDSSaldoTotalB8: TFloatField;
+    CDSUndMedida: TStringField;
+    CDSPeriodoProdutivo: TStringField;
+    CDSDataEstoque: TDateTimeField;
+    CDSDataValidade: TDateTimeField;
+    CDSStatusValidade: TStringField;
+    CDSDiasEmEstoque: TIntegerField;
+    CDSDiferenca: TFloatField;
+    CDSDesbalanceado: TStringField;
+
+    // Minhas Procedures e Functions
+    function GetSelect : String;
+    function ImprimirRelatorio : Boolean;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_PosicaoEstoque_AcompanhamentoItens: TRelatorio_PosicaoEstoque_AcompanhamentoItens;
+
+implementation
+
+{$R *.dfm}
+
+uses FuncaoSistema_Unit, RelatorioPosicaoEstoque_Unit,
+  PadraoBuscadorFiltro_Unit;
+
+function TRelatorio_PosicaoEstoque_AcompanhamentoItens.GetSelect: String;
+Var
+  VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + ' Select *, SaldoTotalB8 - SaldoB2 as Diferenca, Case when SaldoTotalB8 - SaldoB2 = 0 then ' + '''' + '' + '''' + ' else ' + '''' + 'DESBALANCEADO' + '''' + ' end as Desbalanceado  from (' + #13;
+  VLC_Select := VLC_Select + '      Select  ' + #13;
+  VLC_Select := VLC_Select + '      		B8.R_E_C_N_O_ as Recno, B8_FILIAL as Empresa, B8_LOCAL as Armazem_FK,   ' + #13;
+  VLC_Select := VLC_Select + '      		Rtrim(Armazem.Z1_COD) + ' + '''' + ' - ' + '''' + ' + Rtrim(Armazem.Z1_DESC) as Armazem,  ' + #13;
+  VLC_Select := VLC_Select + '      		Item_FK, ItemSemTipoAlca as Item, Rtrim(B8_PRODUTO) as Produto_FK, Produto,  Produto.Bloqueado, B8_LOTECTL as Lote,   ' + #13;
+  VLC_Select := VLC_Select + '       		B2_QATU as SaldoB2, B8_SALDO as SaldoB8, Produto.UndMedida, ' + #13;
+  VLC_Select := VLC_Select + '  ' + #13;
+  VLC_Select := VLC_Select + '			( ' + #13;
+  VLC_Select := VLC_Select + '				Select  ' + #13;
+  VLC_Select := VLC_Select + '					Sum(B8_SALDO) as SaldoTotalB8  ' + #13;
+  VLC_Select := VLC_Select + '				from P12OFICIAL.dbo.SB8010 Total_B8 (nolock)  ' + #13;
+  VLC_Select := VLC_Select + '				Where B8.B8_FILIAL = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + '				AND B8.D_E_L_E_T_  <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + '				AND B8_SALDO <> 0   ' + #13;
+  VLC_Select := VLC_Select + '				AND Total_B8.B8_PRODUTO = B8.B8_PRODUTO  ' + #13;
+  VLC_Select := VLC_Select + '				AND Total_B8.B8_LOCAL = B8.B8_LOCAL  ' + #13;
+  VLC_Select := VLC_Select + '			) as SaldoTotalB8, ' + #13;
+  VLC_Select := VLC_Select + '   ' + #13;
+  VLC_Select := VLC_Select + '         ' + #13;
+  VLC_Select := VLC_Select + '      				Case   ' + #13;
+  VLC_Select := VLC_Select + '          ' + #13;
+  VLC_Select := VLC_Select + '      					when DATEDIFF(Day,(Convert(Datetime,B8_FSDTENT,112)),Convert(Datetime,B8_FSDTSAI,112)) = 0 then  ' + #13;
+  VLC_Select := VLC_Select + '       						Convert(Varchar(10),(Convert(Datetime,B8_DATA,112)),103)  ' + #13;
+  VLC_Select := VLC_Select + '       					else   ' + #13;
+  VLC_Select := VLC_Select + '       						' + '''' + 'De ' + '''' + ' + Convert(Varchar(10),(Convert(Datetime,B8_DATA,112)),103) + ' + '''' + ' até ' + '''' + #13;
+  VLC_Select := VLC_Select + '       						+ Convert(Varchar(10),Convert(Datetime,B8_FSDTSAI,112),103) + ' + '''' + ' .... (' + '''' + #13;
+  VLC_Select := VLC_Select + '      						+ Cast(DATEDIFF(Day,(Convert(Datetime,B8_DATA,112)),Convert(Datetime,B8_FSDTSAI,112)) as varchar(5)) ' + #13;
+  VLC_Select := VLC_Select + '      						+ ' + '''' + ' d)' + '''' + #13;
+  VLC_Select := VLC_Select + '           ' + #13;
+  VLC_Select := VLC_Select + '				end as PeriodoProdutivo,    ' + #13;
+  VLC_Select := VLC_Select + '         ' + #13;
+  VLC_Select := VLC_Select + '       		(Convert(Datetime,B8_DATA,112)) as DataEstoque,   ' + #13;
+  VLC_Select := VLC_Select + '       		(Convert(Datetime,B8_DTVALID,112)) as DataValidade,  ' + #13;
+  VLC_Select := VLC_Select + '       		Case When (Convert(Datetime,B8_DTVALID,112)) <= GetDate() ';
+  VLC_Select := VLC_Select + 'then ' + '''' + 'VENCIDO' + '''' + ' else ' + '''' + 'NO PRAZO' + '''' + ' end StatusValidade, ' + #13;
+  VLC_Select := VLC_Select + '      		Case when B8_FSDTSAI = ' + '''' + '' + '''' + ' then DATEDIFF(Day,(Convert(Datetime,B8_DATA,112)),GetDate()) else DATEDIFF(Day,(Convert(Datetime,B8_FSDTSAI,112)),GetDate()) end as DiasEmEstoque  ' + #13;
+  VLC_Select := VLC_Select + '         ' + #13;
+  VLC_Select := VLC_Select + '      from P12OFICIAL.dbo.SB8010 B8 (nolock)  ' + #13;
+  VLC_Select := VLC_Select + '      Inner Join P12OFICIAL.dbo.SB2010 B2 (nolock) ON B2_FILIAL = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + '      											  AND B2.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + '      											  AND B2_COD = B8_PRODUTO   ' + #13;
+  VLC_Select := VLC_Select + '      											  AND B2_LOCAL = B8_LOCAL   ' + #13;
+  VLC_Select := VLC_Select + '      Inner Join BomixBI.dbo.Pcp_TB_Produto Produto (Nolock) ON Produto.Empresa = ' + '''' + Copy(Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption,1,4) + '''' + #13;
+  VLC_Select := VLC_Select + '                              							  AND Produto_ID = B8_PRODUTO  ' + #13;
+  VLC_Select := VLC_Select + '      Inner Join P12OFICIAL.dbo.SZ1010 Armazem (nolock) ON Armazem.Z1_FILIAL  = ' + '''' + (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption) + '''' + #13;
+  VLC_Select := VLC_Select + '                                                       AND Armazem.Z1_COD = B8_LOCAL   ' + #13;
+  VLC_Select := VLC_Select + '                                                       AND Armazem.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + '      Where B8.B8_FILIAL = ' + '''' + (Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption) + '''' + #13;
+  VLC_Select := VLC_Select + '      AND B8.D_E_L_E_T_  <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + '      AND B8_SALDO <> 0   ' + #13;
+  VLC_Select := VLC_Select + '      AND Z1_COD in (' + #13;
+  VLC_Select := VLC_Select + '                               Select Z7_LOCAL from P12OFICIAL.dbo.SZ7010 (nolock) ' + #13;
+  VLC_Select := VLC_Select + '                               Where Z7_FILIAL  = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaTotvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + '                               AND Z7_CUSERID = ' + '''' + Sys_FuncaoSistema.PNL_Totvs.Caption + '''' + #13;
+  VLC_Select := VLC_Select + '                               AND D_E_L_E_T_  <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + '                            )' + #13;
+
+  if Relatorio_PosicaoEstoque.CBX_Igual_Armazem.Text <> 'AMBOS' then
+  VLC_Select := VLC_Select + '      AND (Rtrim(Armazem.Z1_COD) + ' + '''' + ' - ' + '''' + ' + Rtrim(Armazem.Z1_DESC)) = ' + '''' + Relatorio_PosicaoEstoque.CBX_Igual_Armazem.Text + '''' + #13;
+
+   // Produto ID
+   If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_Operador,Relatorio_PosicaoEstoque.PNL_Sinal,Relatorio_PosicaoEstoque.TXT_Valor1,Relatorio_PosicaoEstoque.TXT_Valor2,'B8_LOTECTL','Caracter') <> '' then
+       VLC_Select := VLC_Select + '      AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_Operador,Relatorio_PosicaoEstoque.PNL_Sinal,Relatorio_PosicaoEstoque.TXT_Valor1,Relatorio_PosicaoEstoque.TXT_Valor2,'B8_LOTECTL','Caracter');
+
+  // Produto ID
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_OperadorProdutoID,Relatorio_PosicaoEstoque.PNL_SinalProdutoID,Relatorio_PosicaoEstoque.TXT_Valor1_ProdutoID,Relatorio_PosicaoEstoque.TXT_Valor2_ProdutoID,'RTRIM(B8_PRODUTO)','Caracter') <> '' then
+       VLC_Select := VLC_Select + '      AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_OperadorProdutoID,Relatorio_PosicaoEstoque.PNL_SinalProdutoID,Relatorio_PosicaoEstoque.TXT_Valor1_ProdutoID,Relatorio_PosicaoEstoque.TXT_Valor2_ProdutoID,'RTRIM(B8_PRODUTO)','Caracter');
+
+  // Produto
+  If PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_OperadorProduto,Relatorio_PosicaoEstoque.PNL_SinalProduto,Relatorio_PosicaoEstoque.TXT_Valor1_Produto,Relatorio_PosicaoEstoque.TXT_Valor2_Produto,'Produto','Caracter') <> '' then
+       VLC_Select := VLC_Select + '      AND ' + PadraoBuscadorFiltro.RetornarWhereFiltro(Relatorio_PosicaoEstoque.CBX_OperadorProduto,Relatorio_PosicaoEstoque.PNL_SinalProduto,Relatorio_PosicaoEstoque.TXT_Valor1_Produto,Relatorio_PosicaoEstoque.TXT_Valor2_Produto,'Produto','Caracter');
+
+  VLC_Select := VLC_Select + ') TB ' + #13;
+  VLC_Select := VLC_Select + ' Where 1=1 ' + #13;
+
+  if Relatorio_PosicaoEstoque.CBX_Igual_DataValidade.Text <> 'AMBOS' then
+  begin
+        if Relatorio_PosicaoEstoque.CBX_Igual_DataValidade.Text = 'SIM' then
+             VLC_Select := VLC_Select + ' AND StatusValidade = ' + '''' + 'NO PRAZO' + '''' + #13
+        else
+             VLC_Select := VLC_Select + ' AND StatusValidade = ' + '''' + 'VENCIDO' + '''' + #13;
+  end;
+
+  if Relatorio_PosicaoEstoque.CBX_Igual_Desbalanceado.Text <> 'AMBOS' then
+  begin
+        if Relatorio_PosicaoEstoque.CBX_Igual_Desbalanceado.Text = 'SIM' then
+             VLC_Select := VLC_Select + ' AND Case when SaldoTotalB8 - SaldoB2 = 0 then ' + '''' + '' + '''' + ' else ' + '''' + 'DESBALANCEADO' + '''' + ' end = ' + '''' + 'DESBALANCEADO' + '''' + #13
+        else
+             VLC_Select := VLC_Select + ' AND Case when SaldoTotalB8 - SaldoB2 = 0 then ' + '''' + '' + '''' + ' else ' + '''' + 'DESBALANCEADO' + '''' + ' end = ' + '''' + '' + '''' + #13;
+  end;
+
+  VLC_Select := VLC_Select + ' ' + #13;
+  VLC_Select := VLC_Select + 'Order by Empresa, Armazem_FK, Produto_FK, DiasEmEstoque desc ' + #13;
+  Result := VLC_Select;
+
+end;
+
+function TRelatorio_PosicaoEstoque_AcompanhamentoItens.ImprimirRelatorio: Boolean;
+Var
+   VLC_Select : String;
+begin
+
+   VLC_Select := GetSelect;
+
+   Relatorio_PosicaoEstoque.MemoSQL.Lines.Text := VLC_Select;
+
+   CDS.Close;
+   Query.Close;
+   Query.SQL.Clear;
+   Query.SQL.Text := VLC_Select;
+   CDS.Open;
+
+   If CDS.RecordCount = 0 Then
+   begin
+      Result := False;
+   end
+   else
+   begin
+      Result := True;
+   end;
+
+end;
+
+end.

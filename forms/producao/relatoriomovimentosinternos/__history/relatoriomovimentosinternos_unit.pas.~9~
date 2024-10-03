@@ -1,0 +1,163 @@
+unit RelatorioMovimentosInternos_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, PadraoBuscadorFiltro_Unit, Vcl.StdCtrls,
+  Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.Mask,
+  Vcl.ComCtrls;
+
+type
+  TRelatorio_MovimentosInternos = class(TPadraoBuscadorFiltro)
+    Panel4: TPanel;
+    Shape1: TShape;
+    Edit25: TEdit;
+    CBX_TipoRelatorio: TComboBox;
+    Panel5: TPanel;
+    TXT_Valor2_ProdutoID: TMaskEdit;
+    CBX_OperadorProdutoID: TComboBox;
+    TXT_Valor1_ProdutoID: TMaskEdit;
+    Panel6: TPanel;
+    PNL_SinalProdutoID: TPanel;
+    CBX_Igual_ProdutoID: TComboBox;
+    Panel7: TPanel;
+    TXT_Valor2_Produto: TMaskEdit;
+    CBX_OperadorProduto: TComboBox;
+    TXT_Valor1_Produto: TMaskEdit;
+    Panel8: TPanel;
+    PNL_SinalProduto: TPanel;
+    CBX_Igual_Produto: TComboBox;
+    Panel9: TPanel;
+    TXT_Valor2_Armazem: TMaskEdit;
+    CBX_OperadorArmazem: TComboBox;
+    TXT_Valor1_Armazem: TMaskEdit;
+    Panel10: TPanel;
+    PNL_SinalArmazem: TPanel;
+    CBX_Igual_Armazem: TComboBox;
+    Panel26: TPanel;
+    CBX_OperadorDataEmissao: TComboBox;
+    Panel27: TPanel;
+    PNL_SinalDataEmissao: TPanel;
+    CBX_Igual_DataEmissao: TComboBox;
+    TXT_Valor1_DataEmissao: TMaskEdit;
+    TXT_Valor2_DataEmissao: TMaskEdit;
+    DT_DataEmissao1: TDateTimePicker;
+    DT_DataEmissao2: TDateTimePicker;
+    Panel1: TPanel;
+    MaskEdit1: TMaskEdit;
+    ComboBox1: TComboBox;
+    MaskEdit2: TMaskEdit;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    ComboBox2: TComboBox;
+    Panel14: TPanel;
+    TXT_Valor2_Documento: TMaskEdit;
+    CBX_OperadorDocumento: TComboBox;
+    TXT_Valor1_Documento: TMaskEdit;
+    Panel17: TPanel;
+    PNL_SinalDocumento: TPanel;
+    CBX_Igual_Documento: TComboBox;
+    Panel11: TPanel;
+    MaskEdit3: TMaskEdit;
+    ComboBox3: TComboBox;
+    MaskEdit4: TMaskEdit;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    ComboBox4: TComboBox;
+    Panel15: TPanel;
+    TXT_Valor2_Lote: TMaskEdit;
+    CBX_OperadorLote: TComboBox;
+    TXT_Valor1_Lote: TMaskEdit;
+    Panel16: TPanel;
+    PNL_SinalLote: TPanel;
+    CBX_Igual_Lote: TComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+    procedure DesenvolvimentoExecute(Sender: TObject);
+    procedure MemoSQLDblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_MovimentosInternos: TRelatorio_MovimentosInternos;
+
+implementation
+
+{$R *.dfm}
+
+uses RelatorioMovimentosInternos_Consulta_Unit;
+
+procedure TRelatorio_MovimentosInternos.BNT_ConfirmarClick(Sender: TObject);
+begin
+
+    if CBX_TipoRelatorio.Text = 'RELATÓRIO DE MOVIMENTOS INTERNOS' then
+    begin
+
+          Application.CreateForm(TRelatorioMovimentosInternos_Consulta, RelatorioMovimentosInternos_Consulta);
+          try
+
+                 If RelatorioMovimentosInternos_Consulta.ImprimirRelatorio = False then
+                 begin
+                      Application.MessageBox('Nenhum registro encontrado!','Atenção',mb_iconwarning + mb_ok);
+                      Exit;
+                 end
+                 else
+                 begin
+                    RelatorioMovimentosInternos_Consulta.ppRelatorio.PrintReport;
+                 end;
+
+          finally
+
+                 RelatorioMovimentosInternos_Consulta.Release;
+                 RelatorioMovimentosInternos_Consulta := Nil;
+
+          end;
+
+    end;
+
+
+end;
+
+procedure TRelatorio_MovimentosInternos.DesenvolvimentoExecute(Sender: TObject);
+begin
+  inherited;
+  Relatorio_MovimentosInternos.Width := 1132;
+end;
+
+procedure TRelatorio_MovimentosInternos.FormShow(Sender: TObject);
+Var
+   TamanhoPadrao : Integer;
+
+begin
+   if DayOfWeek(Date()) = 2 then
+   begin
+       DT_DataEmissao1.Date := Date - 2;
+       DT_DataEmissao2.Date := Date;
+   end
+   else
+   begin
+       DT_DataEmissao1.Date := Date - 1;
+       DT_DataEmissao2.Date := Date;
+   end;
+
+   inherited;
+   TamanhoPadrao := 160;
+   TXT_Valor1.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_ProdutoID.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Produto.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Lote.Width := (TamanhoPadrao * 2) + 1;
+   TXT_Valor1_Documento.Width := (TamanhoPadrao * 2) + 1;
+
+end;
+
+procedure TRelatorio_MovimentosInternos.MemoSQLDblClick(Sender: TObject);
+begin
+  inherited;
+  Relatorio_MovimentosInternos.Width := 693;
+end;
+
+end.

@@ -1,0 +1,60 @@
+unit ConfiguracaoMolde_Buscador_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraobuscadorfiltro_unit,
+  System.Actions, Vcl.ActnList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls;
+
+type
+  TConfiguracaoMolde_Buscador = class(TPadraoBuscadorFiltro)
+    procedure BNT_CancelarClick(Sender: TObject);
+    procedure BNT_ConfirmarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ConfiguracaoMolde_Buscador: TConfiguracaoMolde_Buscador;
+
+implementation
+
+{$R *.dfm}
+
+uses ConfiguracaoMolde_Unit;
+
+procedure TConfiguracaoMolde_Buscador.BNT_CancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TConfiguracaoMolde_Buscador.BNT_ConfirmarClick(Sender: TObject);
+Var
+  VLC_Select : String;
+begin
+  inherited;
+
+  VLC_Select := VLC_Select + '  Select ' + #13;
+  VLC_Select := VLC_Select + '    Distinct Molde.*  ' + #13;
+  VLC_Select := VLC_Select + '  from BomixBI.[dbo].[Icq_TB_Molde] Molde (nolock)  ' + #13;
+  VLC_Select := VLC_Select + '  Left Join [dbo].[Icq_TB_MoldeItem] Item ON Item.Molde_FK = Molde_ID  ' + #13;
+  VLC_Select := VLC_Select + '  Where Molde_ID + Molde like ' + '''' + '%' + TXT_Valor1.Text + '%' + '''';
+  VLC_Select := VLC_Select + '  Order by Molde ' + #13;
+
+  ConfiguracaoMolde.Memo_Query.Text := VLC_Select;
+
+  ConfiguracaoMolde.CDS.Close;
+  ConfiguracaoMolde.Query.Close;
+  ConfiguracaoMolde.Query.SQL.Text := VLC_Select;
+  ConfiguracaoMolde.CDS.Open;
+
+  Close;
+
+end;
+
+end.

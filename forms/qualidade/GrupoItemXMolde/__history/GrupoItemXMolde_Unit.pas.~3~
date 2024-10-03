@@ -1,0 +1,47 @@
+unit GrupoItemXMolde_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, padraocadastro_unit, Data.DB,
+  System.Actions, Vcl.ActnList, Datasnap.Provider, Datasnap.DBClient,
+  Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TGrupoItemXMolde = class(TPadraoCadastro)
+    TXT_ID: TDBEdit;
+    Label7: TLabel;
+    QueryRecno: TIntegerField;
+    QueryEmpresa: TStringField;
+    QueryID: TStringField;
+    QueryItem: TStringField;
+    QueryTipo: TStringField;
+    QuerySemana: TStringField;
+    CDSRecno: TIntegerField;
+    CDSEmpresa: TStringField;
+    CDSID: TStringField;
+    CDSItem: TStringField;
+    CDSTipo: TStringField;
+    CDSSemana: TStringField;
+    Label4: TLabel;
+    TXT_Descricao: TDBEdit;
+    TXT_Ordem: TDBEdit;
+    Label8: TLabel;
+    DBEdit1: TDBEdit;
+    Label5: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  GrupoItemXMolde: TGrupoItemXMolde;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,24 @@
+unit Relatorio_ControleRotulos_ExportarExcel_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TRelatorio_ControleRotulos_ExportarExcel = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ControleRotulos_ExportarExcel: TRelatorio_ControleRotulos_ExportarExcel;
+
+implementation
+
+{$R *.dfm}
+
+end.

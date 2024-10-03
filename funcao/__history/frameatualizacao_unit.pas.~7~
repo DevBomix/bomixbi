@@ -1,0 +1,64 @@
+unit FrameAtualizacao_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFrameAtualizacao = class(TFrame)
+    Panel2: TPanel;
+    LBL_UltimaAtualizacaoTitulo: TLabel;
+    LBL_ProximaAtualizacaoTitulo: TLabel;
+    LBL_ProximaAtualizacao: TLabel;
+    LBL_UltimaAtualizacao: TLabel;
+    Timer1: TTimer;
+    procedure Panel2Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrameAtualizacao.Panel2Click(Sender: TObject);
+begin
+ ShowMessage('Teste');
+end;
+
+procedure TFrameAtualizacao.Timer1Timer(Sender: TObject);
+Var
+   VLT_Proxima, VLT_Ultima : TDateTime;
+begin
+
+  VLT_Ultima := GetTime();
+
+  if VLT_Ultima >= StrToTime('09:00') then
+  begin
+      VLT_Ultima := StrToTime('09:00');
+      VLT_Proxima := StrToTime('10:00');
+  end;
+
+  if VLT_Ultima >= StrToTime('10:00') then
+  begin
+      VLT_Ultima := StrToTime('10:00');
+      VLT_Proxima := StrToTime('12:00');
+  end;
+
+  if VLT_Ultima >= StrToTime('12:00') then
+  begin
+      VLT_Ultima := StrToTime('12:00');
+      VLT_Proxima := StrToTime('15:00');
+  end;
+
+  LBL_UltimaAtualizacao.Caption := DateToStr(Date()) + ' - ' + TimeToStr(VLT_Ultima);
+  LBL_ProximaAtualizacao.Caption := DateToStr(Date()) + ' - ' + TimeToStr(VLT_Proxima);
+
+end;
+
+end.

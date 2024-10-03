@@ -1,0 +1,138 @@
+unit CIT_BuscarMotorista_Unit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ActnList, StdCtrls, ExtCtrls, Grids, DBGrids, System.Actions;
+
+type
+  TCIT_BuscarMotorista = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Image2: TImage;
+    IMG_Pesquisar: TImage;
+    TXT_Buscador: TEdit;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    IMG_OK: TImage;
+    IMG_Cancelar: TImage;
+    ActionList1: TActionList;
+    Enter: TAction;
+    Cancelar: TAction;
+    procedure IMG_PesquisarClick(Sender: TObject);
+    procedure IMG_CancelarClick(Sender: TObject);
+    procedure IMG_OKClick(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  CIT_BuscarMotorista: TCIT_BuscarMotorista;
+
+implementation
+
+uses CIT_Incluir_Unit, CIT_Unit, FuncaoSistema_Unit;
+
+{$R *.dfm}
+
+procedure TCIT_BuscarMotorista.IMG_PesquisarClick(Sender: TObject);
+Var
+   VLC_Select : String;
+
+begin
+
+  VLC_Select := ' Select * from ( ' + #13;
+  VLC_Select := VLC_Select + ' Select Distinct ' + #13;
+  VLC_Select := VLC_Select + ' 					Veiculo.Veiculo_ID, Veiculo.Motorista_ID, Veiculo.Motorista, Veiculo.MotoristaEndereco,' + #13;
+  VLC_Select := VLC_Select + ' 					Veiculo.MotoristaBairro, Veiculo.MotoristaCidade,' + #13;
+  VLC_Select := VLC_Select + ' 					(Veiculo.Motorista_ID + Veiculo.Motorista + Veiculo.MotoristaEndereco  +' + #13;
+  VLC_Select := VLC_Select + ' 					Veiculo.MotoristaBairro + Veiculo.MotoristaCidade + Veiculo.Placa + Veiculo.UF) as Buscador,' + #13;
+  VLC_Select := VLC_Select + ' 					Motorista.MotoristaUF, Motorista.MotoristaCelular, Veiculo.Placa, Veiculo.UF as PlacaUF,' + #13;
+  VLC_Select := VLC_Select + ' 					NotaFiscalVenda.Transportadora_FK ' + #13;
+  VLC_Select := VLC_Select + ' 				from BomixBI.dbo.Fat_VW_TransportadoraVeiculo_Totvs Veiculo (nolock) ' + #13;
+  VLC_Select := VLC_Select + ' 			  Inner Join P11Oficial.dbo.SF2010 SF2 (nolock) ON F2_VEICUL1 = Veiculo.Veiculo_ID AND SF2.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' 			  AND Substring(F2_FILIAL,1,4) = Veiculo.Empresa ' + #13;
+  VLC_Select := VLC_Select + ' 				INNER JOIN BomixBI.dbo.Fat_TB_NotaFiscalVenda NotaFiscalVenda ON NotaFiscalVenda.Nota = SF2.F2_DOC' + #13;
+  VLC_Select := VLC_Select + ' 			  AND Substring(F2_FILIAL,1,4) = NotaFiscalVenda.F2_Empresa ' + #13;
+  VLC_Select := VLC_Select + ' 				LEFT JOIN BomixBI.dbo.Fat_VW_TransportadoraMotorista_Totvs Motorista (nolock) ON Veiculo.Motorista_ID = Motorista.Motorista_ID ' + #13;
+  VLC_Select := VLC_Select + ' 				AND Veiculo.Empresa = Motorista.Empresa ' + #13;
+  VLC_Select := VLC_Select + ' 		WHERE NotaFiscalVenda.CIT is null' + #13;
+  VLC_Select := VLC_Select + ' 		AND Veiculo.Motorista_ID is not null ' + #13;
+  VLC_Select := VLC_Select + '    AND NotaFiscalVenda.Emissao >=  ' + '''' + '2014-08-01 00:00:00.000' + '''' + #13;
+
+  //  VLC_Select := VLC_Select + '    AND BMX_TB_NotaFiscalVenda.Transportadora <> ' + '''' + 'O MESMO' + '''';
+
+  VLC_Select := VLC_Select + '    AND Veiculo.Empresa = ' + '''' + Sys_FuncaoSistema.PNL_EmpresaID.Caption + '''' + #13;
+  VLC_Select := VLC_Select + ' 	  ) TB ' + #13;
+  VLC_Select := VLC_Select + ' 	  Where Transportadora_FK = ' + '''' + CIT_Incluir.TXT_TransportadoraID.Text + '''' + #13;
+  VLC_Select := VLC_Select + '    AND Buscador  Like ' + '''' + '%' + TXT_Buscador.Text + '%' + '''' + #13;
+  VLC_Select := VLC_Select + ' Order by Motorista ';
+
+  CIT.CDS_BuscarMotorista.Close;
+  CIT.Query_BuscarMotorista.Close;
+  CIT.Query_BuscarMotorista.SQL.Clear;
+  CIT.Query_BuscarMotorista.SQL.Text := VLC_Select;
+  CIT.CDS_BuscarMotorista.Open;
+
+end;
+
+procedure TCIT_BuscarMotorista.IMG_CancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TCIT_BuscarMotorista.IMG_OKClick(Sender: TObject);
+begin
+
+   If CIT.DS_BuscarMotorista.DataSet.FieldByName('Motorista').AsString = '' then
+   begin
+       Application.MessageBox('Nenhum Motorista selecionado!','Atenção',mb_iconwarning + mb_ok);
+       TXT_Buscador.Setfocus;
+       Exit;
+   end;
+
+   CIT.GetNotasComMotorista(CIT.DS_BuscarMotorista.DataSet.FieldByName('Transportadora_FK').AsString, CIT.DS_BuscarMotorista.DataSet.FieldByName('Motorista_ID').AsString);
+   CIT_Incluir.TXT_Motorista.Text := CIT.DS_BuscarMotorista.DataSet.FieldByName('Motorista').AsString;
+   CIT_Incluir.TXT_MotoristaID.Text := CIT.DS_BuscarMotorista.DataSet.FieldByName('Motorista_ID').AsString;
+   CIT_Incluir.LBL_Veiculo.Caption := CIT.DS_BuscarMotorista.DataSet.FieldByName('Veiculo_ID').AsString;
+
+   if CIT.DS_BuscarNotas.DataSet.RecordCount > 0 then
+   begin
+       CIT_Incluir.CDS_NotasCIT.CreateDataSet;
+       CIT_Incluir.CDS_NotasCIT.Active := True;
+       CIT_Incluir.DBGrid2.Enabled := True;
+       CIT_Incluir.IMG_ColocarCIT.Enabled := True;
+       CIT_Incluir.IMG_Retirar.Enabled := True;
+   end
+   else
+   begin
+       CIT_Incluir.DBGrid2.Enabled := False;
+       CIT_Incluir.IMG_ColocarCIT.Enabled := False;
+       CIT_Incluir.IMG_Retirar.Enabled := False;
+   end;
+
+   Close;
+
+end;
+
+procedure TCIT_BuscarMotorista.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+    if not odd(DBGrid1.DataSource.DataSet.RecNo) then
+        if not (gdSelected in State) then
+        begin
+            DBGrid1.Canvas.Brush.Color := $00DEBA9A;
+            DBGrid1.Canvas.FillRect(Rect);
+         end;
+         Dbgrid1.DefaultDrawDataCell(Rect, dbgrid1.columns[datacol].field, State);
+end;
+
+end.
+

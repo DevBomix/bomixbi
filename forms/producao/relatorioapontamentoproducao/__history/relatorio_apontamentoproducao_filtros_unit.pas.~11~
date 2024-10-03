@@ -1,0 +1,90 @@
+unit Relatorio_ApontamentoProducao_Filtros_Unit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.Provider, Data.DB,
+  Data.Win.ADODB, Datasnap.DBClient;
+
+type
+  TRelatorio_ApontamentoProducao_Filtros = class(TForm)
+    CDS: TClientDataSet;
+    Query: TADOQuery;
+    DS: TDataSource;
+    DSP: TDataSetProvider;
+    procedure ListarFiltro(PLC_Campo : String);
+    procedure ListarRecurso;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio_ApontamentoProducao_Filtros: TRelatorio_ApontamentoProducao_Filtros;
+
+implementation
+
+{$R *.dfm}
+
+uses RelatorioAprontamentoProducao_Unit;
+
+procedure TRelatorio_ApontamentoProducao_Filtros.ListarFiltro(
+  PLC_Campo: String);
+
+Var
+   VLC_Select, VLC_OrderBY : String;
+
+
+begin
+
+  VLC_Select := VLC_Select + ' Select Distinct ' + #13;
+  VLC_Select := VLC_Select + '       ' + PLC_Campo + #13;
+  VLC_Select := VLC_Select + ' from (  ' + #13;
+  VLC_Select := VLC_Select + Relatorio_ApontamentoProducao.SQL_Principal;
+  VLC_Select := VLC_Select + Relatorio_ApontamentoProducao.SQL_Where;
+  VLC_Select := VLC_Select + ') TB ' + #13;
+
+  VLC_OrderBY := ' Order by ' + PLC_Campo + #13;
+
+  Relatorio_ApontamentoProducao.MemoSQL.Lines.Text := VLC_Select + ' ' + VLC_OrderBY;
+
+  CDS.Close;
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := VLC_Select + ' ' + VLC_OrderBY;
+  CDS.Open;
+
+end;
+
+procedure TRelatorio_ApontamentoProducao_Filtros.ListarRecurso;
+Var
+    VLN_Contador : Integer;
+begin
+
+  ListarFiltro('Recurso');
+
+  Relatorio_ApontamentoProducao.CBX_Igual_InjetoraID.Items.Clear;
+  CDS.First;
+
+  For VLN_Contador := 0 To CDS.RecordCount - 1 do
+  begin
+     Relatorio_ApontamentoProducao.CBX_Igual_InjetoraID.Items.Add(CDS.FieldByName('Recurso').AsString);
+     CDS.Next;
+  end;
+
+  if (Relatorio_ApontamentoProducao.TXT_Valor1_InjetoraID.Text <> '') then
+  begin
+       Relatorio_ApontamentoProducao.CBX_Igual_InjetoraID.Text := CDS.FieldByName('Recurso').AsString;
+       Relatorio_ApontamentoProducao.TXT_Valor1_InjetoraID.Text := CDS.FieldByName('Recurso').AsString;
+  end
+  else
+  begin
+       Relatorio_ApontamentoProducao.TXT_Valor1_InjetoraID.Text := Relatorio_ApontamentoProducao.CBX_Igual_InjetoraID.Text;
+  end;
+
+
+end;
+
+end.
