@@ -1,24 +1,24 @@
 inherited CIT: TCIT
   Caption = 'CIT - Conhecimento Int. de Transporte '
   ClientHeight = 771
-  ClientWidth = 1337
-  ExplicitWidth = 1353
+  ClientWidth = 1421
+  ExplicitWidth = 1437
   ExplicitHeight = 810
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel3: TPanel
-    Width = 1057
+    Width = 1141
     Height = 727
     ExplicitWidth = 1057
     ExplicitHeight = 727
     inherited Splitter1: TSplitter
       Top = 476
-      Width = 1057
+      Width = 1141
       ExplicitTop = 510
       ExplicitWidth = 1055
     end
     inherited DBGrid1: TDBGrid [1]
-      Width = 736
+      Width = 820
       Height = 254
       Color = clWhite
       Font.Name = 'Tahoma'
@@ -438,10 +438,10 @@ inherited CIT: TCIT
         end>
     end
     inherited PNL_Busca: TPanel [2]
-      Width = 1057
+      Width = 1141
       ExplicitWidth = 1057
       inherited Panel6: TPanel
-        Left = 560
+        Left = 644
         Width = 497
         ExplicitLeft = 560
         ExplicitWidth = 497
@@ -37391,7 +37391,7 @@ inherited CIT: TCIT
     end
     inherited PageControl1: TPageControl [3]
       Top = 486
-      Width = 1057
+      Width = 1141
       Height = 241
       ExplicitTop = 486
       ExplicitWidth = 1057
@@ -37405,7 +37405,7 @@ inherited CIT: TCIT
         object DBGrid2: TDBGrid
           Left = 0
           Top = 0
-          Width = 1049
+          Width = 1133
           Height = 207
           Align = alClient
           DataSource = DS_NotasSemCIT
@@ -37584,22 +37584,24 @@ inherited CIT: TCIT
         Caption = 'TabSheet2'
         ImageIndex = 1
         TabVisible = False
+        ExplicitWidth = 1049
       end
       object Tab_Desenvolvimento: TTabSheet
         Caption = 'Query'
         ImageIndex = 2
         TabVisible = False
+        ExplicitWidth = 1049
       end
     end
     inherited PNL_Calendario: TPanel [4]
-      Width = 1057
+      Width = 1141
       ExplicitWidth = 1057
       inherited MonthCalendar1: TMonthCalendar
-        Width = 1055
+        Width = 1139
         ExplicitWidth = 1055
       end
       inherited Panel1: TPanel
-        Width = 1055
+        Width = 1139
         ExplicitWidth = 1055
       end
     end
@@ -37608,7 +37610,7 @@ inherited CIT: TCIT
       ExplicitLeft = 139
     end
     object Memo1: TMemo
-      Left = 736
+      Left = 820
       Top = 222
       Width = 321
       Height = 254
@@ -37624,6 +37626,7 @@ inherited CIT: TCIT
       TabOrder = 5
       Visible = False
       OnDblClick = Memo1DblClick
+      ExplicitLeft = 736
     end
     object Memo_Cabecalho: TMemo
       Left = 584
@@ -37667,10 +37670,10 @@ inherited CIT: TCIT
     end
   end
   inherited PNL_Top: TPanel
-    Width = 1337
+    Width = 1421
     ExplicitWidth = 1337
     inherited PNL_Navegacao: TPanel
-      Left = 1248
+      Left = 1332
       Width = 89
       ExplicitLeft = 1248
       ExplicitWidth = 89
@@ -48355,7 +48358,7 @@ inherited CIT: TCIT
     end
   end
   inherited PNL_Filtros: TPanel
-    Left = 1057
+    Left = 1141
     Height = 727
     Visible = False
     ExplicitLeft = 1057
@@ -51797,7 +51800,7 @@ inherited CIT: TCIT
           mmHeight = 3704
           mmLeft = 36779
           mmTop = 21167
-          mmWidth = 137848
+          mmWidth = 69850
           BandType = 3
           GroupNo = 0
           LayerName = Foreground
@@ -51890,6 +51893,51 @@ inherited CIT: TCIT
           mmLeft = 4498
           mmTop = 1588
           mmWidth = 39952
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppLabel7: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label7'
+          HyperlinkEnabled = False
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Placa do Ve'#237'culo:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = [fsBold]
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4233
+          mmLeft = 126471
+          mmTop = 20373
+          mmWidth = 32808
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText3: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText3'
+          HyperlinkEnabled = False
+          Border.mmPadding = 0
+          DataField = 'Placa'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 9
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 3704
+          mmLeft = 160867
+          mmTop = 20373
+          mmWidth = 29633
           BandType = 3
           GroupNo = 0
           LayerName = Foreground

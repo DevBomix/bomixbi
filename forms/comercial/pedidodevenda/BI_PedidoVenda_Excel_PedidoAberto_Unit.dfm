@@ -1703,7 +1703,7 @@ object BI_PedidoVenda_Excel_PedidoAberto: TBI_PedidoVenda_Excel_PedidoAberto
     end
     object QueryOrdemCompra: TStringField
       FieldName = 'OrdemCompra'
-      Size = 6
+      Size = 26
     end
   end
   object DS: TDataSource

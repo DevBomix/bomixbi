@@ -1,3 +1,16 @@
 /__history
 /__recovery
 /win32
+/forms/comercial/certificadoqualidade_cit/__history/*
+/forms/comercial/pedidodevenda/__history/*
+/forms/comercial/pedidodevenda/__recovery/*
+/estrutura/__recovery/*
+forms/comercial/certificadoqualidade_cit/__history/cit_unit.dfm.~131~
+forms/comercial/certificadoqualidade_cit/__history/cit_unit.pas.~173~
+forms/comercial/certificadoqualidade_cit/__recovery/__recovery.ini
+forms/comercial/certificadoqualidade_cit/__recovery/certificadoqualidade_unit.dfm
+forms/comercial/certificadoqualidade_cit/__recovery/certificadoqualidade_unit.pas
+forms/comercial/pedidodevenda/__history/BI_PedidoVenda_Excel_PedidoAberto_Unit.dfm.~12~
+forms/comercial/pedidodevenda/__history/BI_PedidoVenda_Unit.dfm.~306~
+forms/comercial/pedidodevenda/__history/BI_PedidoVenda_Unit.dfm.~307~
+forms/comercial/pedidodevenda/__history/BI_PedidoVenda_Excel_PedidoAberto_Unit.dfm.~11~

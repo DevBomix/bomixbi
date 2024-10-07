@@ -58,6 +58,8 @@ type
     ppLabel5: TppLabel;
     ppDBText7: TppDBText;
     ppLabel2: TppLabel;
+    ppLabel7: TppLabel;
+    ppDBText3: TppDBText;
     ppLabel14: TppLabel;
     ppLine4: TppLine;
     ppLabel16: TppLabel;
@@ -563,7 +565,7 @@ begin
   VLC_Select := VLC_Select + ' 											  AND Item.D2_FILIAL = F2_FILIAL ' + #13;
   VLC_Select := VLC_Select + ' 											  AND Item.D2_DOC = F2_DOC ' + #13;
   VLC_Select := VLC_Select + ' Inner Join P12OFICIAL.dbo.SB1010 Produto (nolock) ON B1_FILIAL = ' + '''' + '0101' + '''' + #13;
-  VLC_Select := VLC_Select + ' 												  AND Produto.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;  VLC_Select := VLC_Select + ' 												  AND B1_COD = D2_COD ' + #13;  VLC_Select := VLC_Select + ' 												  AND Produto.B1_BRTPPR in (' + '''' + 'ALCA' + '''' + ', ' + '''' + 'ANEL' + '''' + ', ' + '''' + 'BALDE' + '''' + ', ' + '''' + 'SUPORTE' + '''' + ', ' + '''' + 'TAMPA' + '''' + ',' + '''' + 'POTE' + '''' + ', ' + '''' + 'TAMPINHA' + '''' + ',' + '''' + 'PALLET' + '''' + ')' + #13;  VLC_Select := VLC_Select + ' Inner Join P12OFICIAL.dbo.SA1010 Cliente (nolock) ON Cliente.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
+  VLC_Select := VLC_Select + ' 												  AND Produto.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;  VLC_Select := VLC_Select + ' 												  AND B1_COD = D2_COD ' + #13;  VLC_Select := VLC_Select + ' 												  AND Produto.B1_BRTPPR in (' + '''' + 'ALCA' + '''' + ', ' + '''' + 'ANEL' + '''' + ', ' + '''' + 'BALDE' + '''' + ', ' + '''' + 'SUPORTE' + '''' + ', ' + '''' + 'TAMPA' + '''' + ',  ' + '''' + 'POTE' + '''' + ',' + '''' + 'TAMPINHA' + '''' + ',' + '''' + 'PALLET' + '''' + ')' + #13;  VLC_Select := VLC_Select + ' Inner Join P12OFICIAL.dbo.SA1010 Cliente (nolock) ON Cliente.D_E_L_E_T_ <> ' + '''' + '*' + '''' + #13;
   VLC_Select := VLC_Select + ' 												 AND A1_FILIAL = ' + '''' + '0101' + '''' + #13;
   VLC_Select := VLC_Select + ' 												 AND F2_CLIENTE = A1_COD ' + #13;
   VLC_Select := VLC_Select + ' 												 AND F2_LOJA = A1_LOJA ' + #13;

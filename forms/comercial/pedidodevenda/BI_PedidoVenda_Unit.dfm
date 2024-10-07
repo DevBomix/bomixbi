@@ -24180,7 +24180,7 @@ inherited BI_PedidoVenda: TBI_PedidoVenda
     end
     object QueryOrdemCompra: TStringField
       FieldName = 'OrdemCompra'
-      Size = 6
+      Size = 12
     end
     object QueryCondPagamento_FK: TStringField
       FieldName = 'CondPagamento_FK'
