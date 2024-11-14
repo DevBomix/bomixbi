@@ -518,7 +518,7 @@ Var
 begin
   inherited;
 
-  VLC_Select := VLC_Select + 'SELECT * FROM (' + #13;
+  VLC_Select := VLC_Select + 'use BOMIX_VADER SELECT * FROM (' + #13;
   VLC_Select := VLC_Select + 'SELECT' + #13;
 
   if CBX_OrdenarPor.Text = 'VALOR LIQUIDO' then

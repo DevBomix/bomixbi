@@ -3,7 +3,6 @@ inherited RelatorioRankingClientes: TRelatorioRankingClientes
   ClientHeight = 448
   ClientWidth = 685
   OnShow = FormShow
-  ExplicitTop = -88
   ExplicitWidth = 691
   ExplicitHeight = 477
   PixelsPerInch = 96
