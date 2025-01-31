@@ -951,7 +951,6 @@ inherited BI_PedidoVenda: TBI_PedidoVenda
       Top = 503
       Width = 1033
       Height = 225
-      ActivePage = TabSheet2
       OnChange = PageControl1Change
       ExplicitTop = 503
       ExplicitWidth = 1033
@@ -25314,568 +25313,762 @@ inherited BI_PedidoVenda: TBI_PedidoVenda
     object ppDBPipeline1ppField1: TppField
       FieldAlias = 'OP'
       FieldName = 'OP'
-      FieldLength = 11
-      DisplayWidth = 11
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 0
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField2: TppField
       FieldAlias = 'PedidoVenda_ID'
       FieldName = 'PedidoVenda_ID'
-      FieldLength = 9
-      DisplayWidth = 9
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 1
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField3: TppField
       FieldAlias = 'Emissao'
       FieldName = 'Emissao'
       FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 2
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField4: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Dia'
       FieldName = 'Dia'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 3
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField5: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Ano'
       FieldName = 'Ano'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 4
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField6: TppField
       FieldAlias = 'Mes'
       FieldName = 'Mes'
-      FieldLength = 20
-      DisplayWidth = 20
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 5
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField7: TppField
       FieldAlias = 'TipoDocumento'
       FieldName = 'TipoDocumento'
-      FieldLength = 12
-      DisplayWidth = 12
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 6
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField8: TppField
       FieldAlias = 'Cliente_ID'
       FieldName = 'Cliente_ID'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 7
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField9: TppField
       FieldAlias = 'Cliente'
       FieldName = 'Cliente'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 8
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField10: TppField
       FieldAlias = 'Loja'
       FieldName = 'Loja'
-      FieldLength = 2
-      DisplayWidth = 2
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 9
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField11: TppField
       FieldAlias = 'Endereco'
       FieldName = 'Endereco'
-      FieldLength = 40
-      DisplayWidth = 40
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 10
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField12: TppField
       FieldAlias = 'Bairro'
       FieldName = 'Bairro'
-      FieldLength = 30
-      DisplayWidth = 30
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 11
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField13: TppField
       FieldAlias = 'CEP'
       FieldName = 'CEP'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 12
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField14: TppField
       FieldAlias = 'Cidade'
       FieldName = 'Cidade'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 13
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField15: TppField
       FieldAlias = 'UF'
       FieldName = 'UF'
-      FieldLength = 2
-      DisplayWidth = 2
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 14
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField16: TppField
       FieldAlias = 'Estado'
       FieldName = 'Estado'
-      FieldLength = 25
-      DisplayWidth = 25
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 15
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField17: TppField
       FieldAlias = 'Segmento'
       FieldName = 'Segmento'
-      FieldLength = 80
-      DisplayWidth = 80
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 16
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField18: TppField
       FieldAlias = 'Telefone'
       FieldName = 'Telefone'
-      FieldLength = 20
-      DisplayWidth = 20
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 17
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField19: TppField
       FieldAlias = 'Email'
       FieldName = 'Email'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 18
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField20: TppField
       FieldAlias = 'Contato'
       FieldName = 'Contato'
-      FieldLength = 80
-      DisplayWidth = 80
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 19
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField21: TppField
       FieldAlias = 'flgTemGrupoCliente'
       FieldName = 'flgTemGrupoCliente'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 20
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField22: TppField
       FieldAlias = 'GrupoCliente_FK'
       FieldName = 'GrupoCliente_FK'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 21
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField23: TppField
       FieldAlias = 'GrupoCliente'
       FieldName = 'GrupoCliente'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 22
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField24: TppField
       FieldAlias = 'Vendedor_FK'
       FieldName = 'Vendedor_FK'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 23
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField25: TppField
       FieldAlias = 'Vendedor'
       FieldName = 'Vendedor'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 24
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField26: TppField
       FieldAlias = 'Gerencia_FK'
       FieldName = 'Gerencia_FK'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 25
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField27: TppField
       FieldAlias = 'Gerente'
       FieldName = 'Gerente'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 26
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField28: TppField
       FieldAlias = 'Transportadora_FK'
       FieldName = 'Transportadora_FK'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 27
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField29: TppField
       FieldAlias = 'Transportadora'
       FieldName = 'Transportadora'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 28
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField30: TppField
       FieldAlias = 'TransportadoraRedespacho_FK'
       FieldName = 'TransportadoraRedespacho_FK'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 29
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField31: TppField
       FieldAlias = 'TransportadoraRedespacho'
       FieldName = 'TransportadoraRedespacho'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 30
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField32: TppField
       FieldAlias = 'DataPCP'
       FieldName = 'DataPCP'
       FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 31
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField33: TppField
       FieldAlias = 'Responsavel'
       FieldName = 'Responsavel'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 32
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField34: TppField
       FieldAlias = 'RespData'
       FieldName = 'RespData'
       FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 33
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField35: TppField
       FieldAlias = 'Pendencia'
       FieldName = 'Pendencia'
-      FieldLength = 120
-      DisplayWidth = 120
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 34
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField36: TppField
       FieldAlias = 'Empresa'
       FieldName = 'Empresa'
-      FieldLength = 8
-      DisplayWidth = 8
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 35
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField37: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Recno'
       FieldName = 'Recno'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 36
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField38: TppField
       FieldAlias = 'Pedido_FK'
       FieldName = 'Pedido_FK'
-      FieldLength = 9
-      DisplayWidth = 9
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 37
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField39: TppField
       FieldAlias = 'Sequencia'
       FieldName = 'Sequencia'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 38
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField40: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Mix'
       FieldName = 'Mix'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 39
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField41: TppField
       FieldAlias = 'DataEntrega'
       FieldName = 'DataEntrega'
       FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 40
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField42: TppField
       FieldAlias = 'Grupo'
       FieldName = 'Grupo'
-      FieldLength = 50
-      DisplayWidth = 50
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 41
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField43: TppField
       FieldAlias = 'Item_FK'
       FieldName = 'Item_FK'
-      FieldLength = 4
-      DisplayWidth = 4
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 42
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField44: TppField
       FieldAlias = 'Item'
       FieldName = 'Item'
-      FieldLength = 60
-      DisplayWidth = 60
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 43
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField45: TppField
       FieldAlias = 'TipoProduto'
       FieldName = 'TipoProduto'
-      FieldLength = 15
-      DisplayWidth = 15
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 44
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField46: TppField
       FieldAlias = 'Tamanho'
       FieldName = 'Tamanho'
-      FieldLength = 15
-      DisplayWidth = 15
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 45
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField47: TppField
       FieldAlias = 'Produto_ID'
       FieldName = 'Produto_ID'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 46
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField48: TppField
       FieldAlias = 'BloqArte'
       FieldName = 'BloqArte'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 47
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField49: TppField
       FieldAlias = 'Arte_ID'
       FieldName = 'Arte_ID'
-      FieldLength = 12
-      DisplayWidth = 12
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 48
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField50: TppField
       FieldAlias = 'Arte'
       FieldName = 'Arte'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 49
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField51: TppField
       FieldAlias = 'Personalizacao'
       FieldName = 'Personalizacao'
-      FieldLength = 30
-      DisplayWidth = 30
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 50
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField52: TppField
       FieldAlias = 'StatusArte'
       FieldName = 'StatusArte'
-      FieldLength = 30
-      DisplayWidth = 30
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 51
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField53: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Quantidade'
       FieldName = 'Quantidade'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 52
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField54: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Atendida'
       FieldName = 'Atendida'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 53
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField55: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Saldo'
       FieldName = 'Saldo'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 54
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField56: TppField
-      Alignment = taRightJustify
       FieldAlias = 'PesoItem'
       FieldName = 'PesoItem'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 55
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField57: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Peso'
       FieldName = 'Peso'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 56
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField58: TppField
-      Alignment = taRightJustify
       FieldAlias = 'ValorUnitario'
       FieldName = 'ValorUnitario'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 57
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField59: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Valor'
       FieldName = 'Valor'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 58
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField60: TppField
       FieldAlias = 'C6_TES'
       FieldName = 'C6_TES'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 59
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField61: TppField
       FieldAlias = 'TES'
       FieldName = 'TES'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 60
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField62: TppField
       FieldAlias = 'CFOP'
       FieldName = 'CFOP'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 61
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField63: TppField
       FieldAlias = 'SituacaoOP'
       FieldName = 'SituacaoOP'
-      FieldLength = 90
-      DisplayWidth = 90
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 62
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField64: TppField
       FieldAlias = 'C6_Empresa'
       FieldName = 'C6_Empresa'
-      FieldLength = 4
-      DisplayWidth = 4
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 63
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField65: TppField
-      Alignment = taRightJustify
       FieldAlias = 'C6_Recno'
       FieldName = 'C6_Recno'
       FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 64
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField66: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Pallete'
       FieldName = 'Pallete'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 65
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField67: TppField
-      Alignment = taRightJustify
       FieldAlias = 'Estoque'
       FieldName = 'Estoque'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 66
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField68: TppField
-      Alignment = taRightJustify
       FieldAlias = 'EstoqueE2'
       FieldName = 'EstoqueE2'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 67
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField69: TppField
       FieldAlias = 'OrdemCarregamento'
       FieldName = 'OrdemCarregamento'
-      FieldLength = 6
-      DisplayWidth = 6
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 68
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField70: TppField
       FieldAlias = 'TipoRegistro'
       FieldName = 'TipoRegistro'
-      FieldLength = 1
-      DisplayWidth = 1
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 69
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField71: TppField
       FieldAlias = 'Armazem'
       FieldName = 'Armazem'
-      FieldLength = 2
-      DisplayWidth = 2
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 70
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField72: TppField
       FieldAlias = 'CondPagamento'
       FieldName = 'CondPagamento'
-      FieldLength = 50
-      DisplayWidth = 50
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 71
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField73: TppField
       FieldAlias = 'TipoFrete'
       FieldName = 'TipoFrete'
-      FieldLength = 25
-      DisplayWidth = 25
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 72
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField74: TppField
       FieldAlias = 'ZerarRotulo'
       FieldName = 'ZerarRotulo'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 73
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField75: TppField
       FieldAlias = 'Produto'
       FieldName = 'Produto'
-      FieldLength = 120
-      DisplayWidth = 120
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 74
+      Searchable = False
+      Sortable = False
     end
     object ppDBPipeline1ppField76: TppField
       FieldAlias = 'Status'
       FieldName = 'Status'
-      FieldLength = 20
-      DisplayWidth = 20
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
       Position = 75
+      Searchable = False
+      Sortable = False
     end
   end
   object ppPedidoComercial: TppReport

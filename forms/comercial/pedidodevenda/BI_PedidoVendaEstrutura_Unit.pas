@@ -225,7 +225,7 @@ begin
 
    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
    begin
-      VLC_Select := VLC_Select + ' AND (Substring(B2_COD,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+      VLC_Select := VLC_Select + ' AND (Substring(B2_COD,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ',' + '''' + 'M' + '''' + ',' + '''' + 'S' + '''' + ') ' + #13;
       VLC_Select := VLC_Select + ' OR  Substring(B2_COD,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
    end;
 
@@ -289,7 +289,7 @@ begin
 
    If Sys_FuncaoSistema.GetVerificaSeExistePermissao(106,Sys_FuncaoSistema.PNL_LoginAtivo.Caption) = False then
    begin
-      VLC_Select := VLC_Select + ' AND (Substring(B2_COD,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ') ' + #13;
+      VLC_Select := VLC_Select + ' AND (Substring(B2_COD,1,1) In (' + '''' + 'A' + '''' + ',' + '''' + 'B' + '''' + ',' + '''' + 'T' + '''' + ',' + '''' + 'M' + '''' + ',' + '''' + 'S' + '''' + ') ' + #13;
       VLC_Select := VLC_Select + ' OR  Substring(B2_COD,1,4) In (' + '''' + 'P00D' + '''' + ')) ' + #13;
    end;
 

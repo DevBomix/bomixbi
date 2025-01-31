@@ -530,7 +530,13 @@ begin
         VLN_Ano := StrToInt(CBX_Ano.Text);
 
         DT_Valor1_Periodo.Date := StrToDate('01/02/'  + IntToStr(VLN_Ano));
-        DT_Valor2_Periodo.Date := StrToDate('29/02/' +  IntToStr(VLN_Ano));
+        DT_Valor2_Periodo.Date := StrToDate('28/02/' +  IntToStr(VLN_Ano));
+        //******************Incluído por Renato 14/11/2024****************************
+        If IsLeapYear(VLN_Ano) then
+        begin
+          DT_Valor2_Periodo.Date := StrToDate('29/02/' +  IntToStr(VLN_Ano));
+        end;
+        //**************************************************************************
 
         Exit;
     end;
