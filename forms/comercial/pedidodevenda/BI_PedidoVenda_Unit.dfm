@@ -923,13 +923,13 @@ inherited BI_PedidoVenda: TBI_PedidoVenda
         end
         inherited BTN_Buscar: TButton
           Left = 14
-          Top = 4
+          Top = 3
           Width = 199
           Height = 33
           Action = nil
           Caption = 'Buscar Pedido'
           ExplicitLeft = 14
-          ExplicitTop = 4
+          ExplicitTop = 3
           ExplicitWidth = 199
           ExplicitHeight = 33
         end
@@ -24178,8 +24178,8 @@ inherited BI_PedidoVenda: TBI_PedidoVenda
       Size = 25
     end
     object QueryOrdemCompra: TStringField
+      DisplayWidth = 20
       FieldName = 'OrdemCompra'
-      Size = 12
     end
     object QueryCondPagamento_FK: TStringField
       FieldName = 'CondPagamento_FK'
